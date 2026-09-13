@@ -1,0 +1,131 @@
+/* ==================================================================
+   THEME PRESETS
+   Switch with <html data-theme="prime-dark|prime-light|prime-forest">
+   All values are raw CSS custom properties; Tailwind tokens in
+   globals.css map onto them, so components never hardcode colors.
+   ================================================================== */
+
+/* ---------- prime-dark (default: matches primeintellect.ai) ------- */
+:root,
+[data-theme="prime-dark"] {
+  --surface: #0e0e0e;
+  --surface-raised: #191919;
+  --surface-card: #161616;
+  --research-bg: #071012;
+  --line: #202020;
+  --line-strong: #2a2a2a;
+
+  --fg: #ffffff;
+  --fg-muted: rgba(255, 255, 255, 0.5);
+  --fg-subtle: rgba(255, 255, 255, 0.3);
+  --fg-faint: rgba(255, 255, 255, 0.2);
+
+  --primary: #ffffff;
+  --on-primary: #000000;
+
+  --accent: #85ed75;
+  --accent-soft: rgba(120, 231, 114, 0.24);
+
+  --overlay-scrim: rgba(0, 0, 0, 0.55);
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.16);
+}
+
+/* ---------- prime-light ------------------------------------------ */
+[data-theme="prime-light"] {
+  --surface: #f6f6f4;
+  --surface-raised: #ecece9;
+  --surface-card: #ffffff;
+  --research-bg: #e6f0ea;
+  --line: #d9d9d4;
+  --line-strong: #c7c7c1;
+
+  --fg: #0e0e0e;
+  --fg-muted: rgba(14, 14, 14, 0.55);
+  --fg-subtle: rgba(14, 14, 14, 0.35);
+  --fg-faint: rgba(14, 14, 14, 0.22);
+
+  --primary: #0e0e0e;
+  --on-primary: #ffffff;
+
+  --accent: #1f9d4c;
+  --accent-soft: rgba(31, 157, 76, 0.2);
+
+  --overlay-scrim: rgba(255, 255, 255, 0.5);
+  --glass: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- prime-forest (dark, green-tinted) --------------------- */
+[data-theme="prime-forest"] {
+  --surface: #070c0a;
+  --surface-raised: #0f1714;
+  --surface-card: #0c1310;
+  --research-bg: #04110c;
+  --line: #16241d;
+  --line-strong: #1f3128;
+
+  --fg: #eef7f0;
+  --fg-muted: rgba(238, 247, 240, 0.55);
+  --fg-subtle: rgba(238, 247, 240, 0.34);
+  --fg-faint: rgba(238, 247, 240, 0.2);
+
+  --primary: #9dff8c;
+  --on-primary: #05110a;
+
+  --accent: #9dff8c;
+  --accent-soft: rgba(157, 255, 140, 0.26);
+
+  --overlay-scrim: rgba(0, 0, 0, 0.6);
+  --glass: rgba(157, 255, 140, 0.06);
+  --glass-border: rgba(157, 255, 140, 0.16);
+}
+
+/* ==================================================================
+   FONT PRESETS
+   Switch with <html data-font="geist|plex|jetbrains|custom">
+   The next/font variables (--font-geist-sans, --font-dm-mono, ...)
+   are injected on <html> by src/theme/fonts.ts.
+   ================================================================== */
+
+/* ---------- geist (default; closest to the original) -------------- */
+:root,
+[data-font="geist"] {
+  --font-preset-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-preset-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-preset-label: var(--font-dm-mono), var(--font-geist-mono), monospace;
+  --font-preset-display: var(--font-share-tech-mono), var(--font-geist-mono), monospace;
+}
+
+/* ---------- plex --------------------------------------------------- */
+[data-font="plex"] {
+  --font-preset-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-preset-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-preset-label: var(--font-plex-mono), monospace;
+  --font-preset-display: var(--font-share-tech-mono), monospace;
+}
+
+/* ---------- jetbrains --------------------------------------------- */
+[data-font="jetbrains"] {
+  --font-preset-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-preset-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-preset-label: var(--font-jetbrains-mono), monospace;
+  --font-preset-display: var(--font-share-tech-mono), monospace;
+}
+
+/* ---------- custom (licensed fonts dropped into /public/fonts) ----- */
+/* The original site uses "ABC Favorit Mono" (labels) and "OCR X"
+   (display). Both are commercial. If you own a license, put the
+   .woff2 files in public/fonts and uncomment the @font-face rules. */
+[data-font="custom"] {
+  --font-preset-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-preset-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-preset-label: "ABC Favorit Mono", var(--font-dm-mono), monospace;
+  --font-preset-display: "OCR X", var(--font-share-tech-mono), monospace;
+}
+/*
+@font-face { font-family: "ABC Favorit Mono"; src: url(/fonts/ABCFavoritMono-Regular.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "ABC Favorit Mono"; src: url(/fonts/ABCFavoritMono-Medium.woff2)  format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "ABC Favorit Mono"; src: url(/fonts/ABCFavoritMono-Bold.woff2)    format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "OCR X";            src: url(/fonts/OCRX.woff2)                    format("woff2"); font-weight: 400; font-display: swap; }
+*/
