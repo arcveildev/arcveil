@@ -55,8 +55,8 @@ export function Header() {
       <div className="relative z-[100] mx-auto flex h-16 max-w-360 items-center justify-between px-4 md:px-5">
         <Logo className="relative z-[80] shrink-0" />
 
-        {/* Product nav: numbered glass pills */}
-        <nav aria-label="Products" className="relative z-[80] hidden items-center gap-1 xl:flex">
+        {/* Product nav: numbered glass pills. Empty until the home sections land. */}
+        <nav aria-label="Products" className={cn("relative z-[80] hidden items-center gap-1", PRODUCT_NAV.length > 0 && "xl:flex")}>
           {PRODUCT_NAV.map((item) => (
             <Link
               key={item.href}
@@ -88,13 +88,7 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-1">
-            <a
-              href={CTA.login.href}
-              className="inline-flex h-7 items-center justify-center border border-current/12 bg-current/10 px-2 font-favorit text-xs uppercase leading-none opacity-80 backdrop-blur-md transition-opacity hover:opacity-100"
-            >
-              {CTA.login.label}
-            </a>
-            <Button href={CTA.startTraining.href}>{CTA.startTraining.label}</Button>
+            <Button href={CTA.primary.href}>{CTA.primary.label}</Button>
           </div>
         </div>
 

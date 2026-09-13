@@ -1,5 +1,5 @@
-export const NEED_OPTIONS = ["Buy compute", "Post-train agents", "Both", "Not sure yet"] as const;
-export const STAGE_OPTIONS = ["Exploring", "Prototype", "In production", "Already spending money on RL/post-training"] as const;
+export const NEED_OPTIONS = ["Run agents under a mandate", "Embed the SDK", "Both", "Not sure yet"] as const;
+export const STAGE_OPTIONS = ["Exploring", "Prototype", "In production", "Already running agents that hold funds"] as const;
 
 export type ContactFormValues = {
   firstName: string;

@@ -1,23 +1,11 @@
-import { Hero } from "@/components/sections/Hero";
-import { PartnersStrip } from "@/components/sections/PartnersStrip";
-import { LabSection } from "@/components/sections/LabSection";
-import { InferenceSection } from "@/components/sections/InferenceSection";
-import { ComputeSection } from "@/components/sections/ComputeSection";
-import { ResearchSection } from "@/components/sections/ResearchSection";
-import { CustomerStories } from "@/components/sections/CustomerStories";
-import { HiringCta } from "@/components/sections/HiringCta";
+import { Thesis } from "@/components/home/Thesis";
+import { Pillars } from "@/components/home/Pillars";
 
 export default function HomePage() {
   return (
-    <>
-      <Hero />
-      <PartnersStrip />
-      <LabSection />
-      <InferenceSection />
-      <ComputeSection />
-      <ResearchSection />
-      <CustomerStories />
-      <HiringCta />
-    </>
+    <div className="pt-28 pb-20 xl:pt-36">
+      <Thesis />
+      <Pillars />
+    </div>
   );
 }

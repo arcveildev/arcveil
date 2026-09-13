@@ -4,13 +4,13 @@ import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
   title: `${SITE.name} | Book a call`,
-  description: "Tell us what you need and we'll route you to the right compute, training, or evals expert.",
+  description: "Tell us what your agents need to do with money, and we'll show you how a mandate would bound it.",
 };
 
 const COPY = {
-  label: "Evals / RL / Compute",
-  title: "Build faster on the open stack for agents.",
-  body: "Tell us what you need. We'll route your request to the right compute, training, or evals expert and give you a time to talk next.",
+  label: "Mandates / Receipts / SDK",
+  title: "Let your agents spend, without letting them see.",
+  body: "Tell us what your agents need to do with money. We'll walk you through the mandate that would bound it, and the receipts you would get back.",
 } as const;
 
 export default function ContactPage() {

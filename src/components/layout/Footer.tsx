@@ -38,11 +38,11 @@ export function Footer() {
           <div className="flex w-full flex-none flex-col items-start gap-22 lg:w-2/3">
             <Logo className="text-fg" />
             <div className="flex w-full flex-col gap-20">
-              <FooterCanvas text="Be your own Lab." />
+              <FooterCanvas text="Spend without seeing." />
               <div className="flex items-center gap-1">
-                <Button href={CTA.startTraining.href}>{CTA.startTraining.label}</Button>
-                <Button href={CTA.bookCall.href} variant="secondary">
-                  {CTA.bookCall.label}
+                <Button href={CTA.primary.href}>{CTA.primary.label}</Button>
+                <Button href={CTA.secondary.href} variant="secondary">
+                  {CTA.secondary.label}
                 </Button>
               </div>
             </div>

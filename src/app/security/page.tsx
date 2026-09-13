@@ -4,7 +4,7 @@ import { SITE } from "@/data/site";
 
 export const metadata: Metadata = { title: `${SITE.name} | Security Policy` };
 
-const SECTIONS = placeholderSections(["Infrastructure security", "Data isolation and sandboxing", "Responsible disclosure"]);
+const SECTIONS = placeholderSections(["Key handling and mandate storage", "Enclave attestation and policy signing", "Responsible disclosure"]);
 
 export default function SecurityPage() {
   return <LegalPage title="Security Policy" updated="September 2026" sections={SECTIONS} />;

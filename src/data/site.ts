@@ -1,96 +1,45 @@
-/** Site-wide navigation and external links. Swap for CMS/backend later. */
+/** Site-wide identity and navigation. The product name is a codename for now. */
 export const SITE = {
-  name: "Prime Intellect",
-  title: "Prime Intellect - The Open Superintelligence Stack",
+  name: "Blindfold",
+  codename: "BLINDFOLD",
+  title: "Blindfold — agents that can spend, and never see",
   description:
-    "Train, deploy, and continuously improve your own models on an integrated compute, training, inference, and sandbox stack.",
-  appUrl: "https://app.primeintellect.ai",
-  docsUrl: "https://docs.primeintellect.ai/introduction",
-  careersUrl: "https://jobs.ashbyhq.com/PrimeIntellect",
-  openRoles: 24,
-  installCommand: "curl -fsSL https://app.primeintellect.ai/prime-agent/install.sh | sh",
-  pipCommand: "pip install prime",
+    "Give an agent a mandate instead of your keys. It acts in relative terms, never sees your balances, and every action leaves a receipt anyone can verify and nobody can read.",
+  nameNote: "Codename. The product name is not settled yet.",
 } as const;
 
-export const PRODUCT_NAV = [
-  { label: "Training", index: "01", href: "/#lab" },
-  { label: "Inference", index: "02", href: "/#inference" },
-  { label: "Compute", index: "03", href: "/#compute" },
-  { label: "Research", index: "04", href: "/#research" },
-] as const;
+export const CHAIN = {
+  name: "Robinhood Chain",
+  id: 4663,
+  stack: "Arbitrum L2",
+  gas: "ETH",
+} as const;
 
-export const UTILITY_NAV = [
-  { label: "Docs", href: SITE.docsUrl },
-  { label: "Blog", href: "/blog" },
-  { label: "Careers", href: SITE.careersUrl, badge: String(SITE.openRoles) },
-  { label: "Book a call", href: "/contact" },
-] as const;
+export type NavItem = { label: string; href: string; badge?: string };
+
+/** Filled in once the home page sections land; the header hides the nav while it is empty. */
+export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [];
+
+export const UTILITY_NAV: readonly NavItem[] = [
+  { label: "Verify", href: "/verify" },
+  { label: "Contact", href: "/contact" },
+];
 
 export const CTA = {
-  startTraining: { label: "Start training", href: `${SITE.appUrl}/dashboard/home/quickstart` },
-  login: { label: "Login", href: SITE.appUrl },
-  bookCall: { label: "Book a call", href: "/contact" },
-  bookDemo: { label: "Book a demo", href: "/contact" },
-  environments: { label: "Create Environments", href: `${SITE.appUrl}/dashboard/environments` },
-  evaluations: { label: "Run your first eval", href: `${SITE.appUrl}/dashboard/evaluations` },
-  findCompute: { label: "Find compute", href: `${SITE.appUrl}/dashboard/on-demand-gpus` },
-  getQuote: { label: "Get a quote", href: `${SITE.appUrl}/dashboard/quotes` },
+  primary: { label: "Verify a receipt", href: "/verify" },
+  secondary: { label: "Book a call", href: "/contact" },
 } as const;
 
-export const BACKERS = [
-  "Founders Fund",
-  "Radical",
-  "NVIDIA",
-  "Intel",
-  "Andrej Karpathy",
-  "John Schulman",
-  "Dylan Patel",
-  "Clem Delangue",
-] as const;
+export type FooterColumn = { title: string; links: readonly NavItem[] };
 
-export const PARTNERS = [
-  { name: "Ramp", href: "/case-study/ramp", tag: "Case study" },
-  { name: "NVIDIA", href: "/blog/nvidia-collaboration", tag: "Read more" },
-  { name: "Zapier", href: "/case-study/zapier", tag: "Case study" },
-  { name: "Browserbase", href: "/blog/browserbase", tag: "Read more" },
-  { name: "Standard Intelligence", href: null, tag: null },
-] as const;
-
-export const FOOTER_COLUMNS = [
+export const FOOTER_COLUMNS: readonly FooterColumn[] = [
   {
-    title: "Platform",
-    links: [
-      { label: "Lab", href: "/#lab" },
-      { label: "Compute", href: "/#compute" },
-      { label: "Research", href: "/#research" },
-    ],
+    title: "Product",
+    links: [{ label: "Verify a receipt", href: "/verify" }],
   },
   {
     title: "Company",
-    links: [
-      { label: "Careers", href: SITE.careersUrl, badge: String(SITE.openRoles) },
-      { label: "Merch", href: "https://primeintellect.supply" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      { label: "X", href: "https://x.com/PrimeIntellect" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/primeintellect-ai" },
-      { label: "Discord", href: "https://discord.gg/primeintellect" },
-      { label: "Luma", href: "https://luma.com/primeintellect" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Docs", href: SITE.docsUrl },
-      { label: "Writings", href: "/blog" },
-      { label: "Events", href: "https://luma.com/primeintellect" },
-      { label: "Merch", href: "https://primeintellect.supply" },
-      { label: "Platform Status", href: "https://status.primeintellect.ai" },
-    ],
+    links: [{ label: "Contact", href: "/contact" }],
   },
   {
     title: "Terms",
@@ -100,4 +49,4 @@ export const FOOTER_COLUMNS = [
       { label: "Security Policy", href: "/security" },
     ],
   },
-] as const;
+];

@@ -57,9 +57,9 @@ export function MobileMenu() {
             ))}
           </nav>
           <div className="mt-8 flex items-center gap-1">
-            <Button href={CTA.startTraining.href}>{CTA.startTraining.label}</Button>
-            <Button href={CTA.login.href} variant="secondary">
-              {CTA.login.label}
+            <Button href={CTA.primary.href}>{CTA.primary.label}</Button>
+            <Button href={CTA.secondary.href} variant="secondary">
+              {CTA.secondary.label}
             </Button>
           </div>
         </div>
