@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="300" viewBox="0 0 420 300" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e6e6e"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+  </defs>
+  <g stroke="#6e6e6e" stroke-width="1">
+    <!-- four stacked isometric layers -->
+    <path d="M210 246 L330 186 L210 126 L90 186 Z" fill="#0e0e0e"/>
+    <path d="M210 206 L330 146 L210 86 L90 146 Z" fill="#0e0e0e"/>
+    <path d="M210 166 L330 106 L210 46 L90 106 Z" fill="#0e0e0e"/>
+    <path d="M210 126 L330 66 L210 6 L90 66 Z" fill="#0e0e0e" stroke="url(#g)"/>
+    <!-- connectors -->
+    <path d="M210 126 V166 M210 166 V206 M210 206 V246" stroke-dasharray="2 3"/>
+  </g>
+  <!-- private route marker on top layer -->
+  <g font-family="ui-monospace, monospace" font-size="9" fill="#9a9a9a">
+    <text x="188" y="60" fill="#fff">PRIVATE ROUTE</text>
+    <text x="196" y="100" transform="rotate(-27 196 100)">DEDICATED CAPACITY</text>
+    <text x="196" y="140" transform="rotate(-27 196 140)">CUSTOM MODEL</text>
+    <text x="196" y="180" transform="rotate(-27 196 180)">PRODUCTION SLO</text>
+  </g>
+  <circle cx="300" cy="52" r="2" fill="#85ed75"/>
+  <g stroke="#3a3a3a" stroke-width="1"><path d="M60 270 H360"/></g>
+  <g font-family="ui-monospace, monospace" font-size="8" fill="#6e6e6e">
+    <text x="60" y="288">01 ROUTE</text><text x="150" y="288">02 CAPACITY</text><text x="250" y="288">03 MODEL</text><text x="330" y="288">04 SLO</text>
+  </g>
+</svg>
