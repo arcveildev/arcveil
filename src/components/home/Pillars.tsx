@@ -2,7 +2,7 @@ import { HOME_PILLARS } from "@/data/home";
 
 export function Pillars() {
   return (
-    <section className="grid grid-cols-1 border-x border-b border-border lg:grid-cols-3">
+    <section className="mb-5 grid grid-cols-1 border-x border-b border-border md:mb-8 lg:mb-17.5 lg:grid-cols-3">
       {HOME_PILLARS.map((pillar) => (
         <article
           key={pillar.n}

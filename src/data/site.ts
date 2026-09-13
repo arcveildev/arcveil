@@ -17,8 +17,13 @@ export const CHAIN = {
 
 export type NavItem = { label: string; href: string; badge?: string };
 
-/** Filled in once the home page sections land; the header hides the nav while it is empty. */
-export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [];
+/** The header hides this nav while it is empty. */
+export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [
+  { label: "Pipeline", index: "01", href: "/#pipeline" },
+  { label: "Threats", index: "02", href: "/#threat" },
+  { label: "Receipts", index: "03", href: "/#receipts" },
+  { label: "Roadmap", index: "04", href: "/#roadmap" },
+];
 
 export const UTILITY_NAV: readonly NavItem[] = [
   { label: "Verify", href: "/verify" },
