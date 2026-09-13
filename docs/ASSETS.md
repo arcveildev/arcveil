@@ -1,5 +1,9 @@
 # Background assets
 
+> Currently unused: the sections these belonged to were removed when the project
+> pivoted. Kept as raw material for the new home page — regenerate or drop them
+> as that page takes shape.
+
 All media in `public/backgrounds/` is original to this repo (no Prime Intellect files remain).
 
 | File | Used by | Source |
