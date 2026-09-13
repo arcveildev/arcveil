@@ -1,0 +1,276 @@
+{
+  "chainState": {
+    "mandates": [
+      {
+        "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+        "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+        "epoch": 7,
+        "revoked": false
+      }
+    ],
+    "transactions": {
+      "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe": {
+        "status": "success"
+      },
+      "0xbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbf": {
+        "status": "success"
+      }
+    },
+    "anchors": [
+      "0x0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
+      "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e"
+    ]
+  },
+  "samples": [
+    {
+      "id": "clean",
+      "label": "Clean run",
+      "note": "Two linked receipts from one night of agent activity.",
+      "receipts": [
+        {
+          "v": 1,
+          "chain": 4663,
+          "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+          "mandate": {
+            "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+            "epoch": 7
+          },
+          "agent": {
+            "id": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+            "session": "0x22222222222222222222222222222222",
+            "vision": "relative-only"
+          },
+          "action": {
+            "kind": "swap",
+            "userOpHash": "0x7171717171717171717171717171717171717171717171717171717171717171",
+            "settledTx": "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe",
+            "at": "2026-09-13T21:14:02.000Z"
+          },
+          "checks": [
+            "asset_allowlist",
+            "per_action_cap",
+            "window_spend",
+            "active_hours",
+            "killswitch_clear"
+          ],
+          "counter": {
+            "prev": "0x0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
+            "next": "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e"
+          },
+          "proof": {
+            "type": "attestation",
+            "signer": "0x048dcf27384c574eb4e5f115cd2fd2e4fc4707cec7cc314880493d4a2e26f89ffcb5352ce62c5c9a68ee128f3afbd8087a61f6522980703086bdfb66c692c7d5b4",
+            "signature": "0x74dad421068b41c6a08d0550acfaa118f3a8b6ca041227463c4e6f8c1258ab6c749d15182e3febadf3575d482fa124e4aaa61d6e60905ae98b2ec71883b1dc0b"
+          },
+          "id": "0x9ab4f5a8e97f2eb420efd11c80f4bde3aee6f5e8ebf169541061ee943c2034e8"
+        },
+        {
+          "v": 1,
+          "chain": 4663,
+          "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+          "mandate": {
+            "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+            "epoch": 7
+          },
+          "agent": {
+            "id": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+            "session": "0x22222222222222222222222222222222",
+            "vision": "relative-only"
+          },
+          "action": {
+            "kind": "transfer",
+            "userOpHash": "0x7272727272727272727272727272727272727272727272727272727272727272",
+            "settledTx": "0xbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbf",
+            "at": "2026-09-13T23:02:11.000Z"
+          },
+          "checks": [
+            "asset_allowlist",
+            "per_action_cap",
+            "window_spend",
+            "active_hours",
+            "killswitch_clear"
+          ],
+          "counter": {
+            "prev": "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e",
+            "next": "0x9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          "proof": {
+            "type": "attestation",
+            "signer": "0x048dcf27384c574eb4e5f115cd2fd2e4fc4707cec7cc314880493d4a2e26f89ffcb5352ce62c5c9a68ee128f3afbd8087a61f6522980703086bdfb66c692c7d5b4",
+            "signature": "0xd5e7b1a014550e03acca3d1196202db3f9cbaba52b4120d55cb69edd59b10048fddc34c30527d521100fffd153cdbb4f18a1a9b6d4e018b4d71ae0a6c8d094c8"
+          },
+          "id": "0x9f2df48e7d05e0c6780ae053f52e3ea03a11baa78b73266c8e626b2c8bf3a77a"
+        }
+      ]
+    },
+    {
+      "id": "tampered",
+      "label": "Edited after signing",
+      "note": "One field changed by hand after the enclave signed it.",
+      "receipts": [
+        {
+          "v": 1,
+          "chain": 4663,
+          "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+          "mandate": {
+            "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+            "epoch": 7
+          },
+          "agent": {
+            "id": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+            "session": "0x22222222222222222222222222222222",
+            "vision": "relative-only"
+          },
+          "action": {
+            "kind": "transfer",
+            "userOpHash": "0x7171717171717171717171717171717171717171717171717171717171717171",
+            "settledTx": "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe",
+            "at": "2026-09-13T21:14:02.000Z"
+          },
+          "checks": [
+            "asset_allowlist",
+            "per_action_cap",
+            "window_spend",
+            "active_hours",
+            "killswitch_clear"
+          ],
+          "counter": {
+            "prev": "0x0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
+            "next": "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e"
+          },
+          "proof": {
+            "type": "attestation",
+            "signer": "0x048dcf27384c574eb4e5f115cd2fd2e4fc4707cec7cc314880493d4a2e26f89ffcb5352ce62c5c9a68ee128f3afbd8087a61f6522980703086bdfb66c692c7d5b4",
+            "signature": "0x49e1aec722200c6d5e10921722967dc063b9e725d0b9eed9f14084a08801ac02068e501ee7b9675c67b2225247c16012431b2bb62b0e50593394e1c768550ec5"
+          },
+          "id": "0x9ab4f5a8e97f2eb420efd11c80f4bde3aee6f5e8ebf169541061ee943c2034e8"
+        }
+      ]
+    },
+    {
+      "id": "gap",
+      "label": "Missing receipt",
+      "note": "A receipt was dropped, so the budget chain no longer joins.",
+      "receipts": [
+        {
+          "v": 1,
+          "chain": 4663,
+          "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+          "mandate": {
+            "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+            "epoch": 7
+          },
+          "agent": {
+            "id": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+            "session": "0x22222222222222222222222222222222",
+            "vision": "relative-only"
+          },
+          "action": {
+            "kind": "swap",
+            "userOpHash": "0x7171717171717171717171717171717171717171717171717171717171717171",
+            "settledTx": "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe",
+            "at": "2026-09-13T21:14:02.000Z"
+          },
+          "checks": [
+            "asset_allowlist",
+            "per_action_cap",
+            "window_spend",
+            "active_hours",
+            "killswitch_clear"
+          ],
+          "counter": {
+            "prev": "0x0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
+            "next": "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e"
+          },
+          "proof": {
+            "type": "attestation",
+            "signer": "0x048dcf27384c574eb4e5f115cd2fd2e4fc4707cec7cc314880493d4a2e26f89ffcb5352ce62c5c9a68ee128f3afbd8087a61f6522980703086bdfb66c692c7d5b4",
+            "signature": "0x74dad421068b41c6a08d0550acfaa118f3a8b6ca041227463c4e6f8c1258ab6c749d15182e3febadf3575d482fa124e4aaa61d6e60905ae98b2ec71883b1dc0b"
+          },
+          "id": "0x9ab4f5a8e97f2eb420efd11c80f4bde3aee6f5e8ebf169541061ee943c2034e8"
+        },
+        {
+          "v": 1,
+          "chain": 4663,
+          "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+          "mandate": {
+            "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+            "epoch": 7
+          },
+          "agent": {
+            "id": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+            "session": "0x22222222222222222222222222222222",
+            "vision": "relative-only"
+          },
+          "action": {
+            "kind": "transfer",
+            "userOpHash": "0x7373737373737373737373737373737373737373737373737373737373737373",
+            "settledTx": "0xbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbf",
+            "at": "2026-09-13T23:02:11.000Z"
+          },
+          "checks": [
+            "asset_allowlist",
+            "per_action_cap",
+            "window_spend",
+            "active_hours",
+            "killswitch_clear"
+          ],
+          "counter": {
+            "prev": "0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+            "next": "0x9191919191919191919191919191919191919191919191919191919191919191"
+          },
+          "proof": {
+            "type": "attestation",
+            "signer": "0x048dcf27384c574eb4e5f115cd2fd2e4fc4707cec7cc314880493d4a2e26f89ffcb5352ce62c5c9a68ee128f3afbd8087a61f6522980703086bdfb66c692c7d5b4",
+            "signature": "0x6c8db3d102b53080621525597feddd2b1cd57b805601779856d5ec710adf50a4ddb4633b27fa6aa68f9d55f1eca5caf1490bc5955148d1268e8a5df9c15e49cc"
+          },
+          "id": "0xeedba55733689a6108a97bf5ff622e978177e83a23b68517deddd43b6a35320c"
+        }
+      ]
+    },
+    {
+      "id": "pending",
+      "label": "Not settled yet",
+      "note": "Valid, but its transaction is not visible on chain yet.",
+      "receipts": [
+        {
+          "v": 1,
+          "chain": 4663,
+          "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
+          "mandate": {
+            "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
+            "epoch": 7
+          },
+          "agent": {
+            "id": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7",
+            "session": "0x22222222222222222222222222222222",
+            "vision": "relative-only"
+          },
+          "action": {
+            "kind": "approve",
+            "userOpHash": "0x7474747474747474747474747474747474747474747474747474747474747474",
+            "settledTx": "0xc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0",
+            "at": "2026-09-14T01:40:00.000Z"
+          },
+          "checks": [
+            "asset_allowlist",
+            "per_action_cap",
+            "window_spend",
+            "active_hours",
+            "killswitch_clear"
+          ],
+          "counter": {
+            "prev": "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e",
+            "next": "0x9292929292929292929292929292929292929292929292929292929292929292"
+          },
+          "proof": {
+            "type": "attestation",
+            "signer": "0x048dcf27384c574eb4e5f115cd2fd2e4fc4707cec7cc314880493d4a2e26f89ffcb5352ce62c5c9a68ee128f3afbd8087a61f6522980703086bdfb66c692c7d5b4",
+            "signature": "0x073f0d7770f32acf6519ed55201826bcaf02f5819ae41ea350c1b8d10cabdb35700d8c19276d8285f8ee819d512d023c6528bcacc769ffc008834edd09b384bb"
+          },
+          "id": "0x548ad163bb69110c4a6c0db1af32ec325b4c89d132f5dc6b78523287701da082"
+        }
+      ]
+    }
+  ]
+}
