@@ -1,3 +1,4 @@
+import { SectionBackdrop } from "@/components/ui/SectionBackdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 import {
@@ -80,9 +81,10 @@ export function Pipeline() {
       id="pipeline"
       className="mb-5 flex flex-col border border-border scroll-mt-17 md:mb-8 lg:mb-17.5"
     >
-      <div className="flex flex-col gap-4 border-b border-border px-4 py-6 md:px-5 md:py-8">
-        <span className="label text-fg-muted">{PIPELINE_LABEL}</span>
-        <SectionHeading title="Pipeline." tagline={PIPELINE_TAGLINE} />
+      <div className="relative overflow-hidden flex flex-col gap-4 border-b border-border px-4 py-6 md:px-5 md:py-8">
+        <SectionBackdrop src="/backgrounds/pipeline-bg.png" />
+        <span className="relative z-10 label text-fg-muted">{PIPELINE_LABEL}</span>
+        <SectionHeading className="relative z-10" title="Pipeline." tagline={PIPELINE_TAGLINE} />
       </div>
 
       <ol className="flex flex-col">

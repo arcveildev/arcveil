@@ -1,3 +1,4 @@
+import { SectionBackdrop } from "@/components/ui/SectionBackdrop";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { THREAT_COLUMNS, THREAT_NOTE, THREAT_ROWS } from "@/data/threatModel";
 import { cn } from "@/lib/cn";
@@ -14,9 +15,10 @@ export function ThreatModel() {
       id="threat"
       className="mb-5 flex flex-col border border-border scroll-mt-17 md:mb-8 lg:mb-17.5"
     >
-      <div className="flex flex-col gap-4 px-4 py-6 md:px-5 md:py-8">
-        <span className="label text-fg-muted">Who sees what</span>
-        <SectionHeading title="Threat model." tagline="Privacy from whom, exactly." />
+      <div className="relative overflow-hidden flex flex-col gap-4 px-4 py-6 md:px-5 md:py-8">
+        <SectionBackdrop src="/backgrounds/threat-bg.png" />
+        <span className="relative z-10 label text-fg-muted">Who sees what</span>
+        <SectionHeading className="relative z-10" title="Threat model." tagline="Privacy from whom, exactly." />
       </div>
 
       <div className="scrollbar-none overflow-x-auto border-t border-border">
