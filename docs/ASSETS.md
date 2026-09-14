@@ -6,15 +6,18 @@ All media in `public/backgrounds/` is original to this repo.
 
 | File | Used by | Source |
 |---|---|---|
-| `hero-blindfold.png` | Hero poster (`HeroBackdrop`) | Higgsfield · GPT Image 2.5, 16:9 (job bbfed435) |
-| `hero-blindfold-loop.mp4` | Hero video loop | Higgsfield · Seedance 2.5 image-to-video from the poster, 720p, 6s, no audio (job 2909bf1c) |
+| `hero-veil.png` | Hero still, painted under the loop | Higgsfield · GPT Image 2.5, 16:9 (job 7833eb3f) |
+| `hero-veil-loop.mp4` | Hero video loop, full-bleed | Higgsfield · Seedance 2.5 image-to-video from the still, 720p, 6s, no audio (job 2e594d39) |
 | `pipeline-bg.png` | Pipeline section header | GPT Image 2.5, 21:9 (job 48a2e107) |
 | `threat-bg.png` | Threat model section header | GPT Image 2.5, 21:9 (job d1c21655) |
 | `receipts-bg.png` | Receipts section header | GPT Image 2.5, 21:9 (job 844b9265) |
 
-Every backdrop renders through `<SectionBackdrop>` (or `HeroBackdrop` for the
-loop), which owns the blend and filter so all of them read as the same
-material: `mix-blend-screen` + `saturate(1.58) brightness(1.28) contrast(1.16)`.
+Section backdrops render through `<SectionBackdrop>`, which owns the blend and
+filter so they all read as the same material: `mix-blend-screen` +
+`saturate(1.58) brightness(1.28) contrast(1.16)`. The hero is the exception —
+it runs full-bleed and unfiltered so the loop keeps its brightness, and is made
+readable by two scrims instead (left-to-right for the copy, top-down for the
+floating header).
 
 ## Style rules for new backgrounds
 Pure black canvas, dot-matrix / LED sub-pixel texture, one accent hue (mint

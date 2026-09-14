@@ -4,7 +4,10 @@ export const HOME_HERO = {
   label: `Codename ${SITE.codename} · ${CHAIN.name} (${CHAIN.id})`,
   title: "Agents that can spend. Never see. Never exceed.",
   body:
-    "Handing an agent your private key is the only option most wallets offer. A mandate is the other one: the agent works in relative terms, the enclave holds the numbers, and every action it takes leaves behind a receipt that proves it stayed inside your limits — without revealing what those limits are.",
+    "Hand an agent a mandate instead of your keys. It works in relative terms, never sees your balances, and every action it takes leaves a receipt you can check.",
+  /** Right-hand column of the hero — facts only, nothing aspirational. */
+  builtFor: [CHAIN.name, CHAIN.stack, `Chain ID ${CHAIN.id}`],
+  proofLine: "receipt v1 · five checks · nothing leaves your tab",
 } as const;
 
 export const HOME_PILLARS = [

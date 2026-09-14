@@ -1,4 +1,4 @@
-import { Thesis } from "@/components/home/Thesis";
+import { Hero } from "@/components/home/Hero";
 import { Pillars } from "@/components/home/Pillars";
 import { Ladder } from "@/components/home/Ladder";
 import { Pipeline } from "@/components/home/Pipeline";
@@ -12,9 +12,9 @@ import { Faq } from "@/components/home/Faq";
 
 export default function HomePage() {
   return (
-    <div className="pt-28 pb-20 xl:pt-36">
+    <div className="pb-20">
       {/* Claim, then the machine, then the proof, then the failure modes. */}
-      <Thesis />
+      <Hero />
       <Pillars />
       <Ladder />
       <Pipeline />
