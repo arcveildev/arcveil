@@ -13,7 +13,7 @@ const COPY = {
   label: "Receipt format v1",
   tagline: "Check what an agent did — without seeing what it saw.",
   body:
-    "Every action an agent takes under a mandate produces a receipt. It proves the action stayed inside the mandate without revealing the mandate, the balances, or the reasoning. Five checks, all of them run in your browser.",
+    "Every action an agent takes under a mandate produces a receipt. It proves the action stayed inside the mandate without revealing the mandate, the balances, or the reasoning. Five checks: two read the receipt itself, one asks Arc mainnet whether the transaction really settled, and two need contracts we have not deployed yet — those answer unknown, which is the truth.",
 } as const;
 
 export default function VerifyPage() {

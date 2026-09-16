@@ -67,6 +67,11 @@ const linkage: Check = {
 const settlement: Check = {
   id: "settlement",
   run: async ({ receipt, chain }) => {
+    if (chain.chainId !== 0 && receipt.chain !== chain.chainId) {
+      return unknown(
+        `This receipt is for chain ${receipt.chain}; the verifier is pointed at chain ${chain.chainId}.`,
+      );
+    }
     const tx = await chain.getTransaction(receipt.action.settledTx);
     if (tx === null) return unknown(`Transaction ${short(receipt.action.settledTx)} is not visible on chain yet.`);
     return tx.status === "success"

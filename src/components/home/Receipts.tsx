@@ -7,7 +7,7 @@ const COPY = {
   label: "Proof, not adjectives",
   tagline: "Check one right now. Nothing leaves this tab.",
   body:
-    "Everything above describes a machine that is still being built. This part is not a description: load a sample, edit a character of it, and watch the checks disagree with you.",
+    "Everything above describes a machine that is still being built. This part is not a description: load a sample, edit a character of it, and watch the checks disagree with you. The settlement check is a live read of Arc mainnet; the two that need our contracts say unknown until those contracts exist.",
 } as const;
 
 export function Receipts() {

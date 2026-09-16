@@ -12,7 +12,9 @@ export type SpecRow = {
 
 export const SPEC_ROWS: readonly SpecRow[] = [
   { key: "Execution network", value: "Arc mainnet, chain ID 5042", status: "planned" },
-  { key: "Development network", value: "Arc testnet, chain ID 5042002", status: "in progress" },
+  { key: "Chain reader", value: "Live — the verifier reads Arc mainnet over JSON-RPC, from your browser", status: "shipped" },
+  { key: "Mandate registry", value: "Not deployed; the two checks that need it report unknown", status: "planned" },
+  { key: "Development network", value: "Arc testnet, chain ID 5042002", status: "planned" },
   { key: "Native gas", value: "ETH", status: "planned" },
   { key: "Account", value: "ERC-4337 smart account", status: "planned" },
   {

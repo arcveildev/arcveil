@@ -3,8 +3,9 @@
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FigureLabel } from "@/components/ui/FigureLabel";
-import { RECEIPT_SAMPLES, SAMPLE_CHAIN_STATE } from "@/data/receiptSamples";
-import { createMemoryChainReader } from "@/lib/receipt/chain";
+import { RECEIPT_SAMPLES } from "@/data/receiptSamples";
+import { ARC } from "@/data/site";
+import { createRpcChainReader } from "@/lib/receipt/rpc";
 import { parseReceiptInput } from "@/lib/receipt/schema";
 import { verifyReceipts } from "@/lib/receipt/verify";
 import type { VerificationReport } from "@/lib/receipt/types";
@@ -12,8 +13,13 @@ import { cn } from "@/lib/cn";
 import { CheckList } from "./CheckList";
 import { StatusPill } from "./StatusPill";
 
-/** v0 reads a fixture instead of Arc; the RPC reader drops in here later. */
-const chain = createMemoryChainReader(SAMPLE_CHAIN_STATE);
+/** Reads Arc mainnet straight from the browser — Arc's RPC allows it, so no backend of ours is in the path. */
+const chain = createRpcChainReader({
+  endpoint: ARC.rpc,
+  chainId: ARC.chainId,
+  mandateRegistry: ARC.mandateRegistry,
+  anchorRegistry: ARC.anchorRegistry,
+});
 
 type State = { report: VerificationReport | null; errors: readonly string[]; busy: boolean };
 
@@ -89,7 +95,7 @@ export function ReceiptVerifier() {
             >
               Clear
             </Button>
-            <p className="label-2xs ml-auto text-fg-faint">Runs in this tab</p>
+            <p className="label-2xs ml-auto text-fg-faint">Reads Arc {ARC.chainId}</p>
           </div>
         </div>
       </div>
@@ -110,7 +116,7 @@ export function ReceiptVerifier() {
         )}
         {state.report === null && state.errors.length === 0 && (
           <p className={cn("p-4 text-sm leading-140 text-fg-muted md:p-5", state.busy && "animate-pulse")}>
-            {state.busy ? "Checking…" : "Load a sample or paste a receipt. Five checks run here, in your browser — no request leaves this tab."}
+            {state.busy ? "Checking…" : "Load a sample or paste a receipt. Five checks run here, in your browser — the only request made is a read of Arc itself."}
           </p>
         )}
         {state.report?.receipts.map((report, index) => (

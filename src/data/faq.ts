@@ -41,7 +41,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
   {
     question: "Which network and assets?",
     answer:
-      "Arc — Circle\u2019s EVM layer 1 for stablecoin finance, where USDC is the gas token. Mainnet is chain ID 5042, testnet 5042002. Our contracts are deployed to neither yet: everything you can run today, including the verifier, runs in your own browser. See the specifications above for what is shipped and what is planned.",
+      "Arc — Circle\u2019s EVM layer 1 for stablecoin finance, where USDC is the gas token. We target mainnet, chain ID 5042, and the verifier already reads it: paste a receipt and the settlement check queries Arc directly from your browser. Our own contracts are not deployed yet, so the two checks that depend on them answer unknown rather than guessing.",
   },
   {
     question: "What does a receipt actually prove?",

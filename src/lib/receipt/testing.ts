@@ -56,7 +56,7 @@ export function chainFixture(options: ChainOptions = {}): ChainReader {
     mandates: [mandate],
     transactions: tx === null ? {} : { [SETTLED_TX.toLowerCase()]: tx },
     anchors: options.anchors ?? [COUNTER_PREV],
-  });
+  }, 5042002);
 }
 
 export const checkOf = (report: VerificationReport, id: CheckId): CheckResult => {

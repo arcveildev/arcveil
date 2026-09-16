@@ -8,6 +8,8 @@ export type MandateRecord = { account: Hex; commitment: Hex; epoch: number; revo
 export type TxRecord = { status: "success" | "failed" };
 
 export type ChainReader = {
+  /** The chain this reader is pointed at, so a receipt for another chain is caught. */
+  chainId: number;
   getMandate: (account: Hex, epoch: number) => Promise<MandateRecord | null>;
   getTransaction: (hash: Hex) => Promise<TxRecord | null>;
   hasCounterAnchor: (account: Hex, commitment: Hex) => Promise<boolean>;
@@ -21,7 +23,8 @@ export type ChainState = {
 
 export const EMPTY_CHAIN_STATE: ChainState = { mandates: [], transactions: {}, anchors: [] };
 
-export const createMemoryChainReader = (state: ChainState): ChainReader => ({
+export const createMemoryChainReader = (state: ChainState, chainId = 0): ChainReader => ({
+  chainId,
   getMandate: async (account, epoch) =>
     state.mandates.find((m) => m.account.toLowerCase() === account.toLowerCase() && m.epoch === epoch) ?? null,
   getTransaction: async (hash) => state.transactions[hash.toLowerCase()] ?? null,

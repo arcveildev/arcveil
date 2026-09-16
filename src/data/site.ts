@@ -21,6 +21,25 @@ export const CHAIN = {
   gas: "USDC",
 } as const;
 
+/**
+ * Where the verifier points. Contract addresses stay null until they are
+ * deployed — the reader then reports those checks as unknown instead of
+ * pretending, which is the behaviour the page promises.
+ */
+export const ARC: {
+  rpc: string;
+  explorer: string;
+  chainId: number;
+  mandateRegistry: `0x${string}` | null;
+  anchorRegistry: `0x${string}` | null;
+} = {
+  rpc: "https://rpc.mainnet.arc.io",
+  explorer: "https://explorer.arc.io",
+  chainId: CHAIN.id,
+  mandateRegistry: null,
+  anchorRegistry: null,
+};
+
 export type NavItem = { label: string; href: string; badge?: string };
 
 /** The header hides this nav while it is empty. */

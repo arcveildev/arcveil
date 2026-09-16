@@ -1,35 +1,13 @@
 {
-  "chainState": {
-    "mandates": [
-      {
-        "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
-        "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
-        "epoch": 7,
-        "revoked": false
-      }
-    ],
-    "transactions": {
-      "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe": {
-        "status": "success"
-      },
-      "0xbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbf": {
-        "status": "success"
-      }
-    },
-    "anchors": [
-      "0x0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c",
-      "0x7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e7e"
-    ]
-  },
   "samples": [
     {
       "id": "clean",
       "label": "Clean run",
-      "note": "Two linked receipts from one night of agent activity.",
+      "note": "Two linked receipts, settling in real Arc transactions.",
       "receipts": [
         {
           "v": 1,
-          "chain": 5042002,
+          "chain": 5042,
           "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
           "mandate": {
             "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
@@ -43,7 +21,7 @@
           "action": {
             "kind": "swap",
             "userOpHash": "0x7171717171717171717171717171717171717171717171717171717171717171",
-            "settledTx": "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe",
+            "settledTx": "0x01d3ac9f507f3c18e70367b32801712167cea580442e56fedb770aea34d4c758",
             "at": "2026-09-13T21:14:02.000Z"
           },
           "checks": [
@@ -59,14 +37,14 @@
           },
           "proof": {
             "type": "attestation",
-            "signer": "0x041fa01632b394526669508cc9cec7112fa54e983b6ec49ba2eddc7762f3abc5e85ccde7b9d326e3366923c700f9a7f78a84eebcd54ef6e479d8b5555fc35fcf88",
-            "signature": "0x5d3d2cc652c1ead9fa9909fa55820d849fd8fbe25e243127b5cd6152604580bbc8d595e40867ef4824a64af6d22ff1d81ed8eb18e3b442390bf49ed3c773e592"
+            "signer": "0x046947dd0c765d778405e2fdaf5c92e4e6d2b15d5ba690bebae7ef1d5e35578ea799f6d9d03bfbfb5563b839f3bbecff202bc9708c96dffe77b9b83c26e997f382",
+            "signature": "0x99a1fc334622a37cc18cf7fe2895bb11ed5015601f216a35ec6be14edb4e4fbbfab4b4ee26f0f3500a69ce190d330c64db809213c79d093261cbec709f537efb"
           },
-          "id": "0x82ac888957b7e24903dc19134833134dddf52cfb2f4ef7b01dcb327a5e710e39"
+          "id": "0x6ac8dd913dcc59fd23da2fd1db805f050f3556a43fda7a9d8816f013fc905057"
         },
         {
           "v": 1,
-          "chain": 5042002,
+          "chain": 5042,
           "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
           "mandate": {
             "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
@@ -80,7 +58,7 @@
           "action": {
             "kind": "transfer",
             "userOpHash": "0x7272727272727272727272727272727272727272727272727272727272727272",
-            "settledTx": "0xbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbf",
+            "settledTx": "0x8203ed928ab4ba16d45aa110a349494b37418494454472291ec73033defe6f69",
             "at": "2026-09-13T23:02:11.000Z"
           },
           "checks": [
@@ -96,10 +74,10 @@
           },
           "proof": {
             "type": "attestation",
-            "signer": "0x041fa01632b394526669508cc9cec7112fa54e983b6ec49ba2eddc7762f3abc5e85ccde7b9d326e3366923c700f9a7f78a84eebcd54ef6e479d8b5555fc35fcf88",
-            "signature": "0xc33ab454fd5ae3398729b2734e035703eceabea185b267a72bec7b60dacac1e25e2eedd7b682557a4d5850fbfddecf6f47d76da8517907a6342d026057f20b6d"
+            "signer": "0x046947dd0c765d778405e2fdaf5c92e4e6d2b15d5ba690bebae7ef1d5e35578ea799f6d9d03bfbfb5563b839f3bbecff202bc9708c96dffe77b9b83c26e997f382",
+            "signature": "0x67a6109e8cf3910bd66374de65761c21ea53876504766c62abec4e0813b64807a66e11daf897b1f252d505f2b35d1b16c1d49f4dae9a4d97d49fe55d1827d94c"
           },
-          "id": "0xea065df730aa97467d6b87292b19d6399c0d8e0522da9fc9d24c22fbb7e02286"
+          "id": "0x21d9dae07aecc52e0138f56fc03ecef3bf747ea0418d9d2e1eca78cc234e2fe8"
         }
       ]
     },
@@ -110,7 +88,7 @@
       "receipts": [
         {
           "v": 1,
-          "chain": 5042002,
+          "chain": 5042,
           "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
           "mandate": {
             "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
@@ -124,7 +102,7 @@
           "action": {
             "kind": "transfer",
             "userOpHash": "0x7171717171717171717171717171717171717171717171717171717171717171",
-            "settledTx": "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe",
+            "settledTx": "0x01d3ac9f507f3c18e70367b32801712167cea580442e56fedb770aea34d4c758",
             "at": "2026-09-13T21:14:02.000Z"
           },
           "checks": [
@@ -140,10 +118,10 @@
           },
           "proof": {
             "type": "attestation",
-            "signer": "0x041fa01632b394526669508cc9cec7112fa54e983b6ec49ba2eddc7762f3abc5e85ccde7b9d326e3366923c700f9a7f78a84eebcd54ef6e479d8b5555fc35fcf88",
-            "signature": "0x95bb0673f584c83172a4d3730ce0d1417614dd580b595cd9b4014f2a8cfa55fa3cb51250d6f3e68ffd1cc21dd76ac021c7268159bb673c6f5d193e0f990fc81a"
+            "signer": "0x046947dd0c765d778405e2fdaf5c92e4e6d2b15d5ba690bebae7ef1d5e35578ea799f6d9d03bfbfb5563b839f3bbecff202bc9708c96dffe77b9b83c26e997f382",
+            "signature": "0xf1717917ba709b66825a4d28e313cccb46582430efee0b0f23441cc746e33cec745b536ddecd644fb7b6334ffe636acb352d6f314eb6142d86f198c7975be89f"
           },
-          "id": "0x82ac888957b7e24903dc19134833134dddf52cfb2f4ef7b01dcb327a5e710e39"
+          "id": "0x6ac8dd913dcc59fd23da2fd1db805f050f3556a43fda7a9d8816f013fc905057"
         }
       ]
     },
@@ -154,7 +132,7 @@
       "receipts": [
         {
           "v": 1,
-          "chain": 5042002,
+          "chain": 5042,
           "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
           "mandate": {
             "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
@@ -168,7 +146,7 @@
           "action": {
             "kind": "swap",
             "userOpHash": "0x7171717171717171717171717171717171717171717171717171717171717171",
-            "settledTx": "0xbebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebebe",
+            "settledTx": "0x01d3ac9f507f3c18e70367b32801712167cea580442e56fedb770aea34d4c758",
             "at": "2026-09-13T21:14:02.000Z"
           },
           "checks": [
@@ -184,14 +162,14 @@
           },
           "proof": {
             "type": "attestation",
-            "signer": "0x041fa01632b394526669508cc9cec7112fa54e983b6ec49ba2eddc7762f3abc5e85ccde7b9d326e3366923c700f9a7f78a84eebcd54ef6e479d8b5555fc35fcf88",
-            "signature": "0x5d3d2cc652c1ead9fa9909fa55820d849fd8fbe25e243127b5cd6152604580bbc8d595e40867ef4824a64af6d22ff1d81ed8eb18e3b442390bf49ed3c773e592"
+            "signer": "0x046947dd0c765d778405e2fdaf5c92e4e6d2b15d5ba690bebae7ef1d5e35578ea799f6d9d03bfbfb5563b839f3bbecff202bc9708c96dffe77b9b83c26e997f382",
+            "signature": "0x99a1fc334622a37cc18cf7fe2895bb11ed5015601f216a35ec6be14edb4e4fbbfab4b4ee26f0f3500a69ce190d330c64db809213c79d093261cbec709f537efb"
           },
-          "id": "0x82ac888957b7e24903dc19134833134dddf52cfb2f4ef7b01dcb327a5e710e39"
+          "id": "0x6ac8dd913dcc59fd23da2fd1db805f050f3556a43fda7a9d8816f013fc905057"
         },
         {
           "v": 1,
-          "chain": 5042002,
+          "chain": 5042,
           "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
           "mandate": {
             "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
@@ -205,7 +183,7 @@
           "action": {
             "kind": "transfer",
             "userOpHash": "0x7373737373737373737373737373737373737373737373737373737373737373",
-            "settledTx": "0xbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbf",
+            "settledTx": "0x8203ed928ab4ba16d45aa110a349494b37418494454472291ec73033defe6f69",
             "at": "2026-09-13T23:02:11.000Z"
           },
           "checks": [
@@ -221,21 +199,21 @@
           },
           "proof": {
             "type": "attestation",
-            "signer": "0x041fa01632b394526669508cc9cec7112fa54e983b6ec49ba2eddc7762f3abc5e85ccde7b9d326e3366923c700f9a7f78a84eebcd54ef6e479d8b5555fc35fcf88",
-            "signature": "0x564e9780f0552229e4b831909f035b482f92bb30842743f1f8ef870198431cbc8d89facbdadc7b28e564e9c2ea5546c082aa23043331c12f66de90de10c5df89"
+            "signer": "0x046947dd0c765d778405e2fdaf5c92e4e6d2b15d5ba690bebae7ef1d5e35578ea799f6d9d03bfbfb5563b839f3bbecff202bc9708c96dffe77b9b83c26e997f382",
+            "signature": "0xe1011a6e9f3acec5150cff910f7b00a010b0d9294a7cacb53c6d68cd539bbda197c26e49dc18b343003547f6e1fbcf32a15c40b5bceda612cb7542832212cc37"
           },
-          "id": "0xdf9afb3fb0241d8129a30e34d520058e6224937e9dae1c1ec6192b095168a2fb"
+          "id": "0xf20b784e78fc4fa6e0e0cd8be5ee69bd6c4a724864a7588df0f30b3051e5f580"
         }
       ]
     },
     {
       "id": "pending",
       "label": "Not settled yet",
-      "note": "Valid, but its transaction is not visible on chain yet.",
+      "note": "Valid, but its transaction is nowhere on Arc.",
       "receipts": [
         {
           "v": 1,
-          "chain": 5042002,
+          "chain": 5042,
           "account": "0x8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f",
           "mandate": {
             "commitment": "0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d",
@@ -265,10 +243,10 @@
           },
           "proof": {
             "type": "attestation",
-            "signer": "0x041fa01632b394526669508cc9cec7112fa54e983b6ec49ba2eddc7762f3abc5e85ccde7b9d326e3366923c700f9a7f78a84eebcd54ef6e479d8b5555fc35fcf88",
-            "signature": "0x9be7ff755daf334b05bf1759131fe908baa26e655c4e6327ca9b31ff35151f40c5c20644f9984567169a920b0c9efee17b6a72cd6af17ef7c484e99886a1a1aa"
+            "signer": "0x046947dd0c765d778405e2fdaf5c92e4e6d2b15d5ba690bebae7ef1d5e35578ea799f6d9d03bfbfb5563b839f3bbecff202bc9708c96dffe77b9b83c26e997f382",
+            "signature": "0xf29571bc016611f33247bc7edc56b4539d0a5b42919de8628b6b98a92224040fd2eab22bac31fe733a5db56cade2f21db3c5cdb1268d60e75affbb620e70499e"
           },
-          "id": "0x40ee6f853ff967dccde67cfffb2e0af5a53bdaefda46d35b9f195ad5b442e6fb"
+          "id": "0x601cdddc7ebdb8f86a2737aebf0e5c4ac577c3000bffa57a8a24003396be5a2c"
         }
       ]
     }
