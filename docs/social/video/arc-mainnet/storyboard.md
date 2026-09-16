@@ -151,6 +151,28 @@ ffmpeg -i rough.mp4 -loop 1 -i lockup-overlay.png \
   -map "[v]" -map 0:a -c:v libx264 -pix_fmt yuv420p -crf 19 -c:a copy -movflags +faststart arcveil-arc-mainnet-reply.mp4
 ```
 
+### Captions (added 2026-09-16)
+
+`captions.py` draws one RGBA PNG per cue (DM Mono Medium 40 px, navy on a white
+pill at 80% alpha, bottom-centre) and writes the ffmpeg overlay chain to
+`filter.txt`. Cue windows came from `silencedetect` on `vo-grady.mp3`
+(noise −32 dB, min 0.22 s) plus the 0.3 s VO offset; the first segment was split
+by hand because the pause after "live." is shorter than the detector's floor.
+The last line, "Arcveil. Built on Arc.", is carried by the lockup, not a caption,
+so the two never collide at the bottom of the frame.
+
+- `arcveil-arc-mainnet-reply.mp4` — captioned, the one to post
+- `arcveil-arc-mainnet-reply-nocaptions.mp4` — clean, for re-captioning in another language
+- `captions/cue1..7.png` — the rendered cues
+
+```bash
+python3 captions.py fonts captions
+ffmpeg -i arcveil-arc-mainnet-reply-nocaptions.mp4 \
+  -loop 1 -i captions/cue1.png ... -loop 1 -i captions/cue7.png \
+  -filter_complex "$(sed -n 1p captions/filter.txt)" -map "[v7]" -map 0:a -shortest \
+  -c:v libx264 -pix_fmt yuv420p -crf 19 -c:a copy -movflags +faststart arcveil-arc-mainnet-reply.mp4
+```
+
 ## Generation plan (Higgsfield)
 
 1. **Character sheet** — done, see above.
