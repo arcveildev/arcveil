@@ -127,3 +127,51 @@ Reference frames on Higgsfield (media ids): network `f231e559-b51e-4887-bd98-81d
 slab `03caf607-5ede-4604-bad9-10f30e8bb7fd`, arch `33fa98da-1387-4fb2-b826-70c5dfa350f4`,
 coin `82e187f5-ca1f-4800-88d8-14ba87469dec`; Band mark on white `e7e4cb22-b795-4289-b2f9-72b383351680`.
 Shots 3 and 4 need no plate (white + a Higgsedit gradient wash).
+
+## Plates (rendered 2026-09-17, Seedance 2.5 omni-reference, start_image = style frame, 1080p 24 fps, audio off)
+
+| Plate | File | Shot | Length | Seedance job | Note |
+|---|---|---|---|---|---|
+| P1 | `plates/p1.mp4` | 1 | 5 s | `cc175744-573c-4c9c-9097-0275b620b5ad` | drift right, irises glance |
+| P2 | `plates/p2.mp4` | 2 | 6 s | `33da5b6c-82d4-44e4-8295-009d2e346c63` | needed `declined_preset_id` (IN THE DARK) |
+| P3 | `plates/p5.mp4` | 5 | 5 s | `e8aefa02-b51e-4b0c-a09b-54095a8358ca` | particles through the gap |
+| P4 | `plates/p6.mp4` | 6 | 5 s | `2c7948af-1f2b-442c-be9f-309c1642e064` | needed `declined_preset_id` |
+| P5 | `plates/p7.mp4` | 7 | 5 s | `406165c9-f6b5-47db-9f5e-23d770aa62f0` | coin sparks |
+| P6 | `plates/p8.mp4` | 8 | 5 s | `68416228-0ec7-467e-9c66-4b3beb505ea4` | `end_image` = style frame, swoosh sweeps in |
+
+Cost: 45 credits per 5 s plate at 1080p (54 for 6 s); 720p would have been 32.5.
+Plates are re-timed with `setpts` in the sandbox to each shot's length.
+
+## Narration (Seed Audio, Grady `e2a2d2e6-9ed2-59cd-82af-feaa27f8a678`, one take per shot)
+
+Raw takes `vo/vo1..8.mp3` (jobs 313c7b94, 6eb79fe7, 338de23f, dbfb678d, 5eee14eb,
+473aad1e, c723f52e, de035d1e). Grady's pauses are long, so `vo/trim.py` caps
+each pause at 0.32 s and runs `atempo=1.18`; the takes are then placed at
+their shot starts (+0.25 s) into `vo/vo-master.mp3` (46.3 s, loudnorm −16 LUFS).
+Shot timeline derived from the trimmed takes: `vo/timeline.json`.
+
+Shot 4's line was shortened for time: "It gets a mandate instead of your keys.
+Acts in ratios. Never sees a number. Arc settles it in USDC."; shot 7 says
+"The Arcveil dev allocation is burnt" so the TTS does not read a dollar sign.
+
+## Higgsedit edit (`higgsedit/edit.jsx`)
+
+Single build script: VO on the spine, every plate a composed `media` node with
+a 0.45 s fade from white, type in Manrope 700 / DM Mono via `fonts add`,
+headlines as rows of text nodes so the accent word keeps its colour, word-by-word
+`text.motion`, ledger rows and checks staggered with frame choreography, the
+Band mark drawn as a cubic-bezier path (Higgsedit paths have no arcs).
+`HF_FRAMES=t1,t2 higgsedit build edit.jsx` renders check frames; `HF_RENDER=1`
+renders the movie at 12 Mbps.
+
+## Master (rendered 2026-09-17)
+
+`arcveil-live-on-arc.mp4`: 1920×1080, 30 fps, H.264 12 Mbps + AAC, 46.28 s,
+rendered by Higgsedit in the Higgsfield sandbox (7 render windows), uploaded as
+Higgsfield media `c0709f74-1bf2-4ea2-a88d-56d05faf904a`. The build script that
+produced it is `higgsedit/edit.jsx` (rev 5). Higgsedit lessons baked into it:
+`row`/`column` take no choreography and no frames, and stack animated text
+vertically, so every multi-segment headline is a `frame layout=row` with text
+widths pre-measured in Pillow (the `TW` table); text inside a `hug` frame needs
+an explicit width; overshoot easing must not touch opacity. Decided by the user:
+token beat kept, Manrope headlines, straight to master with no revision pass.
