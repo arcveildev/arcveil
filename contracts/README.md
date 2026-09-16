@@ -60,7 +60,15 @@ cd contracts && forge script script/Deploy.s.sol --rpc-url arc --account arcveil
 ```
 
 Gas on Arc is paid in USDC, so the deployer needs a USDC balance on the network
-you are deploying to.
+you are deploying to. Deploying both registries simulates at 681,873 gas —
+about **0.06 USDC** at current base fees.
+
+**Arc's two USDC representations.** The native balance (gas, `msg.value`,
+native sends) uses **18 decimals** like ether; the ERC-20 interface at
+`0x3600000000000000000000000000000000000000` uses the familiar **6**. Divide a
+native figure by 10^12 to read it as USDC. Nothing in these contracts touches
+amounts, so the distinction cannot bite here — but it will the moment anything
+does, and it fails silently.
 
 Afterwards, paste the two addresses into `ARC.mandateRegistry` and
 `ARC.anchorRegistry` in `src/data/site.ts`. The verifier picks them up with no
