@@ -194,7 +194,17 @@ phrase, one proof line, a blank, a two-word status, a blank, one positioning
 line with @arc, one closing line that names our layer. No hashtags, no emoji,
 no arrows. The video is the attachment.
 
-Main:
+Chosen (2026-09-17), closing on the positioning line the user set:
+
+> Agents can move money on Arc from day one.
+> Ours just did, without seeing the balance.
+>
+> Arcveil is coming.
+>
+> A mandate instead of your keys. A receipt for every action.
+> The first privacy layer for agents, built on @arc.
+
+Rejected alt (echo-and-layer pattern):
 
 > Agentic economic activity is live on Arc.
 > So is our first mandate.
@@ -203,16 +213,6 @@ Main:
 >
 > Privacy infrastructure for agents that spend on @arc.
 > The mandate layer starts here.
-
-Alt, sharper on the mechanism:
-
-> Agents can move money on Arc from day one.
-> Ours just did, without seeing the balance.
->
-> Arcveil is coming.
->
-> A mandate instead of your keys. A receipt for every action. On @arc.
-> Spend, never see, never exceed.
 
 "First mandate" is true: MandateRegistry and AnchorRegistry are deployed on Arc
 mainnet (chain 5042, addresses in `src/data/site.ts`) and the demo mandate
