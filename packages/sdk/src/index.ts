@@ -35,12 +35,14 @@ export { arc, arcTestnet, ARC_REGISTRIES, USDC_ERC20_ADDRESS, type Registries } 
 export { anchorCounter, mandateCommitment, registerMandate, revokeMandate } from "./mandate";
 export { createIssuer, nextCounter, type ActionInput, type Issuance, type Issuer, type IssuerConfig } from "./issuer";
 export {
+  adoptTypedData,
   ARCVEIL_ACCOUNT_ABI,
   encodeExecute,
   executeIntent,
   intentTypedData,
   signIntent,
   type AccountCall,
+  type Adoption,
   type Intent,
 } from "./account";
 export { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi";

@@ -38,11 +38,9 @@ contract ArcveilAccountTest is Test {
     function setUp() public {
         registry = new MandateRegistry();
         target = new Target();
-        account =
-            new ArcveilAccount(entryPoint, registry, vm.addr(deviceKey), vm.addr(cosignerKey), vm.addr(recoveryKey));
-
-        vm.prank(address(account));
-        registry.register(EPOCH, MANDATE);
+        account = new ArcveilAccount(
+            entryPoint, registry, vm.addr(deviceKey), vm.addr(cosignerKey), vm.addr(recoveryKey), EPOCH, MANDATE
+        );
 
         vm.deal(address(account), 10 ether);
     }
@@ -80,7 +78,7 @@ contract ArcveilAccountTest is Test {
         address dev = vm.addr(deviceKey);
         address rec = vm.addr(recoveryKey);
         vm.expectRevert(ArcveilAccount.ZeroAddress.selector);
-        new ArcveilAccount(entryPoint, registry, dev, address(0), rec);
+        new ArcveilAccount(entryPoint, registry, dev, address(0), rec, EPOCH, MANDATE);
     }
 
     function test_refusesAZeroRegistry() public {
@@ -88,7 +86,7 @@ contract ArcveilAccountTest is Test {
         address cos = vm.addr(cosignerKey);
         address rec = vm.addr(recoveryKey);
         vm.expectRevert(ArcveilAccount.ZeroAddress.selector);
-        new ArcveilAccount(entryPoint, MandateRegistry(address(0)), dev, cos, rec);
+        new ArcveilAccount(entryPoint, MandateRegistry(address(0)), dev, cos, rec, EPOCH, MANDATE);
     }
 
     /// Repeating a key is 2-of-2 wearing a 2-of-3 label.
@@ -96,7 +94,73 @@ contract ArcveilAccountTest is Test {
         address dev = vm.addr(deviceKey);
         address rec = vm.addr(recoveryKey);
         vm.expectRevert(ArcveilAccount.KeysMustDiffer.selector);
-        new ArcveilAccount(entryPoint, registry, dev, dev, rec);
+        new ArcveilAccount(entryPoint, registry, dev, dev, rec, EPOCH, MANDATE);
+    }
+
+    /// Without this the account is born unable to act: execution is gated on a
+    /// live mandate, so the call that first published one could never pass.
+    function test_isBornHoldingItsMandate() public view {
+        assertTrue(registry.isLive(address(account), EPOCH, MANDATE));
+        assertEq(account.currentEpoch(), EPOCH);
+    }
+
+    // ---------------------------------------------------------- rotating it
+
+    function signAdopt(uint256 key, uint64 epoch, bytes32 commitment, uint64 deadline)
+        private
+        view
+        returns (bytes memory)
+    {
+        (uint8 v, bytes32 r, bytes32 s) =
+            vm.sign(key, account.adoptDigest(epoch, commitment, account.nonce(), deadline));
+        return abi.encodePacked(r, s, v);
+    }
+
+    function test_adoptPublishesTheNextEpoch() public {
+        bytes32 next = keccak256("tighter terms");
+        uint64 deadline = uint64(block.timestamp + 1 hours);
+
+        account.adoptMandate(
+            2, next, deadline, signAdopt(deviceKey, 2, next, deadline), signAdopt(recoveryKey, 2, next, deadline)
+        );
+
+        assertTrue(registry.isLive(address(account), 2, next));
+        assertEq(account.currentEpoch(), 2);
+        // The old epoch stays live until it is revoked, so receipts under it stay true.
+        assertTrue(registry.isLive(address(account), EPOCH, MANDATE));
+    }
+
+    function test_adoptNeedsTwoKeys() public {
+        bytes32 next = keccak256("tighter terms");
+        uint64 deadline = uint64(block.timestamp + 1 hours);
+        bytes memory one = signAdopt(deviceKey, 2, next, deadline);
+
+        vm.expectRevert(abi.encodeWithSelector(ArcveilAccount.DuplicateSigner.selector, vm.addr(deviceKey)));
+        account.adoptMandate(2, next, deadline, one, one);
+    }
+
+    /// An old, looser mandate must not be reinstatable.
+    function test_epochsOnlyAdvance() public {
+        bytes32 next = keccak256("looser terms");
+        uint64 deadline = uint64(block.timestamp + 1 hours);
+        bytes memory a = signAdopt(deviceKey, EPOCH, next, deadline);
+        bytes memory b = signAdopt(cosignerKey, EPOCH, next, deadline);
+
+        vm.expectRevert(abi.encodeWithSelector(ArcveilAccount.EpochMustAdvance.selector, EPOCH, EPOCH));
+        account.adoptMandate(EPOCH, next, deadline, a, b);
+    }
+
+    function test_adoptedMandateGatesExecution() public {
+        bytes32 next = keccak256("tighter terms");
+        uint64 deadline = uint64(block.timestamp + 1 hours);
+        account.adoptMandate(
+            2, next, deadline, signAdopt(deviceKey, 2, next, deadline), signAdopt(cosignerKey, 2, next, deadline)
+        );
+
+        ArcveilAccount.Call memory c = call_(0);
+        uint64 later = uint64(block.timestamp + 2 hours);
+        account.execute(c, later, 2, next, sign(deviceKey, c, later, 2, next), sign(cosignerKey, c, later, 2, next));
+        assertEq(target.seen(), 42);
     }
 
     // ------------------------------------------------------------ the pairs
@@ -309,6 +373,21 @@ contract ArcveilAccountTest is Test {
             );
 
         assertEq(digest, 0x883a1593ae07a432f4b909e2ed822cba681df6b2cb71d946344d762fb4b55255);
+    }
+
+    /// Pinned in packages/sdk/src/account.test.ts too — see the note above.
+    function test_adoptDigestMatchesTheSdk() public {
+        address fixedAccount =
+            address(uint160(uint256(bytes32(hex"acacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacac"))));
+        vm.etch(fixedAccount, address(account).code);
+        vm.chainId(5042);
+
+        bytes32 digest = ArcveilAccount(payable(fixedAccount))
+            .adoptDigest(
+                2, bytes32(uint256(0x4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d4d)), 3, 1789600000
+            );
+
+        assertEq(digest, 0xd3722d00b5b4b9b0c4ae294a42b66128aa28e41e121e09f95a033576d9a3eb4a);
     }
 
     function testFuzz_onlyMembersAreMembers(uint256 key) public view {

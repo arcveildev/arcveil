@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { hashTypedData } from "viem";
-import { encodeExecute, intentTypedData, type Intent } from "./account";
+import { adoptTypedData, encodeExecute, intentTypedData, type Intent } from "./account";
 import type { Hex } from "./types";
 
 /**
@@ -53,6 +53,35 @@ describe("intentTypedData", () => {
     for (const variant of variants) {
       expect(hashTypedData(intentTypedData(ACCOUNT, CHAIN_ID, variant))).not.toBe(EXPECTED_DIGEST);
     }
+  });
+});
+
+/** Pinned in contracts/test/ArcveilAccount.t.sol too, for the same reason. */
+describe("adoptTypedData", () => {
+  const EXPECTED = "0xd3722d00b5b4b9b0c4ae294a42b66128aa28e41e121e09f95a033576d9a3eb4a";
+
+  it("hashes to the digest the account computes on chain", () => {
+    const digest = hashTypedData(
+      adoptTypedData(ACCOUNT, CHAIN_ID, {
+        epoch: 2,
+        commitment: `0x${"4d".repeat(32)}`,
+        nonce: 3n,
+        deadline: 1789600000n,
+      }),
+    );
+    expect(digest).toBe(EXPECTED);
+  });
+
+  it("is a different payload from an intent, so one cannot be signed as the other", () => {
+    const adopt = hashTypedData(
+      adoptTypedData(ACCOUNT, CHAIN_ID, {
+        epoch: 2,
+        commitment: `0x${"4d".repeat(32)}`,
+        nonce: 3n,
+        deadline: 1789600000n,
+      }),
+    );
+    expect(adopt).not.toBe(hashTypedData(intentTypedData(ACCOUNT, CHAIN_ID, INTENT)));
   });
 });
 

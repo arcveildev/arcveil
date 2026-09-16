@@ -9,7 +9,12 @@ import {MandateRegistry} from "../src/MandateRegistry.sol";
  * Deploys one 2-of-3 account.
  *
  *   DEVICE=0x.. COSIGNER=0x.. RECOVERY=0x.. MANDATE_REGISTRY=0x.. \
+ *   MANDATE_TERMS=$'assets: USDC only\nper action: 250 USDC' \
  *     forge script script/DeployAccount.s.sol --rpc-url arc --account <name> --sender 0x.. --broadcast
+ *
+ * The account publishes its own first mandate in the same transaction, which is
+ * the only moment it can: every later call is gated on a mandate already being
+ * live, so the call that published the first one could never pass that gate.
  *
  * ENTRY_POINT defaults to the canonical v0.7 singleton, which is deployed on
  * Arc. The three keys must be three different addresses the constructor
@@ -25,15 +30,21 @@ contract DeployAccount is Script {
         address cosigner = vm.envAddress("COSIGNER");
         address recovery = vm.envAddress("RECOVERY");
 
+        // The account registers this itself, at birth. Keep the terms you hash:
+        // the chain stores only the commitment, and without the text you can
+        // prove the mandate was live but never show what it said.
+        string memory terms = vm.envString("MANDATE_TERMS");
+        uint64 epoch = uint64(vm.envOr("EPOCH", uint256(1)));
+        bytes32 commitment = keccak256(bytes(terms));
+
         vm.startBroadcast();
-        ArcveilAccount account = new ArcveilAccount(entryPoint, registry, device, cosigner, recovery);
+        ArcveilAccount account = new ArcveilAccount(entryPoint, registry, device, cosigner, recovery, epoch, commitment);
         vm.stopBroadcast();
 
         console2.log("ArcveilAccount ", address(account));
         console2.log("entryPoint     ", entryPoint);
-        console2.log("");
-        console2.log("Next: register a mandate FROM THE ACCOUNT, not from your wallet --");
-        console2.log("the registry keys by msg.sender, and execution is gated on the");
-        console2.log("account's own mandate being live.");
+        console2.log("epoch          ", epoch);
+        console2.logBytes32(commitment);
+        console2.log("mandate live:  ", registry.isLive(address(account), epoch, commitment));
     }
 }

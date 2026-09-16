@@ -21,7 +21,14 @@ unstaked account from reading another contract's storage while a bundler
 simulates, so checking the registry there would get the account throttled.
 Validation checks signatures; execution checks the mandate.
 
-Its EIP-712 intent digest is asserted against the same fixture in
+**An account is born holding its mandate.** The constructor registers the first
+one, because it is the only moment it can: every later call is gated on a live
+mandate, so the call that published the first would never pass the gate. Later
+epochs go through `adoptMandate`, its own entry point rather than a hole in the
+gate — rotating a mandate is governance, not spending — and epochs only ever
+advance, so an older, looser mandate cannot be reinstated.
+
+Its EIP-712 intent and adoption digests are asserted against the same fixtures in
 `packages/sdk/src/account.test.ts`. If the typehash, domain or field order
 drifts on either side, one of the two suites fails — otherwise the seam would
 only surface as "signature invalid" against a live account.
@@ -38,6 +45,22 @@ into real answers.
   refused, so a budget chain cannot quietly fork.
 - **Nothing here reveals anything.** Commitments are opaque: no amount, no
   asset, no limit, no counterparty.
+
+## Bootstrap an account
+One transaction: the account is deployed and publishes its own first mandate.
+
+```bash
+cd contracts && DEVICE=0x... COSIGNER=0x... RECOVERY=0x... \
+  MANDATE_REGISTRY=0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5 \
+  MANDATE_TERMS=$'assets: USDC only\nper action: 250 USDC\nper day: 1000 USDC' \
+  forge script script/DeployAccount.s.sol --rpc-url arc --account arcveil-deployer --sender 0xYourDeployer --broadcast
+```
+
+Keep the terms you hashed. The chain stores only the commitment: lose the text
+and you can prove the mandate was live, but never show what it said.
+
+The three keys must be three different addresses — the constructor refuses a
+repeat, because that is 2-of-2 wearing a 2-of-3 label.
 
 ## Deployed on Arc mainnet (chain 5042)
 | Contract | Address |
@@ -65,6 +88,22 @@ changing any signature here.
 ```bash
 cd contracts && forge install foundry-rs/forge-std && forge test -vvv
 ```
+
+## Bootstrap an account
+One transaction: the account is deployed and publishes its own first mandate.
+
+```bash
+cd contracts && DEVICE=0x... COSIGNER=0x... RECOVERY=0x... \
+  MANDATE_REGISTRY=0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5 \
+  MANDATE_TERMS=$'assets: USDC only\nper action: 250 USDC\nper day: 1000 USDC' \
+  forge script script/DeployAccount.s.sol --rpc-url arc --account arcveil-deployer --sender 0xYourDeployer --broadcast
+```
+
+Keep the terms you hashed. The chain stores only the commitment: lose the text
+and you can prove the mandate was live, but never show what it said.
+
+The three keys must be three different addresses — the constructor refuses a
+repeat, because that is 2-of-2 wearing a 2-of-3 label.
 
 ## Deploy
 Import a key into Foundry's keystore once, so no private key ever lands in a

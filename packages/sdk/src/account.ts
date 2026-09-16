@@ -36,6 +36,32 @@ export const ARCVEIL_ACCOUNT_ABI = [
 
 export type AccountCall = { to: Hex; value: bigint; data: Hex };
 
+export type Adoption = { epoch: number; commitment: Hex; nonce: bigint; deadline: bigint };
+
+/**
+ * EIP-712 payload for adopting the next mandate epoch. Rotation is governance,
+ * not spending, so it is signed as its own thing rather than as a call.
+ */
+export const adoptTypedData = (account: Hex, chainId: number, adoption: Adoption) =>
+  ({
+    domain: { name: "Arcveil", version: "1", chainId, verifyingContract: account },
+    types: {
+      Adopt: [
+        { name: "epoch", type: "uint64" },
+        { name: "commitment", type: "bytes32" },
+        { name: "nonce", type: "uint256" },
+        { name: "deadline", type: "uint64" },
+      ],
+    },
+    primaryType: "Adopt",
+    message: {
+      epoch: BigInt(adoption.epoch),
+      commitment: adoption.commitment,
+      nonce: adoption.nonce,
+      deadline: adoption.deadline,
+    },
+  }) as const;
+
 export type Intent = {
   call: AccountCall;
   nonce: bigint;

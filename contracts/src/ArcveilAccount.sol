@@ -40,6 +40,11 @@ contract ArcveilAccount {
     /// @notice Replay counter for the direct path. The EntryPoint keeps its own.
     uint256 public nonce;
 
+    /// @notice Latest mandate epoch this account has adopted. Only ever rises.
+    uint64 public currentEpoch;
+
+    bytes32 private constant ADOPT_TYPEHASH =
+        keccak256("Adopt(uint64 epoch,bytes32 commitment,uint256 nonce,uint64 deadline)");
     bytes32 private constant INTENT_TYPEHASH = keccak256(
         "Intent(address to,uint256 value,bytes data,uint256 nonce,uint64 deadline,uint64 epoch,bytes32 mandate)"
     );
@@ -51,6 +56,7 @@ contract ArcveilAccount {
     uint256 private constant HALF_N = 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0;
 
     error ZeroAddress();
+    error EpochMustAdvance(uint64 current, uint64 proposed);
     error KeysMustDiffer();
     error NotEntryPoint();
     error NotAMember(address signer);
@@ -61,8 +67,17 @@ contract ArcveilAccount {
     error CallReverted(bytes reason);
 
     event Executed(address indexed to, uint256 value, uint64 indexed epoch, bytes32 indexed mandate);
+    event MandateAdopted(uint64 indexed epoch, bytes32 indexed commitment);
 
-    constructor(address entryPoint_, MandateRegistry mandates_, address device_, address cosigner_, address recovery_) {
+    constructor(
+        address entryPoint_,
+        MandateRegistry mandates_,
+        address device_,
+        address cosigner_,
+        address recovery_,
+        uint64 epoch_,
+        bytes32 commitment_
+    ) {
         // A zero member would quietly turn 2-of-3 into 2-of-2, and a repeated one
         // does the same. Both are unrecoverable once the account holds anything.
         // forge-lint: disable-next-line(missing-zero-check)
@@ -76,6 +91,14 @@ contract ArcveilAccount {
         device = device_;
         cosigner = cosigner_;
         recovery = recovery_;
+
+        // Registered here, because it could not be registered later: execution is
+        // gated on a live mandate, so the call that first published one could
+        // never pass the gate. An account is born holding its mandate, or it is
+        // born unable to act at all.
+        currentEpoch = epoch_;
+        emit MandateAdopted(epoch_, commitment_);
+        mandates_.register(epoch_, commitment_);
     }
 
     receive() external payable {}
@@ -105,6 +128,45 @@ contract ArcveilAccount {
 
         nonce += 1;
         result = run(call, epoch, mandate);
+    }
+
+    /**
+     * @notice Publishes the next epoch of this account's mandate.
+     * @dev Its own entry point rather than an exemption in `execute`: rotating a
+     *      mandate is governance, not spending, and it should be visible as
+     *      such. Epochs only ever advance, so an old, looser mandate cannot be
+     *      reinstated by replaying an earlier authorisation.
+     */
+    function adoptMandate(
+        uint64 epoch,
+        bytes32 commitment,
+        uint64 deadline,
+        bytes calldata first,
+        bytes calldata second
+    ) external {
+        // forge-lint: disable-next-line(block-timestamp)
+        if (block.timestamp > deadline) revert Expired(deadline);
+        if (epoch <= currentEpoch) revert EpochMustAdvance(currentEpoch, epoch);
+
+        requireTwoOfThree(adoptDigest(epoch, commitment, nonce, deadline), first, second);
+
+        nonce += 1;
+        currentEpoch = epoch;
+        // The only external call before this is ecrecover, a precompile that
+        // cannot reenter; the registry write deliberately comes after the log.
+        // forge-lint: disable-next-line(reentrancy-events)
+        emit MandateAdopted(epoch, commitment);
+
+        mandates.register(epoch, commitment);
+    }
+
+    function adoptDigest(uint64 epoch, bytes32 commitment, uint256 nonce_, uint64 deadline)
+        public
+        view
+        returns (bytes32)
+    {
+        bytes32 structHash = keccak256(abi.encode(ADOPT_TYPEHASH, epoch, commitment, nonce_, deadline));
+        return keccak256(abi.encodePacked("\x19\x01", domainSeparator(), structHash));
     }
 
     // -------------------------------------------------------------- ERC-4337
