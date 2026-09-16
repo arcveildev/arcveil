@@ -49,6 +49,14 @@ A3 dusk plate, navy card with white type (`dark style=receipt top=0.12 scrim=60`
 (`light style=receipt top=0.12`). In the receipt style the lockup sits low-left
 instead of under the card, so it clears the horizon glow.
 
+DEX PAID (2026-09-17), same card, `preset=dex` (headline label, ledger rows
+DEX Screener / Profile / Chain):
+
+| File | Plate | Compose flags | Higgsfield job |
+|---|---|---|---|
+| `dex-final-dusk-receipt.png` (chosen series match) | The Arch at dusk holding up a glowing receipt card | `dark style=receipt preset=dex top=0.12 scrim=60` | `d11dedde-0951-4301-8121-cc3a8336986b` |
+| `dex-day-receipt.png` | Same at morning | `light style=receipt preset=dex top=0.12 scrim=60` | `a9258325-e124-4871-9ee2-9666b5ff8093` |
+
 Sub lines are placeholders until the burn happens: swap `SUB`/`SUB2` in
 `compose_burn.py` for the real amount and tx, then re-run. Plates are kept as
 `plate-*.png` so the type can be redone without re-prompting.
