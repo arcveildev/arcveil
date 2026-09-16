@@ -61,12 +61,12 @@ src/
     verify/            ReceiptVerifier, CheckList, StatusPill, ClaimPanels
     ui/                Button, SectionHeading, FigureLabel, NumberedList, Logo, CodeBlock
     theme/             ThemeProvider (data-theme / data-font), ThemeSwitcher
-  lib/receipt/         receipt format: canonical hashing, signing, schema, chain reader, verifier
   data/                site identity, home copy, receipt samples + claims
   theme/               presets.css (tokens per preset), presets.ts, fonts.ts
 docs/RECEIPT.md        receipt format v1 and the five checks
 docs/DESIGN_SYSTEM.md  design language + token map
 docs/AGENT_BRIEF.md    conventions for anyone adding a section
+packages/sdk/          @arcveil/sdk — the receipt format, issuer and verifier
 contracts/             Foundry project: MandateRegistry, AnchorRegistry
 ```
 
@@ -74,7 +74,8 @@ contracts/             Foundry project: MandateRegistry, AnchorRegistry
 - [x] Receipt format v1 + in-browser verifier
 - [x] Live reads of Arc mainnet from the browser
 - [ ] Home page: ladder, signing pipeline, threat model, worked example, escape hatch, roadmap
-- [ ] `/docs` + TypeScript SDK
+- [x] TypeScript SDK (`packages/sdk`) — the site is its first consumer
+- [ ] `/docs`
 - [ ] Desktop app (Tauri, sharing these components)
 - [x] Registries deployed to Arc mainnet, and the verifier reads them live
 - [ ] Co-signer / enclave service

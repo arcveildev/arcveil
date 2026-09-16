@@ -6,8 +6,7 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { keccak256, toHex } from "viem";
-import { issueReceipt, generateSigner } from "../src/lib/receipt/sign";
-import type { Hex, Receipt, ReceiptDraft } from "../src/lib/receipt/types";
+import { issueReceipt, generateSigner, type Hex, type Receipt, type ReceiptDraft } from "@arcveil/sdk";
 
 const RPC = "https://rpc.mainnet.arc.io";
 const CHAIN_ID = 5042;

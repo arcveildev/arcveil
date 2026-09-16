@@ -1,0 +1,36 @@
+{
+  "name": "@arcveil/sdk",
+  "version": "0.1.0",
+  "description": "Issue and verify Arcveil receipts: proof that an agent stayed inside a mandate, without revealing the mandate.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "viem": "^2"
+  },
+  "dependencies": {
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "viem": "^2",
+    "vitest": "^3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

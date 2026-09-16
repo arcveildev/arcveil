@@ -13,7 +13,7 @@ describe("verifyReceipts", () => {
   it("passes every check for an untouched receipt", async () => {
     const result = await report([await receiptFixture()]);
     expect(result.status).toBe("pass");
-    expect(result.receipts[0].checks.map((c) => c.status)).toEqual(["pass", "pass", "pass", "pass", "pass"]);
+    expect(result.receipts[0]?.checks.map((c) => c.status)).toEqual(["pass", "pass", "pass", "pass", "pass"]);
   });
 
   it("fails integrity and signature when a field is edited after signing", async () => {
@@ -66,7 +66,7 @@ describe("verifyReceipts", () => {
     const first = await receiptFixture();
     const second = await receiptFixture({ counter: { prev: `0x${"cd".repeat(32)}`, next: `0x${"ab".repeat(32)}` } });
     const result = await report([first, second]);
-    expect(result.receipts[1].checks.find((c) => c.id === "linkage")?.status).toBe("fail");
+    expect(result.receipts[1]?.checks.find((c) => c.id === "linkage")?.status).toBe("fail");
   });
 
   it("cannot judge linkage of a lone receipt whose predecessor is unknown", async () => {

@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "pnpm sdk:build && next dev",
+    "build": "pnpm sdk:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests && pnpm --filter @arcveil/sdk test",
     "test:watch": "vitest",
     "gen:receipts": "tsx scripts/gen-receipts.mts",
-    "deploy": "next build && wrangler deploy",
-    "deploy:dry": "next build && wrangler deploy --dry-run"
+    "deploy": "pnpm build && wrangler deploy",
+    "deploy:dry": "pnpm build && wrangler deploy --dry-run",
+    "sdk:build": "pnpm --filter @arcveil/sdk build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -20,7 +21,8 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "tailwind-merge": "^3.6.0",
-    "viem": "^2.56.5"
+    "viem": "^2.56.5",
+    "@arcveil/sdk": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

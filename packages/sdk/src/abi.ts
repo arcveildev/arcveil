@@ -3,6 +3,23 @@
 export const MANDATE_REGISTRY_ABI = [
   {
     type: "function",
+    name: "register",
+    stateMutability: "nonpayable",
+    inputs: [
+      { name: "epoch", type: "uint64" },
+      { name: "commitment", type: "bytes32" },
+    ],
+    outputs: [],
+  },
+  {
+    type: "function",
+    name: "revoke",
+    stateMutability: "nonpayable",
+    inputs: [{ name: "epoch", type: "uint64" }],
+    outputs: [],
+  },
+  {
+    type: "function",
     name: "mandateOf",
     stateMutability: "view",
     inputs: [
@@ -23,6 +40,13 @@ export const MANDATE_REGISTRY_ABI = [
 ] as const;
 
 export const ANCHOR_REGISTRY_ABI = [
+  {
+    type: "function",
+    name: "anchor",
+    stateMutability: "nonpayable",
+    inputs: [{ name: "commitment", type: "bytes32" }],
+    outputs: [],
+  },
   {
     type: "function",
     name: "isAnchored",

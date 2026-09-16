@@ -105,7 +105,7 @@ export async function verifyReceipts(
 ): Promise<VerificationReport> {
   const reports: ReceiptReport[] = [];
   for (const [index, receipt] of receipts.entries()) {
-    const ctx: CheckContext = { receipt, predecessor: index === 0 ? null : receipts[index - 1], chain };
+    const ctx: CheckContext = { receipt, predecessor: receipts[index - 1] ?? null, chain };
     const checks = await Promise.all(CHECKS.map((check) => runCheck(check, ctx)));
     reports.push({ id: receipt.id, status: worst(checks.map((c) => c.status)), checks });
   }
