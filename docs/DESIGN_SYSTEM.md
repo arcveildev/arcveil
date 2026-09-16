@@ -38,3 +38,21 @@ Add a preset: append a `[data-theme="..."]` block in `src/theme/presets.css` and
 
 ## Licensed fonts
 Drop `ABCFavoritMono-{Regular,Medium,Bold}.woff2` and `OCRX.woff2` into `public/fonts/`, uncomment the `@font-face` block at the bottom of `src/theme/presets.css`, and choose the **Licensed** font preset.
+
+## Logo
+The mark is a parabolic arch cut by a band of light: the arch is the geometry
+Arc itself uses — a shape nobody owns — and the band is what makes it Arcveil.
+It lives in `src/components/ui/Logo.tsx` as `<LogoMark>`, drawn as a separate
+crown and legs rather than a masked shape, so the gap is geometry: no mask ids
+to collide when the logo appears more than once on a page, and it renders
+correctly on any background. The band uses `var(--accent)`, so it follows the
+theme preset; everything else is `currentColor`.
+
+`src/app/icon.svg` is the same mark on a `#0e0e0e` plate (a transparent white
+mark disappears on a light browser tab).
+
+Chosen 2026-09-16 from four candidates. The rejected three — a base unravelling
+into hairlines, a seam parting the arch, a closed eye beneath it — were all
+legible at display size and illegible at 24px, which is where a logo actually
+lives. They are in the history at commit 471b93f if one is ever worth revisiting.
+
