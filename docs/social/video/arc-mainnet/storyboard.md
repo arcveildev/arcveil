@@ -187,16 +187,36 @@ ffmpeg -i arcveil-arc-mainnet-reply-nocaptions.mp4 \
 5. **Post** — ffmpeg concat, 30 fps blend, VO + pad mix, lockup on shot 6 via
    `docs/social/compose.py` (real LogoMark + DM Mono). Export 1920×1080 H.264.
 
-## Reply copy
+## Quote-tweet copy (2026-09-17)
 
-> Arc mainnet is live, with agentic economic workflows from day one.
+Pattern borrowed from @arcusdotnet's QT of the same launch post: echo one Arc
+phrase, one proof line, a blank, a two-word status, a blank, one positioning
+line with @arc, one closing line that names our layer. No hashtags, no emoji,
+no arrows. The video is the attachment.
+
+Main:
+
+> Agentic economic activity is live on Arc.
+> So is our first mandate.
 >
-> An agent that can spend is an agent that can see.
+> Arcveil is coming.
 >
-> Arcveil: a mandate instead of your keys, a receipt for every action.
-> Agents that can spend, never see, never exceed.
+> Privacy infrastructure for agents that spend on @arc.
+> The mandate layer starts here.
+
+Alt, sharper on the mechanism:
+
+> Agents can move money on Arc from day one.
+> Ours just did, without seeing the balance.
 >
-> Built on Arc.
+> Arcveil is coming.
+>
+> A mandate instead of your keys. A receipt for every action. On @arc.
+> Spend, never see, never exceed.
+
+"First mandate" is true: MandateRegistry and AnchorRegistry are deployed on Arc
+mainnet (chain 5042, addresses in `src/data/site.ts`) and the demo mandate
+resolves all five verifier checks.
 
 ## Open before rendering
 
