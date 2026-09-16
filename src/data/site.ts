@@ -65,7 +65,7 @@ export const TOKEN: {
 } = {
   symbol: "ARCVEIL",
   ticker: "$ARCVEIL",
-  address: null,
+  address: "0x30d74ba9d6270bed30e627e2a788b3d68e2ea245",
   explorer: "https://explorer.arc.io/token",
 };
 
