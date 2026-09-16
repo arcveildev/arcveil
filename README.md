@@ -1,6 +1,6 @@
 # Arcveil
 
-Agents that can spend, and never see. → [arcveil.dev](https://arcveil.dev)
+Agents that can spend, and never see. → **live at [arcveil.dev](https://arcveil.dev)**
 
 Give an agent a **mandate** instead of your keys: it works in relative terms
 ("reduce exposure to A by 30%"), the enclave holds the real numbers, and every
@@ -24,6 +24,18 @@ in the browser.
 pnpm install
 pnpm dev
 ```
+
+## Deploy
+The site is a static export served by Cloudflare Workers (no Worker script —
+every route is prerendered and the verifier talks to Arc from the browser).
+
+```bash
+pnpm deploy       # next build && wrangler deploy
+pnpm deploy:dry   # package without publishing
+```
+
+`arcveil.dev` and `www.arcveil.dev` are declared as custom domains in
+`wrangler.jsonc`; the canonical tag points at the apex.
 ```bash
 pnpm test && pnpm lint && pnpm exec tsc --noEmit
 ```
