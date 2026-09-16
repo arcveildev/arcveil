@@ -20,11 +20,25 @@ MINT = (133, 237, 117)         # #85ed75
 MINT_DEEP = (31, 157, 76)      # #1f9d4c, accent on light plates
 
 TICKER = "$ARCVEIL"
-HEADLINE = "DEV BURNT"
-SUB = "The dev allocation is gone for good."
-SUB2 = "Burn tx verifiable on Arc."
 FOOTER = "ARCVEIL.DEV  /  BUILT ON ARC"
-LEDGER = [("ALLOCATION", "100% OF DEV SUPPLY"), ("STATUS", "BURNT"), ("PROOF", "TX ON ARC")]
+
+# Copy presets: headline label, two sub lines (stack/outline styles), ledger rows (receipt style).
+PRESETS = {
+    "burn": {
+        "headline": "DEV BURNT",
+        "sub": "The dev allocation is gone for good.",
+        "sub2": "Burn tx verifiable on Arc.",
+        "ledger": [("ALLOCATION", "100% OF DEV SUPPLY"), ("STATUS", "BURNT"), ("PROOF", "TX ON ARC")],
+    },
+    "dex": {
+        "headline": "DEX PAID",
+        "sub": "Token profile live on DEX Screener.",
+        "sub2": "Paid, verified, built on Arc.",
+        "ledger": [("DEX SCREENER", "PAID"), ("PROFILE", "VERIFIED"), ("CHAIN", "ARC")],
+    },
+}
+COPY = PRESETS["burn"]
+HEADLINE, SUB, SUB2, LEDGER = COPY["headline"], COPY["sub"], COPY["sub2"], COPY["ledger"]
 
 PALETTES = {
     "light": {"fg": NAVY, "accent": MINT_DEEP, "pill": MINT, "pill_fg": NAVY, "mute": NAVY + (190,), "card": WHITE + (200,)},
@@ -176,6 +190,8 @@ def compose(plate_path, out_path, mode, fonts_dir, style="stack", top_frac=0.13,
 if __name__ == "__main__":
     plate, out, mode = sys.argv[1], sys.argv[2], sys.argv[3]
     opts = dict(a.split("=", 1) for a in sys.argv[4:] if "=" in a)
+    chosen = PRESETS[opts.get("preset", "burn")]   # pick the copy set once, at startup
+    HEADLINE, SUB, SUB2, LEDGER = chosen["headline"], chosen["sub"], chosen["sub2"], chosen["ledger"]
     compose(plate, out, mode, opts.get("fonts", "../video/arc-mainnet/fonts"),
             style=opts.get("style", "stack"),
             top_frac=float(opts.get("top", 0.13)),

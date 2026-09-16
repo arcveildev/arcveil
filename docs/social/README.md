@@ -52,3 +52,32 @@ instead of under the card, so it clears the horizon glow.
 Sub lines are placeholders until the burn happens: swap `SUB`/`SUB2` in
 `compose_burn.py` for the real amount and tx, then re-run. Plates are kept as
 `plate-*.png` so the type can be redone without re-prompting.
+
+### Post copy for the banners (2026-09-17)
+
+Same pattern as the launch QT: short declarative lines, no hashtags, no emoji.
+Square brackets are placeholders to fill from the burn tx before posting.
+
+Dev burnt, main:
+
+> Dev allocation: burnt.
+> [100%] of the team's $ARCVEIL, gone for good.
+>
+> No dev bags. No unlocks. Nothing to dump.
+>
+> Tx on Arc: [hash]
+> The first privacy layer for agents, built on @arc.
+
+Dev burnt, shorter:
+
+> $ARCVEIL dev allocation is burnt. All of it.
+>
+> Proof is on Arc: [hash]
+> Agents that can spend, never see, never exceed.
+
+DEX paid:
+
+> DEX paid. Profile live.
+>
+> $ARCVEIL on DEX Screener: [link]
+> Built on @arc.

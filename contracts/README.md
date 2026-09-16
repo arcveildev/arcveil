@@ -82,6 +82,17 @@ repeat, because that is 2-of-2 wearing a 2-of-3 label.
 |---|---|
 | `MandateRegistry` | `0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5` |
 | `AnchorRegistry` | `0xb2af157f269b31e315099e9da693096833ab8289` |
+| `ArcveilAccount` (first) | `0xb1c0983a7b84f38fbaf5f3af92f0fecaa62ce25d` |
+
+The first account was bootstrapped at block 21194397 on EntryPoint v0.7, holding
+epoch 1 of its mandate from birth. Its three keys are distinct, and the deployer
+is deliberately not one of them: the wallet that paid for the deployment has no
+authority over the account.
+
+Verifying an account's bytecode is not a plain comparison — the three keys, the
+EntryPoint and the registry are immutables baked into the runtime code, so the
+artifact's copy has those slots zeroed. Mask them using
+`deployedBytecode.immutableReferences` from the artifact and compare the rest.
 
 Deployed at block 21186110, runtime bytecode byte-identical to the local build.
 The demo mandate is published from `0x96b698308B01473E3A0041634b01f652c4608C2A`,
