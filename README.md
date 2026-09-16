@@ -76,7 +76,7 @@ contracts/             Foundry project: MandateRegistry, AnchorRegistry
 - [ ] Home page: ladder, signing pipeline, threat model, worked example, escape hatch, roadmap
 - [ ] `/docs` + TypeScript SDK
 - [ ] Desktop app (Tauri, sharing these components)
-- [ ] Deploy the registries to Arc (contracts and tests written, see `contracts/`)
+- [x] Registries deployed to Arc mainnet, and the verifier reads them live
 - [ ] Co-signer / enclave service
 
 ## History

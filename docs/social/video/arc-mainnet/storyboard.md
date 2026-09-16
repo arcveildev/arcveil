@@ -116,6 +116,41 @@ K0–K3 and the path runs straight to camera in all five; K3 is a touch closer
 than K2, which suits the push-in. The Band in K1 is a straight bar; in K2 it
 has already bent into the ring, so Clip B's prompt must carry the lift-and-loop.
 
+## Clips and cut (rendered 2026-09-16)
+
+| Clip | File | Frames | Seedance 2.5 job | Notes |
+|---|---|---|---|---|
+| A 0–12 s | `clips/clip-a-0-12s.mp4` | K0 → K1 | `ff8b5e1a-d645-4e84-9244-172f5bd402d7` | Push-in, eyes glance, Band drifts in from right, caught |
+| B 12–20 s | `clips/clip-b-12-20s.mp4` | K1 → K3, K2 + state sheet as refs | `908b82ce-d9d0-44dd-b4d7-deadc0ad92ce` | Band lifts, loops, wraps; eyes close outer→inner; coin + card |
+| C 20–24 s | `clips/clip-c-20-24s.mp4` | K3 → K4 | `313d1caa-b1e0-4ea9-b4ef-38f378fd7130` | Pull-out, coin and card fade, horizon through the Band |
+
+Clip A and C were first refused with a preset recommendation ("IN THE DARK");
+resubmitting with `declined_preset_id` fixed it. All clips 1080p, 24 fps,
+`generate_audio` off, omni_reference mode.
+
+Narration takes (Seed Audio, speech_rate −8, mp3 48 kHz):
+
+| Voice | File | Length | Job |
+|---|---|---|---|
+| Grady (m) | `clips/vo-grady.mp3` | 23.4 s, fits | `bc71201e-1523-42c8-a771-ceb304e468da` |
+| Holden (m) | `clips/vo-holden.mp3` | 30.6 s, needs +15 rate | `d745cf3a-1973-414d-9f49-3b810205e29f` |
+| Ainsley (f) | `clips/vo-ainsley.mp3` | 27.3 s, needs +8 rate | `16a1c1b7-8c13-4e5a-bba2-04a548bd24e8` |
+
+Cut: `arcveil-arc-mainnet-reply.mp4` (24.1 s, 1920×1080, H.264, Grady VO at
++0.3 s). Lockup from `lockup.py` (navy on the K4 sky, DM Mono from `fonts/`)
+fades in over 20.6–21.6 s. No music yet: Higgsfield has no standalone music
+model, so a track has to come from elsewhere or the film ships VO-only.
+
+```bash
+python3 lockup.py fonts lockup-overlay.png
+ffmpeg -i clip-a-0-12s.mp4 -i clip-b-12-20s.mp4 -i clip-c-20-24s.mp4 -i vo-grady.mp3 \
+  -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v];[3:a]adelay=300|300,apad[a]" \
+  -map "[v]" -map "[a]" -shortest -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -b:a 160k rough.mp4
+ffmpeg -i rough.mp4 -loop 1 -i lockup-overlay.png \
+  -filter_complex "[1:v]format=rgba,fade=t=in:st=20.6:d=1.0:alpha=1[ov];[0:v][ov]overlay=0:0:shortest=1[v]" \
+  -map "[v]" -map 0:a -c:v libx264 -pix_fmt yuv420p -crf 19 -c:a copy -movflags +faststart arcveil-arc-mainnet-reply.mp4
+```
+
 ## Generation plan (Higgsfield)
 
 1. **Character sheet** — done, see above.

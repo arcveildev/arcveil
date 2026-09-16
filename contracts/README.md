@@ -22,6 +22,16 @@ into real answers.
 - **Nothing here reveals anything.** Commitments are opaque: no amount, no
   asset, no limit, no counterparty.
 
+## Deployed on Arc mainnet (chain 5042)
+| Contract | Address |
+|---|---|
+| `MandateRegistry` | `0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5` |
+| `AnchorRegistry` | `0xb2af157f269b31e315099e9da693096833ab8289` |
+
+Deployed at block 21186110, runtime bytecode byte-identical to the local build.
+The demo mandate is published from `0x96b698308B01473E3A0041634b01f652c4608C2A`,
+which is why the samples on `/verify` resolve.
+
 ## Status
 21 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
 one, 6 for anchors, 4 for the seeding script), `forge fmt` is clean and

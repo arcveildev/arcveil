@@ -45,9 +45,22 @@ The overall verdict is the worst of the five.
 
 ## Verifying
 
-`/verify` runs all five in the browser — no request leaves the tab. Chain lookups go
-through `ChainReader` (`src/lib/receipt/chain.ts`); v0 uses the in-memory reader over
-`src/data/sample-receipts.json`, and the RPC reader replaces it once the mandate
-contracts are deployed to Arc (mainnet 5042, testnet 5042002 — the samples are
-testnet). Regenerate the samples with `pnpm gen:receipts` — a throwaway key
-is created per run, so no private material is ever committed.
+`/verify` runs all five in the browser. Two are pure local crypto; the other three
+read **Arc mainnet** (chain 5042) through `createRpcChainReader`
+(`src/lib/receipt/rpc.ts`) — `mandate` and `linkage` call the registries below,
+`settlement` is an `eth_getTransactionReceipt`. Arc's RPC allows cross-origin
+requests, so no backend of ours sits in the path.
+
+| Registry | Address |
+|---|---|
+| `MandateRegistry` | `0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5` |
+| `AnchorRegistry` | `0xb2af157f269b31e315099e9da693096833ab8289` |
+
+Leave either address null in `ARC` (`src/data/site.ts`) and the reader throws for
+that check, which the verifier turns into `unknown` — never a `fail`, which would
+read as "this receipt is forged".
+
+The bundled samples settle in real Arc transactions and are published under the
+mandate in `contracts/demo/mandate.json`, so all five checks resolve against the
+chain. Regenerate them with `pnpm gen:receipts` — a throwaway signing key is
+created per run, so no private material is ever committed.
