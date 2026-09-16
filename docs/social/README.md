@@ -148,3 +148,26 @@ HTML type and a code surface. Same render command, swap the HTML file.
 The CLI in V3 is illustrative: `arcveil mandate publish` / `receipt issue` /
 `verify` do not exist as commands yet. Ship V3 only once a CLI does, or swap
 the transcript for the SDK calls.
+
+**Chosen: V1 (`sdk-v1-meadow.png`).** Post copy, paired with its headline:
+
+> Verify what an agent did on Arc. Never what it saw.
+>
+> @arcveil/sdk gives an agent a spending mandate instead of your keys. Every
+> action leaves a receipt that proves it stayed in bounds, with no amounts and
+> no balances inside.
+>
+> Publish a mandate, issue receipts, verify against Arc mainnet. Five checks,
+> a few lines, in Node or a browser.
+>
+> pnpm add @arcveil/sdk
+> arcveil.dev
+
+Shorter alt:
+
+> An agent that can spend is an agent that can see. Not on Arc.
+>
+> @arcveil/sdk: a mandate instead of your keys, a receipt for every action,
+> verified against Arc mainnet in a few lines.
+>
+> arcveil.dev
