@@ -33,12 +33,21 @@ contract SeedSamples is Script {
         AnchorRegistry anchors = AnchorRegistry(vm.envAddress("ANCHOR_REGISTRY"));
 
         vm.startBroadcast();
-        if (msg.sender != demo.account) revert WrongSender(demo.account, msg.sender);
+        // Inside a broadcast, msg.sender is the script's own caller, not the
+        // wallet that will sign; readCallers gives the account that actually
+        // sends, which is the one both registries will key everything by.
+        (, address broadcaster,) = vm.readCallers();
+        requireSender(demo.account, broadcaster);
         seed(mandates, anchors, demo);
         vm.stopBroadcast();
 
         console2.log("mandate live:", mandates.isLive(demo.account, demo.epoch, demo.commitment));
         console2.log("anchors:", demo.counters.length);
+    }
+
+    /// @dev Seeding from another wallet would publish a mandate no receipt refers to.
+    function requireSender(address expected, address actual) public pure {
+        if (expected != actual) revert WrongSender(expected, actual);
     }
 
     /// @dev Separated from run() so it can be tested without broadcasting, and

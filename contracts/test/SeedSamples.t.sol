@@ -58,6 +58,17 @@ contract SeedSamplesTest is Test {
         assertTrue(anchors.isAnchored(d.account, d.counters[1]));
     }
 
+    function test_requireSenderAcceptsTheOwner() public view {
+        seeder.requireSender(address(0xA11CE), address(0xA11CE));
+    }
+
+    /// Regression: this check used to read msg.sender inside a broadcast, which
+    /// is the script's caller rather than the signing wallet — Foundry refuses it.
+    function test_requireSenderRejectsAnyoneElse() public {
+        vm.expectRevert(abi.encodeWithSelector(SeedSamples.WrongSender.selector, address(0xA11CE), address(0xB0B)));
+        seeder.requireSender(address(0xA11CE), address(0xB0B));
+    }
+
     function test_readDemoMatchesTheGeneratedFile() public view {
         SeedSamples.Demo memory d = seeder.readDemo();
         assertTrue(d.commitment != bytes32(0), "commitment missing");

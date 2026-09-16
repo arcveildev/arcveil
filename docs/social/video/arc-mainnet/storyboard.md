@@ -101,12 +101,25 @@ Identity references on Higgsfield (media ids): concept 01 =
 `f80c9e16-5d82-42b0-8f31-ab30e1f66da4`. Pass both sheets (as job ids) plus
 concept 01 as `image_references` for every keyframe.
 
+## Keyframes (rendered 2026-09-16, GPT Image 2.5 high 2k, refs = concept 01 + both sheets)
+
+| Key | File | Shot | Higgsfield job |
+|---|---|---|---|
+| K0 | `keyframes/k0.jpg` | Shot 1 start, wide, eyes open | concept 01, `efba2906-7c67-4413-9056-e4e2c41aac16` |
+| K1 | `keyframes/k1.jpg` | Shot 3 end, medium, Band held in the right hand, all eyes on it | `5d066890-017d-47b6-9bad-8e69563ca638` |
+| K2 | `keyframes/k2.jpg` | Shot 4 end, medium, Band across the crown, eyes still open, fading trail | `e74f9c2a-653b-4682-a216-9375d591cfed` |
+| K3 | `keyframes/k3.jpg` | Shot 5 end, medium close, blindfolded, coin on palm, receipt card | concept 04, `541cc412-7339-4297-9bb8-8f8b7d607ebf` |
+| K4 | `keyframes/k4.jpg` | Shot 6, wide pull-back, horizon line through the Band, empty sky for the lockup | `26bb4572-572f-4d46-b36f-c180f5df32a7` |
+
+Continuity notes: the cloud bank and the two glass arches sit frame-right in
+K0–K3 and the path runs straight to camera in all five; K3 is a touch closer
+than K2, which suits the push-in. The Band in K1 is a straight bar; in K2 it
+has already bent into the ring, so Clip B's prompt must carry the lift-and-loop.
+
 ## Generation plan (Higgsfield)
 
 1. **Character sheet** — done, see above.
-2. **Keyframes** (`gpt_image_2_5`, high, 2k, references = sheet + concept 01):
-   K0 = concept 01 as is, K1 Band at hand (shot 3), K2 Band across crown eyes
-   open (shot 4 end), K3 = concept 04 (shot 5 end), K4 wide pull-back (shot 6).
+2. **Keyframes** — done, see above.
 3. **Clips** — `seedance_2_5`, `omni_reference`, 1080p, `generate_audio` off:
    - Clip A 0–12 s: start K0 → end K1 (shots 1–3)
    - Clip B 12–20 s: start K2 → end K3 (shots 4–5)
