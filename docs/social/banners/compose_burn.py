@@ -1,8 +1,14 @@
 """Compose the "$ARCVEIL / DEV BURNT" post banner: a Higgsfield background plate
 (no text in the render) plus the real Band mark and DM Mono type on the left half.
+Brand colours only (navy, mint, white); no gold. Three type styles:
+
+  stack    ticker and headline stacked, all navy, mint rule
+  outline  ticker solid, headline as a hollow navy outline
+  receipt  frosted card with a mint "DEV BURNT" label, ticker, and a ledger block
+
 Pure functions; nothing mutates the source image.
 
-Usage: python3 compose_burn.py <plate.png> <out.png> <light|dark> [fonts_dir]
+Usage: python3 compose_burn.py <plate.png> <out.png> <light|dark> [style=stack] [top=0.13] [sub_top=] [scrim=0] [fonts=dir]
 """
 import sys
 from PIL import Image, ImageDraw, ImageFont
@@ -10,19 +16,19 @@ from PIL import Image, ImageDraw, ImageFont
 OUT_W, OUT_H = 1920, 1080
 NAVY = (27, 49, 88)
 WHITE = (255, 255, 255)
-MINT = (133, 237, 117)         # #85ed75, for dark plates
-MINT_DEEP = (31, 157, 76)      # #1f9d4c, for light plates
-GOLD = (233, 196, 120)
+MINT = (133, 237, 117)         # #85ed75
+MINT_DEEP = (31, 157, 76)      # #1f9d4c, accent on light plates
 
 TICKER = "$ARCVEIL"
 HEADLINE = "DEV BURNT"
 SUB = "The dev allocation is gone for good."
 SUB2 = "Burn tx verifiable on Arc."
 FOOTER = "ARCVEIL.DEV  /  BUILT ON ARC"
+LEDGER = [("ALLOCATION", "100% OF DEV SUPPLY"), ("STATUS", "BURNT"), ("PROOF", "TX ON ARC")]
 
 PALETTES = {
-    "light": {"fg": NAVY, "accent": MINT_DEEP, "mute": NAVY + (190,), "gold": (176, 128, 40)},
-    "dark": {"fg": WHITE, "accent": MINT, "mute": WHITE + (170,), "gold": GOLD},
+    "light": {"fg": NAVY, "accent": MINT_DEEP, "pill": MINT, "pill_fg": NAVY, "mute": NAVY + (190,), "card": WHITE + (200,)},
+    "dark": {"fg": WHITE, "accent": MINT, "pill": MINT, "pill_fg": NAVY, "mute": WHITE + (170,), "card": (11, 20, 36, 200)},
 }
 
 
@@ -42,10 +48,14 @@ def band_mark(height: int, fg, accent) -> Image.Image:
     return img.resize((mw // S, mh // S), Image.LANCZOS)
 
 
-def draw_tracked(d, xy, text, font, fill, tracking) -> float:
+def tracked_width(d, text, font, tracking) -> float:
+    return sum(d.textlength(ch, font=font) + tracking for ch in text) - tracking
+
+
+def draw_tracked(d, xy, text, font, fill, tracking, stroke=0, stroke_fill=None) -> float:
     x, y = xy
     for ch in text:
-        d.text((x, y), ch, font=font, fill=fill)
+        d.text((x, y), ch, font=font, fill=fill, stroke_width=stroke, stroke_fill=stroke_fill)
         x += d.textlength(ch, font=font) + tracking
     return x
 
@@ -63,8 +73,6 @@ def fit_plate(src: Image.Image) -> Image.Image:
 
 
 def left_scrim(size, color, strength: int) -> Image.Image:
-    """Horizontal gradient from `strength` alpha at the left edge to 0 at 60% width,
-    so type on a busy plate stays readable without a box."""
     w, h = size
     grad = Image.new("L", (w, 1))
     stop = int(w * 0.6)
@@ -74,44 +82,93 @@ def left_scrim(size, color, strength: int) -> Image.Image:
     return scrim
 
 
-def compose(plate_path: str, out_path: str, mode: str, fonts_dir: str,
-            top_frac: float = 0.20, sub_top_frac: float | None = None, scrim: int = 0) -> None:
+def fonts(fonts_dir: str):
+    med = lambda px: ImageFont.truetype(f"{fonts_dir}/DMMono-Medium.ttf", px)
+    reg = lambda px: ImageFont.truetype(f"{fonts_dir}/DMMono-Regular.ttf", px)
+    return med, reg
+
+
+def draw_lockup(layer, d, pal, med, x, y, mark_h=56) -> int:
+    mark = band_mark(mark_h, pal["fg"], pal["accent"])
+    layer.alpha_composite(mark, (x, y))
+    word = med(44)
+    bbox = word.getbbox("ARCVEIL")
+    draw_tracked(d, (x + mark.width + 20, y + (mark_h - (bbox[3] - bbox[1])) // 2 - bbox[1]), "ARCVEIL", word, pal["fg"], 44 * 0.06)
+    return y + mark_h
+
+
+def draw_subs(d, pal, reg, x, rule_y):
+    d.rectangle([x, rule_y, x + 220, rule_y + 4], fill=pal["accent"])
+    sub = reg(34)
+    draw_tracked(d, (x, rule_y + 28), SUB, sub, pal["fg"], 34 * 0.02)
+    draw_tracked(d, (x, rule_y + 78), SUB2, sub, pal["mute"], 34 * 0.02)
+
+
+def draw_footer(d, pal, reg, x):
+    draw_tracked(d, (x, int(OUT_H * 0.90)), FOOTER, reg(22), pal["mute"], 22 * 0.1)
+
+
+def style_stack(layer, d, pal, med, reg, margin, top, sub_top):
+    y = draw_lockup(layer, d, pal, med, margin, top) + 70
+    big = med(150)
+    draw_tracked(d, (margin - 6, y), TICKER, big, pal["fg"], -150 * 0.02)
+    y += 165
+    draw_tracked(d, (margin - 6, y), HEADLINE, big, pal["fg"], -150 * 0.02)
+    draw_subs(d, pal, reg, margin, sub_top or y + 190)
+
+
+def style_outline(layer, d, pal, med, reg, margin, top, sub_top):
+    y = draw_lockup(layer, d, pal, med, margin, top) + 70
+    big = med(150)
+    draw_tracked(d, (margin - 6, y), TICKER, big, pal["fg"], -150 * 0.02)
+    y += 165
+    draw_tracked(d, (margin - 6, y), HEADLINE, big, (0, 0, 0, 0), -150 * 0.02, stroke=4, stroke_fill=pal["fg"])
+    draw_subs(d, pal, reg, margin, sub_top or y + 190)
+
+
+def style_receipt(layer, d, pal, med, reg, margin, top, sub_top):
+    card_w, pad = 780, 48
+    x0, y0 = margin, top
+    # measure content first
+    label_font, big, row_font, key_font = med(26), med(132), reg(30), reg(22)
+    label_h = 46
+    content_h = pad + label_h + 28 + 150 + 30 + 2 + 30 + len(LEDGER) * 52 + pad - 20
+    d.rounded_rectangle([x0, y0, x0 + card_w, y0 + content_h], radius=18, fill=pal["card"])
+    x, y = x0 + pad, y0 + pad
+    # mint label pill
+    lw = tracked_width(d, HEADLINE, label_font, 26 * 0.12)
+    d.rounded_rectangle([x, y, x + lw + 36, y + label_h], radius=8, fill=pal["pill"])
+    lb = label_font.getbbox(HEADLINE)
+    draw_tracked(d, (x + 18, y + (label_h - (lb[3] - lb[1])) // 2 - lb[1]), HEADLINE, label_font, pal["pill_fg"], 26 * 0.12)
+    y += label_h + 28
+    draw_tracked(d, (x - 5, y), TICKER, big, pal["fg"], -132 * 0.02)
+    y += 150 + 30
+    d.rectangle([x, y, x0 + card_w - pad, y + 2], fill=pal["accent"])
+    y += 30
+    for key, val in LEDGER:
+        draw_tracked(d, (x, y + 6), key, key_font, pal["mute"], 22 * 0.12)
+        vw = tracked_width(d, val, row_font, 30 * 0.02)
+        draw_tracked(d, (x0 + card_w - pad - vw, y), val, row_font, pal["fg"], 30 * 0.02)
+        y += 52
+    # lockup sits under the card
+    draw_lockup(layer, d, pal, med, margin, y0 + content_h + 36, mark_h=40)
+
+
+STYLES = {"stack": style_stack, "outline": style_outline, "receipt": style_receipt}
+
+
+def compose(plate_path, out_path, mode, fonts_dir, style="stack", top_frac=0.13, sub_top_frac=None, scrim=0):
     pal = PALETTES[mode]
     base = fit_plate(Image.open(plate_path).convert("RGB")).convert("RGBA")
     if scrim:
-        base = Image.alpha_composite(base, left_scrim(base.size, (255, 255, 255) if mode == "light" else (0, 0, 0), scrim))
+        base = Image.alpha_composite(base, left_scrim(base.size, WHITE if mode == "light" else (0, 0, 0), scrim))
     layer = Image.new("RGBA", base.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
-
+    med, reg = fonts(fonts_dir)
     margin = int(OUT_W * 0.07)
-    top = int(OUT_H * top_frac)
-
-    mark_h = 56
-    mark = band_mark(mark_h, pal["fg"], pal["accent"])
-    layer.alpha_composite(mark, (margin, top))
-    word = ImageFont.truetype(f"{fonts_dir}/DMMono-Medium.ttf", 44)
-    bbox = word.getbbox("ARCVEIL")
-    draw_tracked(d, (margin + mark.width + 20, top + (mark_h - (bbox[3] - bbox[1])) // 2 - bbox[1]),
-                 "ARCVEIL", word, pal["fg"], 44 * 0.06)
-
-    ticker = ImageFont.truetype(f"{fonts_dir}/DMMono-Medium.ttf", 150)
-    y = top + mark_h + 70
-    draw_tracked(d, (margin - 6, y), TICKER, ticker, pal["fg"], -150 * 0.02)
-
-    head = ImageFont.truetype(f"{fonts_dir}/DMMono-Medium.ttf", 150)
-    y += 165
-    draw_tracked(d, (margin - 6, y), HEADLINE, head, pal["gold"], -150 * 0.02)
-
-    rule_y = int(OUT_H * sub_top_frac) if sub_top_frac else y + 190
-    d.rectangle([margin, rule_y, margin + 220, rule_y + 4], fill=pal["accent"])
-
-    sub = ImageFont.truetype(f"{fonts_dir}/DMMono-Regular.ttf", 34)
-    draw_tracked(d, (margin, rule_y + 28), SUB, sub, pal["fg"], 34 * 0.02)
-    draw_tracked(d, (margin, rule_y + 28 + 50), SUB2, sub, pal["mute"], 34 * 0.02)
-
-    small = ImageFont.truetype(f"{fonts_dir}/DMMono-Regular.ttf", 22)
-    draw_tracked(d, (margin, int(OUT_H * 0.90)), FOOTER, small, pal["mute"], 22 * 0.1)
-
+    STYLES[style](layer, d, pal, med, reg, margin, int(OUT_H * top_frac), int(OUT_H * sub_top_frac) if sub_top_frac else None)
+    if style != "receipt":
+        draw_footer(d, pal, reg, margin)
     Image.alpha_composite(base, layer).convert("RGB").save(out_path, quality=95)
     print("wrote", out_path)
 
@@ -120,6 +177,7 @@ if __name__ == "__main__":
     plate, out, mode = sys.argv[1], sys.argv[2], sys.argv[3]
     opts = dict(a.split("=", 1) for a in sys.argv[4:] if "=" in a)
     compose(plate, out, mode, opts.get("fonts", "../video/arc-mainnet/fonts"),
-            top_frac=float(opts.get("top", 0.20)),
+            style=opts.get("style", "stack"),
+            top_frac=float(opts.get("top", 0.13)),
             sub_top_frac=float(opts["sub_top"]) if "sub_top" in opts else None,
             scrim=int(opts.get("scrim", 0)))

@@ -18,8 +18,8 @@ and the wordmark in DM Mono Medium, not AI-rendered text. The tagline is
 
 `$ARCVEIL / DEV BURNT`, 1920×1080, 2026-09-17. Three Higgsfield plates
 (GPT Image 2.5, high, 2k, no text in the prompt) with the type composited by
-`banners/compose_burn.py`: real Band mark, DM Mono, ticker in the foreground
-colour, headline in gold, mint rule, two sub lines, footer.
+`banners/compose_burn.py`: real Band mark, DM Mono, brand colours only (navy,
+mint, white; the first round's gold headline was dropped on 2026-09-17).
 
 | File | World | Compose flags | Higgsfield job |
 |---|---|---|---|
@@ -34,6 +34,14 @@ Round 2, developed from A (the user's pick), same compose script:
 | `burn-a1-raised.png` | Coins held high with both hands, tall plume into the clouds | `light top=0.13 scrim=150` | `9ce44e97-fdff-4d8f-b1fd-e49bc0e76714` |
 | `burn-a2-pile.png` | Coin pile burning on the path in the foreground, The Arch watching behind | `light top=0.13 scrim=150` | `35f2fc15-717d-4db6-8023-68d9a77a0ed8` |
 | `burn-a3-dusk.png` | Same scene at golden hour, Band glowing; sub lines pushed below the horizon | `dark top=0.11 sub_top=0.665 scrim=120` | `64d2273e-8d78-4329-926d-38b393146b53` |
+
+Round 3, type styles on plate A (the background the user kept), `style=`:
+
+| File | Style | Compose flags |
+|---|---|---|
+| `burn-a-s1-stack.png` | `stack`: ticker and headline stacked, all navy, mint rule | `light style=stack top=0.13 scrim=150` |
+| `burn-a-s2-outline.png` | `outline`: ticker solid, DEV BURNT as a hollow navy outline | `light style=outline top=0.13 scrim=150` |
+| `burn-a-s3-receipt.png` | `receipt`: frosted card, mint DEV BURNT label, ticker, ledger rows (allocation / status / proof), lockup under the card | `light style=receipt top=0.12 scrim=60` |
 
 Sub lines are placeholders until the burn happens: swap `SUB`/`SUB2` in
 `compose_burn.py` for the real amount and tx, then re-run. Plates are kept as
