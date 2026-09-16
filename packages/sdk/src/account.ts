@@ -27,6 +27,27 @@ export const ARCVEIL_ACCOUNT_ABI = [
   },
   {
     type: "function",
+    name: "intentDigest",
+    stateMutability: "view",
+    inputs: [
+      {
+        name: "call",
+        type: "tuple",
+        components: [
+          { name: "to", type: "address" },
+          { name: "value", type: "uint256" },
+          { name: "data", type: "bytes" },
+        ],
+      },
+      { name: "nonce", type: "uint256" },
+      { name: "deadline", type: "uint64" },
+      { name: "epoch", type: "uint64" },
+      { name: "mandate", type: "bytes32" },
+    ],
+    outputs: [{ type: "bytes32" }],
+  },
+  {
+    type: "function",
     name: "nonce",
     stateMutability: "view",
     inputs: [],

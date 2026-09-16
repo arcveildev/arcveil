@@ -182,6 +182,30 @@ Afterwards, paste the two addresses into `ARC.mandateRegistry` and
 other change — `createRpcChainReader` stops reporting `unknown` for those checks
 as soon as the addresses are non-null.
 
+## Executing through an account
+`pnpm intent` prepares and relays one intent. It never touches a key: it writes
+the EIP-712 payload for `cast wallet sign`, which reads the encrypted keystore
+and prompts for the password.
+
+```bash
+export ACCOUNT=0xb1c0983a7b84f38fbaf5f3af92f0fecaa62ce25d
+export MANDATE_TERMS=$'assets: USDC only\nper action: 250 USDC\nper day: 1000 USDC'
+
+pnpm intent prepare anchor 0x<commitment>     # or: revoke <epoch> | transfer 0x<to> <usdc>
+cast wallet sign --data --from-file .arcveil/intent.typed.json --account arcveil-device
+cast wallet sign --data --from-file .arcveil/intent.typed.json --account arcveil-cosigner
+pnpm intent send 0x<sig1> 0x<sig2>
+```
+
+Three things are checked before any gas is spent: that `MANDATE_TERMS` hashes to
+the commitment the account actually holds, that the payload hashes to the digest
+**the account itself computes** — asked of the deployed contract, not assumed —
+and that the two signatures recover to two different members. Each of those
+would otherwise surface as an unexplained revert after paying for it.
+
+Relaying is permissionless: any funded wallet can send the transaction, because
+authority lives in the signatures, not in the sender.
+
 ## Seeding the demo mandate
 Until something is published for the samples' account, the mandate and
 budget-chain checks on `/verify` answer `unknown` — correctly, because nothing

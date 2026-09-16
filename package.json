@@ -14,7 +14,8 @@
     "deploy:dry": "pnpm build && wrangler deploy --dry-run",
     "sdk:build": "pnpm --filter @arcveil/sdk build",
     "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveil/sdk typecheck",
-    "check": "pnpm typecheck && pnpm lint && pnpm test"
+    "check": "pnpm typecheck && pnpm lint && pnpm test",
+    "intent": "tsx scripts/intent.mts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

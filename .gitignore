@@ -45,3 +45,6 @@ next-env.d.ts
 
 # wrangler
 .wrangler/
+
+# prepared intents (contain no keys, but are per-run scratch)
+.arcveil/
