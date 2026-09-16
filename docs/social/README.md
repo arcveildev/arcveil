@@ -171,3 +171,48 @@ Shorter alt:
 > verified against Arc mainnet in a few lines.
 >
 > arcveil.dev
+
+## Pipeline post (2026-09-17)
+
+About the Architecture section on `/`: six steps, `PIPELINE_TAGLINE` as the
+payoff line. Copy rule from `src/data/pipeline.ts` carried into the thread:
+steps 1, 2 and 4 are designed, not shipped, and the closer says so.
+
+Single post:
+
+> The agent asks to reduce exposure to A by 30%. It never says how much, because
+> it was never told.
+>
+> The enclave resolves that ratio against balances the agent cannot see. Two
+> signatures settle it on Arc.
+>
+> Six steps, and the agent never sees a number.
+> arcveil.dev
+
+Thread, one step per post, artifact line in mono at the end of each:
+
+1. An agent that can spend is an agent that can see: every balance, every
+   position. / Unless the pipeline is built so it cannot. / Six steps, and the
+   agent never sees a number.
+2. 01 · Intent — The agent proposes in relative terms: reduce exposure to A by
+   30%. / It never states an amount, because it was never told one. /
+   `intent{ asset, ratio }`
+3. 02 · Redact — The enclave resolves that ratio against balances the agent
+   cannot see and builds the unsigned operation. / The numbers exist. They just
+   never reach the agent. / `userOp (unsigned)`
+4. 03 · Client sign — Your device decrypts its shard from the OS keystore and
+   signs the operation hash. / Shard A stays on your device. / `sigA (65 bytes)`
+5. 04 · Mandate check — The policy co-signer evaluates every clause: allowlist,
+   per-action cap, window spend, active hours, kill switch. / Only then does the
+   second signature exist. / `sigB (65 bytes)`
+6. 05 · Settle — The two signatures combine into a 130-byte threshold payload.
+   The account contract validates the quorum and executes. / Neither half moves
+   anything alone. / `sigA ‖ sigB (130 B)`
+7. 06 · Receipt — The body is hashed, the policy signer attests it, and the
+   budget commitment advances. / A dropped receipt is not invisible. It shows up
+   later as a gap. / `receipt v1 (~1 KB)`
+8. Where this stands: the receipt format is shipped and the verifier reads Arc
+   mainnet from your browser. Steps 1, 2 and 4 are designed, not deployed. / We
+   would rather publish the architecture than imply it is finished. / arcveil.dev
+
+Never post the thread without post 8, or the present-tense steps read as shipped.
