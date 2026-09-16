@@ -34,4 +34,13 @@ export { createRpcChainReader, type RpcConfig } from "./rpc";
 export { arc, arcTestnet, ARC_REGISTRIES, USDC_ERC20_ADDRESS, type Registries } from "./chains";
 export { anchorCounter, mandateCommitment, registerMandate, revokeMandate } from "./mandate";
 export { createIssuer, nextCounter, type ActionInput, type Issuance, type Issuer, type IssuerConfig } from "./issuer";
+export {
+  ARCVEIL_ACCOUNT_ABI,
+  encodeExecute,
+  executeIntent,
+  intentTypedData,
+  signIntent,
+  type AccountCall,
+  type Intent,
+} from "./account";
 export { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi";

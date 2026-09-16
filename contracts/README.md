@@ -8,6 +8,23 @@ mandate — that is the point.
 |---|---|
 | `MandateRegistry` | Was this mandate commitment live at this epoch, for this account? |
 | `AnchorRegistry` | Was this budget commitment anchored by this account? |
+| `ArcveilAccount` | Do two of the three keys authorise this call, and is the mandate still live? |
+
+`ArcveilAccount` is a 2-of-3 account: device key, policy co-signer, recovery
+key. Any two authorise a call, which is what makes the co-signer *refusable*
+rather than custodial — it can decline, but device + recovery move funds without
+it, and it can never move them alone. Every execution is gated on the mandate
+being live, so revoking one stops the agent on chain.
+
+The mandate gate lives in execution, never in validation: ERC-4337 forbids an
+unstaked account from reading another contract's storage while a bundler
+simulates, so checking the registry there would get the account throttled.
+Validation checks signatures; execution checks the mandate.
+
+Its EIP-712 intent digest is asserted against the same fixture in
+`packages/sdk/src/account.test.ts`. If the typehash, domain or field order
+drifts on either side, one of the two suites fails — otherwise the seam would
+only surface as "signature invalid" against a live account.
 
 Together they turn the verifier's two `unknown` checks (`mandate`, `linkage`)
 into real answers.

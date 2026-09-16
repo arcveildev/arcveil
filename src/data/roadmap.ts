@@ -49,7 +49,7 @@ export const ROADMAP_PHASES: readonly RoadmapPhase[] = [
   {
     n: "03",
     status: "next",
-    title: "Desktop app",
+    title: "Desktop app and the 2-of-3 account",
     summary:
       "Threshold signing across device, co-signer and passkey, in an app you install.",
     tags: ["2-of-3 signing", "OS keystore", "passkey recovery", "escape hatch"],

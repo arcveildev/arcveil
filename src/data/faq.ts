@@ -36,7 +36,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
   {
     question: "Is this custody?",
     answer:
-      "No. Signing authority is split three ways and we hold one share. Your device and your passkey recovery form a quorum without us.",
+      "No. Signing authority is split three ways and we hold one share — the account contract refuses any single signature, including ours. Your device and your passkey recovery form a quorum without us, and the contract\u2019s tests assert exactly that pair works. It also refuses to execute at all unless the mandate is live in the registry, so revoking one stops the agent on chain rather than in a policy engine we happen to run.",
   },
   {
     question: "Which network and assets?",

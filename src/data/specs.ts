@@ -36,11 +36,15 @@ export const SPEC_ROWS: readonly SpecRow[] = [
     status: "planned",
   },
   { key: "SDK", value: "TypeScript, viem-based", status: "in progress" },
-  { key: "Account", value: "ERC-4337 smart account", status: "planned" },
+  {
+    key: "Account",
+    value: "ERC-4337 account, EntryPoint v0.7 — written and tested, not yet deployed",
+    status: "in progress",
+  },
   {
     key: "Threshold signing",
-    value: "2-of-3 across device, policy co-signer and passkey recovery",
-    status: "planned",
+    value: "2-of-3 across device, policy co-signer and passkey recovery; execution gated on the mandate being live",
+    status: "in progress",
   },
   { key: "Enclave execution", value: "Relative intents resolved away from the model", status: "planned" },
 ] as const;

@@ -30,5 +30,11 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "out",
+    // The SDK is a package with its own, stricter config; it typechecks itself
+    // (pnpm --filter @arcveil/sdk typecheck) and the app consumes its built types.
+    "packages"
+  ]
 }
