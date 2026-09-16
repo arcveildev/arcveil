@@ -216,3 +216,13 @@ Thread, one step per post, artifact line in mono at the end of each:
    would rather publish the architecture than imply it is finished. / arcveil.dev
 
 Never post the thread without post 8, or the present-tense steps read as shipped.
+
+### Pipeline banner (`banners/pipeline-banner.html` → `.png`)
+
+V1 form reused for the Architecture section: the meadow plate
+(`plate-dev-meadow.png`), the floating frosted card carrying the six pipeline
+rows instead of code. Each row is ordinal, title, where it runs, artifact —
+the same four fields as `PIPELINE_STEPS`. Row 06 is tinted mint with an accent
+edge because it is the only shipped step, and the note at lower left states
+that in words rather than leaving the card to imply everything runs. Same
+render command as the SDK banners, 1500×600 layout at 2× → 3000×1200.

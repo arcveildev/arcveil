@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil pipeline banner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{--ink:#1b3158;--ink2:#46587c;--mute:#8492ab;--accent:#1f9d4c;--mint:#85ed75}
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1500px;height:600px;overflow:hidden}
+  body{font-family:"Geist",system-ui,sans-serif;color:var(--ink);position:relative;
+       background:#dbe7f3 url("plate-dev-meadow.png") center/cover no-repeat}
+
+  .eyebrow{position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:12px;
+           font-family:"DM Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.22em;text-transform:uppercase}
+  .eyebrow svg{height:24px;width:auto;color:var(--ink)}
+
+  h1{position:absolute;left:64px;top:96px;width:540px;font-weight:600;font-size:50px;line-height:1.08;letter-spacing:-.025em;text-wrap:balance}
+  h1 span{color:var(--ink2);font-weight:500}
+
+  .note{position:absolute;left:64px;bottom:118px;width:520px;font-family:"DM Mono",monospace;font-size:13px;line-height:1.6;color:var(--ink2)}
+  .pill{position:absolute;left:64px;bottom:52px;display:inline-flex;align-items:center;gap:10px;
+        padding:10px 20px 10px 16px;border-radius:999px;background:var(--ink);color:#fff;font-family:"DM Mono",monospace;font-size:16px}
+  .pill i{width:8px;height:8px;border-radius:50%;background:var(--mint)}
+
+  .card{position:absolute;left:648px;top:50px;width:712px;transform:rotate(-1.6deg);transform-origin:left top;
+        background:rgba(255,255,255,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+        border:1px solid rgba(255,255,255,.92);border-radius:16px;box-shadow:0 30px 60px -24px rgba(27,49,88,.45);overflow:hidden}
+  .top{display:flex;align-items:center;gap:10px;padding:13px 20px;border-bottom:1px solid rgba(27,49,88,.12);
+       font-family:"DM Mono",monospace;font-size:12.5px;letter-spacing:.06em;color:var(--ink2)}
+  .top i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .top .badge{margin-left:auto;color:var(--ink);background:rgba(133,237,117,.38);padding:3px 10px;border-radius:999px}
+
+  .rows{padding:6px 0 8px}
+  .r{display:grid;grid-template-columns:34px 142px 1fr auto;align-items:baseline;gap:14px;
+     padding:11px 20px;border-bottom:1px solid rgba(27,49,88,.07)}
+  .r:last-child{border-bottom:0}
+  .r b{font-family:"DM Mono",monospace;font-weight:500;font-size:12.5px;color:var(--mute)}
+  .r .t{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .r .w{font-family:"DM Mono",monospace;font-size:12.5px;color:var(--ink2)}
+  .r .a{font-family:"DM Mono",monospace;font-size:12.5px;color:var(--ink);justify-self:end}
+  .r.live{background:rgba(133,237,117,.16);box-shadow:inset 2px 0 0 var(--accent)}
+  .r.live b{color:var(--accent)}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Architecture</span>
+  </div>
+
+  <h1>Pipeline. <span>Six steps, and the agent never sees a number.</span></h1>
+
+  <div class="note">Steps 01, 02 and 04 are designed, not shipped.<br>Step 06 is: the format is documented and the verifier runs on it.</div>
+  <div class="pill"><i></i>arcveil.dev</div>
+
+  <div class="card">
+    <div class="top"><i></i>one agent action, end to end<span class="badge">ARC · 5042</span></div>
+    <div class="rows">
+      <div class="r"><b>01</b><span class="t">Intent</span><span class="w">Agent</span><span class="a">intent{ asset, ratio }</span></div>
+      <div class="r"><b>02</b><span class="t">Redact</span><span class="w">Enclave</span><span class="a">userOp (unsigned)</span></div>
+      <div class="r"><b>03</b><span class="t">Client sign</span><span class="w">Your device · Shard A</span><span class="a">sigA (65 bytes)</span></div>
+      <div class="r"><b>04</b><span class="t">Mandate check</span><span class="w">Co-signer · Shard B</span><span class="a">sigB (65 bytes)</span></div>
+      <div class="r"><b>05</b><span class="t">Settle</span><span class="w">Arc</span><span class="a">sigA &#8214; sigB (130 B)</span></div>
+      <div class="r live"><b>06</b><span class="t">Receipt</span><span class="w">Issued to you</span><span class="a">receipt v1 (~1 KB)</span></div>
+    </div>
+  </div>
+</body>
+</html>
