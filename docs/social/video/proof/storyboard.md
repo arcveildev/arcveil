@@ -76,6 +76,34 @@ programmatically, so a frame can never drift from what the chain says.
    established navy/mint horizon language, so it still sits in the family.
 4. No captions, no VO, one pad. Master to `arcveil-proof.mp4`.
 
+## Cut v1 (2026-09-17)
+
+`arcveil-proof.mp4`, 45.9 s, 1920×1080, silent. Eleven cuts, no dissolves:
+title · deployed · account on the explorer · prepare · sign · the settled
+transaction · the verifier · revoke · the revoke transaction · the refusal ·
+end card.
+
+Built by `scripts/video/`: `capture.mjs` drives headless Chrome over CDP —
+needed because the frames that matter require interaction and the explorer is
+a JS app, so it waits for the record to render rather than for a timer —
+`render.mjs` draws the text beats in the site's own type and captures them as
+PNG sequences, `assemble.sh` cuts it together with ffmpeg. Beat data lives in
+`beats.mjs`: change a hash there and the film changes, which is the only way
+it stays true.
+
+Two corrections made while cutting, both worth remembering:
+
+- Type was sized for a desktop edit and unreadable on a phone. Everything
+  went up roughly 25%, and screen captures are now framed on the region that
+  carries the claim instead of being whole pages shrunk to 1080p.
+- The facts card said the bytecode was "byte-identical to the local build".
+  True of the registries; true of the account only once its immutables are
+  masked. The card now says exactly that.
+
+Still open: beat 7 (epoch 2 adoption) is prepared and waiting on two
+signatures. The film ends on the refusal until then, which is a colder ending
+than "you are in control".
+
 ## Open decisions
 
 1. **Screens vs 3D.** Recommendation: screens. A proof film rendered in 3D
