@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil SDK banner, meadow</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{--ink:#1b3158;--ink2:#3d4f74;--accent:#1f9d4c;--mint:#85ed75;--kw:#2f6fd6;--str:#1f9d4c;--fn:#9a5b00;--cm:#7a879d}
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1500px;height:600px;overflow:hidden}
+  body{font-family:"Geist",system-ui,sans-serif;color:var(--ink);position:relative;
+       background:#dbe7f3 url("plate-dev-meadow.png") center/cover no-repeat}
+  .mono{font-family:"DM Mono",ui-monospace,monospace}
+  .eyebrow{position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:12px;font-family:"DM Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.22em;text-transform:uppercase}
+  .eyebrow svg{height:24px;width:auto;color:var(--ink)}
+  h1{position:absolute;left:64px;top:92px;width:560px;font-weight:600;font-size:52px;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+  .card{position:absolute;left:660px;top:56px;width:640px;transform:rotate(-1.6deg);transform-origin:left top;
+        background:rgba(255,255,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+        border:1px solid rgba(255,255,255,.9);border-radius:16px;box-shadow:0 30px 60px -24px rgba(27,49,88,.45);overflow:hidden}
+  .tab{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid rgba(27,49,88,.12);font-family:"DM Mono",monospace;font-size:12.5px;color:var(--ink2)}
+  .tab i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .tab .badge{margin-left:auto;letter-spacing:.08em;color:var(--ink);background:rgba(133,237,117,.35);padding:3px 9px;border-radius:999px}
+  pre{margin:0;padding:16px 20px 18px;font-family:"DM Mono",monospace;font-size:15px;line-height:1.55;color:var(--ink);white-space:pre}
+  .kw{color:var(--kw)} .str{color:var(--str)} .fn{color:var(--fn)} .cm{color:var(--cm)}
+  .steps{position:absolute;left:64px;bottom:120px;display:flex;gap:12px}
+  .chip{display:flex;align-items:center;gap:10px;padding:9px 16px 9px 10px;border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.9);font-size:15.5px;font-weight:500;color:var(--ink)}
+  .chip b{font-family:"DM Mono",monospace;font-weight:500;font-size:12px;color:#fff;background:var(--ink);border-radius:999px;padding:4px 8px;letter-spacing:.06em}
+  .chip.on b{background:var(--accent)}
+  .pill{position:absolute;left:64px;bottom:56px;display:inline-flex;align-items:center;gap:10px;padding:10px 20px 10px 16px;border-radius:999px;background:var(--ink);color:#fff;font-family:"DM Mono",monospace;font-size:16px}
+  .pill i{width:8px;height:8px;border-radius:50%;background:var(--mint)}
+</style>
+</head>
+<body>
+  <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>@arcveil/sdk</span></div>
+  <h1>Verify what an agent did on Arc. Never what it saw.</h1>
+
+  <div class="card">
+    <div class="tab"><i></i>verify.ts<span class="badge">ARC MAINNET</span></div>
+<pre><span class="kw">import</span> { <span class="fn">verifyReceipts</span>, <span class="fn">parseReceiptInput</span>,
+  <span class="fn">createRpcChainReader</span>, ARC_REGISTRIES, arc } <span class="kw">from</span> <span class="str">"@arcveil/sdk"</span>
+
+<span class="kw">const</span> chain = <span class="fn">createRpcChainReader</span>({ endpoint: arc.rpcUrls.default.http[0],
+  chainId: arc.id, ...ARC_REGISTRIES[arc.id] })
+
+<span class="kw">const</span> parsed = <span class="fn">parseReceiptInput</span>(json)
+<span class="kw">const</span> report = <span class="kw">await</span> <span class="fn">verifyReceipts</span>(parsed.receipts, { chain })
+report.status <span class="cm">// "pass" | "fail" | "unknown", never a guess</span></pre>
+  </div>
+
+  <div class="steps">
+    <div class="chip"><b>01</b>Publish the mandate</div>
+    <div class="chip"><b>02</b>Issue a receipt per action</div>
+    <div class="chip on"><b>03</b>Anyone verifies</div>
+  </div>
+  <div class="pill"><i></i>pnpm add @arcveil/sdk viem</div>
+</body>
+</html>

@@ -37,6 +37,7 @@ export { createIssuer, nextCounter, type ActionInput, type Issuance, type Issuer
 export {
   adoptTypedData,
   ARCVEIL_ACCOUNT_ABI,
+  encodeAdopt,
   encodeExecute,
   executeIntent,
   intentTypedData,

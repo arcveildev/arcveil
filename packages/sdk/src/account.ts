@@ -27,6 +27,31 @@ export const ARCVEIL_ACCOUNT_ABI = [
   },
   {
     type: "function",
+    name: "adoptMandate",
+    stateMutability: "nonpayable",
+    inputs: [
+      { name: "epoch", type: "uint64" },
+      { name: "commitment", type: "bytes32" },
+      { name: "deadline", type: "uint64" },
+      { name: "first", type: "bytes" },
+      { name: "second", type: "bytes" },
+    ],
+    outputs: [],
+  },
+  {
+    type: "function",
+    name: "adoptDigest",
+    stateMutability: "view",
+    inputs: [
+      { name: "epoch", type: "uint64" },
+      { name: "commitment", type: "bytes32" },
+      { name: "nonce", type: "uint256" },
+      { name: "deadline", type: "uint64" },
+    ],
+    outputs: [{ type: "bytes32" }],
+  },
+  {
+    type: "function",
     name: "intentDigest",
     stateMutability: "view",
     inputs: [
@@ -154,6 +179,20 @@ export const executeIntent = (
     ],
     chain: client.chain,
     account: client.account,
+  });
+
+/** Calldata for adopting the next mandate epoch, for a relayer to send. */
+export const encodeAdopt = (adoption: Adoption, signatures: readonly [ViemHex, ViemHex]): ViemHex =>
+  encodeFunctionData({
+    abi: ARCVEIL_ACCOUNT_ABI,
+    functionName: "adoptMandate",
+    args: [
+      BigInt(adoption.epoch),
+      adoption.commitment,
+      adoption.deadline,
+      signatures[0],
+      signatures[1],
+    ],
   });
 
 /** Calldata for the same intent, for a relayer that builds its own transaction. */
