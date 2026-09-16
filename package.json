@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "gen:receipts": "tsx scripts/gen-receipts.mts"
+    "gen:receipts": "tsx scripts/gen-receipts.mts",
+    "deploy": "next build && wrangler deploy",
+    "deploy:dry": "next build && wrangler deploy --dry-run"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -31,6 +33,7 @@
     "tsx": "^4.23.13",
     "typescript": "^5",
     "vitest": "^3.2.7",
+    "wrangler": "^4.131.2",
     "zod": "^4.6.2"
   },
   "packageManager": "pnpm@11.9.0"

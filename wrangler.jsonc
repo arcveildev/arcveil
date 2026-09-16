@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "arcveil",
+  "compatibility_date": "2026-09-16",
+  // No Worker script: every route is prerendered, so Cloudflare serves files
+  // and nothing of ours runs on a server. `next build` writes ./out.
+  "assets": {
+    "directory": "./out",
+    // Next's static export writes 404.html; serve it for unmatched paths.
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "arcveil.dev", "custom_domain": true },
+    { "pattern": "www.arcveil.dev", "custom_domain": true }
+  ]
+}
