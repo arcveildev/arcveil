@@ -39,8 +39,8 @@
 <pre><span class="kw">import</span> { <span class="fn">verifyReceipts</span>, <span class="fn">parseReceiptInput</span>,
   <span class="fn">createRpcChainReader</span>, ARC_REGISTRIES, arc } <span class="kw">from</span> <span class="str">"@arcveil/sdk"</span>
 
-<span class="kw">const</span> chain = <span class="fn">createRpcChainReader</span>({ endpoint: arc.rpcUrls.default.http[0],
-  chainId: arc.id, ...ARC_REGISTRIES[arc.id] })
+<span class="kw">const</span> chain = <span class="fn">createRpcChainReader</span>({ chainId: arc.id,
+  endpoint: arc.rpcUrls.default.http[0], ...ARC_REGISTRIES[arc.id] })
 
 <span class="kw">const</span> parsed = <span class="fn">parseReceiptInput</span>(json)
 <span class="kw">const</span> report = <span class="kw">await</span> <span class="fn">verifyReceipts</span>(parsed.receipts, { chain })

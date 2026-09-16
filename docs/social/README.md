@@ -132,3 +132,19 @@ lets agents do, the call to action, the link):
 > with @arcveil/sdk.
 >
 > arcveil.dev
+
+### SDK banner, three variants (2026-09-17)
+
+Same topic as `sdk-banner.html` (the Arcus-pattern one, kept as reference) but
+with our own forms: a Higgsfield plate in one of the three Arcveil worlds under
+HTML type and a code surface. Same render command, swap the HTML file.
+
+| File | World / plate | Form | Higgsfield job |
+|---|---|---|---|
+| `sdk-v1-meadow.html` → `.png` | Meadow, The Arch (eyes open) looking up at the sky, `plate-dev-meadow.png` | Frosted glass code card floating in the sky, tilted; steps as chips; navy install pill | `b2702cc4-04dc-4196-b6e0-064ff7c61dbd` |
+| `sdk-v2-dusk.html` → `.png` | X-header dusk plain, `../x-header-source.png` | Dark glass code slab standing on the plain with a CSS reflection; step rail with mint nodes above the horizon; `$ pnpm add` line | none (reuses the header render) |
+| `sdk-v3-black.html` → `.png` | Dot-matrix black with three receipt cards, `plate-dev-black.png` | No window at all: a CLI transcript (publish → issue → verify, `pass 5/5`); steps as a hairline-divided row | `3ca42f76-19b6-4bbb-80b6-6880567f9cba` |
+
+The CLI in V3 is illustrative: `arcveil mandate publish` / `receipt issue` /
+`verify` do not exist as commands yet. Ship V3 only once a CLI does, or swap
+the transcript for the SDK calls.

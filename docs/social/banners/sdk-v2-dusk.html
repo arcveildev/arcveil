@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil SDK banner, dusk</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{--fg:#eef2f8;--fg2:#b9c4d8;--mute:#7f8ca3;--mint:#85ed75;--kw:#8fb6ff;--str:#85ed75;--fn:#ffd479;--cm:#66738c}
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1500px;height:600px;overflow:hidden}
+  body{font-family:"Geist",system-ui,sans-serif;color:var(--fg);position:relative;
+       background:#0b1424 url("../x-header-source.png") center 42%/cover no-repeat}
+  .eyebrow{position:absolute;left:64px;top:56px;display:flex;align-items:center;gap:12px;font-family:"DM Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg)}
+  .eyebrow svg{height:24px;width:auto}
+  h1{position:absolute;left:64px;top:100px;width:600px;font-weight:500;font-size:54px;line-height:1.06;letter-spacing:-.025em;text-wrap:balance}
+  .rail{position:absolute;left:64px;top:224px;display:grid;gap:0}
+  .st{position:relative;display:grid;grid-template-columns:22px 1fr;gap:16px;padding:0 0 9px;align-items:start}
+  .st::before{content:"";position:absolute;left:10px;top:18px;bottom:-4px;width:1px;background:rgba(133,237,117,.35)}
+  .st:last-child::before{display:none}
+  .st i{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--mint);display:grid;place-items:center;background:#0b1424;margin-top:1px}
+  .st i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--mint)}
+  .st b{display:inline;font-weight:500;font-size:17.5px;line-height:1.2}
+  .st span{display:inline;font-size:13.5px;color:var(--fg2);margin-left:10px}
+  .install{position:absolute;left:64px;bottom:34px;font-family:"DM Mono",monospace;font-size:15px;color:var(--fg2)}
+  .install b{color:var(--mint);font-weight:500}
+  .slab{position:absolute;right:64px;bottom:110px;width:660px;background:rgba(8,14,28,.66);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+        border:1px solid rgba(255,255,255,.14);border-top-color:rgba(255,255,255,.28);border-radius:10px;overflow:hidden;
+        box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+  .slab .top{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.1);font-family:"DM Mono",monospace;font-size:12.5px;color:var(--fg2)}
+  .slab .top .badge{margin-left:auto;color:#0b1424;background:var(--mint);padding:3px 9px;border-radius:3px;letter-spacing:.08em;font-weight:500}
+  pre{margin:0;padding:14px 18px 16px;font-family:"DM Mono",monospace;font-size:14.6px;line-height:1.5;color:var(--fg);white-space:pre}
+  .kw{color:var(--kw)} .str{color:var(--str)} .fn{color:var(--fn)} .cm{color:var(--cm)}
+  .refl{position:absolute;right:64px;bottom:0;width:660px;height:110px;overflow:hidden;opacity:.28;pointer-events:none;
+        -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.6),transparent 85%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.6),transparent 85%)}
+  .refl .slab{position:static;transform:scaleY(-1);width:660px}
+</style>
+</head>
+<body>
+  <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>@arcveil/sdk</span></div>
+  <h1>A mandate goes on Arc. Your keys never do.</h1>
+  <div class="rail">
+    <div class="st"><i></i><div><b>Publish the mandate</b><span>Only its commitment is registered. The terms stay with you.</span></div></div>
+    <div class="st"><i></i><div><b>Issue a receipt per action</b><span>Proof it stayed in bounds. No amounts, no balances.</span></div></div>
+    <div class="st"><i></i><div><b>Anyone verifies</b><span>Five checks against Arc mainnet.</span></div></div>
+  </div>
+  <div class="install">$ <b>pnpm add @arcveil/sdk viem</b></div>
+
+  <div class="slab" id="slab">
+    <div class="top">mandate.ts<span class="badge">ARC · 5042</span></div>
+<pre><span class="cm">// only the commitment reaches the chain</span>
+<span class="kw">const</span> terms = <span class="str">"assets: USDC only\nper action: 250 USDC"</span>
+<span class="kw">const</span> commitment = <span class="fn">mandateCommitment</span>(terms)
+<span class="kw">await</span> <span class="fn">registerMandate</span>({ client, registry }, <span class="str">1</span>, commitment)
+
+<span class="cm">// one receipt per action, no amounts inside</span>
+<span class="kw">const</span> { receipt, issuer: next } = <span class="kw">await</span> issuer.<span class="fn">issue</span>({
+  kind: <span class="str">"swap"</span>, userOpHash, settledTx })</pre>
+  </div>
+  <div class="refl"><div class="slab">
+    <div class="top">mandate.ts<span class="badge">ARC · 5042</span></div>
+<pre><span class="cm">// only the commitment reaches the chain</span>
+<span class="kw">const</span> terms = <span class="str">"assets: USDC only\nper action: 250 USDC"</span>
+<span class="kw">const</span> commitment = <span class="fn">mandateCommitment</span>(terms)
+<span class="kw">await</span> <span class="fn">registerMandate</span>({ client, registry }, <span class="str">1</span>, commitment)
+
+<span class="cm">// one receipt per action, no amounts inside</span>
+<span class="kw">const</span> { receipt, issuer: next } = <span class="kw">await</span> issuer.<span class="fn">issue</span>({
+  kind: <span class="str">"swap"</span>, userOpHash, settledTx })</pre>
+  </div></div>
+</body>
+</html>

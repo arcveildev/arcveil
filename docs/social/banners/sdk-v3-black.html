@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil SDK banner, terminal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{--fg:#eef2f8;--fg2:#aeb9cf;--mute:#6d7a91;--mint:#85ed75;--line:rgba(255,255,255,.14)}
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1500px;height:600px;overflow:hidden}
+  body{font-family:"Geist",system-ui,sans-serif;color:var(--fg);position:relative;
+       background:#050810 url("plate-dev-black.png") center/cover no-repeat}
+  .eyebrow{position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:12px;font-family:"DM Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.22em;text-transform:uppercase}
+  .eyebrow svg{height:24px;width:auto}
+  h1{position:absolute;left:64px;top:96px;width:820px;font-weight:500;font-size:58px;line-height:1.04;letter-spacing:-.03em;text-wrap:balance}
+  .row{position:absolute;left:64px;top:250px;display:grid;grid-template-columns:repeat(3,auto);gap:0}
+  .row div{padding:0 28px 0 0;margin-right:28px;border-right:1px solid var(--line)}
+  .row div:last-child{border-right:0}
+  .row b{display:block;font-family:"DM Mono",monospace;font-weight:500;font-size:12px;letter-spacing:.16em;color:var(--mint)}
+  .row span{display:block;font-size:17px;font-weight:500;margin-top:6px}
+  .term{position:absolute;left:64px;bottom:56px;width:860px;font-family:"DM Mono",monospace;font-size:15.5px;line-height:1.7;color:var(--fg2)}
+  .term .p{color:var(--mint)}
+  .term .k{color:var(--fg);display:inline-block;width:110px}
+  .term .v{color:var(--fg)}
+  .term .ok{color:var(--mint)}
+  .term .d{color:var(--mute)}
+  .term .cur{display:inline-block;width:9px;height:18px;background:var(--mint);vertical-align:-3px;margin-left:2px}
+</style>
+</head>
+<body>
+  <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>@arcveil/sdk · built on Arc</span></div>
+  <h1>Mandates in. Receipts out. Keys never leave.</h1>
+  <div class="row">
+    <div><b>01 · PUBLISH</b><span>Only the commitment reaches Arc</span></div>
+    <div><b>02 · ISSUE</b><span>One receipt per action, no amounts</span></div>
+    <div><b>03 · VERIFY</b><span>Five checks, anyone, anywhere</span></div>
+  </div>
+  <div class="term">
+<div><span class="p">$</span> pnpm add @arcveil/sdk viem</div>
+<div><span class="p">$</span> arcveil mandate publish --epoch 1 ./terms.txt</div>
+<div><span class="k">mandate</span><span class="v">0x9c4e…f21a</span> <span class="d">registered on Arc 5042</span> <span class="ok">✓</span></div>
+<div><span class="p">$</span> arcveil receipt issue --kind swap</div>
+<div><span class="k">receipt</span><span class="v">#0007</span> <span class="d">budget chain advanced, no amounts inside</span> <span class="ok">✓</span></div>
+<div><span class="p">$</span> arcveil verify receipt-0007.json</div>
+<div><span class="k">status</span><span class="ok">pass</span> <span class="d">5/5 checks · body, policy sig, mandate, budget chain, settlement</span><span class="cur"></span></div>
+  </div>
+</body>
+</html>
