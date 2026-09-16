@@ -111,3 +111,19 @@ stays sharp, editable and on-brand.
 - **Headline face**: Manrope Semibold (recommended, mirrors the reference's
   pairing) or all DM Mono like the banners.
 - **Music**: one soft pad, to be generated on Higgsfield or licensed; open.
+
+## Style frames (rendered 2026-09-17, GPT Image 2.5 high 2k 16:9, refs = reference frames + Band mark)
+
+| Plate | File | Shot | Higgsfield job |
+|---|---|---|---|
+| P1 | `styles/p1.jpg` | 1 · network of eye-spheres | `602b83db-82f2-4c5f-8840-413188f67607` |
+| P2 | `styles/p2.jpg` | 2 · one eye reading three glass cards | `c6182a82-4e6a-47d9-8282-04847de6502d` |
+| P3 | `styles/p3.jpg` | 5 · the Band mark as a navy glass arch, particles through the gap | `af646e74-c482-4816-a00d-2dc896d17dc0` |
+| P4 | `styles/p4.jpg` | 6 · receipt cards chained by dots | `a238c2ed-0142-438e-b18a-742c209a493b` |
+| P5 | `styles/p5.jpg` | 7 · navy coin with the mark, rim burning to mint sparks | `ed086ad3-be5f-4f7c-9d11-935c2b53bcbd` |
+| P6 | `styles/p6.jpg` | 8 · navy swoosh with a mint edge | `3e835275-25ed-4b43-98cb-9822017ca812` |
+
+Reference frames on Higgsfield (media ids): network `f231e559-b51e-4887-bd98-81d33837c4ac`,
+slab `03caf607-5ede-4604-bad9-10f30e8bb7fd`, arch `33fa98da-1387-4fb2-b826-70c5dfa350f4`,
+coin `82e187f5-ca1f-4800-88d8-14ba87469dec`; Band mark on white `e7e4cb22-b795-4289-b2f9-72b383351680`.
+Shots 3 and 4 need no plate (white + a Higgsedit gradient wash).

@@ -182,6 +182,23 @@ Afterwards, paste the two addresses into `ARC.mandateRegistry` and
 other change — `createRpcChainReader` stops reporting `unknown` for those checks
 as soon as the addresses are non-null.
 
+## First execution on mainnet
+`0xd110e7255737eed92bf59b3df6e656688bc9acf6ed2f33f72ae306f157937bb3`, block
+21195992, 120,280 gas. The account anchored the first commitment of its budget
+chain, authorised by device + co-signer.
+
+Two things in that transaction are worth reading carefully, because they are
+claims this project makes in prose everywhere else:
+
+- `Anchored.account` is the **account**, not the wallet that sent the
+  transaction. The relayer was the deployer, which is not one of the three keys
+  and holds no authority over the account — it only paid the gas. Authority
+  lives in the signatures.
+- `Executed` carries epoch 1 and commitment `0xa69da9d9…977b`, the account's
+  real mandate. Nothing executes without naming a mandate that is live.
+
+The account's nonce advanced to 1, so those two signatures cannot be replayed.
+
 ## Executing through an account
 `pnpm intent` prepares and relays one intent. It never touches a key: it writes
 the EIP-712 payload for `cast wallet sign`, which reads the encrypted keystore

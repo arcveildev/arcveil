@@ -89,3 +89,13 @@ DEX paid:
 >
 > $ARCVEIL on DEX Screener: [link]
 > Built on @arc.
+
+## Launch film (`video/launch/`)
+
+"Arcveil, live on Arc": a 38 s product-launch explainer in the grammar of the
+Arcus mainnet clip (white studio, soft glass objects, type that types in word
+by word, a self-checking ledger, an end card), built entirely on Higgsfield.
+Source of truth: `video/launch/storyboard.md`; style frames in
+`video/launch/styles/` (job ids in the storyboard); review page
+https://claude.ai/artifact/8P6EkYdkZWuy4U1x5Kefws. Plates are always
+text-free; every word is set in Higgsedit (Manrope + DM Mono).

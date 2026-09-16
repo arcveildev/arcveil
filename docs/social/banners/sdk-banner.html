@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil SDK banner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#f4f6fa; --dot:#d5dbe6; --ink:#1b3158; --ink2:#4a5a78; --mute:#7a879d;
+    --accent:#1f9d4c; --mint:#85ed75; --card:#ffffff; --line:#dfe5ee;
+    --win:#0b1424; --win2:#111c30; --kw:#8fb6ff; --str:#85ed75; --fn:#ffd479; --id:#e9edf4; --cm:#66738c; --num:#5f6b83; --sel:#1c3a5e;
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1500px;height:600px;overflow:hidden;background:var(--bg)}
+  body{
+    font-family:"Geist",system-ui,sans-serif;color:var(--ink);
+    background-image:radial-gradient(var(--dot) 1.1px, transparent 1.1px);
+    background-size:22px 22px;background-position:8px 8px;
+    display:grid;grid-template-columns:600px 1fr;gap:56px;padding:56px 64px 56px 64px;align-items:center;
+  }
+  .mono{font-family:"DM Mono",ui-monospace,monospace}
+  .eyebrow{display:flex;align-items:center;gap:12px;font-family:"DM Mono",monospace;font-weight:500;font-size:15px;letter-spacing:.22em;color:var(--ink);text-transform:uppercase}
+  .eyebrow svg{height:26px;width:auto;color:var(--ink)}
+  h1{font-weight:600;font-size:50px;line-height:1.1;letter-spacing:-.02em;margin:22px 0 30px;text-wrap:balance}
+  .steps{display:grid;gap:18px}
+  .step{display:grid;grid-template-columns:34px 1fr;gap:16px;align-items:start}
+  .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"DM Mono",monospace;font-weight:500;font-size:15px}
+  .n.on{background:var(--accent)}
+  .step b{display:block;font-weight:600;font-size:22px;line-height:1.25;color:var(--ink)}
+  .step span{display:block;font-size:16px;color:var(--ink2);margin-top:3px}
+  .pill{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:11px 22px 11px 18px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-family:"DM Mono",monospace;font-size:17px;color:var(--ink)}
+  .pill i{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(31,157,76,.18)}
+  .win{background:var(--win);border-radius:18px;box-shadow:0 30px 60px -20px rgba(27,49,88,.45),0 2px 0 rgba(255,255,255,.04) inset;overflow:hidden;height:488px;display:grid;grid-template-rows:46px 1fr}
+  .bar{display:flex;align-items:center;gap:8px;padding:0 18px;background:var(--win2);border-bottom:1px solid rgba(255,255,255,.06)}
+  .bar i{width:11px;height:11px;border-radius:50%}
+  .bar .t{margin-left:14px;font-family:"DM Mono",monospace;font-size:13px;color:#aab4c8}
+  .bar .badge{margin-left:auto;font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.06em;color:#dfe8ff;background:var(--sel);padding:5px 11px;border-radius:999px}
+  pre{margin:0;padding:22px 24px;font-family:"DM Mono",monospace;font-size:15.6px;line-height:1.62;color:var(--id);tab-size:2;white-space:pre}
+  .ln{display:inline-block;width:26px;text-align:right;margin-right:22px;color:var(--num);user-select:none}
+  .kw{color:var(--kw)} .str{color:var(--str)} .fn{color:var(--fn)} .cm{color:var(--cm)}
+  .hl{background:var(--sel);border-radius:4px;padding:1px 4px;margin:0 -4px}
+</style>
+</head>
+<body>
+  <section>
+    <div class="eyebrow">
+      <svg viewBox="0 0 28 24" fill="none" aria-hidden="true"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+      <span>@arcveil/sdk</span>
+    </div>
+    <h1>Give an agent a mandate, not your keys.</h1>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><b>Publish the mandate</b><span>Only its commitment reaches Arc. The terms stay with you.</span></div></div>
+      <div class="step"><div class="n">2</div><div><b>Issue a receipt per action</b><span>Proves it stayed in bounds. No amounts, no balances.</span></div></div>
+      <div class="step"><div class="n on">3</div><div><b>Anyone verifies</b><span>Five checks against Arc mainnet, in Node or a browser.</span></div></div>
+    </div>
+    <div class="pill"><i></i>pnpm add @arcveil/sdk viem</div>
+  </section>
+
+  <section class="win">
+    <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">agent.ts</span><span class="badge">Arc Mainnet · 5042</span></div>
+<pre><span class="ln">1</span><span class="kw">import</span> { <span class="fn">mandateCommitment</span>, <span class="fn">registerMandate</span>, <span class="fn">createIssuer</span>,
+<span class="ln">2</span>  <span class="fn">verifyReceipts</span>, ARC_REGISTRIES, arc } <span class="kw">from</span> <span class="str">"@arcveil/sdk"</span>
+<span class="ln">3</span>
+<span class="ln">4</span><span class="cm">// 1. publish: only the commitment reaches Arc</span>
+<span class="ln">5</span><span class="kw">const</span> terms = <span class="str">"assets: USDC only\nper action: 250 USDC"</span>
+<span class="ln">6</span><span class="kw">const</span> commitment = <span class="fn">mandateCommitment</span>(terms)
+<span class="ln">7</span><span class="kw">await</span> <span class="fn">registerMandate</span>({ client, registry: ARC_REGISTRIES[arc.id].mandateRegistry }, <span class="str">1</span>, commitment)
+<span class="ln">8</span>
+<span class="ln">9</span><span class="cm">// 2. issue: one receipt per action, no amounts inside</span>
+<span class="ln">10</span><span class="kw">let</span> issuer = <span class="fn">createIssuer</span>({ chainId: arc.id, account, mandate: { commitment, epoch: <span class="str">1</span> },
+<span class="ln">11</span>  agent: { id, session, vision: <span class="str">"relative-only"</span> }, checks, signer, counter })
+<span class="ln">12</span><span class="kw">const</span> { receipt, issuer: next } = <span class="kw">await</span> issuer.<span class="fn">issue</span>({ kind: <span class="str">"swap"</span>, userOpHash, settledTx })
+<span class="ln">13</span>
+<span class="ln">14</span><span class="cm">// 3. verify: five checks against Arc mainnet</span>
+<span class="ln">15</span><span class="kw">const</span> report = <span class="kw">await</span> <span class="fn">verifyReceipts</span>([receipt], { chain })
+<span class="ln">16</span><span class="hl">report.status <span class="cm">// "pass" | "fail" | "unknown"</span></span>
+<span class="ln">17</span></pre>
+  </section>
+</body>
+</html>
