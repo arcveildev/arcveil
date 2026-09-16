@@ -100,6 +100,50 @@ stays sharp, editable and on-brand.
 > The first privacy layer for agents, built on @arc.
 > arcveil.dev
 
+
+## Launch tweet (2026-09-17, chosen structure: problem hook first, CA in the first reply)
+
+Reference: x.com/arcusdotnet/status/2100238363693551892 opens with "Arcus is live
+on @arc", then Arc context, product, ticker + CA, proof, token utility,
+positioning, URL. Ours inverts it: the film's problem line opens, the launch is
+the second beat, proof is concrete (registries, in-browser verifier), the token
+line is one clause, and the contract address goes in the first reply so the
+post reads as product first.
+
+Main post:
+
+> Every agent that can spend can see.
+>
+> Arcveil is live on @arc. Hand an agent a mandate instead of your keys: it acts in ratios, never sees a balance, and every action leaves a receipt anyone can verify and nobody can read.
+>
+> Mandate and anchor registries are on Arc mainnet. The verifier runs in your browser, no backend.
+>
+> $ARCVEIL, dev allocation burnt. Contract in the reply.
+>
+> The first privacy layer for agents, built on Arc.
+> arcveil.dev
+
+First reply:
+
+> $ARCVEIL on Arc (chain 5042)
+> CA: <address>
+> Burn tx: <explorer link>
+> Verify a receipt: arcveil.dev/verify
+
+Short alt (fits one screen):
+
+> Agents that can spend, never see, never exceed.
+>
+> Arcveil is live on @arc. A mandate instead of your keys, ratios instead of balances, a receipt for every action.
+>
+> Registries on mainnet. Verifier in your browser.
+>
+> $ARCVEIL, dev burnt, CA in the reply.
+> arcveil.dev
+
+Placeholders: the contract address and the burn tx. Do not post the burn line
+before the burn is on chain.
+
 ## Open decisions
 
 - **Token beat (shot 7)**: keep, or drop until the burn tx exists (film ends
