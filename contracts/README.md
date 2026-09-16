@@ -22,8 +22,18 @@ into real answers.
 - **Nothing here reveals anything.** Commitments are opaque: no amount, no
   asset, no limit, no counterparty.
 
+## Status
+17 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
+one, 6 for anchors), `forge fmt` is clean and `forge build` reports no lint
+warnings. Runtime sizes are 1,195 B and 736 B.
+
+The frontend's hand-written ABI in `src/lib/receipt/abi.ts` was checked against
+the compiled artifacts: `mandateOf(address,uint64) -> ((bytes32,uint64,uint64))`
+and `isAnchored(address,bytes32) -> (bool)` match exactly. Re-check that after
+changing any signature here.
+
 ## Setup
-Foundry is not vendored. Install it yourself, then:
+`lib/` is not committed. Fetch dependencies, then run the suite:
 
 ```bash
 cd contracts && forge install foundry-rs/forge-std && forge test -vvv

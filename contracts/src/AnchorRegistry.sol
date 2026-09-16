@@ -18,9 +18,7 @@ contract AnchorRegistry {
     error EmptyCommitment();
     error AlreadyAnchored(address account, bytes32 commitment);
 
-    event Anchored(
-        address indexed account, bytes32 indexed commitment, bytes32 indexed previous, uint64 at
-    );
+    event Anchored(address indexed account, bytes32 indexed commitment, bytes32 indexed previous, uint64 at);
 
     /// @notice Anchors the caller's latest budget commitment.
     function anchor(bytes32 commitment) external {
@@ -30,10 +28,16 @@ contract AnchorRegistry {
         }
 
         bytes32 previous = _head[msg.sender];
-        _anchoredAt[msg.sender][commitment] = uint64(block.timestamp);
+        _anchoredAt[msg.sender][commitment] = _now();
         _head[msg.sender] = commitment;
 
-        emit Anchored(msg.sender, commitment, previous, uint64(block.timestamp));
+        emit Anchored(msg.sender, commitment, previous, _now());
+    }
+
+    /// @dev block.timestamp does not exceed uint64 until long after this chain is dust.
+    function _now() private view returns (uint64) {
+        // forge-lint: disable-next-line(unsafe-typecast)
+        return uint64(block.timestamp);
     }
 
     /// @notice The question the verifier actually asks.

@@ -12,9 +12,7 @@ contract AnchorRegistryTest is Test {
     bytes32 private constant FIRST = keccak256("counter 1");
     bytes32 private constant SECOND = keccak256("counter 2");
 
-    event Anchored(
-        address indexed account, bytes32 indexed commitment, bytes32 indexed previous, uint64 at
-    );
+    event Anchored(address indexed account, bytes32 indexed commitment, bytes32 indexed previous, uint64 at);
 
     function setUp() public {
         registry = new AnchorRegistry();

@@ -12,9 +12,7 @@ contract MandateRegistryTest is Test {
     bytes32 private constant COMMITMENT = keccak256("mandate terms");
     bytes32 private constant OTHER = keccak256("other terms");
 
-    event MandateRegistered(
-        address indexed account, uint64 indexed epoch, bytes32 indexed commitment, uint64 at
-    );
+    event MandateRegistered(address indexed account, uint64 indexed epoch, bytes32 indexed commitment, uint64 at);
     event MandateRevoked(address indexed account, uint64 indexed epoch, uint64 at);
 
     function setUp() public {

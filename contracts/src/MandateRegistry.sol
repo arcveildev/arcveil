@@ -28,9 +28,7 @@ contract MandateRegistry {
     error NotRegistered(address account, uint64 epoch);
     error AlreadyRevoked(address account, uint64 epoch);
 
-    event MandateRegistered(
-        address indexed account, uint64 indexed epoch, bytes32 indexed commitment, uint64 at
-    );
+    event MandateRegistered(address indexed account, uint64 indexed epoch, bytes32 indexed commitment, uint64 at);
     event MandateRevoked(address indexed account, uint64 indexed epoch, uint64 at);
 
     /// @notice Publishes the commitment for one epoch of the caller's mandate.
@@ -41,9 +39,9 @@ contract MandateRegistry {
         if (mandate.commitment != bytes32(0)) revert AlreadyRegistered(msg.sender, epoch);
 
         mandate.commitment = commitment;
-        mandate.registeredAt = uint64(block.timestamp);
+        mandate.registeredAt = _now();
 
-        emit MandateRegistered(msg.sender, epoch, commitment, uint64(block.timestamp));
+        emit MandateRegistered(msg.sender, epoch, commitment, _now());
     }
 
     /// @notice Ends an epoch. Receipts issued before this remain checkable and remain true.
@@ -52,9 +50,15 @@ contract MandateRegistry {
         if (mandate.commitment == bytes32(0)) revert NotRegistered(msg.sender, epoch);
         if (mandate.revokedAt != 0) revert AlreadyRevoked(msg.sender, epoch);
 
-        mandate.revokedAt = uint64(block.timestamp);
+        mandate.revokedAt = _now();
 
-        emit MandateRevoked(msg.sender, epoch, uint64(block.timestamp));
+        emit MandateRevoked(msg.sender, epoch, _now());
+    }
+
+    /// @dev block.timestamp does not exceed uint64 until long after this chain is dust.
+    function _now() private view returns (uint64) {
+        // forge-lint: disable-next-line(unsafe-typecast)
+        return uint64(block.timestamp);
     }
 
     function mandateOf(address account, uint64 epoch) external view returns (Mandate memory) {
@@ -64,7 +68,6 @@ contract MandateRegistry {
     /// @notice The question the verifier actually asks.
     function isLive(address account, uint64 epoch, bytes32 commitment) external view returns (bool) {
         Mandate storage mandate = _mandates[account][epoch];
-        return mandate.commitment != bytes32(0) && mandate.commitment == commitment
-            && mandate.revokedAt == 0;
+        return mandate.commitment != bytes32(0) && mandate.commitment == commitment && mandate.revokedAt == 0;
     }
 }
