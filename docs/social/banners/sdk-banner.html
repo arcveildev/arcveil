@@ -16,7 +16,7 @@
     font-family:"Geist",system-ui,sans-serif;color:var(--ink);
     background-image:radial-gradient(var(--dot) 1.1px, transparent 1.1px);
     background-size:22px 22px;background-position:8px 8px;
-    display:grid;grid-template-columns:600px 1fr;gap:56px;padding:56px 64px 56px 64px;align-items:center;
+    display:grid;grid-template-columns:600px 1fr;gap:56px;padding:40px 64px;align-items:center;
   }
   .mono{font-family:"DM Mono",ui-monospace,monospace}
   .eyebrow{display:flex;align-items:center;gap:12px;font-family:"DM Mono",monospace;font-weight:500;font-size:15px;letter-spacing:.22em;color:var(--ink);text-transform:uppercase}
@@ -30,12 +30,12 @@
   .step span{display:block;font-size:16px;color:var(--ink2);margin-top:3px}
   .pill{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:11px 22px 11px 18px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-family:"DM Mono",monospace;font-size:17px;color:var(--ink)}
   .pill i{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(31,157,76,.18)}
-  .win{background:var(--win);border-radius:18px;box-shadow:0 30px 60px -20px rgba(27,49,88,.45),0 2px 0 rgba(255,255,255,.04) inset;overflow:hidden;height:488px;display:grid;grid-template-rows:46px 1fr}
+  .win{min-width:0;background:var(--win);border-radius:18px;box-shadow:0 30px 60px -20px rgba(27,49,88,.45),0 2px 0 rgba(255,255,255,.04) inset;overflow:hidden;height:520px;display:grid;grid-template-rows:46px 1fr}
   .bar{display:flex;align-items:center;gap:8px;padding:0 18px;background:var(--win2);border-bottom:1px solid rgba(255,255,255,.06)}
   .bar i{width:11px;height:11px;border-radius:50%}
   .bar .t{margin-left:14px;font-family:"DM Mono",monospace;font-size:13px;color:#aab4c8}
   .bar .badge{margin-left:auto;font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.06em;color:#dfe8ff;background:var(--sel);padding:5px 11px;border-radius:999px}
-  pre{margin:0;padding:22px 24px;font-family:"DM Mono",monospace;font-size:15.6px;line-height:1.62;color:var(--id);tab-size:2;white-space:pre}
+  pre{margin:0;padding:20px 24px;font-family:"DM Mono",monospace;font-size:15.2px;line-height:1.55;color:var(--id);tab-size:2;white-space:pre}
   .ln{display:inline-block;width:26px;text-align:right;margin-right:22px;color:var(--num);user-select:none}
   .kw{color:var(--kw)} .str{color:var(--str)} .fn{color:var(--fn)} .cm{color:var(--cm)}
   .hl{background:var(--sel);border-radius:4px;padding:1px 4px;margin:0 -4px}
@@ -64,17 +64,18 @@
 <span class="ln">4</span><span class="cm">// 1. publish: only the commitment reaches Arc</span>
 <span class="ln">5</span><span class="kw">const</span> terms = <span class="str">"assets: USDC only\nper action: 250 USDC"</span>
 <span class="ln">6</span><span class="kw">const</span> commitment = <span class="fn">mandateCommitment</span>(terms)
-<span class="ln">7</span><span class="kw">await</span> <span class="fn">registerMandate</span>({ client, registry: ARC_REGISTRIES[arc.id].mandateRegistry }, <span class="str">1</span>, commitment)
-<span class="ln">8</span>
-<span class="ln">9</span><span class="cm">// 2. issue: one receipt per action, no amounts inside</span>
-<span class="ln">10</span><span class="kw">let</span> issuer = <span class="fn">createIssuer</span>({ chainId: arc.id, account, mandate: { commitment, epoch: <span class="str">1</span> },
-<span class="ln">11</span>  agent: { id, session, vision: <span class="str">"relative-only"</span> }, checks, signer, counter })
-<span class="ln">12</span><span class="kw">const</span> { receipt, issuer: next } = <span class="kw">await</span> issuer.<span class="fn">issue</span>({ kind: <span class="str">"swap"</span>, userOpHash, settledTx })
-<span class="ln">13</span>
-<span class="ln">14</span><span class="cm">// 3. verify: five checks against Arc mainnet</span>
-<span class="ln">15</span><span class="kw">const</span> report = <span class="kw">await</span> <span class="fn">verifyReceipts</span>([receipt], { chain })
-<span class="ln">16</span><span class="hl">report.status <span class="cm">// "pass" | "fail" | "unknown"</span></span>
-<span class="ln">17</span></pre>
+<span class="ln">7</span><span class="kw">const</span> registry = ARC_REGISTRIES[arc.id].mandateRegistry
+<span class="ln">8</span><span class="kw">await</span> <span class="fn">registerMandate</span>({ client, registry }, <span class="str">1</span>, commitment)
+<span class="ln">9</span>
+<span class="ln">10</span><span class="cm">// 2. issue: one receipt per action, no amounts inside</span>
+<span class="ln">11</span><span class="kw">let</span> issuer = <span class="fn">createIssuer</span>({ chainId: arc.id, account, signer,
+<span class="ln">12</span>  counter, mandate: { commitment, epoch: <span class="str">1</span> }, agent, checks })
+<span class="ln">13</span><span class="kw">const</span> { receipt, issuer: next } = <span class="kw">await</span> issuer.<span class="fn">issue</span>({
+<span class="ln">14</span>  kind: <span class="str">"swap"</span>, userOpHash, settledTx })
+<span class="ln">15</span>
+<span class="ln">16</span><span class="cm">// 3. verify: five checks against Arc mainnet</span>
+<span class="ln">17</span><span class="kw">const</span> report = <span class="kw">await</span> <span class="fn">verifyReceipts</span>([receipt], { chain })
+<span class="ln">18</span><span class="hl">report.status <span class="cm">// "pass" | "fail" | "unknown"</span></span></pre>
   </section>
 </body>
 </html>

@@ -99,3 +99,36 @@ Source of truth: `video/launch/storyboard.md`; style frames in
 `video/launch/styles/` (job ids in the storyboard); review page
 https://claude.ai/artifact/8P6EkYdkZWuy4U1x5Kefws. Plates are always
 text-free; every word is set in Higgsedit (Manrope + DM Mono).
+
+## SDK banner (`banners/sdk-banner.html` → `sdk-banner.png`)
+
+Developer banner in the @arcusdotnet pattern (2026-09-17): eyebrow with the
+mark, headline, three numbered steps, install pill on the left; a code window
+on the right with real `@arcveil/sdk` calls (publish a mandate, issue a
+receipt, verify) and an "Arc Mainnet · 5042" badge. No Higgsfield: it is HTML,
+Geist + DM Mono, rendered with headless Chrome at 2× (3000×1200 from a
+1500×600 layout). Re-render after editing the HTML:
+
+```bash
+cd docs/social/banners && "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new --disable-gpu --hide-scrollbars --window-size=1500,600 \
+  --force-device-scale-factor=2 --virtual-time-budget=6000 \
+  --screenshot=sdk-banner.png "file://$PWD/sdk-banner.html"
+```
+
+Keep the code honest: every identifier in the window exists in
+`packages/sdk/README.md`. Update the window when the API changes.
+
+Post copy (Arcus pattern: what the primitive is, what we bring to Arc, what it
+lets agents do, the call to action, the link):
+
+> Agents on Arc can move money from day one. The question is what they can see.
+>
+> Arcveil brings mandates and receipts to @arc: an agent gets a spending
+> mandate instead of your keys, and every action leaves a receipt that proves
+> it stayed in bounds without revealing amounts or balances.
+>
+> Publish a mandate, issue receipts, verify against Arc mainnet. A few lines
+> with @arcveil/sdk.
+>
+> arcveil.dev
