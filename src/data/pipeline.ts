@@ -57,7 +57,7 @@ export const PIPELINE_STEPS: readonly PipelineStep[] = [
   {
     n: "05",
     title: "Settle",
-    where: "Robinhood Chain (4663)",
+    where: "Arc (chain 5042)",
     body:
       "The two signatures combine into a 130-byte threshold payload; the account contract validates the quorum and executes.",
     artifact: "sigA ‖ sigB (130 B)",

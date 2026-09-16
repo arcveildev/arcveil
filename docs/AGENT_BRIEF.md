@@ -38,7 +38,7 @@ Diagrams are inline SVG / CSS: monochrome, hairline, green accent only where it 
 ## Copy rules
 This product sells verifiability, so the writing must not outrun what ships.
 Name the adversary, state what is *not* proven, and label anything unbuilt as
-what it is. See docs/RECEIPT.md for the vocabulary (mandate, blindfold, receipt,
+what it is. See docs/RECEIPT.md for the vocabulary (mandate, veil, receipt,
 counter chain, escape hatch).
 
 ## Code rules

@@ -1,14 +1,17 @@
-# Blindfold *(codename)*
+# Arcveil
 
-Agents that can spend, and never see.
+Agents that can spend, and never see. → [arcveil.dev](https://arcveil.dev)
 
 Give an agent a **mandate** instead of your keys: it works in relative terms
 ("reduce exposure to A by 30%"), the enclave holds the real numbers, and every
 settled action leaves a **receipt** that proves the mandate was respected —
 verifiable by anyone, readable by no one.
 
-Built for Robinhood Chain (Arbitrum L2, chain ID 4663).
-The product name is a placeholder; only the codename is fixed.
+Built for [Arc](https://docs.arc.io) — Circle's EVM layer 1 for stablecoin
+finance, where USDC is the gas token. Mainnet is chain ID 5042 (public since
+16 September 2026), testnet 5042002. Nothing of ours is deployed to either yet:
+the receipt format and its verifier are what exist today, and they run entirely
+in the browser.
 
 ## Stack
 - Next.js 16 (App Router, `src/app`) · React 19 · TypeScript
@@ -62,6 +65,7 @@ docs/AGENT_BRIEF.md    conventions for anyone adding a section
 - [ ] Contracts + co-signer/enclave service, RPC chain reader
 
 ## History
-The repository started as a frontend clone of primeintellect.ai, used as
-design raw material. That code is gone from `main` but remains in the history
-up to `59e7357`.
+The repository started as a frontend clone of primeintellect.ai, used as design
+raw material (gone from `main`, still in the history up to `59e7357`), then ran
+under the codename BLINDFOLD while the product was shaped. It became Arcveil,
+aimed at Arc, on 16 September 2026.

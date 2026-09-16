@@ -11,8 +11,8 @@ export type SpecRow = {
 };
 
 export const SPEC_ROWS: readonly SpecRow[] = [
-  { key: "Execution network", value: "Robinhood Chain mainnet", status: "planned" },
-  { key: "Network stack", value: "Arbitrum L2, chain ID 4663", status: "planned" },
+  { key: "Execution network", value: "Arc mainnet, chain ID 5042", status: "planned" },
+  { key: "Development network", value: "Arc testnet, chain ID 5042002", status: "in progress" },
   { key: "Native gas", value: "ETH", status: "planned" },
   { key: "Account", value: "ERC-4337 smart account", status: "planned" },
   {

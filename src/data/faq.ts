@@ -41,7 +41,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
   {
     question: "Which network and assets?",
     answer:
-      "Robinhood Chain, an Arbitrum L2 with chain ID 4663. Contracts are not deployed yet — see the specifications above for what is shipped and what is planned.",
+      "Arc — Circle\u2019s EVM layer 1 for stablecoin finance, where USDC is the gas token. Mainnet is chain ID 5042, testnet 5042002. Our contracts are deployed to neither yet: everything you can run today, including the verifier, runs in your own browser. See the specifications above for what is shipped and what is planned.",
   },
   {
     question: "What does a receipt actually prove?",

@@ -1,7 +1,7 @@
 import type { Hex } from "./types";
 
 /**
- * What the verifier needs from Robinhood Chain. v0 ships the in-memory reader
+ * What the verifier needs from Arc. v0 ships the in-memory reader
  * below; the RPC reader replaces it once the mandate contracts are deployed.
  */
 export type MandateRecord = { account: Hex; commitment: Hex; epoch: number; revoked: boolean };

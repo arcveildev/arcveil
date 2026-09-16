@@ -1,18 +1,24 @@
-/** Site-wide identity and navigation. The product name is a codename for now. */
+/** Site-wide identity and navigation. */
 export const SITE = {
-  name: "Blindfold",
-  codename: "BLINDFOLD",
-  title: "Blindfold — agents that can spend, and never see",
+  name: "Arcveil",
+  domain: "arcveil.dev",
+  title: "Arcveil — agents that can spend, and never see",
   description:
     "Give an agent a mandate instead of your keys. It acts in relative terms, never sees your balances, and every action leaves a receipt anyone can verify and nobody can read.",
-  nameNote: "Codename. The product name is not settled yet.",
 } as const;
 
+/**
+ * Circle's Arc: an EVM L1 for stablecoin finance where USDC is the gas token.
+ * Mainnet opened 2026-09-16; nothing of ours is deployed to it yet, so the
+ * fixtures and anything we claim on the page stay on testnet.
+ * Source: docs.arc.io/arc/references/rpc-endpoints
+ */
 export const CHAIN = {
-  name: "Robinhood Chain",
-  id: 4663,
-  stack: "Arbitrum L2",
-  gas: "ETH",
+  name: "Arc",
+  id: 5042,
+  testnetId: 5042002,
+  stack: "Circle L1, EVM",
+  gas: "USDC",
 } as const;
 
 export type NavItem = { label: string; href: string; badge?: string };

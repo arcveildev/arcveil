@@ -57,7 +57,7 @@ export const ROADMAP_PHASES: readonly RoadmapPhase[] = [
   {
     n: "04",
     status: "planned",
-    title: "Blindfolded execution",
+    title: "Veiled execution",
     summary:
       "Relative intents resolved inside the enclave, so the model never receives an absolute number.",
     tags: ["relative intents", "enclave resolve", "clearance levels"],

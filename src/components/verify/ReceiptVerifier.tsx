@@ -12,7 +12,7 @@ import { cn } from "@/lib/cn";
 import { CheckList } from "./CheckList";
 import { StatusPill } from "./StatusPill";
 
-/** v0 reads a fixture instead of Robinhood Chain; the RPC reader drops in here later. */
+/** v0 reads a fixture instead of Arc; the RPC reader drops in here later. */
 const chain = createMemoryChainReader(SAMPLE_CHAIN_STATE);
 
 type State = { report: VerificationReport | null; errors: readonly string[]; busy: boolean };

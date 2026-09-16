@@ -18,7 +18,7 @@ export async function draftFixture(overrides: Partial<ReceiptDraft> = {}): Promi
   const signer = await testSigner();
   return {
     v: 1,
-    chain: 4663,
+    chain: 5042002,
     account: ACCOUNT,
     mandate: { commitment: COMMITMENT, epoch: 7 },
     agent: { id: byte("a7", 32), session: byte("22", 16), vision: "relative-only" },

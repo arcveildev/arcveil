@@ -21,7 +21,7 @@ const signer = await generateSigner();
 
 const draft = (overrides: Partial<ReceiptDraft>): ReceiptDraft => ({
   v: 1,
-  chain: 4663,
+  chain: 5042002,
   account: ACCOUNT,
   mandate: { commitment: MANDATE, epoch: 7 },
   agent: { id: b("a7", 32), session: b("22", 16), vision: "relative-only" },

@@ -9,7 +9,7 @@ account holder's mandate — **without revealing the mandate, the balances, or t
 {
   "v": 1,
   "id": "0x…",                     // sha256 of the canonical body
-  "chain": 4663,
+  "chain": 5042002,
   "account": "0x…",                // smart account (public anyway)
   "mandate": { "commitment": "0x…", "epoch": 7 },
   "agent":   { "id": "0x…", "session": "0x…", "vision": "relative-only" },
@@ -48,5 +48,6 @@ The overall verdict is the worst of the five.
 `/verify` runs all five in the browser — no request leaves the tab. Chain lookups go
 through `ChainReader` (`src/lib/receipt/chain.ts`); v0 uses the in-memory reader over
 `src/data/sample-receipts.json`, and the RPC reader replaces it once the mandate
-contracts are deployed. Regenerate the samples with `pnpm gen:receipts` — a throwaway key
+contracts are deployed to Arc (mainnet 5042, testnet 5042002 — the samples are
+testnet). Regenerate the samples with `pnpm gen:receipts` — a throwaway key
 is created per run, so no private material is ever committed.
