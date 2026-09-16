@@ -23,9 +23,9 @@ into real answers.
   asset, no limit, no counterparty.
 
 ## Status
-17 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
-one, 6 for anchors), `forge fmt` is clean and `forge build` reports no lint
-warnings. Runtime sizes are 1,195 B and 736 B.
+21 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
+one, 6 for anchors, 4 for the seeding script), `forge fmt` is clean and
+`forge build` reports no lint warnings. Runtime sizes are 1,195 B and 736 B.
 
 The frontend's hand-written ABI in `src/lib/receipt/abi.ts` was checked against
 the compiled artifacts: `mandateOf(address,uint64) -> ((bytes32,uint64,uint64))`
@@ -66,3 +66,31 @@ Afterwards, paste the two addresses into `ARC.mandateRegistry` and
 `ARC.anchorRegistry` in `src/data/site.ts`. The verifier picks them up with no
 other change — `createRpcChainReader` stops reporting `unknown` for those checks
 as soon as the addresses are non-null.
+
+## Seeding the demo mandate
+Until something is published for the samples' account, the mandate and
+budget-chain checks on `/verify` answer `unknown` — correctly, because nothing
+about them exists on chain. To make the samples resolve, publish the demo
+mandate from the same wallet that owns them:
+
+```bash
+ARC_SAMPLE_ACCOUNT=0xYourDeployerAddress pnpm gen:receipts
+```
+
+That regenerates the samples **and** writes `contracts/demo/mandate.json`, which
+is the single source of truth: the seeding script publishes exactly the values
+the receipts claim. Then:
+
+```bash
+cd contracts && MANDATE_REGISTRY=0x... ANCHOR_REGISTRY=0x... forge script script/SeedSamples.s.sol --rpc-url arc --account arcveil-deployer --broadcast
+```
+
+The script refuses to run from a wallet other than the one in the JSON — both
+registries key everything by `msg.sender`, so seeding from elsewhere would
+publish a mandate no receipt refers to. It is idempotent, so a re-run after a
+partial failure resumes rather than reverting.
+
+The demo mandate's terms are in the JSON in plain text on purpose: a real
+mandate's terms never leave its owner, and the sample exists to show that the
+chain stores only their hash. Anyone can keccak256 that text and get the
+commitment.
