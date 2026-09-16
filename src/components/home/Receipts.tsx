@@ -14,7 +14,7 @@ export function Receipts() {
   return (
     <section id="receipts" className="mb-5 flex flex-col border border-border scroll-mt-17 md:mb-8 lg:mb-17.5">
       <div className="relative flex flex-col gap-4 overflow-hidden px-4 py-6 md:px-5 md:py-8">
-        <SectionBackdrop src="/backgrounds/receipts-bg.png" className="object-right" />
+        <SectionBackdrop src="/backgrounds/receipts-bg.webp" className="object-right" />
         <span className="relative z-10 label text-fg-muted">{COPY.label}</span>
         <SectionHeading className="relative z-10" title="Receipts." tagline={COPY.tagline} />
         <p className="relative z-10 max-w-2xl text-sm leading-140 text-fg-muted">{COPY.body}</p>

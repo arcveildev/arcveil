@@ -19,7 +19,7 @@ export function Hero() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- decorative backdrop under the loop */}
         <img
-          src="/backgrounds/hero-veil.png"
+          src="/backgrounds/hero-veil.webp"
           alt=""
           className="absolute inset-0 h-full w-full scale-105 object-cover object-[70%_48%] max-[560px]:object-[64%_44%]"
         />

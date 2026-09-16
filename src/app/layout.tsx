@@ -10,13 +10,23 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: SITE.title,
+  metadataBase: new URL(`https://${SITE.domain}`),
+  title: { default: SITE.title, template: `%s | ${SITE.name}` },
   description: SITE.description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: SITE.title,
     description: SITE.description,
     siteName: SITE.name,
+    url: "/",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE.title }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.title,
+    description: SITE.description,
+    images: ["/og.png"],
   },
 };
 

@@ -6,11 +6,11 @@ All media in `public/backgrounds/` is original to this repo.
 
 | File | Used by | Source |
 |---|---|---|
-| `hero-veil.png` | Hero still, painted under the loop | Higgsfield · GPT Image 2.5, 16:9 (job 7833eb3f) |
+| `hero-veil.webp` | Hero still, painted under the loop | Higgsfield · GPT Image 2.5, 16:9 (job 7833eb3f) |
 | `hero-veil-loop.mp4` | Hero video loop, full-bleed | Higgsfield · Seedance 2.5 image-to-video from the still (job 2e594d39), then post-processed — see below |
-| `pipeline-bg.png` | Pipeline section header | GPT Image 2.5, 21:9 (job 48a2e107) |
-| `threat-bg.png` | Threat model section header | GPT Image 2.5, 21:9 (job d1c21655) |
-| `receipts-bg.png` | Receipts section header | GPT Image 2.5, 21:9 (job 844b9265) |
+| `pipeline-bg.webp` | Pipeline section header | GPT Image 2.5, 21:9 (job 48a2e107) |
+| `threat-bg.webp` | Threat model section header | GPT Image 2.5, 21:9 (job d1c21655) |
+| `receipts-bg.webp` | Receipts section header | GPT Image 2.5, 21:9 (job 844b9265) |
 
 Section backdrops render through `<SectionBackdrop>`, which owns the blend and
 filter so they all read as the same material: `mix-blend-screen` +
@@ -45,8 +45,14 @@ of light across an unseen form (blindfold), a hairline rail of nodes
 translucent sheets (receipts). Video: near-still, the loop should end where it
 began — no cuts, no camera moves, no new objects entering.
 
-## Left over from the previous project
-`lab.png`, `compute-bg.png`, `inference-header.png`, `fig-7-bg.png`,
-`environment-hub-bg.png`, `dedicated-inference.svg`, `inference-stack.svg`,
-`lora-hot-swapping.svg`, `pi-glass-loop-*` — generated for the Prime Intellect
-clone and unused since the pivot. Delete them once no new section wants them.
+## Social card
+`public/og.png` is composed from the hero still by `python3 scripts/gen-og.py`
+— a script rather than a one-off, so the card can be regenerated when the
+headline or the art changes. Text is measured and wrapped, so a longer line
+cannot silently run off the edge.
+
+## Removed
+The Prime Intellect-era backgrounds (`lab.png`, `compute-bg.png`,
+`inference-header.png`, the two dot grids, three hand-drawn SVGs and
+`pi-glass-loop-*`) were deleted before the first deploy: ~9 MB of assets no
+section referenced. They remain in the history if one is ever wanted back.
