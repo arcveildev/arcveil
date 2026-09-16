@@ -55,14 +55,17 @@ src/
 docs/RECEIPT.md        receipt format v1 and the five checks
 docs/DESIGN_SYSTEM.md  design language + token map
 docs/AGENT_BRIEF.md    conventions for anyone adding a section
+contracts/             Foundry project: MandateRegistry, AnchorRegistry
 ```
 
 ## Roadmap
 - [x] Receipt format v1 + in-browser verifier
+- [x] Live reads of Arc mainnet from the browser
 - [ ] Home page: ladder, signing pipeline, threat model, worked example, escape hatch, roadmap
 - [ ] `/docs` + TypeScript SDK
 - [ ] Desktop app (Tauri, sharing these components)
-- [ ] Contracts + co-signer/enclave service, RPC chain reader
+- [ ] Deploy the registries to Arc (contracts and tests written, see `contracts/`)
+- [ ] Co-signer / enclave service
 
 ## History
 The repository started as a frontend clone of primeintellect.ai, used as design
