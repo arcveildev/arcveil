@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/Hero";
+import { TokenStrip } from "@/components/home/TokenStrip";
 import { Pillars } from "@/components/home/Pillars";
 import { Ladder } from "@/components/home/Ladder";
 import { Pipeline } from "@/components/home/Pipeline";
@@ -15,6 +16,7 @@ export default function HomePage() {
     <div className="pb-20">
       {/* Claim, then the machine, then the proof, then the failure modes. */}
       <Hero />
+      <TokenStrip />
       <Pillars />
       <Ladder />
       <Pipeline />

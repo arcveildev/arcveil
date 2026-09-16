@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CTA, PRODUCT_NAV, UTILITY_NAV } from "@/data/site";
+import { CTA, PRODUCT_NAV, SOCIAL, UTILITY_NAV } from "@/data/site";
+import { XIcon } from "@/components/ui/XIcon";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -85,6 +86,19 @@ export function Header() {
                   </span>
                 )}
               </NavLink>
+            ))}
+            {SOCIAL.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${link.label} ${link.handle}`}
+                title={link.handle}
+                className="flex h-7 items-center opacity-90 transition-opacity hover:opacity-100"
+              >
+                <XIcon className="size-3.5" />
+              </a>
             ))}
           </nav>
           <div className="flex items-center gap-1">

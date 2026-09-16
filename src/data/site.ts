@@ -44,6 +44,31 @@ export const ARC: {
 
 export type NavItem = { label: string; href: string; badge?: string };
 
+export type SocialLink = { label: string; handle: string; href: string; kind: "x" };
+
+/** Where Arcveil talks. Rendered in the header, the mobile menu and the footer. */
+export const SOCIAL: readonly SocialLink[] = [
+  { label: "X", handle: "@Arcveil_AI", href: "https://x.com/Arcveil_AI", kind: "x" },
+] as const;
+
+/**
+ * The $ARCVEIL token slot on the homepage. Set `address` to the deployed
+ * contract and the strip switches from "not yet published" to the full CA
+ * with a copy button and an explorer link. It stays null until then so the
+ * page never shows an address that does not exist.
+ */
+export const TOKEN: {
+  symbol: string;
+  ticker: string;
+  address: `0x${string}` | null;
+  explorer: string;
+} = {
+  symbol: "ARCVEIL",
+  ticker: "$ARCVEIL",
+  address: null,
+  explorer: "https://explorer.arc.io/token",
+};
+
 /** The header hides this nav while it is empty. */
 export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [
   { label: "Pipeline", index: "01", href: "/#pipeline" },
@@ -71,7 +96,10 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
   },
   {
     title: "Company",
-    links: [{ label: "Contact", href: "/contact" }],
+    links: [
+      { label: "Contact", href: "/contact" },
+      { label: "X · @Arcveil_AI", href: "https://x.com/Arcveil_AI" },
+    ],
   },
   {
     title: "Terms",

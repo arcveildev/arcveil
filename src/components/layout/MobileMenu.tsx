@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { CTA, PRODUCT_NAV, UTILITY_NAV } from "@/data/site";
+import { CTA, PRODUCT_NAV, SOCIAL, UTILITY_NAV } from "@/data/site";
+import { XIcon } from "@/components/ui/XIcon";
 import { Button } from "@/components/ui/Button";
 
 export function MobileMenu() {
@@ -54,6 +55,18 @@ export function MobileMenu() {
                   <span className="bg-fg/12 px-1 py-0.5 text-2xs text-fg/55">{item.badge}</span>
                 )}
               </Link>
+            ))}
+            {SOCIAL.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 border-b border-border py-4 font-favorit text-sm uppercase text-fg/80"
+              >
+                <XIcon className="size-3.5" />
+                <span>{link.handle}</span>
+              </a>
             ))}
           </nav>
           <div className="mt-8 flex items-center gap-1">
