@@ -150,8 +150,8 @@ def style_receipt(layer, d, pal, med, reg, margin, top, sub_top):
         vw = tracked_width(d, val, row_font, 30 * 0.02)
         draw_tracked(d, (x0 + card_w - pad - vw, y), val, row_font, pal["fg"], 30 * 0.02)
         y += 52
-    # lockup sits under the card
-    draw_lockup(layer, d, pal, med, margin, y0 + content_h + 36, mark_h=40)
+    # lockup sits low-left, where the footer normally goes, clear of the horizon glow
+    draw_lockup(layer, d, pal, med, margin, int(OUT_H * 0.90) - 40, mark_h=40)
 
 
 STYLES = {"stack": style_stack, "outline": style_outline, "receipt": style_receipt}

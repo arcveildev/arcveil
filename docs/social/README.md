@@ -43,6 +43,12 @@ Round 3, type styles on plate A (the background the user kept), `style=`:
 | `burn-a-s2-outline.png` | `outline`: ticker solid, DEV BURNT as a hollow navy outline | `light style=outline top=0.13 scrim=150` |
 | `burn-a-s3-receipt.png` | `receipt`: frosted card, mint DEV BURNT label, ticker, ledger rows (allocation / status / proof), lockup under the card | `light style=receipt top=0.12 scrim=60` |
 
+**Chosen (2026-09-17): `burn-final-dusk-receipt.png`** — `receipt` style on the
+A3 dusk plate, navy card with white type (`dark style=receipt top=0.12 scrim=60`).
+`burn-final-dusk-receipt-lightcard.png` is the same with the frosted white card
+(`light style=receipt top=0.12`). In the receipt style the lockup sits low-left
+instead of under the card, so it clears the horizon glow.
+
 Sub lines are placeholders until the burn happens: swap `SUB`/`SUB2` in
 `compose_burn.py` for the real amount and tx, then re-run. Plates are kept as
 `plate-*.png` so the type can be redone without re-prompting.
