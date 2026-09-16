@@ -49,6 +49,21 @@ into real answers.
 ## Bootstrap an account
 One transaction: the account is deployed and publishes its own first mandate.
 
+First you need three keys that are genuinely three different holders — that is
+the entire point of 2-of-3. Create them as encrypted keystores, so no private
+key is ever printed or stored in a file you have to guard:
+
+```bash
+cast wallet new ~/.foundry/keystores arcveil-device
+cast wallet new ~/.foundry/keystores arcveil-cosigner
+cast wallet new ~/.foundry/keystores arcveil-recovery
+```
+
+Each prints its address, which is what the script wants. In production these
+live in three different places — the device holds one, the co-signer service
+holds one, and recovery sits behind a passkey; generating all three here is a
+first account to learn on, not a threat model.
+
 ```bash
 cd contracts && DEVICE=0x... COSIGNER=0x... RECOVERY=0x... \
   MANDATE_REGISTRY=0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5 \
@@ -91,6 +106,21 @@ cd contracts && forge install foundry-rs/forge-std && forge test -vvv
 
 ## Bootstrap an account
 One transaction: the account is deployed and publishes its own first mandate.
+
+First you need three keys that are genuinely three different holders — that is
+the entire point of 2-of-3. Create them as encrypted keystores, so no private
+key is ever printed or stored in a file you have to guard:
+
+```bash
+cast wallet new ~/.foundry/keystores arcveil-device
+cast wallet new ~/.foundry/keystores arcveil-cosigner
+cast wallet new ~/.foundry/keystores arcveil-recovery
+```
+
+Each prints its address, which is what the script wants. In production these
+live in three different places — the device holds one, the co-signer service
+holds one, and recovery sits behind a passkey; generating all three here is a
+first account to learn on, not a threat model.
 
 ```bash
 cd contracts && DEVICE=0x... COSIGNER=0x... RECOVERY=0x... \

@@ -23,17 +23,27 @@ import {MandateRegistry} from "../src/MandateRegistry.sol";
 contract DeployAccount is Script {
     address constant ENTRY_POINT_V07 = 0x0000000071727De22E5E9d8BAf0edAc6f37da032;
 
+    error Missing(string variable);
+
+    /// @dev vm.envAddress fails with a parser dump that says nothing about which
+    ///      variable was wrong; this says which one, and what it wanted.
+    function requireAddress(string memory name) internal view returns (address value) {
+        value = vm.envOr(name, address(0));
+        if (value == address(0)) revert Missing(name);
+    }
+
     function run() external {
         address entryPoint = vm.envOr("ENTRY_POINT", ENTRY_POINT_V07);
-        MandateRegistry registry = MandateRegistry(vm.envAddress("MANDATE_REGISTRY"));
-        address device = vm.envAddress("DEVICE");
-        address cosigner = vm.envAddress("COSIGNER");
-        address recovery = vm.envAddress("RECOVERY");
+        MandateRegistry registry = MandateRegistry(requireAddress("MANDATE_REGISTRY"));
+        address device = requireAddress("DEVICE");
+        address cosigner = requireAddress("COSIGNER");
+        address recovery = requireAddress("RECOVERY");
 
         // The account registers this itself, at birth. Keep the terms you hash:
         // the chain stores only the commitment, and without the text you can
         // prove the mandate was live but never show what it said.
-        string memory terms = vm.envString("MANDATE_TERMS");
+        string memory terms = vm.envOr("MANDATE_TERMS", string(""));
+        if (bytes(terms).length == 0) revert Missing("MANDATE_TERMS");
         uint64 epoch = uint64(vm.envOr("EPOCH", uint256(1)));
         bytes32 commitment = keccak256(bytes(terms));
 
