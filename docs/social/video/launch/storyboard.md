@@ -144,6 +144,24 @@ Short alt (fits one screen):
 Placeholders: the contract address and the burn tx. Do not post the burn line
 before the burn is on chain.
 
+### Chosen (2026-09-17): same eight-beat structure as the Arcus post, CA inline
+
+> Arcveil is live on @arc.
+>
+> Arc was built for stablecoin finance at machine speed, with agents moving USDC from day one. Arcveil is building the privacy layer for those agents.
+>
+> $ARCVEIL: <paste CA>
+>
+> An agent gets a mandate instead of your keys. It acts in ratios, never sees a balance, and every action leaves a receipt anyone can verify and nobody can read, with the mandate and anchor registries already deployed on Arc mainnet.
+>
+> Dev allocation burnt, proof on Arc.
+>
+> The first privacy layer for agents, built on Arc.
+> arcveil.dev
+
+Beat map against the reference: live line · Arc context · what we build ·
+ticker + CA · capability + on-chain proof · token line · positioning · URL.
+
 ## Open decisions
 
 - **Token beat (shot 7)**: keep, or drop until the burn tx exists (film ends
