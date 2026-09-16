@@ -36,8 +36,10 @@ export const ARC: {
   rpc: "https://rpc.mainnet.arc.io",
   explorer: "https://explorer.arc.io",
   chainId: CHAIN.id,
-  mandateRegistry: null,
-  anchorRegistry: null,
+  // Deployed 2026-09-16, block 21186110. Runtime bytecode verified byte-identical
+  // to the local build, so what answers here is what the test suite ran against.
+  mandateRegistry: "0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5",
+  anchorRegistry: "0xb2af157f269b31e315099e9da693096833ab8289",
 };
 
 export type NavItem = { label: string; href: string; badge?: string };

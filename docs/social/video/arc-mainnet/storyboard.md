@@ -89,11 +89,21 @@ exceed. Built on Arc.*
   crown where the eyes were. That silhouette equals the LogoMark.
 - No hat, no mouth. Personality from eyes, tilt and posture.
 
+## Character sheet (rendered 2026-09-16, approved direction: The Arch, 23 s)
+
+| File | What | Higgsfield job |
+|---|---|---|
+| `character/turnaround.jpg` | Front, three-quarter, side, back on white. Side view confirms a thick slab about a third as deep as wide; back is plain navy. | `4fa3a13c-4701-4a5d-8124-13c1797f3bb4` |
+| `character/states.jpg` | Eyes open · eyes closed under the Band · blindfolded with coin on palm and receipt card. Closed eyes read as soft round impressions in the clay. | `0c406db3-8cb6-4537-8ca2-8bf3108b0069` |
+
+Identity references on Higgsfield (media ids): concept 01 =
+`6ddfc441-21bb-4088-9ad7-9012f0b5dd5e`, concept 04 =
+`f80c9e16-5d82-42b0-8f31-ab30e1f66da4`. Pass both sheets (as job ids) plus
+concept 01 as `image_references` for every keyframe.
+
 ## Generation plan (Higgsfield)
 
-1. **Character sheet** — `character-sheet` workflow, 3D-stylized, using
-   concept 01 as identity: front / three-quarter / back, eyes open, eyes
-   closed with Band.
+1. **Character sheet** — done, see above.
 2. **Keyframes** (`gpt_image_2_5`, high, 2k, references = sheet + concept 01):
    K0 = concept 01 as is, K1 Band at hand (shot 3), K2 Band across crown eyes
    open (shot 4 end), K3 = concept 04 (shot 5 end), K4 wide pull-back (shot 6).
