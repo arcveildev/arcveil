@@ -199,6 +199,21 @@ claims this project makes in prose everywhere else:
 
 The account's nonce advanced to 1, so those two signatures cannot be replayed.
 
+## Revocation, demonstrated on mainnet
+`0x78f194852e5f02fce8ba3524daf7eff27bc47daa4c9c32c398d5fec75a461372`, block
+21197420. The account revoked its own epoch 1, authorised by device +
+co-signer. `mandateOf` now carries a `revokedAt`, and `isLive` is false.
+
+What that buys is checkable rather than asserted. Asking the account to execute
+under epoch 1 afterwards — `eth_call` through the EntryPoint path, which needs
+no signature and no gas — reverts with selector `0xb254c866`,
+`MandateNotLive(1, 0xa69da9d9…977b)`. The refusal comes from the contract, not
+from a policy engine we happen to run: revoking stops the agent even if every
+key and every server agreed to carry on.
+
+The commitment survives revocation, so receipts issued while epoch 1 was live
+stay checkable and stay true.
+
 ## Executing through an account
 `pnpm intent` prepares and relays one intent. It never touches a key: it writes
 the EIP-712 payload for `cast wallet sign`, which reads the encrypted keystore
