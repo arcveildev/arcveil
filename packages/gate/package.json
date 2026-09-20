@@ -1,0 +1,27 @@
+{
+  "name": "@arcveil/gate",
+  "version": "0.1.0",
+  "description": "The policy gate: puts a mandate's semantic clauses to a judge and answers allow or deny, never why.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry": "wrangler deploy --dry-run",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@arcveil/sdk": "workspace:*",
+    "viem": "^2",
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "^3",
+    "wrangler": "^4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -24,6 +24,13 @@ export type Receipt = {
   action: { kind: ActionKind; userOpHash: Hex; settledTx: Hex; at: string };
   /** Names of the policy checks that ran. Thresholds stay inside the mandate. */
   checks: readonly string[];
+  /**
+   * Present when some of those checks were semantic — answered by a model
+   * rather than by arithmetic. `model` names who answered; `commitment` binds
+   * the exact clauses and thresholds it was held to, without revealing either.
+   * Absent on receipts whose checks were all arithmetic, which hash unchanged.
+   */
+  judge?: { model: string; commitment: Hex };
   /** Commitments to cumulative budget use, before and after this action. */
   counter: { prev: Hex; next: Hex };
   proof: Proof;

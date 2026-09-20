@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "arcveil-gate",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-16",
+
+  // The judge. `typesafe/jev` runs through this binding, so no model key of
+  // ours exists to leak, and the request never leaves Cloudflare's network.
+  "ai": { "binding": "AI" },
+
+  // One evaluation is one paid inference, so an open endpoint is an open
+  // wallet. The bearer check runs first; this bounds what a leaked token costs.
+  "ratelimits": [{ "name": "RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } }],
+
+  "observability": { "enabled": true }
+
+  // Secrets — set with `wrangler secret put`, never committed:
+  //   GATE_CLAUSES  the mandate's semantic clauses, as JSON. Thresholds live here.
+  //   GATE_TOKEN    the bearer token callers must present. No token, no service.
+  //   GATE_ORIGIN   optional: the one browser origin allowed to call this gate.
+}

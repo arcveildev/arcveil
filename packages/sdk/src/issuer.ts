@@ -31,6 +31,8 @@ export type IssuerConfig = {
   agent: { id: Hex; session: Hex; vision: "relative-only" | "absolute" };
   /** Names of the clauses that were evaluated. Their thresholds stay in the mandate. */
   checks: readonly string[];
+  /** Set when any of those clauses was semantic. See `judgeCommitment`. */
+  judge?: { model: string; commitment: Hex };
   signer: { publicKey: Hex; privateKey: CryptoKey };
   /** Head of the budget chain — the last anchored commitment. */
   counter: Hex;
@@ -67,6 +69,7 @@ export function createIssuer(config: IssuerConfig): Issuer {
             at: (action.at ?? new Date()).toISOString(),
           },
           checks: config.checks,
+          ...(config.judge === undefined ? {} : { judge: config.judge }),
           counter: { prev: config.counter, next },
           proof: { type: "attestation", signer: config.signer.publicKey },
         },

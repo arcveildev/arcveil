@@ -15,6 +15,7 @@ account holder's mandate — **without revealing the mandate, the balances, or t
   "agent":   { "id": "0x…", "session": "0x…", "vision": "relative-only" },
   "action":  { "kind": "swap", "userOpHash": "0x…", "settledTx": "0x…", "at": "…Z" },
   "checks":  ["asset_allowlist", "per_action_cap", "window_spend", "active_hours", "killswitch_clear"],
+  "judge":   { "model": "jev-1.13.0", "commitment": "0x…" },   // only when a check was semantic
   "counter": { "prev": "0x…", "next": "0x…" },
   "proof":   { "type": "attestation", "signer": "0x…", "signature": "0x…" }
 }
@@ -27,6 +28,12 @@ balance ever appears in a receipt.
   evidence (`signature` / `data`) excluded. Implemented in `src/lib/receipt/canonical.ts`.
 - `counter.prev → counter.next` are commitments to cumulative budget use. Consecutive
   receipts must chain, which is what makes a *dropped* receipt visible.
+- `judge` is present only when some of those checks were semantic — answered by a model
+  rather than by arithmetic. `commitment` binds the clause set *and its thresholds*, so the
+  holder can show later what was asked without the receipt ever revealing it. The field is
+  optional: a receipt without it canonicalises to exactly the bytes it did before judges
+  existed. The five checks below do **not** re-run it, and nobody outside the gate can —
+  see [JUDGE.md](./JUDGE.md) for what that does and does not prove.
 - `proof` is a discriminated union. v0.5 ships `attestation` (enclave signature);
   v1 swaps in `zk` and the rest of the format is unchanged.
 

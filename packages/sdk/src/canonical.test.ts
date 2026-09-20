@@ -53,3 +53,31 @@ describe("computeReceiptId", () => {
     expect(await computeReceiptId(forged)).toBe(await computeReceiptId(receipt));
   });
 });
+
+describe("the judge field", () => {
+  const judge = { model: "jev-1.13.0", commitment: `0x${"5b".repeat(32)}` } as const;
+
+  it("is absent from the body of a receipt that carries no semantic clauses", async () => {
+    const body = receiptBody(await receiptFixture()) as Record<string, unknown>;
+    expect(body).not.toHaveProperty("judge");
+  });
+
+  it("leaves receipts issued before it existed hashing exactly as they did", async () => {
+    const before = await receiptFixture();
+    const after = await receiptFixture({ judge: undefined });
+    expect(canonicalize(receiptBody(after))).toBe(canonicalize(receiptBody(before)));
+  });
+
+  it("is covered by the hash once a receipt carries one", async () => {
+    const plain = await draftFixture();
+    const judged = await draftFixture({ judge });
+    expect(receiptBody(judged)).toHaveProperty("judge", judge);
+    expect(await computeReceiptId(judged)).not.toBe(await computeReceiptId(plain));
+  });
+
+  it("binds the clause set: moving a threshold changes the receipt id", async () => {
+    const one = await computeReceiptId(await draftFixture({ judge }));
+    const other = await computeReceiptId(await draftFixture({ judge: { ...judge, commitment: `0x${"6c".repeat(32)}` } }));
+    expect(one).not.toBe(other);
+  });
+});

@@ -78,6 +78,7 @@ export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [
 ];
 
 export const UTILITY_NAV: readonly NavItem[] = [
+  { label: "Gate", href: "/gate" },
   { label: "Verify", href: "/verify" },
   { label: "Contact", href: "/contact" },
 ];
@@ -92,7 +93,10 @@ export type FooterColumn = { title: string; links: readonly NavItem[] };
 export const FOOTER_COLUMNS: readonly FooterColumn[] = [
   {
     title: "Product",
-    links: [{ label: "Verify a receipt", href: "/verify" }],
+    links: [
+      { label: "Verify a receipt", href: "/verify" },
+      { label: "The semantic gate", href: "/gate" },
+    ],
   },
   {
     title: "Company",

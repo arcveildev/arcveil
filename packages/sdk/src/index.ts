@@ -47,3 +47,35 @@ export {
   type Intent,
 } from "./account";
 export { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi";
+
+export {
+  buildEvaluation,
+  judgeCommitment,
+  type ChoiceClause,
+  type Clause,
+  type Evaluation,
+  type NoulClause,
+  type Question,
+  type ScoreClause,
+} from "./judge";
+export {
+  applyClauses,
+  decide,
+  parseJudgement,
+  type Answer,
+  type ClauseStatus,
+  type ClauseVerdict,
+  type Decision,
+  type Judgement,
+  type JudgementResult,
+} from "./judgement";
+export {
+  affordable,
+  applySelection,
+  buildSelection,
+  SELECTION_CHECKS,
+  selectionClauses,
+  type Candidate,
+  type Selection,
+  type SelectionPolicy,
+} from "./selection";

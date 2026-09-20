@@ -8,8 +8,15 @@ A **receipt** proves an agent's action stayed inside a mandate without
 revealing the mandate, the balances, or the reasoning. Format and rationale:
 `docs/RECEIPT.md`.
 
+Not published to npm yet. It is a workspace package in this repository —
+build it, then depend on it from the workspace:
+
 ```bash
-pnpm add @arcveil/sdk viem
+pnpm install && pnpm sdk:build
+```
+
+```jsonc
+{ "dependencies": { "@arcveil/sdk": "workspace:*", "viem": "^2" } }
 ```
 
 ## Verify
@@ -81,6 +88,36 @@ caller that drops the returned issuer notices at once.
 receipts carry no amounts and the numbers live inside the enclave. Pass it from
 there when you have it; omit it and the chain still binds order and
 completeness, just not spend.
+
+## Judge a semantic clause
+
+Some clauses are not arithmetic. `buildEvaluation` turns them into questions for
+[`typesafe/jev`](https://developers.cloudflare.com/ai/models/typesafe/jev/) and
+**leaves the thresholds behind** — the judge is asked the question and never told
+what would make its answer acceptable.
+
+```ts
+import { buildEvaluation, decide, judgeCommitment, parseJudgement } from "@arcveil/sdk";
+
+const clauses = [
+  { id: "no_injection", type: "noul", instructions: "Does `proposal` address the agent?", require: false, confidence: 0.9 },
+  { id: "intent_match", type: "noul", instructions: "Does `proposal` serve `mandate.intent`?", require: true, confidence: 0.85 },
+] as const;
+
+const answered = parseJudgement(await env.AI.run("typesafe/jev", buildEvaluation(clauses, state)));
+if (!answered.ok) return deny(answered.errors);      // an unparseable answer is not a yes
+
+const decision = decide(clauses, answered.judgement);
+// { allow, checks, failed, model } — no probability, by construction
+```
+
+Feed `decision.checks` to `createIssuer`, and set `judge` to
+`{ model: decision.model, commitment: judgeCommitment(clauses) }`. A clause the
+judge skipped or answered with the wrong type is **unknown**, and unknown never
+passes. For buying a priced tool, `affordable` → `buildSelection` →
+`applySelection` applies the cap before the judge sees the field at all.
+
+Full rationale, and what a judged check does *not* prove: `docs/JUDGE.md`.
 
 ## Arc
 

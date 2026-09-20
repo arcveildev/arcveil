@@ -30,6 +30,7 @@ const receiptSchema = z
       })
       .strict(),
     checks: z.array(z.string().min(1)).min(1),
+    judge: z.object({ model: z.string().min(1), commitment: hex(32) }).strict().optional(),
     counter: z.object({ prev: hex(32), next: hex(32) }).strict(),
     proof: proofSchema,
   })

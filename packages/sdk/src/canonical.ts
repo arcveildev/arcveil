@@ -33,6 +33,9 @@ export const receiptBody = (input: Receipt | ReceiptDraft) => ({
   agent: input.agent,
   action: input.action,
   checks: input.checks,
+  // Omitted rather than nulled when absent, so a receipt with no semantic
+  // clauses serialises to exactly the bytes it did before judges existed.
+  ...(input.judge === undefined ? {} : { judge: input.judge }),
   counter: input.counter,
   proof: stripEvidence(input.proof),
 });

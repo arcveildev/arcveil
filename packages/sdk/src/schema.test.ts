@@ -49,3 +49,30 @@ describe("parseReceiptInput", () => {
     expect(result.ok).toBe(false);
   });
 });
+
+describe("the judge field", () => {
+  const withJudge = async (judge: unknown) => {
+    const receipt = await receiptFixture();
+    return parseReceiptInput(JSON.stringify({ ...receipt, judge }));
+  };
+
+  it("accepts a receipt that names its judge", async () => {
+    const result = await withJudge({ model: "jev-1.13.0", commitment: `0x${"5b".repeat(32)}` });
+    expect(result.ok).toBe(true);
+  });
+
+  it("rejects a judge with no model named", async () => {
+    const result = await withJudge({ model: "", commitment: `0x${"5b".repeat(32)}` });
+    expect(result.ok).toBe(false);
+  });
+
+  it("rejects a commitment that is not 32 bytes", async () => {
+    const result = await withJudge({ model: "jev-1.13.0", commitment: "0x5b" });
+    expect(result.ok).toBe(false);
+  });
+
+  it("rejects extra keys smuggled into the judge", async () => {
+    const result = await withJudge({ model: "jev-1.13.0", commitment: `0x${"5b".repeat(32)}`, probabilities: {} });
+    expect(result.ok).toBe(false);
+  });
+});
