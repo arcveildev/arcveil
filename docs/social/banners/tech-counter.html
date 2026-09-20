@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — the counter chain</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  body{background-image:url("plate-tech-counter.png");background-position:58% 40%;background-size:132%}
+  h1{top:88px}
+  .r,.head{grid-template-columns:34px 1fr auto}
+  .head{display:grid;align-items:baseline;gap:14px}
+  .r .a{letter-spacing:-.01em}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Receipt format v1</span>
+  </div>
+
+  <h1>Counter chain. <span>Faking a receipt is hard. Deleting one is the attack that pays.</span></h1>
+
+  <div class="note">Each receipt commits to cumulative budget use before and<br>after it, so consecutive receipts have to join.</div>
+  <div class="pill"><i></i>arcveil.dev</div>
+
+  <div class="card">
+    <div class="top"><i></i>one session, four actions<span class="badge">counter.prev → counter.next</span></div>
+    <div class="head"><span>#</span><span>action</span><span>budget commitment</span></div>
+    <div class="rows">
+      <div class="r"><b>01</b><span class="t">swap</span><span class="a">0x7e41… → 0x9c02…</span></div>
+      <div class="r"><b>02</b><span class="t">swap</span><span class="a">0x9c02… → 0x3fa8…</span></div>
+      <div class="r gap"><b>03</b><span class="t">receipt withheld</span><span class="a">0x3fa8… → &nbsp;— — —</span></div>
+      <div class="r"><b>04</b><span class="t">transfer</span><span class="a"><span class="amber">0x1d55…</span> → 0xb730…</span></div>
+    </div>
+    <div class="foot">Row 04 does not join row 02, and nothing it carries can be made to. <span class="amber">A dropped receipt is not invisible — it shows up later as a gap.</span></div>
+  </div>
+</body>
+</html>

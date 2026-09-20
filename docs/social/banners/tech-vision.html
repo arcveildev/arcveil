@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — what each party sees</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  body{background-image:url("plate-tech-vision.png");background-position:center 52%}
+  .r,.head{grid-template-columns:132px 1fr 1fr}
+  .head{display:grid;align-items:baseline;gap:14px}
+  .r .t{font-size:15px}
+  .r .w,.r .a{font-family:"Geist",system-ui,sans-serif;font-size:14px;line-height:1.35;text-align:left;justify-self:start}
+  .r .a{color:var(--mute)}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Threat model</span>
+  </div>
+
+  <h1>Vision. <span>Reduce exposure to A by 30%. It was never told how much.</span></h1>
+
+  <div class="note">Enclave execution is designed, not deployed. We would rather<br>publish the architecture than imply it is finished.</div>
+  <div class="pill"><i></i>arcveil.dev</div>
+
+  <div class="card">
+    <div class="top"><i></i>one action, five points of view<span class="badge">relative-only</span></div>
+    <div class="head"><span>party</span><span>sees</span><span>never sees</span></div>
+    <div class="rows">
+      <div class="r"><span class="t">Chain observer</span><span class="w">That an operation happened, and from which account</span><span class="a">The asset, the amount, the strategy</span></div>
+      <div class="r"><span class="t">Model provider</span><span class="w">A relative instruction and redacted context</span><span class="a">Who you are, your balances, your positions</span></div>
+      <div class="r"><span class="t">Our co-signer</span><span class="w">That a proof of policy compliance validated</span><span class="a">The mandate’s terms, the agent’s reasoning</span></div>
+      <div class="r"><span class="t">The agent</span><span class="w">Relative quantities, and pass or refuse</span><span class="a">Absolute amounts, total portfolio</span></div>
+      <div class="r live"><span class="t">You</span><span class="w">Everything, plus who read what</span><span class="a">—</span></div>
+    </div>
+    <div class="foot">Row three is the one that deserves suspicion. We can refuse to sign — we cannot sign alone, cannot move funds, and cannot read the mandate we check against.</div>
+  </div>
+</body>
+</html>

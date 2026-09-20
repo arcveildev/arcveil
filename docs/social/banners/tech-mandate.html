@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — the mandate registry</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  body{background-image:url("plate-tech-mandate.png");background-position:center 56%}
+  .split{display:grid;grid-template-columns:1fr 1fr}
+  .side{padding:14px 20px 16px}
+  .side + .side{border-left:1px solid var(--hair)}
+  .side h2{font-family:"DM Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--mute);margin-bottom:10px}
+  .side li{list-style:none;font-family:"DM Mono",monospace;font-size:13px;line-height:2.05;color:var(--ink)}
+  .side li span{color:var(--mute)}
+  .side.chain li{color:var(--ink2)}
+  .side.chain .hash{color:var(--ink);font-size:14px}
+  .keep{background:rgba(255,255,255,.55)}
+  .chain{background:rgba(133,237,117,.13);box-shadow:inset 2px 0 0 var(--accent)}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Mandate registry</span>
+  </div>
+
+  <h1>Mandate. <span>Spending rules do not have to be public to be enforceable.</span></h1>
+
+  <div class="note">An epoch can never be overwritten, only revoked — or the<br>terms could change after receipts were issued against them.</div>
+  <div class="pill"><i></i>arcveil.dev</div>
+
+  <div class="card">
+    <div class="top"><i></i>what you hash, and what leaves<span class="badge">ARC · 5042</span></div>
+    <div class="split">
+      <div class="side keep">
+        <h2>stays with you</h2>
+        <ul>
+          <li><span>assets:</span> USDC only</li>
+          <li><span>per action:</span> 250 USDC</li>
+          <li><span>window:</span> 2,000 / 24h</li>
+          <li><span>active hours:</span> 02:00–06:00 UTC</li>
+          <li><span>kill switch:</span> holder only</li>
+        </ul>
+      </div>
+      <div class="side chain">
+        <h2>reaches Arc</h2>
+        <ul>
+          <li><span>commitment</span></li>
+          <li class="hash">0x8a4c…e19f</li>
+          <li><span>epoch</span> 1</li>
+          <li><span>status</span> <span class="mint">live</span></li>
+          <li><span>terms on chain</span> none</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot">Keep what you hashed. Without it you can prove a mandate was live, and never again show what it said.<br>0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5</div>
+  </div>
+</body>
+</html>

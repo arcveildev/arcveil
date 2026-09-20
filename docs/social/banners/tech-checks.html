@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — the five checks</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  body{background-image:url("plate-tech-checks.png");background-position:center 55%}
+  .r,.head{grid-template-columns:104px 1fr 54px 168px}
+  .head{display:grid;align-items:baseline;gap:14px}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Verify</span>
+  </div>
+
+  <h1>Checks. <span>A verifier that can only say pass is decoration.</span></h1>
+
+  <div class="note">Two checks are local crypto. Three read Arc mainnet from<br>your browser — no backend of ours in the path.</div>
+  <div class="pill"><i></i>arcveil.dev/verify</div>
+
+  <div class="card">
+    <div class="top"><i></i>five checks per receipt<span class="badge">ARC · 5042</span></div>
+    <div class="head"><span>check</span><span>question</span><span>reads</span><span>verdicts</span></div>
+    <div class="rows">
+      <div class="r"><b>integrity</b><span class="t">Body still hashes to its id</span><span class="w">local</span><span class="a">pass · fail</span></div>
+      <div class="r"><b>signature</b><span class="t">Policy signer signed these bytes</span><span class="w">local</span><span class="a">pass · fail · <span class="amber">unknown</span></span></div>
+      <div class="r"><b>mandate</b><span class="t">Mandate was live at that epoch</span><span class="w">Arc</span><span class="a">pass · fail</span></div>
+      <div class="r"><b>linkage</b><span class="t">Budget chain joins its predecessor</span><span class="w">Arc</span><span class="a">pass · fail · <span class="amber">unknown</span></span></div>
+      <div class="r"><b>settlement</b><span class="t">Settlement transaction succeeded</span><span class="w">Arc</span><span class="a">pass · fail · <span class="amber">unknown</span></span></div>
+    </div>
+    <div class="foot">The overall verdict is the worst of the five. A check that cannot decide returns <span class="amber">unknown</span> — never pass, and never fail, which would read as “this receipt is forged”.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* Shared layout for the five tech post banners (tech-*.html).
+   1500x600 layout, rendered at 2x -> 3000x1200. Each HTML file sets only its
+   own plate background, headline, card rows and note; everything visual lives
+   here so the five read as one series. */
+
+:root{
+  --ink:#1b3158;      /* navy, the wordmark colour */
+  --ink2:#46587c;     /* secondary type */
+  --mute:#8492ab;     /* ordinals, column labels */
+  --accent:#1f9d4c;   /* mint, legible on white */
+  --mint:#85ed75;     /* the brand accent itself */
+  --amber:#b6761f;    /* the "unknown" verdict, never a fail red */
+  --card:rgba(255,255,255,.84);
+  --hair:rgba(27,49,88,.09);
+}
+*{box-sizing:border-box;margin:0}
+html,body{width:1500px;height:600px;overflow:hidden}
+body{font-family:"Geist",system-ui,sans-serif;color:var(--ink);position:relative;
+     background-color:#dbe7f3;background-position:center;background-size:cover;background-repeat:no-repeat}
+
+/* Soft corner scrim so the mono note and the pill stay legible where the
+   plate's flower field is busy. Painted under every other element. */
+body::before{content:"";position:absolute;left:0;bottom:0;width:820px;height:400px;pointer-events:none;
+     background:linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,.55) 58%, rgba(255,255,255,0));
+     -webkit-mask-image:linear-gradient(to top, #000 22%, rgba(0,0,0,.35) 58%, transparent 88%)}
+
+/* ---- left column ------------------------------------------------------- */
+.eyebrow{position:absolute;left:64px;top:52px;display:flex;align-items:center;gap:12px;
+         font-family:"DM Mono",monospace;font-weight:500;font-size:14px;letter-spacing:.22em;text-transform:uppercase}
+.eyebrow svg{height:24px;width:auto;color:var(--ink)}
+
+h1{position:absolute;left:64px;top:96px;width:520px;font-weight:600;font-size:46px;line-height:1.08;
+   letter-spacing:-.025em;text-wrap:balance}
+h1 span{color:var(--ink2);font-weight:500}
+
+.note{position:absolute;left:64px;bottom:118px;width:520px;font-family:"DM Mono",monospace;
+      font-size:13px;line-height:1.6;color:var(--ink2)}
+.pill{position:absolute;left:64px;bottom:52px;display:inline-flex;align-items:center;gap:10px;
+      padding:10px 20px 10px 16px;border-radius:999px;background:var(--ink);color:#fff;
+      font-family:"DM Mono",monospace;font-size:16px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--mint)}
+
+/* ---- right card -------------------------------------------------------- */
+.card{position:absolute;left:648px;top:56px;width:712px;transform:rotate(-1.6deg);transform-origin:left top;
+      background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.92);border-radius:16px;
+      box-shadow:0 30px 60px -24px rgba(27,49,88,.45);overflow:hidden}
+.top{display:flex;align-items:center;gap:10px;padding:11px 20px;border-bottom:1px solid rgba(27,49,88,.12);
+     font-family:"DM Mono",monospace;font-size:12.5px;letter-spacing:.06em;color:var(--ink2)}
+.top i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.top .badge{margin-left:auto;color:var(--ink);background:rgba(133,237,117,.38);padding:3px 10px;border-radius:999px}
+
+.rows{padding:6px 0 8px}
+.r{display:grid;align-items:baseline;gap:14px;padding:9px 20px;border-bottom:1px solid var(--hair)}
+.r:last-child{border-bottom:0}
+.r b{font-family:"DM Mono",monospace;font-weight:500;font-size:12.5px;color:var(--mute)}
+.r .t{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.r .w{font-family:"DM Mono",monospace;font-size:12.5px;color:var(--ink2)}
+.r .a{font-family:"DM Mono",monospace;font-size:12.5px;color:var(--ink);justify-self:end;text-align:right}
+.r.live{background:rgba(133,237,117,.16);box-shadow:inset 2px 0 0 var(--accent)}
+.r.live b{color:var(--accent)}
+.r.gap{background:rgba(182,118,31,.10);box-shadow:inset 2px 0 0 var(--amber)}
+.r.gap b,.r.gap .t,.r.gap .w,.r.gap .a{color:var(--amber)}
+.r.gap .t{font-weight:500;font-style:italic}
+
+/* column heads, same grid as the rows below them */
+.head{padding:9px 20px 7px;border-bottom:1px solid var(--hair);
+      font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.foot{padding:10px 20px 12px;font-family:"DM Mono",monospace;font-size:12px;line-height:1.55;color:var(--ink2);
+      border-top:1px solid var(--hair)}
+.mint{color:var(--accent)}
+.amber{color:var(--amber)}

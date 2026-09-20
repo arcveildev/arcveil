@@ -226,3 +226,45 @@ the same four fields as `PIPELINE_STEPS`. Row 06 is tinted mint with an accent
 edge because it is the only shipped step, and the note at lower left states
 that in words rather than leaving the card to imply everything runs. Same
 render command as the SDK banners, 1500×600 layout at 2× → 3000×1200.
+
+## Five tech posts and their banners (2026-09-17)
+
+Copy: `posts-tech.md` — one post per piece of the system, in the same voice as
+the launch and pipeline posts (short declarative lines, no hashtags, no emoji,
+and a status line wherever a claim describes the design rather than the build).
+
+Banners are the V1 form again — a text-free Higgsfield plate under HTML type
+and a frosted card — but they share one stylesheet, `banners/tech-banner.css`,
+so the five read as a series. Each HTML file sets only its own plate, framing,
+headline, card grid and note. 1500×600 layout rendered at 2× → 3000×1200:
+
+```bash
+cd docs/social/banners && for f in tech-checks tech-counter tech-mandate tech-vision tech-escape; do
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
+    --hide-scrollbars --window-size=1500,600 --force-device-scale-factor=2 \
+    --virtual-time-budget=8000 --screenshot="$f.png" "file://$PWD/$f.html"
+done
+```
+
+| File | Post | What the card carries | Plate | Higgsfield job |
+|---|---|---|---|---|
+| `tech-checks.png` | The five checks | Each check, where it reads from, and its verdicts — `unknown` in amber | The Arch holding five glass tiles, one amber and out of line | `383a28c6-ca71-4f12-93ef-89db1e3f496a` |
+| `tech-counter.png` | The counter chain | Four actions, `counter.prev → counter.next`, row 03 withheld so row 04 no longer joins | A chain of blank cards into the sky with one link missing | `7b96991d-fd63-4b25-ab41-9ffeee36b211` |
+| `tech-mandate.png` | The mandate registry | Split card: the terms that stay with you against the commitment, epoch and status that reach Arc | The Arch, blind, lowering a mint pebble into a pedestal beside a sealed envelope | `d0b5dfe9-e352-4a3b-ba79-943559b79789` |
+| `tech-vision.png` | What each party sees | `THREAT_ROWS` verbatim, your row accented | The Arch, blind, a hand on a frosted pane with unreadable shapes behind it | `423d3bd8-06bf-44a4-bcfa-56aecef9b6e0` |
+| `tech-escape.png` | If we disappear | The three `ESCAPE_HATCH` points and the caveat, the honest cost included | Three posts, two lit and bridged, the third dark | `ac5b1694-947c-4f27-9464-682e1c81af0c` |
+
+All five: GPT Image 2.5, high, 2k, 16:9, character sheets passed as
+`image_references`, and "no text anywhere" in every prompt — every word on the
+banner is HTML. Plates are kept as `plate-tech-*.png` so the type can be redone
+without re-prompting; `contact-sheet-tech.jpg` is the plates, and
+`contact-sheet-tech-banners.jpg` the finished five.
+
+Framing note: these plates put the character higher in the frame than the SDK
+and pipeline plates did, so each file sets its own `background-position` to
+drop the character below the card rather than behind it. Re-pan there, not in
+the plate, if a card ever grows.
+
+Card contents are quoted from `docs/RECEIPT.md`, `src/data/threatModel.ts` and
+`src/data/escapeHatch.ts`. If those change, the banners are wrong — re-render
+rather than leaving them.
