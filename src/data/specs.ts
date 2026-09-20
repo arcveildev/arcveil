@@ -2,6 +2,8 @@
  * Build status of each line in the spec table. Nothing may read as shipped
  * unless it actually is — see docs/AGENT_BRIEF.md copy rules.
  */
+import { ARC } from "./site";
+
 export type SpecStatus = "shipped" | "in progress" | "planned";
 
 export type SpecRow = {
@@ -15,12 +17,12 @@ export const SPEC_ROWS: readonly SpecRow[] = [
   { key: "Native gas", value: "USDC — 18 decimals native, 6 on the ERC-20 interface", status: "shipped" },
   {
     key: "MandateRegistry",
-    value: "0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5",
+    value: ARC.mandateRegistry ?? "not deployed",
     status: "shipped",
   },
   {
     key: "AnchorRegistry",
-    value: "0xb2af157f269b31e315099e9da693096833ab8289",
+    value: ARC.anchorRegistry ?? "not deployed",
     status: "shipped",
   },
   {
@@ -38,7 +40,7 @@ export const SPEC_ROWS: readonly SpecRow[] = [
   { key: "SDK", value: "TypeScript, viem-based", status: "in progress" },
   {
     key: "Account",
-    value: "0xb1c0983a7b84f38fbaf5f3af92f0fecaa62ce25d — ERC-4337, EntryPoint v0.7",
+    value: `${ARC.account} — ERC-4337, EntryPoint v0.7`,
     status: "shipped",
   },
   {

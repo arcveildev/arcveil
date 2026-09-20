@@ -32,6 +32,8 @@ export const ARC: {
   chainId: number;
   mandateRegistry: `0x${string}` | null;
   anchorRegistry: `0x${string}` | null;
+  /** The first ArcveilAccount — ERC-4337, 2-of-3, adopted onto epoch 1. */
+  account: `0x${string}` | null;
 } = {
   rpc: "https://rpc.mainnet.arc.io",
   explorer: "https://explorer.arc.io",
@@ -40,6 +42,7 @@ export const ARC: {
   // to the local build, so what answers here is what the test suite ran against.
   mandateRegistry: "0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5",
   anchorRegistry: "0xb2af157f269b31e315099e9da693096833ab8289",
+  account: "0xb1c0983a7b84f38fbaf5f3af92f0fecaa62ce25d",
 };
 
 export type NavItem = { label: string; href: string; badge?: string };
@@ -78,6 +81,7 @@ export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [
 ];
 
 export const UTILITY_NAV: readonly NavItem[] = [
+  { label: "Docs", href: "/docs" },
   { label: "Gate", href: "/gate" },
   { label: "Verify", href: "/verify" },
   { label: "Contact", href: "/contact" },
@@ -96,6 +100,7 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
     links: [
       { label: "Verify a receipt", href: "/verify" },
       { label: "The semantic gate", href: "/gate" },
+      { label: "Documentation", href: "/docs" },
     ],
   },
   {

@@ -46,6 +46,7 @@ pnpm test && pnpm lint && pnpm exec tsc --noEmit
 | `/` | Thesis + the three primitives (mandate, blindfold, receipt) |
 | `/verify` | **Receipt verifier** — paste a receipt, five checks run in your browser |
 | `/gate` | **Semantic gate** — the clauses a threshold cannot express, put to `typesafe/jev` |
+| `/docs` | Developer docs — receipt format, the five checks, the SDK, Arc and the contracts |
 | `/contact` | Enquiry form (posts to `/api/contact`, falls back to local) |
 | `/privacy-policy` `/terms-of-service` `/security` | Placeholder legal copy |
 
@@ -60,6 +61,7 @@ src/
     layout/            Header, AnnouncementBar, MobileMenu, Footer, FooterCanvas
     home/              Thesis, Pillars
     verify/            ReceiptVerifier, CheckList, StatusPill, ClaimPanels
+    docs/              DocsNav, DocsHeader, DocsSection, DefTable, Snippet, Note, DocsPager
     ui/                Button, SectionHeading, FigureLabel, NumberedList, Logo, CodeBlock
     theme/             ThemeProvider (data-theme / data-font), ThemeSwitcher
   data/                site identity, home copy, receipt samples + claims
@@ -76,11 +78,12 @@ contracts/             Foundry project: MandateRegistry, AnchorRegistry
 ## Roadmap
 - [x] Receipt format v1 + in-browser verifier
 - [x] Live reads of Arc mainnet from the browser
-- [ ] Home page: ladder, signing pipeline, threat model, worked example, escape hatch, roadmap
+- [x] Home page: ladder, signing pipeline, threat model, worked example, escape hatch, roadmap
 - [x] TypeScript SDK (`packages/sdk`) — the site is its first consumer
 - [x] Semantic clauses judged by `typesafe/jev`, and the gate that runs them
       (`packages/gate`) — built and tested, not deployed
-- [ ] `/docs`
+- [x] `/docs`
+- [ ] Publish `@arcveil/sdk` to npm
 - [ ] Desktop app (Tauri, sharing these components)
 - [x] Registries deployed to Arc mainnet, and the verifier reads them live
 - [ ] Co-signer / enclave service
