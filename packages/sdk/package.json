@@ -7,6 +7,14 @@
     "access": "public"
   },
   "homepage": "https://arcveil.dev/docs/sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcveildev/arcveil.git",
+    "directory": "packages/sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/arcveildev/arcveil/issues"
+  },
   "keywords": [
     "arcveil",
     "arc",

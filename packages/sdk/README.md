@@ -12,7 +12,8 @@ Not published to npm yet. It is a workspace package in this repository —
 build it, then depend on it from the workspace:
 
 ```bash
-pnpm install && pnpm sdk:build
+git clone https://github.com/arcveildev/arcveil
+cd arcveil && pnpm install && pnpm sdk:build
 ```
 
 ```jsonc

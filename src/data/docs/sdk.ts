@@ -11,9 +11,9 @@ export const SDK_PAGE = {
 } as const;
 
 export const INSTALL = `
-# Not published yet. Build it from the repository:
-pnpm install
-pnpm sdk:build
+# Not on npm yet. Clone the repository and build it:
+git clone https://github.com/arcveildev/arcveil
+cd arcveil && pnpm install && pnpm sdk:build
 `;
 
 export const INSTALL_DEP = `
