@@ -268,3 +268,80 @@ the plate, if a card ever grows.
 Card contents are quoted from `docs/RECEIPT.md`, `src/data/threatModel.ts` and
 `src/data/escapeHatch.ts`. If those change, the banners are wrong — re-render
 rather than leaving them.
+
+## The semantic gate banner (2026-09-20)
+
+`banners/tech-injection.png`, for post 02 in `posts-gate.md` — the one that
+leads on Jev's output channel. Sixth file in the `tech-*` series and rendered
+the same way (same `tech-banner.css`, same headless-Chrome line, swap the name):
+
+```bash
+cd docs/social/banners && "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new --disable-gpu --hide-scrollbars --window-size=1500,600 \
+  --force-device-scale-factor=2 --virtual-time-budget=8000 \
+  --screenshot=tech-injection.png "file://$PWD/tech-injection.html"
+```
+
+| File | Post | What the card carries | Plate | Higgsfield job |
+|---|---|---|---|---|
+| `tech-injection.png` | A typed answer cannot carry an instruction | The three answer shapes Jev can return, what each one is, and the most an injection can do to it — with `free text` in amber as the row that does not exist | The Arch, blind, a long ruled scroll stopped flat against a slotted post while a single mint cube comes through to its palm | `747240be-b4df-4190-bfa1-bdcc1452618d` |
+
+Two departures from the first five, both deliberate and both worth knowing
+before the next one:
+
+- **No character sheet.** The five were generated with the sheets passed as
+  `image_references`; this one was not, so the character is the rounded "blind"
+  variant from the mandate and vision plates rather than the arch silhouette.
+  It sits in the series, but pass the sheet next time.
+- **1k then upscaled.** The generation came back at 1344×752 rather than the
+  series' 2k, so `plate-tech-injection.png` is that frame upscaled to 3856×2160
+  (`bytedance`, 2k, job `d4f3b578-1cac-4cc2-8660-c5bdd2e97fed`) rather than
+  re-rolled — the composition was the one worth keeping. Set the resolution
+  explicitly on the next plate.
+
+Card contents are quoted from `docs/JUDGE.md` and `packages/sdk/src/judge.ts`.
+The note line says the gate is built and not deployed; **that line stops being
+true the day it ships**, so re-render this banner with the deploy.
+
+## The docs banner (2026-09-21)
+
+Copy: `posts-docs.md`. Banner: `banners/docs-live.html` → `docs-live.png`, the
+same `tech-banner.css` series as the five tech banners, so it needs only its own
+plate, headline, rows and note.
+
+Plate: `banners/plate-docs-live.png` — the Arch on the path beside five glass
+markers, one per docs page. Generated with GPT Image 2.5 (high, 2k, 16:9) using
+the **previous plate's job id as the image reference** rather than a character
+sheet, which carries the meadow, the light and the character in one go:
+`423d3bd8-06bf-44a4-bcfa-56aecef9b6e0`. Jobs
+`12d48d30-aacb-47dd-b3ed-404b99afef26` (chosen) and
+`516b02ee-6177-497e-a6d6-f8110a6699f9` (kept as `plate-docs-live-alt.png`, and
+reused as the film's closing plate).
+
+The numbers on the card are counted from `src/data/docs/*` — 17 receipt fields,
+12 SDK exports, five pages. If those files change the banner is wrong, so
+re-render rather than leaving it.
+
+## The docs film (2026-09-21)
+
+Storyboard, beats and build plan: `video/docs/storyboard.md`. Master:
+`video/docs/arcveil-docs.mp4` — 38 s, 1920×1080, 30 fps, **silent**; the pad the
+storyboard calls for is not cut yet.
+
+First film built with **Remotion** rather than Higgsedit: the source is
+`packages/film`, and the composition imports `src/data/docs/checks.ts`,
+`receipts.ts` and `site.ts` directly, so the addresses and the five checks on
+screen are the same objects the pages render. A doc change breaks the film's
+typecheck instead of silently disagreeing with it.
+
+Higgsfield renders exactly two frames of this film — the opening and closing
+plates. Everything between them is React. That split is deliberate: the
+reference film the user supplied is entirely typography and UI, and a generated
+clip cannot be trusted to spell a contract address correctly.
+
+```bash
+cd packages/film
+pnpm studio                 # scrub the beats
+pnpm exec remotion still src/index.ts DocsFilm out.png --frame=540
+pnpm exec remotion render src/index.ts DocsFilm ../../docs/social/video/docs/arcveil-docs.mp4
+```

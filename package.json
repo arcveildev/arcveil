@@ -15,9 +15,11 @@
     "gate:deploy": "pnpm --filter @arcveil/gate deploy",
     "gate:dev": "pnpm --filter @arcveil/gate dev",
     "sdk:build": "pnpm --filter @arcveil/sdk build",
-    "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveil/sdk typecheck && pnpm --filter @arcveil/gate typecheck",
+    "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveil/sdk typecheck && pnpm --filter @arcveil/gate typecheck && pnpm --filter @arcveil/film typecheck",
     "check": "pnpm typecheck && pnpm lint && pnpm test",
-    "intent": "tsx scripts/intent.mts"
+    "intent": "tsx scripts/intent.mts",
+    "film:studio": "pnpm --filter @arcveil/film studio",
+    "film:render": "pnpm --filter @arcveil/film render ../../docs/social/video/docs/arcveil-docs.mp4"
   },
   "dependencies": {
     "clsx": "^2.1.1",

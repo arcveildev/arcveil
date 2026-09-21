@@ -48,3 +48,6 @@ next-env.d.ts
 
 # prepared intents (contain no keys, but are per-run scratch)
 .arcveil/
+
+# agent worktrees, never part of the project
+.claude/worktrees/

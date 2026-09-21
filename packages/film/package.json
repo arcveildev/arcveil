@@ -1,0 +1,29 @@
+{
+  "name": "@arcveil/film",
+  "version": "0.1.0",
+  "description": "Remotion source for the Arcveil films. Every number on screen is imported from the site's own data, so a frame cannot drift from what ships.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "still": "remotion still src/index.ts DocsFilm",
+    "render": "remotion render src/index.ts DocsFilm",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@arcveil/sdk": "workspace:*",
+    "@remotion/cli": "^4.0.400",
+    "@remotion/google-fonts": "^4.0.400",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "remotion": "^4.0.400",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

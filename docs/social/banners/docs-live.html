@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — the docs are live</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  body{background-image:url("plate-docs-live.png");background-position:38% 62%}
+  .r,.head{grid-template-columns:34px 1fr 192px}
+  .head{display:grid;align-items:baseline;gap:14px}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Documentation</span>
+  </div>
+
+  <h1>Docs. <span>Read it before you trust it.</span></h1>
+
+  <div class="note">Five pages: the receipt field by field, the checks that<br>decide it, the SDK, and the contracts it reads on Arc.</div>
+  <div class="pill"><i></i>arcveil.dev/docs</div>
+
+  <div class="card">
+    <div class="top"><i></i>five pages, written against the source<span class="badge">LIVE</span></div>
+    <div class="head"><span>#</span><span>page</span><span>what it carries</span></div>
+    <div class="rows">
+      <div class="r"><b>00</b><span class="t">Overview</span><span class="a">live, and not built</span></div>
+      <div class="r"><b>01</b><span class="t">Receipt format</span><span class="a">17 fields of v1</span></div>
+      <div class="r"><b>02</b><span class="t">The five checks</span><span class="a">three verdicts</span></div>
+      <div class="r"><b>03</b><span class="t">SDK</span><span class="a">12 exports</span></div>
+      <div class="r"><b>04</b><span class="t">Arc and contracts</span><span class="a">chain 5042</span></div>
+    </div>
+    <div class="foot">Written against the code rather than from memory, which is how the docs ended up correcting the product: <span class="amber">@arcveil/sdk is not on npm</span>, and the page that tells you to install it says so.</div>
+  </div>
+</body>
+</html>

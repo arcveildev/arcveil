@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored Foundry dependencies. Their shipped JS is not ours to lint, and
+    // it fails rules the rest of the repo keeps.
+    "contracts/lib/**",
   ]),
 ]);
 
