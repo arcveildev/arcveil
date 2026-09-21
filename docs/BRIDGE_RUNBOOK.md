@@ -136,4 +136,4 @@ Same sequence, `--rpc-url arc`, with three differences:
 | `/bridge` says a deposit is not privately spendable | The postman has not published a root containing its label. It can still be pulled back publicly through the gateway. |
 | A withdrawal is refused with "not made for this withdrawal" | The proof was built against a different recipient, fee, entrypoint or scope. Re-fetch the quote and rebuild. |
 | The deposit reached "attesting" and stopped | The USDC is burnt and safe. Circle has not attested yet; the message can be delivered later by anyone. |
-| A USDC transfer reverts for no visible reason | Arc's compliance precompile can refuse a transfer, including out of this pool. Nothing here overrides it. |
+| A USDC transfer reverts for no visible reason | Both the mint and the transfer path go through Arc precompiles whose code is not readable from outside. Nothing here overrides them. |

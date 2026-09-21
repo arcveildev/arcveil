@@ -14,8 +14,9 @@ pragma solidity 0.8.28;
  *      exists to check — the message offsets, the handler, the destination
  *      caller, the mint recipient — still runs against Circle's real
  *      MessageTransmitterV2 and TokenMessengerV2 on a fork of Arc. What is not
- *      covered here is Arc's own USDC: its blocklist precompile can refuse a
- *      transfer, and that refusal is real on mainnet and absent here.
+ *      covered here is Arc's own USDC: the mint path consults a compliance
+ *      precompile, and every path routes through one whose code is not readable
+ *      from outside. Neither can run on a fork, so neither is tested.
  *
  *      Storage is mappings only, so nothing collides with whatever the proxy
  *      being etched over had in its low slots.

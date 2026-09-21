@@ -67,7 +67,7 @@ export const BRIDGE_LEDGER: readonly LedgerRow[] = [
   { fact: "Which deposit funded which withdrawal", who: "Nobody", kind: "private" },
   { fact: "Your note's secrets", who: "Only your device", kind: "private" },
   { fact: "The recipient, the amount, and your IP, while a withdrawal is in flight", who: "The relayer", kind: "seen" },
-  { fact: "That an address is blocked, on every USDC movement", who: "Arc's own compliance precompile", kind: "seen" },
+  { fact: "That an address is blocked, on the mint path", who: "Arc's own compliance precompile", kind: "seen" },
 ] as const;
 
 export type ThreatRow = { readonly threat: string; readonly answer: string; readonly settled: boolean };
@@ -111,7 +111,7 @@ export const BRIDGE_THREATS: readonly ThreatRow[] = [
   {
     threat: "Arc itself refuses the transfer",
     answer:
-      "It can. Arc's USDC asks a chain-level precompile whether an address is blocked on every mint and transfer, including out of this pool. Nothing here can override that, and no test covers it — a fork cannot run a precompile.",
+      "It can. Arc's USDC asks a compliance precompile whether an address is blocked on the mint path, and every transfer routes through a second precompile whose code nobody outside Arc can read. Nothing here can override either, and no test covers them — a fork has no precompile to run.",
     settled: false,
   },
   {

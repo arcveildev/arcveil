@@ -158,9 +158,11 @@ Two things about Arc surfaced only by running it, and both are worth knowing:
 - USDC at `0x3600…0000` is a 6-decimal view over the chain's 18-decimal native
   balance, and every mint and transfer is delegated to a precompile at
   `0x1800…0000`. A precompile is not bytecode, so a fork has nothing to fetch.
-- Arc has a **compliance precompile** at `0x1800…0001`, asked `isBlocklisted`
-  on every USDC movement. The chain itself can refuse a transfer, including one
-  out of this pool. That is real on mainnet and absent from the fork.
+- Arc has a **compliance precompile** at `0x1800…0001`, called with
+  `isBlocklisted` on the mint path. A plain `transfer` does not make that call
+  from the ERC-20 layer — traced on a fork — but it still routes through
+  `0x1800…0000`, whose code nobody outside Arc can read. What a blocklist does
+  or does not cover is therefore not something this repository can assert.
 
 So the test replaces the token and keeps the bridge: `ArcUsdcStub` is etched
 over USDC, while MessageTransmitterV2 and TokenMessengerV2 stay real. Arc's own
