@@ -1,8 +1,11 @@
 "use client";
 
+import { commitmentOf, deriveNote, poolState, type OwnedDeposit } from "@arcveil/bridge";
 import { useEffect, useRef, useState } from "react";
+
 import { FigureLabel } from "@/components/ui/FigureLabel";
 import { PROVING_COPY } from "@/data/bridge";
+import { planSpend } from "@/lib/spend";
 import { shortField } from "@/lib/veil";
 import type { ProverMessage, ProverRequest } from "./prover.worker";
 
@@ -10,10 +13,10 @@ import type { ProverMessage, ProverRequest } from "./prover.worker";
  * Builds a real withdrawal proof in the browser, against the real ceremony key.
  *
  * The pool it proves against is a demonstration — nothing is deployed, so
- * there is no live tree — and the panel says so. What is not a demonstration:
- * the circuit, the 17 MB proving key from the Privacy Pools trusted setup, the
- * context binding, and the time it takes. A proof produced by this same code
- * path is checked against the deployed verifier in
+ * there is no live tree — and the panel says so under the result. What is not
+ * a demonstration: the circuit, the 17 MB proving key from the Privacy Pools
+ * trusted setup, the context binding, the code path, and the time it takes. A
+ * proof from this same path is checked against the deployed verifier in
  * `contracts/test/WithdrawalProof.t.sol`.
  */
 
@@ -27,6 +30,43 @@ const SIGNAL_NAMES = [
   "ASPTreeDepth",
   "context",
 ] as const;
+
+/** A four-deposit pool with one of them ours, built the same way a real one is read. */
+function demoPlan() {
+  const seed = `0x${"ab".repeat(65)}` as const;
+  const note = deriveNote(seed, 0);
+  const label = 0x3333333333333333n;
+  const value = 25_000_000n;
+  const commitment = commitmentOf(value, label, note.precommitment);
+
+  const deposits = [
+    { commitment: 111n, label: 10n, value: 1n, precommitment: 1n, blockNumber: 1n, logIndex: 0 },
+    { commitment, label, value, precommitment: note.precommitment, blockNumber: 2n, logIndex: 0 },
+    { commitment: 222n, label: 20n, value: 1n, precommitment: 2n, blockNumber: 3n, logIndex: 0 },
+    { commitment: 333n, label: 30n, value: 1n, precommitment: 3n, blockNumber: 4n, logIndex: 0 },
+  ];
+
+  const state = poolState(
+    deposits,
+    deposits.map((deposit, index) => ({ index: BigInt(index + 1), leaf: deposit.commitment })),
+  );
+  const owned: OwnedDeposit = { note, deposit: state.deposits[1]! };
+
+  return planSpend(
+    state,
+    owned,
+    10_000_000n,
+    {
+      entrypoint: "0x00000000000000000000000000000000000000c3",
+      recipient: "0x00000000000000000000000000000000000000A1",
+      feeRecipient: "0x00000000000000000000000000000000000000b2",
+      relayFeeBPS: 25n,
+      scope: 777n,
+    },
+    seed,
+    1,
+  );
+}
 
 type State =
   | { kind: "idle" }
@@ -55,24 +95,15 @@ export function ProvePanel() {
         setState({ kind: "working", stage: message.stage, loaded: message.loaded, total: message.total });
         return;
       }
-      if (message.kind === "done") {
-        setState({ kind: "done", signals: message.signals, ms: message.ms });
-      } else {
-        setState({ kind: "error", message: message.message });
-      }
-      // snarkjs leaves threads running; terminating is the only way to reclaim them.
+      if (message.kind === "done") setState({ kind: "done", signals: message.proof.pubSignals, ms: message.ms });
+      else setState({ kind: "error", message: message.message });
+
+      // snarkjs leaves threads running; terminating is the only way back.
       created.terminate();
       worker.current = null;
     });
 
-    const request: ProverRequest = {
-      seed: `0x${"ab".repeat(65)}`,
-      existingValue: "25000000",
-      withdrawnValue: "10000000",
-      recipient: "0x00000000000000000000000000000000000000A1",
-      entrypoint: "0x00000000000000000000000000000000000000c3",
-      scope: "777",
-    };
+    const request: ProverRequest = { payload: demoPlan().payload };
     created.postMessage(request);
   };
 

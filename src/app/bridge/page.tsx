@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 
-import { DepositPanel } from "@/components/bridge/DepositPanel";
+import { BridgeApp } from "@/components/bridge/BridgeApp";
 import { Ledger } from "@/components/bridge/Ledger";
-import { NotDeployed } from "@/components/bridge/NotDeployed";
 import { BridgeProviders } from "@/components/bridge/Providers";
-import { ProvePanel } from "@/components/bridge/ProvePanel";
 import { Steps } from "@/components/bridge/Steps";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BRIDGE_COPY } from "@/data/bridge";
@@ -29,15 +27,7 @@ export default function BridgePage() {
         <Steps />
 
         <BridgeProviders>
-          <div className="grid grid-cols-1 border-t border-border lg:grid-cols-3">
-            <div className="border-b border-border lg:border-r lg:border-b-0">
-              <DepositPanel />
-            </div>
-            <div className="border-b border-border lg:border-r lg:border-b-0">
-              <NotDeployed />
-            </div>
-            <ProvePanel />
-          </div>
+          <BridgeApp />
         </BridgeProviders>
 
         <Ledger />

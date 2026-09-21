@@ -41,5 +41,15 @@ export const WithdrawRequestSchema = z
 
 export type WithdrawRequest = z.infer<typeof WithdrawRequestSchema>;
 
+const hex = z
+  .string()
+  .regex(/^0x[0-9a-fA-F]+$/, "expected hex")
+  .transform((v) => v as `0x${string}`);
+
+/** A CCTP message and Circle's signature over it, exactly as Iris returned them. */
+export const DeliverRequestSchema = z.object({ message: hex, attestation: hex }).strict();
+
+export type DeliverRequest = z.infer<typeof DeliverRequestSchema>;
+
 export const issues = (error: z.ZodError): string =>
   error.issues.map((issue) => `${issue.path.join(".") || "body"}: ${issue.message}`).join("; ");

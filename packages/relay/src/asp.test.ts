@@ -7,14 +7,25 @@ import { digestOf, publishRoot, readLabels, type AspState } from "./asp";
 const ENTRYPOINT = "0x00000000000000000000000000000000000000c3" as Address;
 const POOL = "0x00000000000000000000000000000000000000d4" as Address;
 
-const logsClient = (logs: readonly unknown[]): PublicClient =>
-  ({ getLogs: async () => logs }) as unknown as PublicClient;
+/**
+ * A node that answers the two log queries `readPoolState` makes. Deposits
+ * carry labels; LeafInserted carries the tree's own index, and the reader
+ * refuses a set with a hole in it.
+ */
+const poolClient = (deposits: readonly unknown[], leaves: readonly unknown[]): PublicClient =>
+  ({
+    getBlockNumber: async () => 100n,
+    getLogs: async ({ event }: { event: { name: string } }) =>
+      event.name === "Deposited" ? deposits : leaves,
+  }) as unknown as PublicClient;
 
 const log = (blockNumber: bigint, logIndex: number, label: bigint) => ({
   blockNumber,
   logIndex,
-  args: { _label: label },
+  args: { _commitment: label * 10n, _label: label, _value: 1n, _precommitmentHash: label },
 });
+
+const leafLog = (index: number, leaf: bigint) => ({ args: { _index: BigInt(index), _leaf: leaf } });
 
 describe("the association set's digest", () => {
   it("fits the contract's 32-to-64 character window", () => {
@@ -41,18 +52,23 @@ describe("the association set's digest", () => {
 describe("reading labels", () => {
   it("puts them in chain order, which is the only order that gives the right root", async () => {
     const shuffled = [log(11n, 0, 300n), log(10n, 2, 200n), log(10n, 1, 100n)];
-    const labels = await readLabels(logsClient(shuffled), POOL, 0n);
+    const leaves = [leafLog(1, 1000n), leafLog(2, 2000n), leafLog(3, 3000n)];
 
-    expect(labels).toEqual([100n, 200n, 300n]);
+    expect(await readLabels(poolClient(shuffled, leaves), POOL, 0n)).toEqual([100n, 200n, 300n]);
   });
 
   it("gives an empty set for a pool with no deposits", async () => {
-    expect(await readLabels(logsClient([]), POOL, 0n)).toEqual([]);
+    expect(await readLabels(poolClient([], []), POOL, 0n)).toEqual([]);
   });
 
   it("agrees with the tree the circuit proves against", async () => {
-    const labels = await readLabels(logsClient([log(1n, 0, 5n), log(2n, 0, 6n)]), POOL, 0n);
+    const labels = await readLabels(poolClient([log(1n, 0, 5n), log(2n, 0, 6n)], [leafLog(1, 50n), leafLog(2, 60n)]), POOL, 0n);
     expect(rootOf(labels)).toBe(rootOf([5n, 6n]));
+  });
+
+  it("refuses a pool whose leaves arrived with a gap, rather than publishing a root nobody holds", async () => {
+    const client = poolClient([log(1n, 0, 5n)], [leafLog(1, 50n), leafLog(3, 70n)]);
+    await expect(readLabels(client, POOL, 0n)).rejects.toThrow(/not contiguous/);
   });
 });
 

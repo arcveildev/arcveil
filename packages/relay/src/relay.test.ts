@@ -12,6 +12,7 @@ const FEE_RECIPIENT = "0x00000000000000000000000000000000000000b2" as const;
 const config: Config = {
   rpc: "https://rpc.mainnet.arc.io",
   entrypoint: ENTRYPOINT,
+  gateway: "0x00000000000000000000000000000000000060A7",
   scope: 777n,
   key: `0x${"11".repeat(32)}`,
   minFeeBps: 25n,

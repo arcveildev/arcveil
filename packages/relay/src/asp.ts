@@ -1,4 +1,4 @@
-import { ENTRYPOINT_ABI, POOL_ABI, rootOf } from "@arcveil/bridge";
+import { ENTRYPOINT_ABI, readPoolState, rootOf } from "@arcveil/bridge";
 import { keccak256, stringToHex, type Address, type PublicClient, type WalletClient } from "viem";
 
 /**
@@ -41,30 +41,17 @@ export const digestOf = (labels: readonly bigint[]): string =>
 
 /**
  * Reads every label the pool has ever issued, in the only order that produces
- * the right root: the order the chain emitted them.
+ * the right root.
+ *
+ * The ordering lives in `@arcveil/bridge` and is shared with the browser. Two
+ * implementations of it would eventually disagree, and the disagreement would
+ * surface as a withdrawal proof nobody accepts — with no clue as to why.
  */
 export const readLabels = async (
   publicClient: PublicClient,
   pool: Address,
   fromBlock: bigint,
-): Promise<readonly bigint[]> => {
-  const logs = await publicClient.getLogs({
-    address: pool,
-    event: POOL_ABI[0],
-    fromBlock,
-    toBlock: "latest",
-  });
-
-  return logs
-    .slice()
-    .sort((a, b) =>
-      a.blockNumber === b.blockNumber
-        ? (a.logIndex ?? 0) - (b.logIndex ?? 0)
-        : Number((a.blockNumber ?? 0n) - (b.blockNumber ?? 0n)),
-    )
-    .map((log) => (log.args as { _label?: bigint })._label)
-    .filter((label): label is bigint => label !== undefined);
-};
+): Promise<readonly bigint[]> => (await readPoolState(publicClient, pool, { fromBlock })).labels;
 
 export const readState = async (
   publicClient: PublicClient,

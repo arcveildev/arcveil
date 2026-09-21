@@ -94,6 +94,24 @@ export {
   type WithdrawInputs,
 } from "./prove";
 
+export {
+  findOwned,
+  isSpendable,
+  nextNoteIndex,
+  orderedLabels,
+  orderedLeaves,
+  poolState,
+  TreeGapError,
+  witnessesFor,
+  type DepositLog,
+  type LeafLog,
+  type OwnedDeposit,
+  type PoolState,
+  type Witnesses,
+} from "./scan";
+
+export { readPoolState, type ReadOptions } from "./reader";
+
 export { ENTRYPOINT_ABI, POOL_ABI } from "./pool";
 
 export { VEIL_GATEWAY_ABI } from "./gateway";
