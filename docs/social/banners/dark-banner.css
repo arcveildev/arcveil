@@ -7,7 +7,10 @@
    is a one-line fix rather than a re-render. */
 
 :root{
-  --surface:#0e0e0e;    /* the site's canvas, not pure black */
+  /* The site's canvas is #0e0e0e. This series uses pure black instead, because
+     the plates are rendered on #000 and any other value leaves a visible
+     vertical seam where the scrim meets the render. Matching the image wins. */
+  --surface:#000000;
   --fg:#ffffff;
   --muted:rgba(255,255,255,.50);
   --subtle:rgba(255,255,255,.30);
@@ -19,7 +22,15 @@
 *{box-sizing:border-box;margin:0}
 html,body{width:1920px;height:1080px;overflow:hidden}
 body{background:var(--surface);color:var(--fg);position:relative;
+     background-position:center;background-size:cover;background-repeat:no-repeat;
      font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* The plates are rendered with their subject in the right third and the left
+   two thirds empty, so this only insures against a render creeping left. It is
+   not doing the work of making the type legible; the composition is. */
+body::before{content:"";position:absolute;inset:0;pointer-events:none;
+     background:linear-gradient(to right, rgba(0,0,0,.92) 0%, rgba(0,0,0,.60) 38%, rgba(0,0,0,0) 64%)}
+body>*{position:relative}
 
 /* ---- left column ------------------------------------------------------- */
 .eyebrow{position:absolute;left:96px;top:92px;display:flex;align-items:center;gap:16px;
@@ -48,6 +59,19 @@ h1.small{font-size:92px}
         font-family:"DM Mono",monospace;font-size:21px;letter-spacing:.06em;text-transform:uppercase}
 .traced i{font-style:normal;color:var(--subtle)}
 .traced b{font-weight:400;color:var(--fg)}
+
+/* ---- the ledger, in the left column ------------------------------------ */
+/* The render carries the mood; the addresses have to be readable, so they live
+   in the type column rather than fighting the image for the right third. */
+.ledger{position:absolute;left:96px;width:880px;border-top:1px solid var(--line)}
+.ledger .row{display:grid;grid-template-columns:260px 1fr 190px;align-items:baseline;gap:24px;
+             padding:20px 0;border-bottom:1px solid var(--line)}
+.ledger .a{font-family:"DM Mono",monospace;font-size:27px;letter-spacing:.01em}
+.ledger .w{font-size:22px;color:var(--muted)}
+.ledger .s{font-family:"DM Mono",monospace;font-size:18px;letter-spacing:.12em;text-transform:uppercase;
+           color:var(--subtle);justify-self:end}
+.ledger .row.lit .a{color:var(--accent)}
+.ledger .row.lit .s{color:var(--accent)}
 
 /* ---- right side -------------------------------------------------------- */
 /* One bright thing on a black field. The green is the only lit surface in the

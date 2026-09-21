@@ -6,30 +6,18 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="dark-banner.css">
 <style>
-  .sub{top:560px}
-  .stage .glow{width:520px;height:520px;right:-140px;top:120px;opacity:.16}
-  .err{position:absolute;right:110px;top:300px;width:600px;border:1px solid var(--line);background:#141414;padding:34px 36px}
-  .err .k{font-family:"DM Mono",monospace;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:var(--subtle)}
-  .err .v{font-family:"DM Mono",monospace;font-size:46px;color:var(--amber);margin-top:14px;letter-spacing:-.01em}
-  .err .h{height:1px;background:var(--line);margin:28px -36px}
-  .err .l{font-family:"DM Mono",monospace;font-size:21px;line-height:1.6;color:var(--muted)}
-  .err .l em{font-style:normal;color:var(--fg)}
+  body{background-image:url("plate-dark-v3.png")}
+  h1{width:980px;font-size:104px}
+  .sub{top:580px;font-size:28px}
+  .note{bottom:300px}
+  .note em{font-style:normal;color:var(--amber)}
 </style>
 </head>
 <body>
   <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Chain note</span></div>
-  <h1 class="small">Two precompiles.<br><em>No bytecode.</em></h1>
+  <h1>Two precompiles.<br><em>No bytecode.</em></h1>
   <div class="sub"><span>0x1800…0000</span><b>·</b><span>0x1800…0001</span></div>
-  <div class="note">Fork Arc and both answer with nothing to run.<br>What they do inside is not something anyone outside can check.</div>
-  <div class="stage">
-    <div class="glow"></div>
-    <div class="err">
-      <div class="k">eth_call on a fork</div>
-      <div class="v">OpcodeNotFound</div>
-      <div class="h"></div>
-      <div class="l">There is no code to fetch, so a fork has nothing to execute — and <em>no one outside Arc can read what they do</em>.</div>
-    </div>
-  </div>
+  <div class="note">Fork Arc and both answer <em>OpcodeNotFound</em> — there is nothing<br>to execute, and nothing anyone outside Arc can read.</div>
   <div class="lockup"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Arcveil</span></div>
   <div class="traced"><i>Traced on</i><b>Arc mainnet · block 21,800,000</b></div>
 </body>
