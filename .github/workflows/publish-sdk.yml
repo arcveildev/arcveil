@@ -1,0 +1,48 @@
+# Publishes @arcveil/sdk from a tag, with npm provenance.
+#
+# Provenance is the reason this runs in CI rather than from a laptop: npm
+# records a signed attestation binding the published tarball to this workflow,
+# this repository and the exact commit. For a package whose whole claim is that
+# you can check it yourself rather than trust us, an unverifiable tarball would
+# be the wrong artifact to ship.
+#
+# Release: git tag sdk-v0.1.0 && git push origin sdk-v0.1.0
+name: Publish SDK
+
+on:
+  push:
+    tags: ["sdk-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  # Required for provenance: lets npm mint the attestation for this run.
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      # The gates the repository already keeps. A package that fails its own
+      # test suite must not reach the registry, where the version is permanent.
+      - run: pnpm --filter @arcveil/sdk typecheck
+      - run: pnpm --filter @arcveil/sdk test
+      - run: pnpm --filter @arcveil/sdk build
+
+      - run: npm publish --provenance --access public
+        working-directory: packages/sdk
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
