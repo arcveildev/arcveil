@@ -43,6 +43,8 @@ pastel series, kept for reference.
 > outside.
 >
 > Found by tracing a transfer on a fork at block 21,800,000.
+>
+> arcveil.dev
 
 ---
 
@@ -61,6 +63,8 @@ be useful to somebody at the moment they read it.
 > never sees it happen, and neither does your test.
 >
 > Traced on a fork of Arc mainnet at block 21,800,000.
+>
+> arcveil.dev
 
 ---
 
@@ -75,6 +79,8 @@ Same finding, aimed at people who are about to lose an afternoon.
 >
 > The fix is not to mock the chain. Replace the token, keep Circle's CCTP
 > contracts, and say in the test what that no longer covers.
+>
+> arcveil.dev
 
 ---
 
@@ -89,7 +95,7 @@ reading has just seen launch, and the contrast is the whole argument.
 > Circle's USDC Bridge publishes every part of a crossing: who sent it, how
 > much, and where it landed.
 >
-> We built one that doesn't.
+> Arcveil built one that doesn't.
 >
 > A CCTP burn on Ethereum, Base, Arbitrum, OP or Polygon becomes one shielded
 > deposit on Arc. The deposit is public. Every withdrawal is public. Which
@@ -97,6 +103,8 @@ reading has just seen launch, and the contrast is the whole argument.
 >
 > Built and tested against Circle's live CCTP contracts on a fork of Arc
 > mainnet. Not deployed, and no date.
+>
+> arcveil.dev
 
 ### Short version
 
@@ -104,15 +112,18 @@ If it has to fit 280 characters.
 
 > Circle's USDC Bridge publishes who sent it, how much, and where it landed.
 >
-> We built one that doesn't. One CCTP burn in, one shielded deposit on Arc.
-> The deposit is public. The withdrawal is public. The link is not.
+> Arcveil built one that doesn't. One CCTP burn in, one shielded deposit on
+> Arc. The deposit is public. The withdrawal is public. The link is not.
 >
-> Built and tested. Not deployed.
+> Built and tested. Not deployed. arcveil.dev
 
 ### Do not
 
-- Link to `arcveil.dev/bridge`. It exists and it says nothing is deployed;
-  that is the right page and the wrong moment.
+- Link to `arcveil.dev/bridge`. It exists and it correctly reports that
+  nothing is deployed, which is the right page at the wrong moment. Close on
+  `arcveil.dev` instead — every post above does, the way the gate posts close
+  on `arcveil.dev/gate`. A post that never names the product is one nobody can
+  attribute after it is screenshotted.
 - Say it hides a transaction. It hides which deposit paid which withdrawal,
   and nothing else. Every version above is written to make that impossible to
   misread, and a reply that softens it undoes the banner.
@@ -154,7 +165,7 @@ For the people who will ask how it works rather than what it claims.
 > Getting into a shielded pool usually takes two transactions: bridge in, then
 > deposit.
 >
-> This is one. The CCTP burn names our gateway on Arc as both the payee and
+> Arcveil's is one. The CCTP burn names the gateway on Arc as both the payee and
 > the only address permitted to deliver the message, and carries the deposit's
 > commitment in the hook. The gateway mints and deposits in the same
 > transaction.
@@ -164,6 +175,8 @@ For the people who will ask how it works rather than what it claims.
 > the burn named rather than nowhere.
 >
 > Built and tested against Circle's live CCTP contracts. Not deployed.
+>
+> arcveil.dev
 
 ---
 
@@ -173,7 +186,7 @@ The one to post if the announcement draws a sceptic, and the one worth posting
 even if it does not.
 
 > "Private" is doing a lot of work in most announcements. Here is all of it
-> this one is doing.
+> Arcveil's bridge is doing.
 >
 > Not the ledger: every deposit and every withdrawal sits on Arc, in public,
 > permanently.
@@ -186,6 +199,8 @@ even if it does not.
 > pool alongside yours — nothing at all, when that number is one.
 >
 > Coming. Not deployed.
+>
+> arcveil.dev
 
 ---
 
@@ -200,8 +215,10 @@ The most on-brand of the four, and the least likely to be misread.
 > Private: which deposit funded which withdrawal.
 > Seen by one party: the recipient and your IP, by whichever relayer you pick.
 >
-> That is one line of privacy and six of exposure, and the page says so in that
-> order.
+> That is one line of privacy and six of exposure, and the page says so in
+> that order.
+>
+> arcveil.dev
 
 ---
 
