@@ -113,8 +113,8 @@ action" or anything shaped like that. Live is true. Guarding is not, yet.
 > calibrated probability. Our code holds the number it has to clear, and the
 > model is never told what that number is.
 >
-> Measured on 500 labelled proposals, 161 held out: 0 of 102 attacks got
-> through. 5 of 59 honest proposals were refused.
+> Built from 500 labelled proposals, 495 scored, 161 held out: 0 of 102
+> attacks got through. 5 of 59 honest proposals were refused.
 >
 > gate.arcveil.dev
 
