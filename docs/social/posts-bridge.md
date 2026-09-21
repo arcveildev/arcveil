@@ -27,12 +27,16 @@ Occasion: @arc's post of 2026-09-19 launching USDC Bridge.
 
 The strongest one, and it costs nothing to claim: anyone can check it.
 
+Banners: `banners/dark-precompile-v1.png` (the three addresses),
+`v2.png` (the decimals), `v3.png` (the opacity). One post, pick one.
+
 > Arc's USDC is not an ERC-20 with a balance mapping.
 >
-> The token at 0x3600…0000 is a 6-decimal view over the chain's 18-decimal
-> native balance. `transfer` hands off to a precompile at 0x1800…0000, scaled
-> by 1e12. The mint path calls another one, 0x1800…0001, with
-> `isBlocklisted`.
+> The token at 0x3600…0000 holds no balances. It is a 6-decimal view over the
+> chain's 18-decimal native balance: `transfer` hands off to a precompile at
+> 0x1800…0000, scaled by 1e12. Read one as the other and you are out by a
+> trillion, silently. The mint path calls a second precompile, 0x1800…0001,
+> with `isBlocklisted`.
 >
 > Neither is EVM code, so neither can be forked, read, or reasoned about from
 > outside.

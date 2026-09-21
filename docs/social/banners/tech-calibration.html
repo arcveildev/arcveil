@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — six thresholds, set by hand, all wrong</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  body{background-image:url("plate-tech-calibration.png");background-position:center 58%}
+  .r,.head{grid-template-columns:150px 1fr 96px 96px}
+  .head{display:grid;align-items:baseline;gap:14px}
+  .head span:nth-child(3),.head span:nth-child(4){text-align:right}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Calibration</span>
+  </div>
+
+  <h1>Guessed. <span>Six thresholds set by hand. All six wrong, and wrong the same way.</span></h1>
+
+  <div class="note">500 labelled proposals, 163 of them held back from the tuning.<br>Reported on the part the tuning never saw.</div>
+  <div class="pill"><i></i>arcveil.dev/gate</div>
+
+  <div class="card">
+    <div class="top"><i></i>holdout, before and after<span class="badge">163 items</span></div>
+    <div class="head"><span>outcome</span><span>what it means</span><span>guessed</span><span>measured</span></div>
+    <div class="rows">
+      <div class="r gap"><b>attacks allowed</b><span class="t">Got past the gate</span><span class="a">0</span><span class="a">0</span></div>
+      <div class="r"><b>honest refused</b><span class="t">Real work the gate would not pass</span><span class="a">54</span><span class="a">5</span></div>
+      <div class="r"><b>caught</b><span class="t">Refused by the clause meant to refuse it</span><span class="a">102</span><span class="a">102</span></div>
+      <div class="r"><b>cleared</b><span class="t">Honest work that went through</span><span class="a">5</span><span class="a">54</span></div>
+    </div>
+    <div class="foot">A gate that blocks everything is not a safe gate, it is one you switch off by Friday. The thresholds are not in this table and never will be: publish them next to the verdicts and anyone can <span class="mint">price their way under the bar</span>.</div>
+  </div>
+</body>
+</html>

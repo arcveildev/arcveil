@@ -293,9 +293,9 @@ finding:
 
 | File | Hook | Plate | Higgsfield job |
 |---|---|---|---|
-| `dark-precompile-v1.png` | Arc's USDC is a view, not a ledger | Three slabs in perspective; the near one glass, lit green from within, the two behind it matte and unlit | `611f3c3e-cc26-4b17-a793-08870c3dbb48` |
-| `dark-precompile-v2.png` | Mix the decimals and you are out by a million | A watch-part disc in sharp focus dwarfed by an enormous unlit one | `5b77fc14-29b6-4e8b-94e0-674893cc5804` |
-| `dark-precompile-v3.png` | Two precompiles. No bytecode. | A sealed matte cube, no seams, one amber corner | `57257830-fbfe-433c-9b89-f5a3412e271f` |
+| `dark-precompile-v1.png` | Arc's USDC doesn't hold your balance | Three slabs in perspective; the near one glass, lit green from within, the two behind it matte and unlit | `611f3c3e-cc26-4b17-a793-08870c3dbb48` |
+| `dark-precompile-v2.png` | Off by a trillion. Nothing throws. | A watch-part disc in sharp focus dwarfed by an enormous unlit one | `5b77fc14-29b6-4e8b-94e0-674893cc5804` |
+| `dark-precompile-v3.png` | You can't fork what isn't code | A sealed matte cube, no seams, one amber corner | `57257830-fbfe-433c-9b89-f5a3412e271f` |
 
 All three: `gpt_image_2_5`, 16:9, and every prompt ends "no text anywhere, no
 letters, no numbers, no symbols, no logos" — every word on the banner is HTML,
@@ -322,6 +322,11 @@ Conventions this series keeps:
   project where the surface token is not the site's.
 - **Addresses live in the type column**, never over the render. The image
   carries the mood; a contract address has to be readable.
+- **The headline names a consequence, not a fact.** The first cut said "Arc's
+  USDC is a view, not a ledger" and "Two precompiles. No bytecode." — both
+  true, neither a reason to stop scrolling. What replaced them says what it
+  costs the reader: the token does not hold the balance, an error of 10^12
+  throws nothing, and a fork cannot run what has no code.
 
 ## The precompile banner (2026-09-21)
 

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — six thresholds, all six wrong</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="dark-banner.css">
+<style>
+  .sub{top:566px}
+  .stage .glow{width:520px;height:520px;right:-140px;top:260px}
+  .plate{width:470px;left:150px}
+  .p1{top:206px;height:186px}
+  .p2{top:428px;height:186px}
+  .p3{top:650px;height:186px}
+  /* The one number that must not move gets the green. The one that did move
+     gets the amber the series already uses for opacity rather than failure. */
+  .plate.moved{border-color:var(--amber)}
+  .plate.moved .addr{color:var(--amber)}
+  .plate.moved .what{color:rgba(232,176,75,.65)}
+</style>
+</head>
+<body>
+  <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Calibration</span></div>
+  <h1 class="small">Caught every attack. <em>And almost everything else.</em></h1>
+  <div class="sub"><span>500 labelled proposals</span><b>·</b><span>161 held out</span></div>
+  <div class="note">A gate that blocks everything is not a safe gate.<br>It is one you switch off by Friday.</div>
+  <div class="stage">
+    <div class="glow"></div>
+    <div class="plate lit p1"><div class="addr">0</div><div class="what">attacks through · of 102</div></div>
+    <div class="plate moved p2"><div class="addr">54 → 5</div><div class="what">honest refused · of 59</div></div>
+    <div class="plate p3"><div class="addr">1 clause</div><div class="what">all five refusals · one question</div></div>
+  </div>
+  <div class="lockup"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Arcveil</span></div>
+  <div class="traced"><i>Measured on</i><b>495 of 500 · reported on the holdout</b></div>
+</body>
+</html>

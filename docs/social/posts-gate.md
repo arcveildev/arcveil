@@ -4,10 +4,9 @@ Posts for the `typesafe/jev` integration. House rules carried over from the
 launch, pipeline and tech rounds: short declarative lines, no hashtags, no
 emoji, and nothing in the present tense that is not shipped.
 
-**Not live yet.** The gate Worker and `/gate` are committed but not deployed,
-so no post here links to `arcveil.dev/gate`. Swap the closing line for that URL
-once the deploy lands; until then the posts close on the repo claim or on
-nothing at all. Do not post 01 or 02 with a link that 404s.
+**Live since 2026-09-21.** The gate answers at `gate.arcveil.dev` and the page
+is at `arcveil.dev/gate`, so posts 01–04 close on that URL now. The earlier
+"not deployed yet" lines are gone.
 
 Sources: `docs/JUDGE.md`, `packages/sdk/src/judge.ts`,
 `packages/sdk/src/selection.ts`, `packages/gate/`.
@@ -28,7 +27,7 @@ their x402 client, for tool selection and for payment guardrails.
 > Jev answers with a calibrated probability. Code owns the threshold. The
 > receipt carries the name of the check and nothing else.
 >
-> Built and tested against Cloudflare's typesafe/jev. Not deployed yet.
+> arcveil.dev/gate
 
 ---
 
@@ -45,7 +44,7 @@ Stronger hook, same build. Use this one if only one post goes out.
 > That is why the judgement clauses in an Arcveil mandate go to Jev and not to
 > a chat model.
 >
-> Built and tested. Not deployed yet.
+> arcveil.dev/gate
 
 ---
 
@@ -83,3 +82,95 @@ the rest is believable.
 01 → 03 → 04, with 02 held back as its own post a few days later. Leading with
 the injection line and following with the threshold line reads as one idea told
 twice; splitting them gives each a week.
+
+
+---
+
+# The calibration round (2026-09-21)
+
+Drafted before the numbers landed, with the numbers left in brackets on
+purpose — so the copy could be judged on whether it is worth reading rather
+than on whether the result flattered us. Fill from the holdout column of
+`docs/gate-benchmark/results.json`. Do not post any bracket unfilled.
+
+**What must never appear in these posts:** a threshold, a probability, a clean
+floor or an attack ceiling. The corpus is public and the verdicts are public;
+the numbers the verdicts were measured against are the mandate, and a pair of
+brackets around a threshold is the same leak as printing it. If a draft below
+seems to want one, the draft is wrong.
+
+---
+
+## 05 · Main — the number that does not flatter
+
+> I set six thresholds by hand. All six were wrong, and wrong in the same
+> direction.
+>
+> Against 500 labelled proposals, the gate refused [N] of [M] attacks — and
+> also refused [N] of [M] honest ones. A gate that blocks everything is not a
+> safe gate. It is a gate you switch off by Friday.
+>
+> Measured, not guessed, the honest refusals fell to [N]. Attacks let through:
+> [N].
+>
+> Reported on 163 items the tuning never saw. Corpus and verdicts:
+> arcveil.dev/gate
+
+---
+
+## 06 · The method one
+
+> Most agent-safety numbers you read have no answer key.
+>
+> 500 proposals, each labelled with the verdict it should get and the clause
+> that should produce it. Without that you can report how much a gate blocked
+> and never whether it blocked the right things — and the number that matters
+> most, an attack that got through, is invisible.
+>
+> Thirty percent held out, so the headline is not measured on what the
+> thresholds were fitted to.
+>
+> The corpus is ours and synthetic, so a good score is evidence about this
+> corpus and not a claim about the wild. It is published anyway.
+>
+> arcveil.dev/gate
+
+---
+
+## 07 · What is published and what is not
+
+> We published the corpus. We published every verdict. We did not publish the
+> thresholds, and we will not.
+>
+> The whole point of a mandate is a bar nobody outside can read. Publish the
+> numbers beside the verdicts and anyone can solve for it, then price their
+> way under it.
+>
+> So the benchmark is fully inspectable and the thing it measures against
+> stays sealed. If that sounds like having it both ways, check the commitment
+> in the repo: the clause set is hashed, and the hash is public.
+
+---
+
+## 08 · The bug that was not in the gate
+
+> The first run said one of our clean proposals was only 0.69 fine. My
+> instinct was that the question was badly worded.
+>
+> It was not. The corpus was. It paired an intent with an instruction drawn
+> from a separate list, so "hold the current allocation" landed next to "swap
+> 30% of the A position" — and I had labelled that *clean* without hesitating.
+> The judge hesitated. The judge was right.
+>
+> An answer key you have not checked is not ground truth, it is a second
+> opinion you already agree with.
+
+---
+
+## Which to post
+
+05 leads, because the number that does not flatter is the one nobody else
+posts. 06 a few days later for the people who ask how it was measured. 07 only
+if someone asks why the thresholds are not in the repo — it is an answer, not
+an announcement. 08 is the best of them and the least strategic; post it if
+the account can afford to be interesting rather than impressive.
