@@ -7,6 +7,13 @@
       "runtimeArgs": ["dev"],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "arcveil-gate",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@arcveil/gate", "dev", "--port", "8787"],
+      "port": 8787,
+      "autoPort": false
     }
   ]
 }

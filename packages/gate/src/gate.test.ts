@@ -238,3 +238,44 @@ describe("the edges of the service", () => {
     expect((await worker.fetch(get("/clauses"), env())).status).toBe(404);
   });
 });
+
+describe("POST /calibrate", () => {
+  const state = { state: "a proposed swap" };
+
+  it("does not exist unless an operator turned it on", async () => {
+    const response = await worker.fetch(post("/calibrate", state), env());
+    expect(response.status).toBe(404);
+  });
+
+  it("buys no inference when it does not exist", async () => {
+    const calls: Call[] = [];
+    await worker.fetch(post("/calibrate", state), env({ AI: judge(clean, calls) }));
+    expect(calls).toHaveLength(0);
+  });
+
+  it("is still behind the bearer check when it does exist", async () => {
+    const on = env({ GATE_CALIBRATION: "1" });
+    const request = new Request("https://gate.arcveil.dev/calibrate", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(state),
+    });
+    expect((await worker.fetch(request, on)).status).toBe(401);
+  });
+
+  it("returns the numbers a threshold is set against", async () => {
+    const response = await worker.fetch(post("/calibrate", state), env({ GATE_CALIBRATION: "1" }));
+    const body = (await response.json()) as {
+      allow: boolean;
+      judgement: { answers: Record<string, { type: string; noul?: number }> };
+    };
+    expect(body.allow).toBe(true);
+    expect(body.judgement.answers.no_injection).toEqual({ type: "noul", noul: 0.02 });
+  });
+
+  it("leaves /evaluate carrying no numbers even while calibration is on", async () => {
+    const text = await (await worker.fetch(post("/evaluate", state), env({ GATE_CALIBRATION: "1" }))).text();
+    expect(text).not.toContain("judgement");
+    expect(text).not.toContain("0.02");
+  });
+});
