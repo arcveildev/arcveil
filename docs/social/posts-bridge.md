@@ -59,25 +59,72 @@ Same finding, aimed at people who are about to lose an afternoon.
 
 ---
 
-## 03 · The bridge — built, not deployed
+## 03 · The announcement — chosen
 
-Only after 01 or 02. Do not post with a link until the deploy lands.
+Banner: `banners/soon-bridge-v1.png` — the arch, `<LogoMark>` made physical.
 
-Banners: `banners/soon-bridge-v1.png` (the arch — the pick), `v2.png` (the
-crossing), `v3.png` (the parted link).
+The banner already carries the headline, so the post does not repeat it. It
+opens on what Circle's own bridge does, because that is the thing everyone
+reading has just seen launch, and the contrast is the whole argument.
 
-> Circle's USDC Bridge publishes every part of a crossing: sender, amount,
-> destination.
+> Circle's USDC Bridge publishes every part of a crossing: who sent it, how
+> much, and where it landed.
 >
-> We built one that doesn't. A CCTP burn names a gateway on Arc as both payee
-> and sole deliverer, carrying the deposit's commitment in the hook. It mints
-> and deposits into a Privacy Pool in one transaction.
+> We built one that doesn't.
 >
-> The deposit is still public. Every withdrawal is still public. What is hidden
-> is which deposit paid which withdrawal.
+> A CCTP burn on Ethereum, Base, Arbitrum, OP or Polygon becomes one shielded
+> deposit on Arc. The deposit is public. Every withdrawal is public. Which
+> deposit paid which withdrawal is not.
 >
 > Built and tested against Circle's live CCTP contracts on a fork of Arc
-> mainnet. Not deployed.
+> mainnet. Not deployed, and no date.
+
+### Short version
+
+If it has to fit 280 characters.
+
+> Circle's USDC Bridge publishes who sent it, how much, and where it landed.
+>
+> We built one that doesn't. One CCTP burn in, one shielded deposit on Arc.
+> The deposit is public. The withdrawal is public. The link is not.
+>
+> Built and tested. Not deployed.
+
+### Do not
+
+- Link to `arcveil.dev/bridge`. It exists and it says nothing is deployed;
+  that is the right page and the wrong moment.
+- Say it hides a transaction. It hides which deposit paid which withdrawal,
+  and nothing else. Every version above is written to make that impossible to
+  misread, and a reply that softens it undoes the banner.
+- Give a date. There is no deploy key in this repository and no date to give.
+
+### Replies to have ready
+
+Both of these are coming. Answering them in an hour reads as candour;
+answering them in a day reads as a comms cycle.
+
+**"So it's a mixer."**
+
+> In function, today, yes. The association set admits every label without
+> filtering, and the page says that in those words.
+>
+> The mechanism is Privacy Pools, unmodified, so the policy can be tightened
+> without redeploying anything. That is a future tense and we are not going to
+> write it as a present one.
+
+**"What's audited?"**
+
+> The pool contracts and the circuits are Privacy Pools by 0xbow, copied at
+> commit c312dcd5 and audited by Oxorio and Auditware. contracts/privacy has a
+> hash manifest and the steps to check that copy against upstream yourself.
+>
+> The gateway, the relayer and the ASP postman are ours and are audited by
+> nobody. That is why nothing is deployed.
+
+**"When?"**
+
+> No date. The deploy needs keys this repository does not hold.
 
 ---
 
