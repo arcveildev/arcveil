@@ -90,6 +90,6 @@ contracts/             Foundry project: MandateRegistry, AnchorRegistry
 
 ## History
 The repository started as a frontend clone of primeintellect.ai, used as design
-raw material (gone from `main`, still in the history up to `59e7357`), then ran
+raw material (gone from `main`, still in the history up to `e29f507`), then ran
 under the codename BLINDFOLD while the product was shaped. It became Arcveil,
 aimed at Arc, on 16 September 2026.
