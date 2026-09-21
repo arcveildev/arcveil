@@ -163,10 +163,12 @@ over USDC, while MessageTransmitterV2 and TokenMessengerV2 stay real. Arc's own
 blocklist is therefore *not* covered by any test here.
 
 ## Status
-62 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
+71 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
 one, 6 for anchors, 6 for the seeding script, 28 for the account, 11 for the
-veil gateway), `forge fmt` is clean and `forge build` reports no lint warnings.
-Runtime sizes are 1,195 B, 736 B and 4,673 B.
+veil gateway, and 9 that exist to pin the TypeScript side: Poseidon vectors,
+LeanIMT roots, the withdrawal context, and a real proof put in front of the
+deployed verifier). `forge fmt` is clean and `forge build` reports no lint
+warnings. Runtime sizes are 1,195 B, 736 B and 4,673 B.
 
 The frontend's hand-written ABI in `src/lib/receipt/abi.ts` was checked against
 the compiled artifacts: `mandateOf(address,uint64) -> ((bytes32,uint64,uint64))`
