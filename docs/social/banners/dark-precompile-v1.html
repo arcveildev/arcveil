@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — a view, not a ledger</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="dark-banner.css">
+<style>
+  .sub{top:512px}
+  .stage .glow{width:560px;height:560px;right:-120px;top:230px}
+  .plate{width:470px;left:150px}
+  .p1{top:206px;height:186px}
+  .p2{top:428px;height:186px}
+  .p3{top:650px;height:186px}
+</style>
+</head>
+<body>
+  <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Chain note</span></div>
+  <h1>Arc's USDC is a <em>view</em>, not a ledger</h1>
+  <div class="sub"><span>6-decimal window</span><b>·</b><span>18-decimal balance</span></div>
+  <div class="note">A transfer hands off to a precompile, scaled by 1e12.<br>The mint path calls a second one with isBlocklisted.</div>
+  <div class="stage">
+    <div class="glow"></div>
+    <div class="plate lit p1"><div class="addr">0x3600…0000</div><div class="what">ERC-20 face · readable</div></div>
+    <div class="plate p2"><div class="addr">0x1800…0000</div><div class="what">native balance · precompile</div></div>
+    <div class="plate p3"><div class="addr">0x1800…0001</div><div class="what">isBlocklisted · precompile</div></div>
+  </div>
+  <div class="lockup"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Arcveil</span></div>
+  <div class="traced"><i>Traced on</i><b>Arc mainnet · block 21,800,000</b></div>
+</body>
+</html>

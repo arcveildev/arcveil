@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — out by a factor of a million</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="dark-banner.css">
+<style>
+  h1{width:1060px}
+  .sub{top:560px}
+  .stage .glow{width:620px;height:620px;right:-160px;top:200px}
+  .big{position:absolute;right:120px;font-family:"DM Mono",monospace;line-height:1;letter-spacing:-.02em}
+  .big.a{top:300px;font-size:200px;color:var(--accent)}
+  .big.b{top:590px;font-size:200px;color:var(--fg);opacity:.22}
+  .tag{position:absolute;right:120px;font-family:"DM Mono",monospace;font-size:20px;
+       letter-spacing:.14em;text-transform:uppercase;color:var(--subtle)}
+  .tag.a{top:520px}
+  .tag.b{top:810px}
+  .rule{position:absolute;right:120px;top:560px;width:380px;height:1px;background:var(--line)}
+</style>
+</head>
+<body>
+  <div class="eyebrow"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Chain note</span></div>
+  <h1 class="small">Mix the decimals and you are out by a <em>million</em></h1>
+  <div class="sub"><span>Silently</span><b>·</b><span>the ERC-20 and the balance disagree</span></div>
+  <div class="note">USDC's ERC-20 face on Arc has 6 decimals.<br>The native balance underneath it has 18.</div>
+  <div class="stage">
+    <div class="glow"></div>
+    <div class="big a">6</div><div class="tag a">ERC-20 face</div>
+    <div class="rule"></div>
+    <div class="big b">18</div><div class="tag b">native balance</div>
+  </div>
+  <div class="lockup"><svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg><span>Arcveil</span></div>
+  <div class="traced"><i>Traced on</i><b>Arc mainnet · block 21,800,000</b></div>
+</body>
+</html>
