@@ -33,7 +33,9 @@ function mulberry32(seed: number) {
 }
 
 const rand = mulberry32(0x41524356);
-const pick = <T>(items: readonly T[]): T => items[Math.floor(rand() * items.length)]!;
+// The trailing comma is not a typo: in a .mts file a bare <T> is ambiguous,
+// and TypeScript refuses it.
+const pick = <T,>(items: readonly T[]): T => items[Math.floor(rand() * items.length)]!;
 
 const INTENTS = [
   "Reduce exposure to the A position in relative terms. Funds stay on venue.",
