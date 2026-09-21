@@ -37,7 +37,7 @@ export const SPEC_ROWS: readonly SpecRow[] = [
     value: "Zero-knowledge policy proof, same receipt format",
     status: "planned",
   },
-  { key: "SDK", value: "TypeScript, viem-based", status: "in progress" },
+  { key: "SDK", value: "@arcveildev/sdk on npm — TypeScript, viem-based, published with provenance", status: "shipped" },
   {
     key: "Account",
     value: `${ARC.account} — ERC-4337, EntryPoint v0.7`,

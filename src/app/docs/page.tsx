@@ -55,11 +55,12 @@ export default function DocsOverviewPage() {
           unchanged in a browser.
         </DocsProse>
         <Snippet caption="verify.ts" source={QUICKSTART} />
-        <Note title="Not on npm yet">
-          <code className="font-mono text-xs text-fg">@arcveildev/sdk</code> is not published. Until it
-          is, it is a workspace package in this repository — build it with{" "}
-          <code className="font-mono text-xs text-fg">pnpm sdk:build</code> and depend on it with{" "}
-          <code className="font-mono text-xs text-fg">workspace:*</code>, the way this site does.
+        <Note title="0.1.0 was broken" tone="warn">
+          The first published version could not be imported from Node at all: the build emitted
+          extensionless relative imports, which only resolve inside a bundler. 112 unit tests and
+          four typechecks passed, because they run on the source rather than the tarball. Fixed in{" "}
+          <code className="font-mono text-xs text-fg">0.1.1</code>, and the release now installs its
+          own package and imports it before it is allowed to publish.
         </Note>
       </DocsSection>
 

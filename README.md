@@ -83,7 +83,7 @@ contracts/             Foundry project: MandateRegistry, AnchorRegistry
 - [x] Semantic clauses judged by `typesafe/jev`, and the gate that runs them —
       deployed at `gate.arcveil.dev`, in service once it holds a token
 - [x] `/docs`
-- [ ] Publish `@arcveildev/sdk` to npm
+- [x] Publish `@arcveildev/sdk` to npm, from CI with provenance
 - [ ] Desktop app (Tauri, sharing these components)
 - [x] Registries deployed to Arc mainnet, and the verifier reads them live
 - [ ] Co-signer / enclave service

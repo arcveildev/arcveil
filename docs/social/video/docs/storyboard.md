@@ -45,7 +45,7 @@ field correctly, and every number in this film has to be the real one.
 | 5 | 16–20 | "A check that cannot decide returns **unknown**." The amber row holds alone on the frame. | unknown |
 | 6 | 20–25 | "Three of them read **Arc mainnet**." Both registry addresses, chain 5042, from `src/data/site.ts`. | Arc mainnet |
 | 7 | 25–30 | Terminal types `verifyReceipts(...)` and prints `report.status`. | — |
-| 8 | 30–34 | "**Not on npm yet.**" The honest card: workspace package, no enclave, nothing audited. | Not on npm yet |
+| 8 | 30–34 | "**No enclave yet.**" The honest card: no enclave, no spend binding, no zk proof, nothing audited. | No enclave yet |
 | 9 | 34–38 | Higgsfield closer plate, lockup, `arcveil.dev/docs`. | — |
 
 ## Beat 3, in full
@@ -101,3 +101,13 @@ Built as planned, with three things learned in the doing:
   and closes on the same meadow from two angles.
 
 Not done: the pad. The film is silent until one is cut.
+
+## Recut (2026-09-21, after the SDK was published)
+
+Beat 8 said "Not on npm yet." The package is on npm now, so the beat was
+recut rather than left to age: the honest list drops the npm row, gains the
+spend commitment the budget chain still does not bind, and the headline moves
+to the largest thing that is genuinely missing — the enclave.
+
+The beat itself was never about npm. It is four seconds spent on what is not
+built, so the other eight cannot be over-read, and that job did not change.

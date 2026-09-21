@@ -8,17 +8,17 @@ A **receipt** proves an agent's action stayed inside a mandate without
 revealing the mandate, the balances, or the reasoning. Format and rationale:
 `docs/RECEIPT.md`.
 
-Not published to npm yet. It is a workspace package in this repository —
-build it, then depend on it from the workspace:
-
 ```bash
-git clone https://github.com/arcveildev/arcveil
-cd arcveil && pnpm install && pnpm sdk:build
+pnpm add @arcveildev/sdk viem
 ```
 
-```jsonc
-{ "dependencies": { "@arcveildev/sdk": "workspace:*", "viem": "^2" } }
-```
+Published from CI with [provenance](https://docs.npmjs.com/generating-provenance-statements),
+so the registry holds a signed statement binding the tarball to the commit and
+workflow that built it. `npm audit signatures` checks it.
+
+> **0.1.0 is deprecated.** It could not be imported from Node — the build
+> emitted extensionless relative imports, which resolve only inside a bundler.
+> Use 0.1.1 or later.
 
 ## Verify
 

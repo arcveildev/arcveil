@@ -9,7 +9,7 @@ import {
   EXPORT_ROWS,
   IMMUTABILITY_NOTE,
   INSTALL,
-  INSTALL_DEP,
+  INSTALL_VERIFY,
   INTENT_SNIPPET,
   ISSUE_SNIPPET,
   KEY_NOTE,
@@ -36,11 +36,12 @@ export default function SdkPage() {
 
       <DocsSection id="install" title="Install">
         <DocsProse>
-          The package is not on npm. It lives in this repository as a workspace package, with viem
-          as a peer dependency.
+          viem is a peer dependency. The package is published from CI with provenance, so the
+          registry holds a signed statement binding the tarball to the commit and the workflow that
+          built it — which you can check rather than take on trust.
         </DocsProse>
         <Snippet caption="shell" source={INSTALL} />
-        <Snippet caption="package.json" source={INSTALL_DEP} />
+        <Snippet caption="checking where it came from" source={INSTALL_VERIFY} />
       </DocsSection>
 
       <DocsSection id="verify" title="Verify">

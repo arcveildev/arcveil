@@ -11,18 +11,13 @@ export const SDK_PAGE = {
 } as const;
 
 export const INSTALL = `
-# Not on npm yet. Clone the repository and build it:
-git clone https://github.com/arcveildev/arcveil
-cd arcveil && pnpm install && pnpm sdk:build
+pnpm add @arcveildev/sdk viem
 `;
 
-export const INSTALL_DEP = `
-{
-  "dependencies": {
-    "@arcveildev/sdk": "workspace:*",
-    "viem": "^2"
-  }
-}
+/** Published from CI with provenance, which a consumer can check for themselves. */
+export const INSTALL_VERIFY = `
+npm audit signatures
+# @arcveildev/sdk ... verified attestations
 `;
 
 export const VERIFY_SNIPPET = `

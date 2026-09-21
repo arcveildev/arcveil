@@ -30,9 +30,8 @@ table, two addresses they can paste into a block explorer.
 > We wrote the docs against the code instead of from memory, and the code won
 > an argument.
 >
-> The SDK page said `pnpm add @arcveildev/sdk`. That command fails — the package
-> is not published. So the page now says it is not published, and the install
-> section tells you to build it from the workspace.
+> The SDK page said `pnpm add @arcveildev/sdk`, so we went and made that true.
+> Then the first published version turned out to be unimportable from Node.
 >
 > Five pages. The receipt field by field, the five checks, the SDK, and the
 > contracts it reads on Arc.
@@ -47,9 +46,8 @@ Use this one if only a single post goes out.
 
 > Docs are live. Read them before you trust us.
 >
-> The page that tells you how to install the SDK also tells you it is not on
-> npm yet. The overview has two tables — what is live, and what is not — and
-> the second one is longer.
+> The overview has two tables — what is live, and what is not. The second one
+> is longer, and it stays that way until the enclave exists.
 >
 > arcveil.dev/docs
 
@@ -88,10 +86,9 @@ written to stand alone, because most of them will be seen that way.
 > We wrote the Arcveil docs against the code instead of from memory, and the
 > code won an argument.
 >
-> The SDK page printed an install command that fails. The fix went into the
-> page, not the excuse.
+> Five pages, and a published SDK that we broke and fixed in the same day.
 >
-> Here is what is in all five, and what is deliberately not.
+> Here is what is in all of it, and what is deliberately not.
 
 **2/**
 
@@ -166,10 +163,10 @@ written to stand alone, because most of them will be seen that way.
 
 ## 05 · Replies to keep in the pocket
 
-For "why isn't the SDK on npm":
+For "why was 0.1.0 broken":
 
-> Because publishing it would make the install instruction true and the
-> maturity claim false. It ships when the enclave it talks about exists.
+> Because every test we had ran on the source, and the source was fine. The
+> tarball was not. Nothing we owned was looking at the thing we shipped.
 
 For "is any of this audited":
 
@@ -199,3 +196,67 @@ pages, five checks, two addresses. If those files change, the posts are wrong.
 **On the thread's closing tweet:** the usual advice is to end a thread by asking
 for a bookmark and a repost. That is not this account's voice, so tweet 8 points
 at one page instead. It will cost some saves; it keeps the register.
+
+---
+
+# The SDK release (2026-09-21)
+
+`@arcveildev/sdk@0.1.1` is on npm, published from CI with provenance. `0.1.0`
+is deprecated and could not be imported at all.
+
+That is the post. Not "the SDK is live" — an announcement nobody engages with —
+but the four hours between the two versions, which is the only part a developer
+learns anything from.
+
+## 01 · Main — the tests were looking at the wrong thing
+
+> We published the SDK. The first version could not be imported.
+>
+> 112 unit tests passed. Four typechecks passed. The site that depends on it
+> built and deployed. All of them ran against the source, and the source was
+> fine — the compiled tarball emitted extensionless relative imports, which
+> resolve inside a bundler and nowhere else.
+>
+> Nothing we owned was looking at the thing we actually shipped.
+>
+> 0.1.1 fixes it. The release now installs its own package in a clean project
+> and imports it before it is allowed to publish.
+
+## 02 · Alt — shorter
+
+> Shipped an SDK. It didn't import.
+>
+> Every test we had ran on the source. The source was fine. The tarball was
+> not, and the tarball is the product.
+>
+> 0.1.1 is out, and the release pipeline now has to install its own package
+> before npm will take it.
+
+## 03 · Provenance
+
+> `@arcveildev/sdk` is published from CI with provenance, so the registry holds
+> a signed statement binding the tarball to the commit and the workflow that
+> built it.
+>
+> `npm audit signatures` checks it. For a package whose entire claim is that you
+> can verify things yourself instead of trusting us, shipping one you had to
+> take on trust would have been the wrong first artifact.
+
+## 04 · Reply, for anyone who asks what we changed
+
+> `moduleResolution: "bundler"` let the source import "./types" with no
+> extension, and tsc emitted it verbatim. Node ESM needs "./types.js".
+>
+> The package compiles under NodeNext now, so a missing extension is a compile
+> error rather than a silent one. That is the smaller half of the fix. The
+> larger half is that CI packs the real tarball and imports it.
+
+## Notes
+
+Do not post 01 without 0.1.1 being installable — the whole post rests on the
+fix existing. Verified before writing: a clean `npm install @arcveildev/sdk`
+resolves 0.1.1, imports from Node, and verifies a real receipt against Arc
+mainnet with all five checks passing.
+
+No version numbers in these posts beyond 0.1.0 and 0.1.1, both of which are
+real and on the registry.

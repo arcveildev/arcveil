@@ -53,7 +53,7 @@ export const LIVE_ROWS = [
   { key: "Verifier", value: "Five checks, client-side, reading Arc mainnet over plain JSON-RPC" },
   { key: "Registries", value: `MandateRegistry and AnchorRegistry, deployed to ${CHAIN.name} mainnet (chain ${ARC.chainId})` },
   { key: "Account", value: "ERC-4337 account with 2-of-3 signing, executing only while its mandate is live" },
-  { key: "SDK", value: "@arcveildev/sdk — issuing, verifying, mandates and account intents" },
+  { key: "SDK", value: "@arcveildev/sdk on npm — issuing, verifying, mandates and account intents, published from CI with provenance" },
 ] as const;
 
 export const NOT_LIVE_ROWS = [

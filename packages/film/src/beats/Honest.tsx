@@ -9,15 +9,15 @@ import { Row } from "../ui/Row";
  * on what is not built, so the other eight beats cannot be over-read.
  */
 const NOT_YET = [
-  { key: "@arcveildev/sdk", note: "not on npm — a workspace package" },
   { key: "enclave", note: "designed, not built" },
+  { key: "spend", note: "the budget chain binds order, not amounts" },
   { key: "zk proof", note: "planned; the format does not change" },
   { key: "audit", note: "none. nothing is at stake yet" },
 ] as const;
 
 export const Honest = () => (
   <Beat>
-    <Headline accent="Not on npm yet" after="." />
+    <Headline accent="No enclave yet" after="." />
     <Card title="what the docs say before they say anything else" width={1180} delay={14} style={{ marginTop: 72 }}>
       <div style={{ padding: "6px 0" }}>
         {NOT_YET.map((row, i) => (
@@ -34,7 +34,7 @@ export const Honest = () => (
           borderTop: `1px solid ${COLOR.hair}`,
         }}
       >
-        The page that tells you to install it says so too.
+        The overview page says all of this before it says anything else.
       </div>
     </Card>
   </Beat>
