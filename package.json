@@ -26,7 +26,8 @@
     "packages:build": "pnpm sdk:build && pnpm bridge:build",
     "relay:deploy": "pnpm --filter @arcveil/relay deploy",
     "relay:dev": "pnpm --filter @arcveil/relay dev",
-    "veil:artifacts": "tsx scripts/veil-artifacts.mts"
+    "veil:artifacts": "tsx scripts/veil-artifacts.mts",
+    "veil:addresses": "tsx scripts/veil-addresses.mts"
   },
   "dependencies": {
     "@arcveil/bridge": "workspace:*",

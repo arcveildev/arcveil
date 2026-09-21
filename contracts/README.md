@@ -130,6 +130,10 @@ mixer in function. The mechanism is the upstream one, so the policy can be
 tightened later without redeploying, but today nothing is screened.
 
 ### Deploy
+The full sequence — contracts, relayer, site, and the end-to-end run that
+proves it — is in [docs/BRIDGE_RUNBOOK.md](../docs/BRIDGE_RUNBOOK.md). The
+contracts themselves are one command:
+
 ```bash
 cd contracts && POSTMAN=0x… VEIL_OWNER=0x… \
   forge script script/DeployVeil.s.sol --rpc-url arc_testnet --account arcveil-deployer --broadcast

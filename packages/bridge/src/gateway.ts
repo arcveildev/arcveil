@@ -18,6 +18,27 @@ export const VEIL_GATEWAY_ABI = [
   },
   {
     type: "function",
+    name: "ENTRYPOINT",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [{ type: "address" }],
+  },
+  {
+    type: "function",
+    name: "TOKEN_MESSENGER",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [{ type: "address" }],
+  },
+  {
+    type: "function",
+    name: "USDC",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [{ type: "address" }],
+  },
+  {
+    type: "function",
     name: "refundOf",
     stateMutability: "view",
     inputs: [{ name: "commitment", type: "uint256" }],

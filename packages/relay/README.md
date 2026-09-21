@@ -44,6 +44,7 @@ There is no database binding, so there is no record of who was paid.
 |---|---|
 | `GET /quote` | The entrypoint, pool, scope, fee recipient and minimum fee. Build the proof against these — they are bound into it. |
 | `GET /status` | Deposits in the pool, the current root, and whether the published root is current. |
+| `POST /deliver` | `{ message, attestation }` from Circle. Submits the burn to the gateway, and is paid nothing for it — an undelivered burn is USDC destroyed on one chain and minted on neither. |
 | `POST /withdraw` | `{ recipient, relayFeeBPS, proof }`. Returns `{ hash }`. |
 
 There is no bearer token, on purpose. A token is an account, an account is an
@@ -91,6 +92,7 @@ and the settings:
 |---|---|
 | `ARC_RPC` | `https://rpc.mainnet.arc.io` |
 | `ENTRYPOINT` | the Privacy Pool Entrypoint on Arc |
+| `GATEWAY` | VeilGateway, which `POST /deliver` submits to |
 | `SCOPE` | the pool's scope, decimal — printed by `DeployVeil.s.sol` |
 | `FROM_BLOCK` | the block the pool was deployed in |
 | `MIN_FEE_BPS` | optional, defaults to 25 |
