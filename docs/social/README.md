@@ -269,6 +269,44 @@ Card contents are quoted from `docs/RECEIPT.md`, `src/data/threatModel.ts` and
 `src/data/escapeHatch.ts`. If those change, the banners are wrong — re-render
 rather than leaving them.
 
+## Dark banners (`dark-*.html`, 2026-09-21)
+
+A second banner series, 1920×1080 at 2x, sharing `dark-banner.css`. It drops
+the Higgsfield plates entirely and uses the product's own surface instead:
+`#0e0e0e`, the one green `#85ed75`, hairline borders, and type doing the work.
+Every mark is CSS or inline SVG, so a wrong number is a one-line fix rather
+than a re-render — which matters for banners that carry addresses.
+
+Rendered the same way as the `tech-*` series, at a different size:
+
+```bash
+cd docs/social/banners && for v in 1 2 3; do
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
+    --hide-scrollbars --window-size=1920,1080 --force-device-scale-factor=2 \
+    --virtual-time-budget=8000 --screenshot="dark-precompile-v$v.png" \
+    "file://$PWD/dark-precompile-v$v.html"
+done
+```
+
+Three versions of post 01 in `posts-bridge.md`, three different hooks on one
+finding:
+
+| File | Hook | Right side |
+|---|---|---|
+| `dark-precompile-v1.png` | Arc's USDC is a view, not a ledger | The three addresses as plates; only the readable one is lit |
+| `dark-precompile-v2.png` | Mix the decimals and you are out by a million | `6` in green against `18` at 22% — the two faces, one legible |
+| `dark-precompile-v3.png` | Two precompiles. No bytecode. | The `OpcodeNotFound` a fork actually returns, in amber |
+
+Conventions this series keeps:
+
+- **One lit thing.** The green is the only light in the frame, and in every
+  version it marks what *can* be read. Amber is opacity, never failure.
+- **The evidence line is the footer.** Bottom-right carries where and when the
+  claim was traced, in place of a slogan.
+- **The empty middle-left is deliberate**, and comes from the reference: the
+  headline sits top-left, the lockup bottom-left, and nothing fills the space
+  between them.
+
 ## The precompile banner (2026-09-21)
 
 `banners/tech-precompile.png`, for post 01 in `posts-bridge.md`. Seventh file

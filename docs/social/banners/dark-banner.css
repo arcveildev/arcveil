@@ -1,0 +1,65 @@
+/* Shared layout for the black post banners (dark-*.html).
+   1920x1080, rendered at 2x -> 3840x2160.
+
+   This series drops the meadow plates and uses the product's own surface: the
+   near-black canvas, one green accent, hairline rules, and type doing the work.
+   Nothing here is a raster — every mark is CSS or inline SVG, so a wrong number
+   is a one-line fix rather than a re-render. */
+
+:root{
+  --surface:#0e0e0e;    /* the site's canvas, not pure black */
+  --fg:#ffffff;
+  --muted:rgba(255,255,255,.50);
+  --subtle:rgba(255,255,255,.30);
+  --faint:rgba(255,255,255,.16);
+  --line:#202020;       /* the hairline the whole site is built from */
+  --accent:#85ed75;     /* the one green. Never a second one. */
+  --amber:#e8b04b;      /* opacity, not failure */
+}
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden}
+body{background:var(--surface);color:var(--fg);position:relative;
+     font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* ---- left column ------------------------------------------------------- */
+.eyebrow{position:absolute;left:96px;top:92px;display:flex;align-items:center;gap:16px;
+         font-family:"DM Mono",monospace;font-size:19px;letter-spacing:.24em;text-transform:uppercase;
+         color:var(--muted)}
+.eyebrow svg{height:30px;width:auto;color:var(--fg)}
+
+h1{position:absolute;left:96px;top:168px;width:1020px;font-weight:800;font-size:112px;line-height:.94;
+   letter-spacing:-.035em;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--accent)}
+h1.small{font-size:92px}
+
+.sub{position:absolute;left:96px;display:flex;align-items:baseline;gap:18px;
+     font-family:"DM Mono",monospace;font-size:22px;letter-spacing:.04em;color:var(--muted)}
+.sub b{font-weight:400;color:var(--fg)}
+
+.note{position:absolute;left:96px;bottom:250px;width:900px;font-family:"DM Mono",monospace;
+      font-size:20px;line-height:1.65;color:var(--subtle)}
+
+/* ---- footer ------------------------------------------------------------ */
+.lockup{position:absolute;left:96px;bottom:96px;display:flex;align-items:center;gap:20px}
+.lockup svg{height:54px;width:auto;color:var(--fg)}
+.lockup span{font-weight:700;font-size:38px;letter-spacing:-.01em;line-height:1;text-transform:uppercase}
+
+.traced{position:absolute;right:96px;bottom:104px;display:flex;align-items:baseline;gap:16px;
+        font-family:"DM Mono",monospace;font-size:21px;letter-spacing:.06em;text-transform:uppercase}
+.traced i{font-style:normal;color:var(--subtle)}
+.traced b{font-weight:400;color:var(--fg)}
+
+/* ---- right side -------------------------------------------------------- */
+/* One bright thing on a black field. The green is the only lit surface in the
+   frame, and in every version it marks the one address that can be read. */
+.stage{position:absolute;right:0;top:0;width:820px;height:1080px}
+.glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.30;
+      background:radial-gradient(circle, var(--accent), transparent 70%)}
+
+.plate{position:absolute;border:1px solid var(--line);background:#141414;
+       display:flex;flex-direction:column;justify-content:space-between;padding:26px 30px}
+.plate .addr{font-family:"DM Mono",monospace;font-size:26px;letter-spacing:.02em}
+.plate .what{font-family:"DM Mono",monospace;font-size:17px;color:var(--subtle);letter-spacing:.06em;text-transform:uppercase}
+.plate.lit{border-color:var(--accent);background:#10180f}
+.plate.lit .addr{color:var(--accent)}
+.plate.lit .what{color:rgba(133,237,117,.65)}
