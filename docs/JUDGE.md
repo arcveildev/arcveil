@@ -135,6 +135,31 @@ Four settings, none of them committed:
 | `GATE_TOKEN` | The bearer token callers present. Unset means the gate serves nobody. |
 | `GATE_ORIGIN` | Optional. The single browser origin allowed to call it. |
 
+The clauses the live gate holds are **not in this repository**, and that is the point — a
+threshold anyone can read is not a threshold. They live in `.arcveil/gate-clauses.json`, which
+is gitignored, and the only thing published is what they hash to:
+
+```
+judgeCommitment  0x18cb4aa74415eb067c55b9e2286306c43e85ad4b18b1f49abd42f2084496efc6
+checks           no_injection · destination_known · intent_match ·
+                 counterparty_kind · scope · no_pressure
+set              2026-09-21
+```
+
+`GATE_SELECTION` is kept the same way, in `.arcveil/gate-selection.json`: the per-call price
+cap is a spending limit, and a spending limit anyone can read is a spending limit anyone can
+price against.
+
+Same bargain as `mandateCommitment`: keep the text you hashed, because without it you can prove
+this clause set was the one in force and never again show what it said. The demonstration
+clauses in `src/data/gate.ts` are published deliberately, so the page can show both halves of
+the split; they are not what guards anything.
+
+Those thresholds are **not calibrated**. They were set strict by hand before the gate had
+answered a single real evaluation, which is the opposite of what this document asks for
+everywhere else. Treat the first runs as measurement, not as enforcement, and move them once
+there is something to move them against.
+
 Anything malformed takes the gate **out of service** (503) rather than into a permissive state:
 a typo in a threshold must not become a gate that waves things through. So does a missing
 `GATE_TOKEN` — a freshly deployed gate answers 503 to every route, including `/evaluate`, until
