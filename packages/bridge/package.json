@@ -1,0 +1,44 @@
+{
+  "name": "@arcveil/bridge",
+  "version": "0.1.0",
+  "description": "Bridge USDC into Arc's shielded pool: one CCTP burn in, one unlinkable withdrawal out.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "viem": "^2"
+  },
+  "dependencies": {
+    "@zk-kit/lean-imt": "2.2.4",
+    "poseidon-lite": "0.3.0",
+    "snarkjs": "0.7.5",
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "@types/snarkjs": "0.7.9",
+    "typescript": "^5",
+    "viem": "^2",
+    "vitest": "^3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

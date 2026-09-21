@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm sdk:build && next dev",
-    "build": "pnpm sdk:build && next build",
+    "dev": "pnpm packages:build && next dev",
+    "build": "pnpm packages:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "pnpm sdk:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/gate test",
+    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/gate test",
     "test:watch": "vitest",
     "gen:receipts": "tsx scripts/gen-receipts.mts",
     "deploy": "pnpm build && wrangler deploy",
@@ -19,17 +19,19 @@
     "check": "pnpm typecheck && pnpm lint && pnpm test",
     "intent": "tsx scripts/intent.mts",
     "film:studio": "pnpm --filter @arcveil/film studio",
-    "film:render": "pnpm --filter @arcveil/film render ../../docs/social/video/docs/arcveil-docs.mp4"
+    "film:render": "pnpm --filter @arcveil/film render ../../docs/social/video/docs/arcveil-docs.mp4",
+    "bridge:build": "pnpm --filter @arcveil/bridge build",
+    "packages:build": "pnpm sdk:build && pnpm bridge:build"
   },
   "dependencies": {
+    "@arcveildev/sdk": "workspace:*",
     "clsx": "^2.1.1",
     "lucide-react": "^1.45.0",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "tailwind-merge": "^3.6.0",
-    "viem": "^2.56.5",
-    "@arcveildev/sdk": "workspace:*"
+    "viem": "^2.56.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
