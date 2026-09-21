@@ -45,6 +45,28 @@ export const ARC: {
   account: "0xb1c0983a7b84f38fbaf5f3af92f0fecaa62ce25d",
 };
 
+/**
+ * The private bridge. Every address stays null until `DeployVeil.s.sol` has
+ * run, and `/bridge` reports each piece as *not deployed* rather than drawing
+ * a form that cannot work — the same rule the verifier follows for its
+ * unknown checks.
+ */
+export const VEIL: {
+  entrypoint: `0x${string}` | null;
+  pool: `0x${string}` | null;
+  gateway: `0x${string}` | null;
+  /** Identifies the pool inside the Entrypoint. Printed by the deploy script. */
+  scope: string | null;
+  /** Where a withdrawal is submitted from, so a fresh address needs no gas. */
+  relayer: string | null;
+} = {
+  entrypoint: null,
+  pool: null,
+  gateway: null,
+  scope: null,
+  relayer: null,
+};
+
 export type NavItem = { label: string; href: string; badge?: string };
 
 export type SocialLink = { label: string; handle: string; href: string; kind: "x" };
@@ -82,6 +104,7 @@ export const PRODUCT_NAV: readonly (NavItem & { index: string })[] = [
 
 export const UTILITY_NAV: readonly NavItem[] = [
   { label: "Docs", href: "/docs" },
+  { label: "Bridge", href: "/bridge" },
   { label: "Gate", href: "/gate" },
   { label: "Verify", href: "/verify" },
   { label: "Contact", href: "/contact" },
