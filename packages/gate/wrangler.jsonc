@@ -12,10 +12,15 @@
   // wallet. The bearer check runs first; this bounds what a leaked token costs.
   "ratelimits": [{ "name": "RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } }],
 
+  // The site calls this from the browser, so it needs an origin of ours rather
+  // than a workers.dev subdomain. GATE_ORIGIN is what actually opens CORS.
+  "routes": [{ "pattern": "gate.arcveil.dev", "custom_domain": true }],
+
   "observability": { "enabled": true }
 
   // Secrets — set with `wrangler secret put`, never committed:
-  //   GATE_CLAUSES  the mandate's semantic clauses, as JSON. Thresholds live here.
-  //   GATE_TOKEN    the bearer token callers must present. No token, no service.
-  //   GATE_ORIGIN   optional: the one browser origin allowed to call this gate.
+  //   GATE_CLAUSES   the mandate's semantic clauses, as JSON. Thresholds live here.
+  //   GATE_SELECTION  price cap and confidence bars for tool selection, as JSON.
+  //   GATE_TOKEN      the bearer token callers must present. No token, no service.
+  //   GATE_ORIGIN     optional: the one browser origin allowed to call this gate.
 }

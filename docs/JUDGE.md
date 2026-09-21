@@ -118,15 +118,15 @@ The rest of a receipt is checkable by a stranger. **This part is not**, and the 
 
 ## Running the gate
 
-`packages/gate` is a Worker. It holds the mandate, so it does not belong in the browser and it
-is not part of the static site.
+`packages/gate` is a Worker, live at **`gate.arcveil.dev`** since 2026-09-21. It holds the
+mandate, so it does not belong in the browser and it is not part of the static site.
 
 ```bash
 pnpm --filter @arcveil/gate dev          # local, with the AI binding
 pnpm --filter @arcveil/gate deploy:dry   # bundle without publishing
 ```
 
-Three secrets, none of them committed:
+Four settings, none of them committed:
 
 | Secret | What it is |
 |---|---|
@@ -136,7 +136,9 @@ Three secrets, none of them committed:
 | `GATE_ORIGIN` | Optional. The single browser origin allowed to call it. |
 
 Anything malformed takes the gate **out of service** (503) rather than into a permissive state:
-a typo in a threshold must not become a gate that waves things through.
+a typo in a threshold must not become a gate that waves things through. So does a missing
+`GATE_TOKEN` — a freshly deployed gate answers 503 to every route, including `/evaluate`, until
+someone gives it a token, which means it cannot spend anything before it is meant to.
 
 | Route | Answers |
 |---|---|
