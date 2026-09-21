@@ -98,10 +98,75 @@ Deployed at block 21186110, runtime bytecode byte-identical to the local build.
 The demo mandate is published from `0x96b698308B01473E3A0041634b01f652c4608C2A`,
 which is why the samples on `/verify` resolve.
 
+## The private bridge
+
+`VeilGateway` turns one CCTP burn on any supported chain into one shielded
+deposit on Arc. The burn names the gateway as both `mintRecipient` and
+`destinationCaller` and carries the deposit's precommitment in `hookData`; the
+gateway mints the USDC and puts it into the pool in the same transaction.
+
+The pool itself is not ours. `privacy/` is a verbatim copy of
+[0xbow-io/privacy-pools-core](https://github.com/0xbow-io/privacy-pools-core) at
+commit `c312dcd5`, Apache-2.0, audited by Oxorio and Auditware. Nothing in it is
+modified, because the audits and the trusted setup only apply to those exact
+bytes. `privacy/VERIFY.md` is how anyone checks that claim without trusting us.
+
+| Piece | Whose | Audited |
+|---|---|---|
+| `Entrypoint`, `PrivacyPool`, circuits, verifiers | 0xbow | yes, upstream |
+| `VeilGateway` | ours | **no** |
+| Relayer, ASP postman | ours | **no** |
+
+### What is public, and what is not
+The burn on the source chain names the sender, the amount and the gateway. The
+mint and the deposit on Arc are public. Every withdrawal is public — recipient,
+amount, time. The single thing that is private is **which deposit funds which
+withdrawal**, and that holds only against the anonymity set the pool has at that
+moment. The first depositor into an empty pool has no privacy at all, and the
+interface has to say so rather than imply otherwise.
+
+The association set currently admits every label, unfiltered. That makes this a
+mixer in function. The mechanism is the upstream one, so the policy can be
+tightened later without redeploying, but today nothing is screened.
+
+### Deploy
+```bash
+cd contracts && POSTMAN=0x… VEIL_OWNER=0x… \
+  forge script script/DeployVeil.s.sol --rpc-url arc_testnet --account arcveil-deployer --broadcast
+```
+
+`VEIL_OWNER` should be the 2-of-3 `ArcveilAccount`: the Entrypoint is UUPS, so
+whoever holds `OWNER_ROLE` can replace its logic. The script grants the role and
+renounces the deployer's in the same transaction; leave it unset and a single
+key keeps that power, which is fine on testnet and not on mainnet. `POSTMAN` is
+a separate hot key that publishes association-set roots — never the 2-of-3.
+
+Simulated on Arc testnet the whole deployment is 17,473,952 gas, about
+**0.79 USDC**.
+
+### Testing against the real chain
+`test/VeilGateway.t.sol` forks Arc mainnet at a pinned block, so the CCTP
+contracts under test are Circle's own. The test takes over the attester set,
+which proves nothing about Circle's signing and everything about our parsing.
+
+Two things about Arc surfaced only by running it, and both are worth knowing:
+
+- USDC at `0x3600…0000` is a 6-decimal view over the chain's 18-decimal native
+  balance, and every mint and transfer is delegated to a precompile at
+  `0x1800…0000`. A precompile is not bytecode, so a fork has nothing to fetch.
+- Arc has a **compliance precompile** at `0x1800…0001`, asked `isBlocklisted`
+  on every USDC movement. The chain itself can refuse a transfer, including one
+  out of this pool. That is real on mainnet and absent from the fork.
+
+So the test replaces the token and keeps the bridge: `ArcUsdcStub` is etched
+over USDC, while MessageTransmitterV2 and TokenMessengerV2 stay real. Arc's own
+blocklist is therefore *not* covered by any test here.
+
 ## Status
-21 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
-one, 6 for anchors, 4 for the seeding script), `forge fmt` is clean and
-`forge build` reports no lint warnings. Runtime sizes are 1,195 B and 736 B.
+62 tests pass on Foundry 1.8.3 (11 for the mandate registry including a fuzzed
+one, 6 for anchors, 6 for the seeding script, 28 for the account, 11 for the
+veil gateway), `forge fmt` is clean and `forge build` reports no lint warnings.
+Runtime sizes are 1,195 B, 736 B and 4,673 B.
 
 The frontend's hand-written ABI in `src/lib/receipt/abi.ts` was checked against
 the compiled artifacts: `mandateOf(address,uint64) -> ((bytes32,uint64,uint64))`
@@ -109,11 +174,18 @@ and `isAnchored(address,bytes32) -> (bool)` match exactly. Re-check that after
 changing any signature here.
 
 ## Setup
-`lib/` is not committed. Fetch dependencies, then run the suite:
+`lib/` is not committed. `deps.sh` fetches everything at pinned versions — the
+four the Privacy Pool protocol needs come from npm at the exact versions its own
+manifest pins, so the dependency set matches the one its audits were run
+against:
 
 ```bash
-cd contracts && forge install foundry-rs/forge-std && forge test -vvv
+cd contracts && ./deps.sh && forge test -vvv
 ```
+
+The fork test in `test/VeilGateway.t.sol` needs to reach `rpc.mainnet.arc.io`
+once to fill Foundry's RPC cache; without network it skips itself and the rest
+of the suite still runs.
 
 ## Bootstrap an account
 One transaction: the account is deployed and publishes its own first mandate.
