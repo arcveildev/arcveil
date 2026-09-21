@@ -41,7 +41,7 @@ export const NEVER_REVERT_NOTE =
   "Once receiveMessage succeeds the CCTP message is consumed and cannot be replayed, so a revert after that point would burn USDC on the source chain and mint it nowhere. Every failure past the mint — malformed hook, dead pool, amount below the minimum, duplicate commitment — degrades to a plain transfer to the refund address the burn named.";
 
 export const PRECOMPILE_NOTE =
-  "Arc's USDC asks a chain-level precompile at 0x1800…0001 whether an address is blocked, on every mint and every transfer, including out of this pool. Nothing here can override that. A fork cannot run a precompile, so no test covers it either — the fork tests replace the token and keep Circle's contracts.";
+  "Arc's USDC calls a compliance precompile at 0x1800…0001 with isBlocklisted on the mint path. A plain transfer does not make that call from the ERC-20 layer — but it does route through a second precompile at 0x1800…0000, whose code nobody outside Arc can read, so that says nothing about whether a blocklist applies inside it. Either way nothing here can override it, and no test covers it: a fork has no precompile to run.";
 
 export const GATEWAY_FUNCTIONS = [
   {
