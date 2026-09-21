@@ -269,6 +269,32 @@ Card contents are quoted from `docs/RECEIPT.md`, `src/data/threatModel.ts` and
 `src/data/escapeHatch.ts`. If those change, the banners are wrong — re-render
 rather than leaving them.
 
+## The precompile banner (2026-09-21)
+
+`banners/tech-precompile.png`, for post 01 in `posts-bridge.md`. Seventh file
+in the `tech-*` series, same `tech-banner.css` and the same headless-Chrome
+line with the name swapped.
+
+| File | Post | What the card carries | Plate |
+|---|---|---|---|
+| `tech-precompile.png` | Arc's USDC is a view, not a ledger | The three addresses a USDC transfer on Arc touches, what each one is, and whether it can be read at all | **Reused** `plate-tech-vision.png` |
+
+**The plate is reused, deliberately and with a cost.** It is the Arch with a
+hand on a frosted pane and unreadable shapes behind it — which is the argument
+of this post rather than decoration, since the finding is two precompiles
+nobody outside Arc can read. The cost is that `tech-vision.png` uses the same
+background, so the two should not go out near each other. Generate a bespoke
+plate if they need to.
+
+One departure from the series' meaning, not its look: amber rows here are
+`.r.gap` for the colour but **not** the italic. In the first five, italic marked
+a row that does not exist (`free text` on the injection banner). These two rows
+exist; they are simply opaque, and italic would say the wrong thing.
+
+Card contents are from the trace in `contracts/test/` and the correction in
+`src/data/bridge.ts` — the `isBlocklisted` call was observed on the mint path
+and *not* on a plain transfer. Do not broaden that line without re-tracing.
+
 ## The semantic gate banner (2026-09-20)
 
 `banners/tech-injection.png`, for post 02 in `posts-gate.md` — the one that
