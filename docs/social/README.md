@@ -291,11 +291,21 @@ done
 Three versions of post 01 in `posts-bridge.md`, three different hooks on one
 finding:
 
-| File | Hook | Right side |
-|---|---|---|
-| `dark-precompile-v1.png` | Arc's USDC is a view, not a ledger | The three addresses as plates; only the readable one is lit |
-| `dark-precompile-v2.png` | Mix the decimals and you are out by a million | `6` in green against `18` at 22% — the two faces, one legible |
-| `dark-precompile-v3.png` | Two precompiles. No bytecode. | The `OpcodeNotFound` a fork actually returns, in amber |
+| File | Hook | Plate | Higgsfield job |
+|---|---|---|---|
+| `dark-precompile-v1.png` | Arc's USDC is a view, not a ledger | Three slabs in perspective; the near one glass, lit green from within, the two behind it matte and unlit | `611f3c3e-cc26-4b17-a793-08870c3dbb48` |
+| `dark-precompile-v2.png` | Mix the decimals and you are out by a million | A watch-part disc in sharp focus dwarfed by an enormous unlit one | `5b77fc14-29b6-4e8b-94e0-674893cc5804` |
+| `dark-precompile-v3.png` | Two precompiles. No bytecode. | A sealed matte cube, no seams, one amber corner | `57257830-fbfe-433c-9b89-f5a3412e271f` |
+
+All three: `gpt_image_2_5`, 16:9, and every prompt ends "no text anywhere, no
+letters, no numbers, no symbols, no logos" — every word on the banner is HTML,
+as in the `tech-*` series. Plates are kept as `plate-dark-v*.png` so the type
+can be redone without re-prompting.
+
+**The composition is in the prompt, not the crop.** Each one asks for the
+subject in the right third and "the left two thirds pure empty black negative
+space", which is what the reference banner does and what leaves room for type
+without a scrim doing the work.
 
 Conventions this series keeps:
 
@@ -306,6 +316,12 @@ Conventions this series keeps:
 - **The empty middle-left is deliberate**, and comes from the reference: the
   headline sits top-left, the lockup bottom-left, and nothing fills the space
   between them.
+- **The canvas is `#000`, not the site's `#0e0e0e`.** The plates render on pure
+  black, and any other value leaves a visible vertical seam where the scrim
+  meets the image. Matching the render wins; this is the one place on the
+  project where the surface token is not the site's.
+- **Addresses live in the type column**, never over the render. The image
+  carries the mood; a contract address has to be readable.
 
 ## The precompile banner (2026-09-21)
 
