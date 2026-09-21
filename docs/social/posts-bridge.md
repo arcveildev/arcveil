@@ -63,6 +63,9 @@ Same finding, aimed at people who are about to lose an afternoon.
 
 Only after 01 or 02. Do not post with a link until the deploy lands.
 
+Banners: `banners/soon-bridge-v1.png` (the arch — the pick), `v2.png` (the
+crossing), `v3.png` (the parted link).
+
 > Circle's USDC Bridge publishes every part of a crossing: sender, amount,
 > destination.
 >

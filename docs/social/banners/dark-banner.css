@@ -87,3 +87,18 @@ h1.small{font-size:92px}
 .plate.lit{border-color:var(--accent);background:#10180f}
 .plate.lit .addr{color:var(--accent)}
 .plate.lit .what{color:rgba(133,237,117,.65)}
+
+/* ---- announcement variant ---------------------------------------------- */
+/* A banner for something that does not exist yet has one job beyond looking
+   good: it must be impossible to read as live. The status word is the only
+   green in the type, and the boundary line sits directly under the headline
+   rather than in the small print. */
+.status{display:inline-block;border:1px solid var(--accent);color:var(--accent);
+        font-family:"DM Mono",monospace;font-size:20px;letter-spacing:.20em;text-transform:uppercase;
+        padding:9px 20px;margin-left:4px}
+.boundary{position:absolute;left:96px;width:900px;font-size:26px;line-height:1.5;color:var(--muted)}
+.boundary em{font-style:normal;color:var(--fg)}
+.builton{position:absolute;right:96px;bottom:104px;display:flex;align-items:center;gap:18px;
+         font-family:"DM Mono",monospace;font-size:21px;letter-spacing:.06em;text-transform:uppercase}
+.builton i{font-style:normal;color:var(--subtle)}
+.builton b{font-weight:400;color:var(--fg)}
