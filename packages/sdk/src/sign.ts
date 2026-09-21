@@ -1,6 +1,6 @@
-import { canonicalBytes, computeReceiptId } from "./canonical";
-import { bytesToHex, hexToBytes } from "./hex";
-import type { Hex, Receipt, ReceiptDraft } from "./types";
+import { canonicalBytes, computeReceiptId } from "./canonical.js";
+import { bytesToHex, hexToBytes } from "./hex.js";
+import type { Hex, Receipt, ReceiptDraft } from "./types.js";
 
 /**
  * Stand-in for the policy enclave's signing key. In production the private key

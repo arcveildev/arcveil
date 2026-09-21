@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { Clause } from "./judge";
-import { applyClauses, decide, parseJudgement } from "./judgement";
+import type { Clause } from "./judge.js";
+import { applyClauses, decide, parseJudgement } from "./judgement.js";
 
 const raw = {
   model: "jev-1.13.0",

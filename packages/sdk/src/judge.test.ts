@@ -8,7 +8,7 @@ import {
   type NoulClause,
   type Question,
   type ScoreClause,
-} from "./judge";
+} from "./judge.js";
 
 const questionOf = (evaluation: Evaluation, id: string): Question => {
   const question = evaluation.questions[id];

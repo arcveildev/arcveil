@@ -1,6 +1,6 @@
 import { keccak256, toHex } from "viem";
-import { canonicalize } from "./canonical";
-import type { Hex } from "./types";
+import { canonicalize } from "./canonical.js";
+import type { Hex } from "./types.js";
 
 /**
  * Semantic clauses — the part of a mandate no threshold can express.

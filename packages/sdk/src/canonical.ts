@@ -1,5 +1,5 @@
-import { bytesToHex } from "./hex";
-import type { Hex, Proof, Receipt, ReceiptDraft, UnsignedProof } from "./types";
+import { bytesToHex } from "./hex.js";
+import type { Hex, Proof, Receipt, ReceiptDraft, UnsignedProof } from "./types.js";
 
 /**
  * Deterministic JSON: object keys sorted, no whitespace, no lossy values.

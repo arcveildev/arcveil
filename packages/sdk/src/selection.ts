@@ -1,5 +1,5 @@
-import { buildEvaluation, type Clause, type Evaluation } from "./judge";
-import { applyClauses, type Judgement } from "./judgement";
+import { buildEvaluation, type Clause, type Evaluation } from "./judge.js";
+import { applyClauses, type Judgement } from "./judgement.js";
 
 /**
  * Choosing a paid tool, under a mandate.

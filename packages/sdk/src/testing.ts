@@ -1,7 +1,7 @@
 /** Fixtures shared by the unit tests. Not imported by application code. */
-import { createMemoryChainReader, type ChainReader, type MandateRecord, type TxRecord } from "./chain";
-import { generateSigner, issueReceipt, type Signer } from "./sign";
-import type { CheckId, CheckResult, Hex, Receipt, ReceiptDraft, VerificationReport } from "./types";
+import { createMemoryChainReader, type ChainReader, type MandateRecord, type TxRecord } from "./chain.js";
+import { generateSigner, issueReceipt, type Signer } from "./sign.js";
+import type { CheckId, CheckResult, Hex, Receipt, ReceiptDraft, VerificationReport } from "./types.js";
 
 const byte = (value: string, bytes: number): Hex => `0x${value.repeat(bytes)}`;
 

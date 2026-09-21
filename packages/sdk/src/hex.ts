@@ -1,4 +1,4 @@
-import type { Hex } from "./types";
+import type { Hex } from "./types.js";
 
 export const isHex = (value: string, bytes?: number): value is Hex =>
   new RegExp(`^0x[0-9a-fA-F]${bytes === undefined ? "*" : `{${bytes * 2}}`}$`).test(value) &&

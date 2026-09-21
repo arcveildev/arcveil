@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { canonicalize, computeReceiptId, receiptBody } from "./canonical";
-import { draftFixture, receiptFixture } from "./testing";
+import { canonicalize, computeReceiptId, receiptBody } from "./canonical.js";
+import { draftFixture, receiptFixture } from "./testing.js";
 
 describe("canonicalize", () => {
   it("is independent of key order", () => {

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Clause } from "./judge";
+import type { Clause } from "./judge.js";
 
 /**
  * What comes back from the judge, and what the mandate makes of it.

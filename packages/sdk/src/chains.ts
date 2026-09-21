@@ -1,5 +1,5 @@
 import { defineChain } from "viem";
-import type { Hex } from "./types";
+import type { Hex } from "./types.js";
 
 /**
  * Arc, Circle's EVM layer 1 for stablecoin finance. The native balance — gas,

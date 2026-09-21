@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { encodeAbiParameters } from "viem";
-import { createRpcChainReader } from "./rpc";
-import type { Hex } from "./types";
+import { createRpcChainReader } from "./rpc.js";
+import type { Hex } from "./types.js";
 
 const CONFIG = { endpoint: "https://rpc.example", chainId: 5042, mandateRegistry: null, anchorRegistry: null };
 const DEPLOYED = {

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { anchorCounter, mandateCommitment, registerMandate, revokeMandate } from "./mandate";
-import type { Hex } from "./types";
+import { anchorCounter, mandateCommitment, registerMandate, revokeMandate } from "./mandate.js";
+import type { Hex } from "./types.js";
 
 const REGISTRY = `0x${"11".repeat(20)}` as Hex;
 const COMMITMENT = `0x${"4d".repeat(32)}` as Hex;

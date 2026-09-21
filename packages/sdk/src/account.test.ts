@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { hashTypedData } from "viem";
-import { adoptTypedData, encodeExecute, intentTypedData, type Intent } from "./account";
-import type { Hex } from "./types";
+import { adoptTypedData, encodeExecute, intentTypedData, type Intent } from "./account.js";
+import type { Hex } from "./types.js";
 
 /**
  * The fixture below is also asserted in contracts/test/ArcveilAccount.t.sol.

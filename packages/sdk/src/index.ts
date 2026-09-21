@@ -13,13 +13,13 @@ export type {
   UnsignedProof,
   VerificationReport,
   ZkProof,
-} from "./types";
-export { RECEIPT_VERSION } from "./types";
+} from "./types.js";
+export { RECEIPT_VERSION } from "./types.js";
 
-export { canonicalize, canonicalBytes, computeReceiptId, receiptBody } from "./canonical";
-export { generateSigner, issueReceipt, signBody, verifyBodySignature, type Signer } from "./sign";
-export { parseReceiptInput, type ParseResult } from "./schema";
-export { CHECK_ORDER, verifyReceipts } from "./verify";
+export { canonicalize, canonicalBytes, computeReceiptId, receiptBody } from "./canonical.js";
+export { generateSigner, issueReceipt, signBody, verifyBodySignature, type Signer } from "./sign.js";
+export { parseReceiptInput, type ParseResult } from "./schema.js";
+export { CHECK_ORDER, verifyReceipts } from "./verify.js";
 
 export {
   createMemoryChainReader,
@@ -28,12 +28,12 @@ export {
   type ChainState,
   type MandateRecord,
   type TxRecord,
-} from "./chain";
-export { createRpcChainReader, type RpcConfig } from "./rpc";
+} from "./chain.js";
+export { createRpcChainReader, type RpcConfig } from "./rpc.js";
 
-export { arc, arcTestnet, ARC_REGISTRIES, USDC_ERC20_ADDRESS, type Registries } from "./chains";
-export { anchorCounter, mandateCommitment, registerMandate, revokeMandate } from "./mandate";
-export { createIssuer, nextCounter, type ActionInput, type Issuance, type Issuer, type IssuerConfig } from "./issuer";
+export { arc, arcTestnet, ARC_REGISTRIES, USDC_ERC20_ADDRESS, type Registries } from "./chains.js";
+export { anchorCounter, mandateCommitment, registerMandate, revokeMandate } from "./mandate.js";
+export { createIssuer, nextCounter, type ActionInput, type Issuance, type Issuer, type IssuerConfig } from "./issuer.js";
 export {
   adoptTypedData,
   ARCVEIL_ACCOUNT_ABI,
@@ -45,8 +45,8 @@ export {
   type AccountCall,
   type Adoption,
   type Intent,
-} from "./account";
-export { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi";
+} from "./account.js";
+export { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi.js";
 
 export {
   buildEvaluation,
@@ -57,7 +57,7 @@ export {
   type NoulClause,
   type Question,
   type ScoreClause,
-} from "./judge";
+} from "./judge.js";
 export {
   applyClauses,
   decide,
@@ -68,7 +68,7 @@ export {
   type Decision,
   type Judgement,
   type JudgementResult,
-} from "./judgement";
+} from "./judgement.js";
 export {
   affordable,
   applySelection,
@@ -78,4 +78,4 @@ export {
   type Candidate,
   type Selection,
   type SelectionPolicy,
-} from "./selection";
+} from "./selection.js";

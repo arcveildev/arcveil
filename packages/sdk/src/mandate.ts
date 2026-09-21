@@ -1,6 +1,6 @@
 import { keccak256, toHex, type Account, type Chain, type Hash, type Transport, type WalletClient } from "viem";
-import { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi";
-import type { Hex } from "./types";
+import { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi.js";
+import type { Hex } from "./types.js";
 
 /**
  * The commitment is all that ever reaches the chain. Terms stay with their

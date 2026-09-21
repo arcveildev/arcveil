@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { createIssuer, nextCounter } from "./issuer";
-import { generateSigner } from "./sign";
-import { verifyReceipts } from "./verify";
-import { createMemoryChainReader } from "./chain";
-import type { Hex } from "./types";
+import { createIssuer, nextCounter } from "./issuer.js";
+import { generateSigner } from "./sign.js";
+import { verifyReceipts } from "./verify.js";
+import { createMemoryChainReader } from "./chain.js";
+import type { Hex } from "./types.js";
 
 const ACCOUNT = `0x${"8f".repeat(20)}` as Hex;
 const COMMITMENT = `0x${"4d".repeat(32)}` as Hex;

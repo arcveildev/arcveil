@@ -42,6 +42,27 @@ jobs:
       - run: pnpm --filter @arcveildev/sdk test
       - run: pnpm --filter @arcveildev/sdk build
 
+      # 0.1.0 shipped extensionless relative imports and could not be imported
+      # from Node at all — it only worked inside a bundler. Nothing in the unit
+      # tests could see that, because they run on the source. This packs the
+      # real tarball and imports it the way a stranger would.
+      - name: Import the packed tarball from a clean Node project
+        run: |
+          set -euo pipefail
+          TARBALL="$(pwd)/$(npm pack --silent)"
+          SMOKE="$(mktemp -d)"
+          cd "$SMOKE"
+          npm init -y >/dev/null
+          npm install "$TARBALL" viem >/dev/null
+          node --input-type=module -e "
+            import { RECEIPT_VERSION, arc, verifyReceipts } from '@arcveildev/sdk';
+            if (RECEIPT_VERSION !== 1) throw new Error('unexpected receipt version');
+            if (arc.id !== 5042) throw new Error('unexpected chain id');
+            if (typeof verifyReceipts !== 'function') throw new Error('verifyReceipts missing');
+            console.log('import from Node: ok');
+          "
+        working-directory: packages/sdk
+
       - run: npm publish --provenance --access public
         working-directory: packages/sdk
         env:

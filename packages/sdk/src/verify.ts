@@ -1,7 +1,7 @@
-import { computeReceiptId } from "./canonical";
-import { verifyBodySignature } from "./sign";
-import type { ChainReader } from "./chain";
-import type { CheckId, CheckResult, CheckStatus, Receipt, ReceiptReport, VerificationReport } from "./types";
+import { computeReceiptId } from "./canonical.js";
+import { verifyBodySignature } from "./sign.js";
+import type { ChainReader } from "./chain.js";
+import type { CheckId, CheckResult, CheckStatus, Receipt, ReceiptReport, VerificationReport } from "./types.js";
 
 type CheckContext = { receipt: Receipt; predecessor: Receipt | null; chain: ChainReader };
 type CheckOutcome = Omit<CheckResult, "id">;

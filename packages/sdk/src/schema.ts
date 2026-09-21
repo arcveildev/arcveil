@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { RECEIPT_VERSION, type Receipt } from "./types";
+import { RECEIPT_VERSION, type Receipt } from "./types.js";
 
 const hex = (bytes?: number) =>
   z.string().regex(bytes === undefined ? /^0x[0-9a-fA-F]+$/ : new RegExp(`^0x[0-9a-fA-F]{${bytes * 2}}$`), {

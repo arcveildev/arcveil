@@ -1,5 +1,5 @@
 import { encodeFunctionData, type Account, type Chain, type Hash, type Hex as ViemHex, type Transport, type WalletClient } from "viem";
-import type { Hex } from "./types";
+import type { Hex } from "./types.js";
 
 /** The 2-of-3 account: a device key, a refusable policy co-signer, and recovery. */
 export const ARCVEIL_ACCOUNT_ABI = [

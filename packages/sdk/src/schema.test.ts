@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { parseReceiptInput } from "./schema";
-import { receiptFixture } from "./testing";
+import { parseReceiptInput } from "./schema.js";
+import { receiptFixture } from "./testing.js";
 
 describe("parseReceiptInput", () => {
   it("accepts a single receipt and returns it as a one-item bundle", async () => {

@@ -1,6 +1,6 @@
 import { concatHex, keccak256 } from "viem";
-import { issueReceipt } from "./sign";
-import type { ActionKind, Hex, Receipt } from "./types";
+import { issueReceipt } from "./sign.js";
+import type { ActionKind, Hex, Receipt } from "./types.js";
 
 const ZERO_COMMITMENT: Hex = `0x${"00".repeat(32)}`;
 

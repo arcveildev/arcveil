@@ -1,7 +1,7 @@
 import { decodeFunctionResult, encodeFunctionData } from "viem";
-import { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi";
-import type { ChainReader, MandateRecord, TxRecord } from "./chain";
-import type { Hex } from "./types";
+import { ANCHOR_REGISTRY_ABI, MANDATE_REGISTRY_ABI } from "./abi.js";
+import type { ChainReader, MandateRecord, TxRecord } from "./chain.js";
+import type { Hex } from "./types.js";
 
 /**
  * Reads Arc over plain JSON-RPC, from the browser. Arc's endpoint allows

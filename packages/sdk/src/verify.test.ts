@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { computeReceiptId } from "./canonical";
-import { generateSigner, issueReceipt } from "./sign";
-import { verifyReceipts } from "./verify";
-import { checkOf, chainFixture, draftFixture, receiptFixture, testSigner } from "./testing";
-import type { ChainReader } from "./chain";
-import type { Receipt } from "./types";
+import { computeReceiptId } from "./canonical.js";
+import { generateSigner, issueReceipt } from "./sign.js";
+import { verifyReceipts } from "./verify.js";
+import { checkOf, chainFixture, draftFixture, receiptFixture, testSigner } from "./testing.js";
+import type { ChainReader } from "./chain.js";
+import type { Receipt } from "./types.js";
 
 const report = (receipts: readonly Receipt[], chain: ChainReader = chainFixture()) =>
   verifyReceipts(receipts, { chain });

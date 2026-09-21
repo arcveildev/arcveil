@@ -1,4 +1,4 @@
-import type { Hex } from "./types";
+import type { Hex } from "./types.js";
 
 /**
  * What the verifier needs from Arc. v0 ships the in-memory reader

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseJudgement } from "./judgement";
+import { parseJudgement } from "./judgement.js";
 import {
   affordable,
   applySelection,
@@ -7,8 +7,8 @@ import {
   selectionClauses,
   type Candidate,
   type SelectionPolicy,
-} from "./selection";
-import { judgeCommitment } from "./judge";
+} from "./selection.js";
+import { judgeCommitment } from "./judge.js";
 
 const candidates: readonly Candidate[] = [
   { id: "quotes_pro", description: "Streaming quotes for 40 venues", priceUsd: 0.02 },
