@@ -1,0 +1,31 @@
+# Marks a published version as deprecated. Run from the Actions tab.
+#
+# This exists because registry writes need the automation token, which lives
+# only in this repository's secrets — a laptop logged in through the website
+# gets a 403. Deprecating is reversible: run it again with an empty message.
+name: Deprecate SDK version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to deprecate, e.g. 0.1.0
+        required: true
+      message:
+        description: Why. Empty string un-deprecates.
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm deprecate "@arcveildev/sdk@${{ inputs.version }}" "${{ inputs.message }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
