@@ -1,4 +1,4 @@
-import type { Evaluation } from "@arcveil/sdk";
+import type { Evaluation } from "@arcveildev/sdk";
 
 /**
  * Everything the judge is shown, and nothing else.

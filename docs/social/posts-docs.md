@@ -30,7 +30,7 @@ table, two addresses they can paste into a block explorer.
 > We wrote the docs against the code instead of from memory, and the code won
 > an argument.
 >
-> The SDK page said `pnpm add @arcveil/sdk`. That command fails — the package
+> The SDK page said `pnpm add @arcveildev/sdk`. That command fails — the package
 > is not published. So the page now says it is not published, and the install
 > section tells you to build it from the workspace.
 >

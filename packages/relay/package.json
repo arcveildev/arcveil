@@ -1,7 +1,7 @@
 {
-  "name": "@arcveil/gate",
+  "name": "@arcveil/relay",
   "version": "0.1.0",
-  "description": "The policy gate: puts a mandate's semantic clauses to a judge and answers allow or deny, never why.",
+  "description": "Submits shielded withdrawals so a fresh address never has to hold gas to be paid.",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@arcveildev/sdk": "workspace:*",
+    "@arcveil/bridge": "workspace:*",
     "viem": "^2",
     "zod": "^4"
   },

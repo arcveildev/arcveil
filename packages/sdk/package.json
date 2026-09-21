@@ -1,5 +1,5 @@
 {
-  "name": "@arcveil/sdk",
+  "name": "@arcveildev/sdk",
   "version": "0.1.0",
   "description": "Issue and verify Arcveil receipts: proof that an agent stayed inside a mandate, without revealing the mandate.",
   "license": "MIT",

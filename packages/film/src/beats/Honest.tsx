@@ -9,7 +9,7 @@ import { Row } from "../ui/Row";
  * on what is not built, so the other eight beats cannot be over-read.
  */
 const NOT_YET = [
-  { key: "@arcveil/sdk", note: "not on npm — a workspace package" },
+  { key: "@arcveildev/sdk", note: "not on npm — a workspace package" },
   { key: "enclave", note: "designed, not built" },
   { key: "zk proof", note: "planned; the format does not change" },
   { key: "audit", note: "none. nothing is at stake yet" },

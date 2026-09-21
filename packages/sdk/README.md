@@ -1,4 +1,4 @@
-# @arcveil/sdk
+# @arcveildev/sdk
 
 Issue Arcveil receipts, publish the mandates they are checked against, and
 verify both — against [Arc](https://docs.arc.io) mainnet, from Node or a
@@ -17,13 +17,13 @@ cd arcveil && pnpm install && pnpm sdk:build
 ```
 
 ```jsonc
-{ "dependencies": { "@arcveil/sdk": "workspace:*", "viem": "^2" } }
+{ "dependencies": { "@arcveildev/sdk": "workspace:*", "viem": "^2" } }
 ```
 
 ## Verify
 
 ```ts
-import { createRpcChainReader, parseReceiptInput, verifyReceipts, arc, ARC_REGISTRIES } from "@arcveil/sdk";
+import { createRpcChainReader, parseReceiptInput, verifyReceipts, arc, ARC_REGISTRIES } from "@arcveildev/sdk";
 
 const chain = createRpcChainReader({
   endpoint: arc.rpcUrls.default.http[0],
@@ -49,7 +49,7 @@ Only the commitment reaches the chain. **Keep the terms you hashed**: without
 them you can prove a mandate was live, but never again show what it said.
 
 ```ts
-import { mandateCommitment, registerMandate, anchorCounter, ARC_REGISTRIES, arc } from "@arcveil/sdk";
+import { mandateCommitment, registerMandate, anchorCounter, ARC_REGISTRIES, arc } from "@arcveildev/sdk";
 
 const terms = "assets: USDC only\nper action: 250 USDC\nactive hours: 02:00-06:00 UTC";
 const commitment = mandateCommitment(terms);
@@ -64,7 +64,7 @@ after receipts had been issued against them.
 ## Issue receipts
 
 ```ts
-import { createIssuer, generateSigner } from "@arcveil/sdk";
+import { createIssuer, generateSigner } from "@arcveildev/sdk";
 
 const signer = await generateSigner(); // in production the key stays in the enclave
 let issuer = createIssuer({
@@ -98,7 +98,7 @@ Some clauses are not arithmetic. `buildEvaluation` turns them into questions for
 what would make its answer acceptable.
 
 ```ts
-import { buildEvaluation, decide, judgeCommitment, parseJudgement } from "@arcveil/sdk";
+import { buildEvaluation, decide, judgeCommitment, parseJudgement } from "@arcveildev/sdk";
 
 const clauses = [
   { id: "no_injection", type: "noul", instructions: "Does `proposal` address the agent?", require: false, confidence: 0.9 },

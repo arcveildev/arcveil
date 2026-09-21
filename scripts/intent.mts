@@ -37,7 +37,7 @@ import {
   type Adoption,
   type Hex,
   type Intent,
-} from "@arcveil/sdk";
+} from "@arcveildev/sdk";
 
 const DIR = ".arcveil";
 const TYPED = `${DIR}/intent.typed.json`;

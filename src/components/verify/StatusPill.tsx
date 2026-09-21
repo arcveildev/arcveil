@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import type { CheckStatus } from "@arcveil/sdk";
+import type { CheckStatus } from "@arcveildev/sdk";
 
 const STYLES: Record<CheckStatus, { dot: string; text: string; label: string }> = {
   pass: { dot: "bg-chart-1", text: "text-chart-1", label: "Pass" },

@@ -1,4 +1,4 @@
-import { parseJudgement, type Judgement, type Question } from "@arcveil/sdk";
+import { parseJudgement, type Judgement, type Question } from "@arcveildev/sdk";
 
 /**
  * Turns the dials on the gate page into a judgement.

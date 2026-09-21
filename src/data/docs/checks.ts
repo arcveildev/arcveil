@@ -87,7 +87,7 @@ report.receipts[0].checks; // [{ id, status, detail }, ...] in CHECK_ORDER
 
 export const MEMORY_SNIPPET = `
 // In tests, hand the verifier the chain state you want to check against.
-import { createMemoryChainReader } from "@arcveil/sdk";
+import { createMemoryChainReader } from "@arcveildev/sdk";
 
 const chain = createMemoryChainReader({
   mandates: [{ account, commitment, epoch: 1, revoked: false }],

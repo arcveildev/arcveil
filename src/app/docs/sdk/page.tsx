@@ -88,7 +88,7 @@ export default function SdkPage() {
         <DefTable
           rows={EXPORT_ROWS}
           head={["Symbol", "What it does"]}
-          caption="The public surface of @arcveil/sdk."
+          caption="The public surface of @arcveildev/sdk."
         />
       </DocsSection>
 

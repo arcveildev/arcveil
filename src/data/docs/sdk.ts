@@ -7,7 +7,7 @@ export const SDK_PAGE = {
   title: "SDK.",
   tagline: "Issue receipts, publish mandates, verify both.",
   lede:
-    "@arcveil/sdk is the receipt format as code: the canonical hashing, the issuer, the five checks, viem chain definitions for Arc, and typed calls into the registries and the account. It runs in Node and in a browser — the site you are reading is its first consumer.",
+    "@arcveildev/sdk is the receipt format as code: the canonical hashing, the issuer, the five checks, viem chain definitions for Arc, and typed calls into the registries and the account. It runs in Node and in a browser — the site you are reading is its first consumer.",
 } as const;
 
 export const INSTALL = `
@@ -19,14 +19,14 @@ cd arcveil && pnpm install && pnpm sdk:build
 export const INSTALL_DEP = `
 {
   "dependencies": {
-    "@arcveil/sdk": "workspace:*",
+    "@arcveildev/sdk": "workspace:*",
     "viem": "^2"
   }
 }
 `;
 
 export const VERIFY_SNIPPET = `
-import { arc, ARC_REGISTRIES, createRpcChainReader, parseReceiptInput, verifyReceipts } from "@arcveil/sdk";
+import { arc, ARC_REGISTRIES, createRpcChainReader, parseReceiptInput, verifyReceipts } from "@arcveildev/sdk";
 
 // Anything arriving as text is untrusted until the schema says otherwise.
 const parsed = parseReceiptInput(json);
@@ -42,7 +42,7 @@ const report = await verifyReceipts(parsed.receipts, { chain });
 `;
 
 export const MANDATE_SNIPPET = `
-import { mandateCommitment, registerMandate, revokeMandate, ARC_REGISTRIES, arc } from "@arcveil/sdk";
+import { mandateCommitment, registerMandate, revokeMandate, ARC_REGISTRIES, arc } from "@arcveildev/sdk";
 
 const terms = [
   "assets: USDC only",
@@ -58,7 +58,7 @@ await revokeMandate(writer, 1); // stops it; the epoch can never be reused
 `;
 
 export const ISSUE_SNIPPET = `
-import { createIssuer, generateSigner } from "@arcveil/sdk";
+import { createIssuer, generateSigner } from "@arcveildev/sdk";
 
 const signer = await generateSigner(); // stand-in: in production this key lives in the enclave
 
@@ -77,7 +77,7 @@ issuer = next; // issuing advances the chain — keep the issuer it hands back
 `;
 
 export const INTENT_SNIPPET = `
-import { encodeExecute, executeIntent, intentTypedData, signIntent } from "@arcveil/sdk";
+import { encodeExecute, executeIntent, intentTypedData, signIntent } from "@arcveildev/sdk";
 
 const intent = { call, nonce, deadline, epoch: 1, mandate: commitment };
 

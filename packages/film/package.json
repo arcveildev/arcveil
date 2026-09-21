@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@arcveil/sdk": "workspace:*",
+    "@arcveildev/sdk": "workspace:*",
     "@remotion/cli": "^4.0.400",
     "@remotion/google-fonts": "^4.0.400",
     "react": "19.2.8",

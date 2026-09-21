@@ -102,7 +102,7 @@ export const CANONICAL_RULES = [
 ] as const;
 
 export const CANONICAL_SNIPPET = `
-import { canonicalize, computeReceiptId, receiptBody } from "@arcveil/sdk";
+import { canonicalize, computeReceiptId, receiptBody } from "@arcveildev/sdk";
 
 canonicalize(receiptBody(receipt)); // the exact bytes that get hashed
 await computeReceiptId(receipt); // must equal receipt.id

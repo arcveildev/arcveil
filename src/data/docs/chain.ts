@@ -1,4 +1,4 @@
-import { USDC_ERC20_ADDRESS } from "@arcveil/sdk";
+import { USDC_ERC20_ADDRESS } from "@arcveildev/sdk";
 import { ARC, CHAIN } from "@/data/site";
 
 /**
@@ -55,7 +55,7 @@ export const DECIMALS_NOTE =
   "USDC has two faces on Arc. The native balance — gas, msg.value, native sends — has 18 decimals; the ERC-20 interface has the familiar 6. Mixing them is a factor of a million and it fails silently. The chain definitions in the SDK spell both out for that reason.";
 
 export const READER_SNIPPET = `
-import { createRpcChainReader, arc, arcTestnet, ARC_REGISTRIES } from "@arcveil/sdk";
+import { createRpcChainReader, arc, arcTestnet, ARC_REGISTRIES } from "@arcveildev/sdk";
 
 // Mainnet — the registries below are deployed and answering.
 createRpcChainReader({

@@ -1,4 +1,4 @@
-import { parseJudgement, type Evaluation, type Judgement } from "@arcveil/sdk";
+import { parseJudgement, type Evaluation, type Judgement } from "@arcveildev/sdk";
 import type { JudgeBinding } from "./env";
 
 /** TypeSafe's structured evaluation model, reached through the Workers AI binding. */

@@ -56,7 +56,7 @@ export default function DocsOverviewPage() {
         </DocsProse>
         <Snippet caption="verify.ts" source={QUICKSTART} />
         <Note title="Not on npm yet">
-          <code className="font-mono text-xs text-fg">@arcveil/sdk</code> is not published. Until it
+          <code className="font-mono text-xs text-fg">@arcveildev/sdk</code> is not published. Until it
           is, it is a workspace package in this repository — build it with{" "}
           <code className="font-mono text-xs text-fg">pnpm sdk:build</code> and depend on it with{" "}
           <code className="font-mono text-xs text-fg">workspace:*</code>, the way this site does.

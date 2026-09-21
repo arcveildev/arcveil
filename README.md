@@ -70,7 +70,7 @@ docs/RECEIPT.md        receipt format v1 and the five checks
 docs/JUDGE.md          semantic clauses, the judge, and what it does not prove
 docs/DESIGN_SYSTEM.md  design language + token map
 docs/AGENT_BRIEF.md    conventions for anyone adding a section
-packages/sdk/          @arcveil/sdk — the receipt format, issuer, verifier and judge
+packages/sdk/          @arcveildev/sdk — the receipt format, issuer, verifier and judge
 packages/gate/         the policy gate — a Worker that puts semantic clauses to typesafe/jev
 contracts/             Foundry project: MandateRegistry, AnchorRegistry
 ```
@@ -80,10 +80,10 @@ contracts/             Foundry project: MandateRegistry, AnchorRegistry
 - [x] Live reads of Arc mainnet from the browser
 - [x] Home page: ladder, signing pipeline, threat model, worked example, escape hatch, roadmap
 - [x] TypeScript SDK (`packages/sdk`) — the site is its first consumer
-- [x] Semantic clauses judged by `typesafe/jev`, and the gate that runs them
-      (`packages/gate`) — built and tested, not deployed
+- [x] Semantic clauses judged by `typesafe/jev`, and the gate that runs them —
+      deployed at `gate.arcveil.dev`, in service once it holds a token
 - [x] `/docs`
-- [ ] Publish `@arcveil/sdk` to npm
+- [ ] Publish `@arcveildev/sdk` to npm
 - [ ] Desktop app (Tauri, sharing these components)
 - [x] Registries deployed to Arc mainnet, and the verifier reads them live
 - [ ] Co-signer / enclave service

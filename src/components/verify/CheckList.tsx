@@ -1,5 +1,5 @@
 import { CHECK_TITLES } from "@/data/receiptClaims";
-import type { ReceiptReport } from "@arcveil/sdk";
+import type { ReceiptReport } from "@arcveildev/sdk";
 import { StatusPill } from "./StatusPill";
 
 const shortId = (id: string) => `${id.slice(0, 10)}…${id.slice(-4)}`;

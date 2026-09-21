@@ -53,7 +53,7 @@ export const LIVE_ROWS = [
   { key: "Verifier", value: "Five checks, client-side, reading Arc mainnet over plain JSON-RPC" },
   { key: "Registries", value: `MandateRegistry and AnchorRegistry, deployed to ${CHAIN.name} mainnet (chain ${ARC.chainId})` },
   { key: "Account", value: "ERC-4337 account with 2-of-3 signing, executing only while its mandate is live" },
-  { key: "SDK", value: "@arcveil/sdk — issuing, verifying, mandates and account intents" },
+  { key: "SDK", value: "@arcveildev/sdk — issuing, verifying, mandates and account intents" },
 ] as const;
 
 export const NOT_LIVE_ROWS = [
@@ -92,7 +92,7 @@ export const VOCABULARY = [
 
 export const QUICKSTART = `
 // Five checks against Arc mainnet, from Node or a browser.
-import { arc, ARC_REGISTRIES, createRpcChainReader, parseReceiptInput, verifyReceipts } from "@arcveil/sdk";
+import { arc, ARC_REGISTRIES, createRpcChainReader, parseReceiptInput, verifyReceipts } from "@arcveildev/sdk";
 
 const chain = createRpcChainReader({
   endpoint: arc.rpcUrls.default.http[0],

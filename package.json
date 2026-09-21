@@ -7,15 +7,15 @@
     "build": "pnpm sdk:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "pnpm sdk:build && vitest run --passWithNoTests && pnpm --filter @arcveil/sdk test && pnpm --filter @arcveil/gate test",
+    "test": "pnpm sdk:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/gate test",
     "test:watch": "vitest",
     "gen:receipts": "tsx scripts/gen-receipts.mts",
     "deploy": "pnpm build && wrangler deploy",
     "deploy:dry": "pnpm build && wrangler deploy --dry-run",
     "gate:deploy": "pnpm --filter @arcveil/gate deploy",
     "gate:dev": "pnpm --filter @arcveil/gate dev",
-    "sdk:build": "pnpm --filter @arcveil/sdk build",
-    "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveil/sdk typecheck && pnpm --filter @arcveil/gate typecheck && pnpm --filter @arcveil/film typecheck",
+    "sdk:build": "pnpm --filter @arcveildev/sdk build",
+    "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveildev/sdk typecheck && pnpm --filter @arcveil/bridge typecheck && pnpm --filter @arcveil/gate typecheck",
     "check": "pnpm typecheck && pnpm lint && pnpm test",
     "intent": "tsx scripts/intent.mts",
     "film:studio": "pnpm --filter @arcveil/film studio",
@@ -29,7 +29,7 @@
     "react-dom": "19.2.8",
     "tailwind-merge": "^3.6.0",
     "viem": "^2.56.5",
-    "@arcveil/sdk": "workspace:*"
+    "@arcveildev/sdk": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

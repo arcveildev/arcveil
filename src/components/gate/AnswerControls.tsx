@@ -1,6 +1,6 @@
 "use client";
 
-import type { Question } from "@arcveil/sdk";
+import type { Question } from "@arcveildev/sdk";
 import type { DialValue, Dials } from "@/lib/gate";
 import { Dial } from "./Dial";
 

@@ -72,7 +72,7 @@ export default function ReceiptFormatPage() {
           commitment to cumulative spend. Consecutive receipts must join, which is what makes a
           dropped receipt visible rather than silent.
         </DocsProse>
-        <Snippet caption="@arcveil/sdk" source={COUNTER_SNIPPET} />
+        <Snippet caption="@arcveildev/sdk" source={COUNTER_SNIPPET} />
         <Note title="Spend is not bound yet">
           The SDK cannot compute a spend commitment: receipts carry no amounts, and the numbers
           would live inside an enclave that is designed, not built. Omit it and the chain still

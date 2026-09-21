@@ -1,4 +1,4 @@
-# Publishes @arcveil/sdk from a tag, with npm provenance.
+# Publishes @arcveildev/sdk from a tag, with npm provenance.
 #
 # Provenance is the reason this runs in CI rather than from a laptop: npm
 # records a signed attestation binding the published tarball to this workflow,
@@ -38,9 +38,9 @@ jobs:
 
       # The gates the repository already keeps. A package that fails its own
       # test suite must not reach the registry, where the version is permanent.
-      - run: pnpm --filter @arcveil/sdk typecheck
-      - run: pnpm --filter @arcveil/sdk test
-      - run: pnpm --filter @arcveil/sdk build
+      - run: pnpm --filter @arcveildev/sdk typecheck
+      - run: pnpm --filter @arcveildev/sdk test
+      - run: pnpm --filter @arcveildev/sdk build
 
       - run: npm publish --provenance --access public
         working-directory: packages/sdk

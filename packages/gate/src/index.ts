@@ -8,7 +8,7 @@ import {
   judgeCommitment,
   selectionClauses,
   type Candidate,
-} from "@arcveil/sdk";
+} from "@arcveildev/sdk";
 import { loadClauses, loadSelectionPolicy } from "./config";
 import { ask, JEV_MODEL } from "./judge";
 import { authorise, corsHeaders, fail, json, rateLimit, readJson } from "./http";

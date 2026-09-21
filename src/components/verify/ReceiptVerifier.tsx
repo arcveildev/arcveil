@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { FigureLabel } from "@/components/ui/FigureLabel";
 import { RECEIPT_SAMPLES } from "@/data/receiptSamples";
 import { ARC } from "@/data/site";
-import { createRpcChainReader, parseReceiptInput, verifyReceipts, type VerificationReport } from "@arcveil/sdk";
+import { createRpcChainReader, parseReceiptInput, verifyReceipts, type VerificationReport } from "@arcveildev/sdk";
 import { cn } from "@/lib/cn";
 import { CheckList } from "./CheckList";
 import { StatusPill } from "./StatusPill";

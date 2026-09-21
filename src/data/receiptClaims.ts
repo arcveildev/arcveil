@@ -1,4 +1,4 @@
-import type { CheckId } from "@arcveil/sdk";
+import type { CheckId } from "@arcveildev/sdk";
 
 export const CHECK_TITLES: Record<CheckId, string> = {
   integrity: "Body integrity",

@@ -1,4 +1,4 @@
-import type { Candidate, Clause, SelectionPolicy } from "@arcveil/sdk";
+import type { Candidate, Clause, SelectionPolicy } from "@arcveildev/sdk";
 import type { Dials } from "@/lib/gate";
 
 /**

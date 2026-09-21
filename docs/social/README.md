@@ -104,7 +104,7 @@ text-free; every word is set in Higgsedit (Manrope + DM Mono).
 
 Developer banner in the @arcusdotnet pattern (2026-09-17): eyebrow with the
 mark, headline, three numbered steps, install pill on the left; a code window
-on the right with real `@arcveil/sdk` calls (publish a mandate, issue a
+on the right with real `@arcveildev/sdk` calls (publish a mandate, issue a
 receipt, verify) and an "Arc Mainnet · 5042" badge. No Higgsfield: it is HTML,
 Geist + DM Mono, rendered with headless Chrome at 2× (3000×1200 from a
 1500×600 layout). Re-render after editing the HTML:
@@ -129,7 +129,7 @@ lets agents do, the call to action, the link):
 > it stayed in bounds without revealing amounts or balances.
 >
 > Publish a mandate, issue receipts, verify against Arc mainnet. A few lines
-> with @arcveil/sdk.
+> with @arcveildev/sdk.
 >
 > arcveil.dev
 
@@ -153,21 +153,21 @@ the transcript for the SDK calls.
 
 > Verify what an agent did on Arc. Never what it saw.
 >
-> @arcveil/sdk gives an agent a spending mandate instead of your keys. Every
+> @arcveildev/sdk gives an agent a spending mandate instead of your keys. Every
 > action leaves a receipt that proves it stayed in bounds, with no amounts and
 > no balances inside.
 >
 > Publish a mandate, issue receipts, verify against Arc mainnet. Five checks,
 > a few lines, in Node or a browser.
 >
-> pnpm add @arcveil/sdk
+> pnpm add @arcveildev/sdk
 > arcveil.dev
 
 Shorter alt:
 
 > An agent that can spend is an agent that can see. Not on Arc.
 >
-> @arcveil/sdk: a mandate instead of your keys, a receipt for every action,
+> @arcveildev/sdk: a mandate instead of your keys, a receipt for every action,
 > verified against Arc mainnet in a few lines.
 >
 > arcveil.dev
@@ -345,3 +345,13 @@ pnpm studio                 # scrub the beats
 pnpm exec remotion still src/index.ts DocsFilm out.png --frame=540
 pnpm exec remotion render src/index.ts DocsFilm ../../docs/social/video/docs/arcveil-docs.mp4
 ```
+
+## Note on the SDK rename (2026-09-21)
+
+The package was renamed `@arcveil/sdk` → `@arcveildev/sdk` before its first
+publish: the `@arcveil` scope on npm needs an organisation of that name, and
+the account is `arcveildev`. Everything in the repository uses the new name.
+
+The four `sdk-*.html` banners are the exception and are left untouched, because
+their PNGs were posted under the old name and those posts are a record of what
+was true when they went out. Re-render them only if they are ever posted again.

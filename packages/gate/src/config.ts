@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Clause, SelectionPolicy } from "@arcveil/sdk";
+import type { Clause, SelectionPolicy } from "@arcveildev/sdk";
 import type { Env } from "./env";
 
 /**

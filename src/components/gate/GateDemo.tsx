@@ -11,7 +11,7 @@ import {
   selectionClauses,
   type Candidate,
   type Evaluation,
-} from "@arcveil/sdk";
+} from "@arcveildev/sdk";
 import { FigureLabel } from "@/components/ui/FigureLabel";
 import { DEMO_CLAUSES, DEMO_SELECTION, SCENARIOS, type Scenario } from "@/data/gate";
 import { stageJudgement, type DialValue, type Dials } from "@/lib/gate";

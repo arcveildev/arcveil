@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildEvaluation, decide, type Clause } from "@arcveil/sdk";
+import { buildEvaluation, decide, type Clause } from "@arcveildev/sdk";
 import { stageJudgement, type Dials } from "./gate";
 
 const clauses: readonly Clause[] = [
