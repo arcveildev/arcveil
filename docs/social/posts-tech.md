@@ -65,6 +65,8 @@ Shorter alt:
 > again show what it said.
 >
 > MandateRegistry, Arc mainnet: 0xcd48ede31bd45d8fda65d5d24f8a6a317fd131f5
+>
+> arcveil.dev
 
 ---
 
@@ -81,6 +83,8 @@ Shorter alt:
 >
 > Enclave execution is designed, not deployed. We would rather publish the
 > architecture than imply it is finished.
+>
+> arcveil.dev
 
 ---
 
@@ -100,6 +104,8 @@ Shorter alt:
 >
 > The escape hatch contract is designed, not shipped. It lands with the mandate
 > contracts.
+>
+> arcveil.dev
 
 ---
 

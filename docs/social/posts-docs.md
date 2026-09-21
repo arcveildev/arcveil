@@ -221,6 +221,8 @@ learns anything from.
 >
 > 0.1.1 fixes it. The release now installs its own package in a clean project
 > and imports it before it is allowed to publish.
+>
+> @arcveildev/sdk · arcveil.dev/docs/sdk
 
 ## 02 · Alt — shorter
 
@@ -231,6 +233,8 @@ learns anything from.
 >
 > 0.1.1 is out, and the release pipeline now has to install its own package
 > before npm will take it.
+>
+> @arcveildev/sdk
 
 ## 03 · Provenance
 

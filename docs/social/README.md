@@ -14,6 +14,34 @@ The lockup is the real `<LogoMark>` geometry from `src/components/ui/Logo.tsx`
 and the wordmark in DM Mono Medium, not AI-rendered text. The tagline is
 "Agents that can spend, never see, never exceed."
 
+## Attribution
+
+Every standalone post closes on the product. Not because a link performs — it
+usually does not — but because a screenshot of a post that never names anyone
+is a screenshot nobody can trace back.
+
+| Post is about | Closes on |
+|---|---|
+| Receipts, the verifier | `arcveil.dev/verify` |
+| The semantic gate | `gate.arcveil.dev` or `arcveil.dev/gate` |
+| The docs, the SDK | `arcveil.dev/docs`, `arcveil.dev/docs/sdk`, or `@arcveildev/sdk` |
+| The bridge | `arcveil.dev` — **not** `/bridge`, which correctly reports that nothing is deployed |
+| Anything else | `arcveil.dev` |
+
+**Replies are exempt**, and should stay that way. A reply already sits under
+the account that wrote it; a domain on the end of one reads as a pitch rather
+than an answer.
+
+**Announcements name the product inside the claim**, not only at the close and
+not only on the banner. A finding does not: a fact about someone else's chain
+belongs to whoever can reproduce it, and putting our name in the middle of it
+turns a contribution into an advertisement. The name goes at the end, as
+attribution.
+
+This was written after an audit found twelve post bodies with no mention of
+Arcveil anywhere in them, across all four files — including the bridge
+announcement, whose whole purpose was to announce an Arcveil product.
+
 ## Post banners (`banners/`)
 
 `$ARCVEIL / DEV BURNT`, 1920×1080, 2026-09-17. Three Higgsfield plates
