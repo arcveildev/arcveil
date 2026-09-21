@@ -5,6 +5,7 @@ import { loadConfig, loadPostman, type Env } from "./env";
 const complete: Env = {
   ARC_RPC: "https://rpc.mainnet.arc.io",
   ENTRYPOINT: "0x00000000000000000000000000000000000000c3",
+  GATEWAY: "0x00000000000000000000000000000000000060A7",
   SCOPE: "777",
   RELAYER_KEY: `0x${"11".repeat(32)}`,
 };
@@ -33,6 +34,10 @@ describe("configuration", () => {
 
   it("refuses an entrypoint that is not an address", () => {
     expect(loadConfig({ ...complete, ENTRYPOINT: "arcveil.dev" }).ok).toBe(false);
+  });
+
+  it("will not deliver deposits without a gateway to deliver them to", () => {
+    expect(loadConfig({ ...complete, GATEWAY: undefined }).ok).toBe(false);
   });
 });
 

@@ -23,6 +23,8 @@ export type Env = {
   ENTRYPOINT?: string;
   /** The pool's scope, which selects the pool inside the Entrypoint. */
   SCOPE?: string;
+  /** VeilGateway on Arc, which turns an attested CCTP burn into a deposit. */
+  GATEWAY?: string;
   /** The hot key that pays gas. Funded with USDC, holds nothing else, rotatable. */
   RELAYER_KEY?: string;
   /** Minimum fee, in basis points of the withdrawal, this relayer will work for. */
@@ -49,6 +51,7 @@ const privateKey = z
 const ConfigSchema = z.object({
   rpc: z.url(),
   entrypoint: address,
+  gateway: address,
   scope: z.string().regex(/^\d+$/, "expected a decimal scope").transform(BigInt),
   key: privateKey,
   minFeeBps: z
@@ -102,6 +105,7 @@ export const loadConfig = (env: Env): Loaded<Config> => {
   const parsed = ConfigSchema.safeParse({
     rpc: env.ARC_RPC,
     entrypoint: env.ENTRYPOINT,
+    gateway: env.GATEWAY,
     scope: env.SCOPE,
     key: env.RELAYER_KEY,
     minFeeBps: env.MIN_FEE_BPS,

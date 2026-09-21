@@ -1,16 +1,8 @@
 /// <reference lib="webworker" />
 
-import {
-  commitmentOf,
-  contextFor,
-  deriveNote,
-  proveWithdrawal,
-  rootOf,
-  withdrawalFor,
-  witnessFor,
-  type Groth16,
-  type WithdrawProof,
-} from "@arcveil/bridge";
+import { proveWithdrawal, type Groth16, type WithdrawProof } from "@arcveil/bridge";
+
+import { spendFromPayload, type SpendPayload } from "@/lib/spend";
 
 /**
  * Builds a withdrawal proof, off the main thread.
@@ -20,23 +12,23 @@ import {
  * finishes, so the only clean way to reclaim them is to terminate the worker
  * that owns them.
  *
- * Nothing secret is posted back. The message out carries the proof, the eight
- * public signals and how long it took — the same things a relayer receives.
+ * The plan arrives already assembled — which leaf, which siblings, which
+ * context — so this file cannot get any of that wrong. It deserialises, proves,
+ * and posts back the proof and the eight public signals: exactly what the
+ * relayer receives, and nothing that names a deposit.
+ *
+ * The veil-key signature reaches this worker and stops here.
  */
 
-export type ProverRequest = {
-  /** The veil-key signature, or a demonstration seed. Never leaves this worker. */
-  readonly seed: `0x${string}`;
-  readonly existingValue: string;
-  readonly withdrawnValue: string;
-  readonly recipient: `0x${string}`;
-  readonly entrypoint: `0x${string}`;
-  readonly scope: string;
-};
+export type ProverRequest = { readonly payload: SpendPayload };
 
 export type ProverMessage =
   | { readonly kind: "progress"; readonly stage: string; readonly loaded?: number; readonly total?: number }
-  | { readonly kind: "done"; readonly proof: readonly string[][]; readonly signals: readonly string[]; readonly ms: number }
+  | {
+      readonly kind: "done";
+      readonly proof: { pA: string[]; pB: string[][]; pC: string[]; pubSignals: string[] };
+      readonly ms: number;
+    }
   | { readonly kind: "error"; readonly message: string };
 
 const post = (message: ProverMessage) => (self as unknown as Worker).postMessage(message);
@@ -69,51 +61,12 @@ async function load(url: string, stage: string): Promise<Uint8Array> {
   return bytes;
 }
 
-/**
- * A pool with a handful of deposits in it, one of which is ours.
- *
- * This is a demonstration, and it is labelled as one on the page: no pool is
- * deployed yet, so there is no real tree to prove against. Every other part is
- * real — the real circuit, the real ceremony key, the real context binding —
- * so what this measures is what a real withdrawal will cost.
- */
-function demoSpend(request: ProverRequest) {
-  const note = deriveNote(request.seed, 0);
-  const change = deriveNote(request.seed, 1);
-
-  const label = 0x3333333333333333n;
-  const existingValue = BigInt(request.existingValue);
-  const commitment = commitmentOf(existingValue, label, note.precommitment);
-
-  const stateLeaves = [111n, commitment, 222n, 333n];
-  const aspLeaves = [999n, label, 888n];
-
-  const withdrawal = withdrawalFor(request.entrypoint, {
-    recipient: request.recipient,
-    feeRecipient: request.recipient,
-    relayFeeBPS: 25n,
-  });
-
-  return {
-    note,
-    change,
-    label,
-    existingValue,
-    withdrawnValue: BigInt(request.withdrawnValue),
-    stateWitness: witnessFor(stateLeaves, commitment),
-    aspWitness: witnessFor(aspLeaves, label),
-    context: contextFor(withdrawal, BigInt(request.scope)),
-    poolSize: stateLeaves.length,
-    root: rootOf(stateLeaves),
-  };
-}
-
-const asStrings = (proof: WithdrawProof): readonly string[][] => [
-  proof.pA.map(String),
-  proof.pB[0].map(String),
-  proof.pB[1].map(String),
-  proof.pC.map(String),
-];
+const serialise = (proof: WithdrawProof) => ({
+  pA: proof.pA.map(String),
+  pB: proof.pB.map((pair) => pair.map(String)),
+  pC: proof.pC.map(String),
+  pubSignals: proof.pubSignals.map(String),
+});
 
 self.addEventListener("message", (event: MessageEvent<ProverRequest>) => {
   void (async () => {
@@ -128,10 +81,9 @@ self.addEventListener("message", (event: MessageEvent<ProverRequest>) => {
       const { groth16 } = (await import("snarkjs")) as unknown as { groth16: Groth16 };
 
       const started = performance.now();
-      const proof = await proveWithdrawal(demoSpend(event.data), { wasm, zkey }, groth16);
-      const ms = Math.round(performance.now() - started);
+      const proof = await proveWithdrawal(spendFromPayload(event.data.payload), { wasm, zkey }, groth16);
 
-      post({ kind: "done", proof: asStrings(proof), signals: proof.pubSignals.map(String), ms });
+      post({ kind: "done", proof: serialise(proof), ms: Math.round(performance.now() - started) });
     } catch (error) {
       post({ kind: "error", message: error instanceof Error ? error.message : "Proving failed." });
     }

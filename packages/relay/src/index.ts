@@ -2,11 +2,12 @@ import { ENTRYPOINT_ABI } from "@arcveil/bridge";
 import { privateKeyToAccount } from "viem/accounts";
 
 import { publishRoot, readState } from "./asp";
+import { deliver } from "./deliver";
 import { clientsFor } from "./clients";
 import { loadConfig, loadFromBlock, loadPostman, type Env, type ExecutionContext, type ScheduledController } from "./env";
 import { corsHeaders, fail, json, rateLimit, readJson } from "./http";
 import { submit } from "./relay";
-import { issues, WithdrawRequestSchema } from "./schema";
+import { DeliverRequestSchema, issues, WithdrawRequestSchema } from "./schema";
 
 /**
  * The relayer.
@@ -41,6 +42,7 @@ async function quote(env: Env, headers: Headers): Promise<Response> {
   return json(
     {
       entrypoint: config.value.entrypoint,
+      gateway: config.value.gateway,
       pool,
       scope: config.value.scope.toString(),
       feeRecipient,
@@ -70,6 +72,28 @@ async function withdraw(env: Env, request: Request, headers: Headers): Promise<R
   return outcome.ok
     ? json({ hash: outcome.hash }, 200, headers)
     : fail(outcome.status, outcome.error, headers);
+}
+
+/**
+ * Delivers an attested burn, because the depositor has no gas on Arc yet.
+ *
+ * Paid nothing for it. An undelivered burn is USDC destroyed on one chain and
+ * minted on neither, and no fee is worth that.
+ */
+async function deliverDeposit(env: Env, request: Request, headers: Headers): Promise<Response> {
+  const config = loadConfig(env);
+  if (!config.ok) return fail(503, config.error, headers);
+
+  const body = await readJson(request, headers);
+  if (!body.ok) return body.response;
+
+  const parsed = DeliverRequestSchema.safeParse(body.value);
+  if (!parsed.success) return fail(400, issues(parsed.error), headers);
+
+  const clients = await clientsFor(config.value.rpc, config.value.key);
+  const outcome = await deliver(parsed.data.message, parsed.data.attestation, config.value.gateway, clients);
+
+  return outcome.ok ? json({ hash: outcome.hash }, 200, headers) : fail(outcome.status, outcome.error, headers);
 }
 
 /** What the pool looks like right now, including how little privacy a small one gives. */
@@ -112,13 +136,13 @@ const relayer = {
     if (request.method === "GET" && pathname === "/quote") return quote(env, headers);
     if (request.method === "GET" && pathname === "/status") return status(env, headers);
 
-    if (request.method === "POST" && pathname === "/withdraw") {
+    if (request.method === "POST" && (pathname === "/withdraw" || pathname === "/deliver")) {
       const limited = await rateLimit(env, request, headers);
       if (limited) return limited.response;
-      return withdraw(env, request, headers);
+      return pathname === "/withdraw" ? withdraw(env, request, headers) : deliverDeposit(env, request, headers);
     }
 
-    return fail(404, "GET /quote, GET /status, or POST /withdraw.", headers);
+    return fail(404, "GET /quote, GET /status, POST /deliver, or POST /withdraw.", headers);
   },
 
   /**

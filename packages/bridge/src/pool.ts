@@ -96,6 +96,15 @@ export const POOL_ABI = [
     ],
   },
   {
+    type: "event",
+    name: "LeafInserted",
+    inputs: [
+      { name: "_index", type: "uint256", indexed: false },
+      { name: "_leaf", type: "uint256", indexed: false },
+      { name: "_root", type: "uint256", indexed: false },
+    ],
+  },
+  {
     type: "function",
     name: "SCOPE",
     stateMutability: "view",
