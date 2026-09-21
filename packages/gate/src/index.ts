@@ -131,6 +131,40 @@ async function select(request: Request, env: Env, headers: Headers): Promise<Res
   );
 }
 
+/**
+ * The raw judgement, for an operator setting thresholds.
+ *
+ * This is the one place probabilities leave the service, and it is off by
+ * default: with GATE_CALIBRATION unset the route 404s exactly like a typo, so
+ * a deployed gate does not advertise that it exists. Calibration happens
+ * against `wrangler dev` on the machine of whoever owns the mandate, which is
+ * the only party the numbers were ever for.
+ */
+async function calibrate(request: Request, env: Env, headers: Headers): Promise<Response> {
+  const clauses = loadClauses(env);
+  if (!clauses.ok) return fail(503, clauses.error, headers);
+
+  const body = await readJson(request, headers);
+  if (!body.ok) return body.response;
+  const parsed = evaluateSchema.safeParse(body.value);
+  if (!parsed.success) return fail(400, issues(parsed.error), headers);
+
+  const answered = await ask(env.AI, buildEvaluation(clauses.value, parsed.data.state));
+  if (!answered.ok) return fail(502, answered.error, headers);
+
+  const decision = decide(clauses.value, answered.judgement);
+  return json(
+    {
+      allow: decision.allow,
+      checks: decision.checks,
+      failed: decision.failed,
+      judgement: answered.judgement,
+    },
+    200,
+    headers,
+  );
+}
+
 const gate = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const headers = corsHeaders(env, request);
@@ -147,6 +181,9 @@ const gate = {
     if (request.method === "GET" && pathname === "/") return describe(env, headers);
     if (request.method === "POST" && pathname === "/evaluate") return evaluate(request, env, headers);
     if (request.method === "POST" && pathname === "/select") return select(request, env, headers);
+    if (request.method === "POST" && pathname === "/calibrate" && (env.GATE_CALIBRATION ?? "") !== "") {
+      return calibrate(request, env, headers);
+    }
 
     return fail(404, `No route for ${request.method} ${pathname}.`, headers);
   },

@@ -12,6 +12,8 @@
     "gen:receipts": "tsx scripts/gen-receipts.mts",
     "deploy": "pnpm build && wrangler deploy",
     "deploy:dry": "pnpm build && wrangler deploy --dry-run",
+    "gate:corpus": "tsx scripts/gate-corpus.mts",
+    "gate:bench": "tsx scripts/gate-bench.mts",
     "gate:deploy": "pnpm --filter @arcveil/gate deploy",
     "gate:dev": "pnpm --filter @arcveil/gate dev",
     "sdk:build": "pnpm --filter @arcveildev/sdk build",

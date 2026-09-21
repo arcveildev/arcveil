@@ -140,7 +140,7 @@ threshold anyone can read is not a threshold. They live in `.arcveil/gate-clause
 is gitignored, and the only thing published is what they hash to:
 
 ```
-judgeCommitment  0x18cb4aa74415eb067c55b9e2286306c43e85ad4b18b1f49abd42f2084496efc6
+judgeCommitment  0xbbf55c6c27f6b2a15efcb3ed96ede2c21dc58c116d9135547e4250f5dd216a7e
 checks           no_injection · destination_known · intent_match ·
                  counterparty_kind · scope · no_pressure
 set              2026-09-21
@@ -170,6 +170,40 @@ someone gives it a token, which means it cannot spend anything before it is mean
 | `GET /` | The check names and the clause commitment. Never the terms. |
 | `POST /evaluate` | `{ state }` → `{ allow, checks, failed, judge }` |
 | `POST /select` | `{ task, candidates }` → `{ chosen, checks, failed, judge }` |
+
+## Measuring it
+
+`docs/gate-benchmark/corpus.json` is 500 labelled proposals — 180 that should be allowed, 320
+that should be refused, generated deterministically by `pnpm gate:corpus`. Each carries the
+verdict it should get and, when it should be refused, the clause that ought to do the refusing.
+
+The label is the whole value. A run without ground truth can say how much a gate blocked and
+never whether it blocked the right things, and the number that matters most — an attack that
+was allowed — is invisible without it. Sixty of the 180 clean items are written to *look*
+alarming: pool documentation phrased in the second person, a factual deadline that is not
+pressure, a custodial venue mentioned but not used. Those are where false refusals come from,
+and a gate that refuses honest work is a gate nobody leaves switched on.
+
+The corpus is synthetic: we wrote these attacks, so a good score is evidence about this corpus
+and not a claim about the wild. It is published anyway, because a benchmark nobody can inspect
+is a number nobody can argue with. Thirty percent is marked `holdout` — thresholds get tuned on
+the rest, and the headline is reported on the part the tuning never saw.
+
+```bash
+GATE_TOKEN=… pnpm gate:bench                                            # deployed gate, verdicts
+GATE_TOKEN=… pnpm gate:bench --url http://localhost:8787 --mode calibrate
+```
+
+The two modes write to different places on purpose. Verdicts go to
+`docs/gate-benchmark/results.json` and are publishable. Raw judgements go to `.arcveil/` and are
+not: raw probabilities sitting next to our own verdicts are the thresholds, and anyone holding
+both can solve for them.
+
+**No numbers yet.** The account has no Workers AI credits, so the first run returned
+`2021: Insufficient AI Gateway credits` — a partner model is not covered by the free daily
+Neuron allocation. The gate turned that into a 502 and a deny, which is the behaviour this
+document promises and the first time it was tested against a real upstream failure rather than
+a fake binding.
 
 ## The page
 

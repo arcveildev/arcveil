@@ -19,5 +19,12 @@ export type Env = {
   GATE_TOKEN?: string;
   /** The single browser origin allowed to call this gate, if any. */
   GATE_ORIGIN?: string;
+  /**
+   * Opens /calibrate, which returns the judge's raw answers. Set only in
+   * `.dev.vars` on an operator's machine — never in production, where the
+   * route does not exist at all. Measuring a threshold needs the numbers a
+   * threshold is measured against; serving them to callers does not.
+   */
+  GATE_CALIBRATION?: string;
   RATE_LIMIT?: RateLimiter;
 };

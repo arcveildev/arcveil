@@ -54,3 +54,7 @@ next-env.d.ts
 
 # Circuit artifacts: 20 MB, fetched by `pnpm veil:artifacts`, not ours to commit.
 /public/veil/
+
+# wrangler local secrets
+.dev.vars
+.dev.vars.*
