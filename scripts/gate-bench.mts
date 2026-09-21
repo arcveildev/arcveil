@@ -50,6 +50,7 @@ const url = arg("--url", "https://gate.arcveil.dev").replace(/\/$/, "");
 const mode = arg("--mode", "verdict");
 const perMinute = Number(arg("--rpm", url.includes("localhost") ? "600" : "55"));
 const limit = Number(arg("--limit", "0"));
+const sample = Number(arg("--sample", "0"));
 
 const token = process.env.GATE_TOKEN;
 if (token === undefined || token === "") {
@@ -59,7 +60,19 @@ if (token === undefined || token === "") {
 
 const route = mode === "calibrate" ? "/calibrate" : "/evaluate";
 const corpus = JSON.parse(readFileSync("docs/gate-benchmark/corpus.json", "utf8")) as Item[];
-const items = limit > 0 ? corpus.slice(0, limit) : corpus;
+/**
+ * `--limit` takes the first N, which is one whole class and tells you nothing.
+ * `--sample` spreads N across every class instead — the shape of a full run at
+ * a fraction of its cost, which is what you want before paying for the real one.
+ */
+function stratified(all: Item[], n: number): Item[] {
+  const classes = [...new Set(all.map((i) => i.class))];
+  const per = Math.max(1, Math.floor(n / classes.length));
+  const taken = classes.flatMap((name) => all.filter((i) => i.class === name).slice(0, per));
+  return taken.slice(0, n);
+}
+
+const items = sample > 0 ? stratified(corpus, sample) : limit > 0 ? corpus.slice(0, limit) : corpus;
 const gap = 60_000 / perMinute;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

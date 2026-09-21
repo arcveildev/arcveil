@@ -279,3 +279,37 @@ describe("POST /calibrate", () => {
     expect(text).not.toContain("0.02");
   });
 });
+
+describe("the shape the binding actually returns", () => {
+  const wrapped: JudgeBinding = {
+    run: async (_model, input) => ({
+      state: (input as { state: unknown }).state,
+      result: { model: "jev-1.13.0", answers: clean, usage: { input_tokens: 10, output_tokens: 5 } },
+      gatewayMetadata: { cacheStatus: null },
+    }),
+  };
+
+  it("reads a judgement out of the binding's wrapper", async () => {
+    const response = await worker.fetch(post("/evaluate", { state: "x" }), env({ AI: wrapped }));
+    const body = (await response.json()) as { allow: boolean; judge: { model: string } };
+    expect(body.allow).toBe(true);
+    expect(body.judge.model).toBe("jev-1.13.0");
+  });
+
+  it("still reads the flat shape the model docs describe", async () => {
+    const response = await worker.fetch(post("/evaluate", { state: "x" }), env());
+    expect(((await response.json()) as { allow: boolean }).allow).toBe(true);
+  });
+
+  it("does not let the echoed proposal back out", async () => {
+    const text = await (await worker.fetch(post("/calibrate", { state: "the proposal" }), env({ AI: wrapped, GATE_CALIBRATION: "1" }))).text();
+    expect(text).not.toContain("the proposal");
+  });
+
+  it("names the keys it did get when nothing parses, and no values", async () => {
+    const odd: JudgeBinding = { run: async () => ({ result: { oops: 0.97 } }) };
+    const body = (await (await worker.fetch(post("/evaluate", { state: "x" }), env({ AI: odd }))).json()) as { error: string };
+    expect(body.error).toContain("[oops]");
+    expect(body.error).not.toContain("0.97");
+  });
+});
