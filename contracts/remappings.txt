@@ -1,0 +1,8 @@
+forge-std/=lib/forge-std/src/
+@oz/=lib/openzeppelin-contracts/
+@oz-upgradeable/=lib/openzeppelin-contracts-upgradeable/
+lean-imt/=lib/lean-imt/
+poseidon/=lib/poseidon-solidity/
+contracts/=privacy/src/contracts/
+interfaces/=privacy/src/interfaces/
+@openzeppelin/contracts/=lib/openzeppelin-contracts/

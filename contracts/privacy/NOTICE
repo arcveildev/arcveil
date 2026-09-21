@@ -1,0 +1,22 @@
+Privacy Pool Protocol
+Copyright (c) Wonderland / 0xbow
+
+This directory contains a verbatim copy of the Privacy Pool protocol's Solidity
+sources and Circom circuits, redistributed under the Apache License 2.0. The
+licence text is in ./LICENSE.
+
+  Upstream: https://github.com/0xbow-io/privacy-pools-core
+  Commit:   c312dcd58f6ad085204be61923c49f8065e4e9ae (2026-08-31)
+  Taken:    packages/contracts/src -> ./src
+            packages/circuits/circuits -> ./circuits
+
+Nothing in ./src or ./circuits has been modified. That is not tidiness, it is
+the point: the audits in the upstream repository (Oxorio and Auditware) and the
+trusted setup that produced the proving keys only apply to these exact bytes.
+Editing one character makes both claims false.
+
+Arcveil's own code is not in this directory. The one contract that touches this
+protocol is ../src/VeilGateway.sol, which calls the Entrypoint from outside and
+changes nothing within it.
+
+Verify the copy against upstream with ./VERIFY.md.

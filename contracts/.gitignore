@@ -1,5 +1,7 @@
 out/
 cache/
-lib/
+# Foundry dependencies, fetched by ./deps.sh. Anchored, so it does not also
+# swallow the vendored protocol's own src/contracts/lib.
+/lib/
 broadcast/
 .env
