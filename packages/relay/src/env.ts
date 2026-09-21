@@ -8,6 +8,14 @@ import { z } from "zod";
  * out of the pool, which is the one link the pool exists to break. So it keeps
  * nothing: every check it makes, it makes against the chain, in the moment.
  */
+/**
+ * The two bits of the Workers runtime this service touches, declared here
+ * rather than pulled in wholesale. The gate does the same: a narrow type you
+ * can read beats a dependency you cannot.
+ */
+export type ExecutionContext = { waitUntil: (promise: Promise<unknown>) => void };
+export type ScheduledController = { readonly cron: string; readonly scheduledTime: number };
+
 export type Env = {
   /** Arc JSON-RPC. Reads and one write per withdrawal. */
   ARC_RPC?: string;
@@ -23,6 +31,8 @@ export type Env = {
   RELAY_ORIGIN?: string;
   /** The postman key that publishes association-set roots. Never the relayer key, never the 2-of-3. */
   POSTMAN_KEY?: string;
+  /** The block the pool was deployed in. Scanning from genesis would work and would be slow. */
+  FROM_BLOCK?: string;
   RATE_LIMIT?: { limit: (options: { key: string }) => Promise<{ success: boolean }> };
 };
 
@@ -43,14 +53,44 @@ const ConfigSchema = z.object({
   key: privateKey,
   minFeeBps: z
     .string()
-    .optional()
-    .default("25")
     .regex(/^\d+$/, "expected basis points as a whole number")
-    .transform(BigInt)
-    .refine((bps) => bps <= 10_000n, "a fee cannot exceed the whole withdrawal"),
+    .default("25")
+    .transform((value) => BigInt(value))
+    .refine((bps: bigint) => bps <= 10_000n, "a fee cannot exceed the whole withdrawal"),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;
+
+const blockNumber = z.string().regex(/^\d+$/, "expected a block number").transform(BigInt);
+
+const PostmanSchema = z.object({ key: privateKey, fromBlock: blockNumber });
+
+/**
+ * Where to start reading `Deposited` events. Needed for the public status
+ * view as well as the postman, so it is read on its own — a page that shows
+ * how large the anonymity set is should not depend on a secret being present.
+ */
+export const loadFromBlock = (env: Env): Loaded<bigint> => {
+  const parsed = blockNumber.safeParse(env.FROM_BLOCK);
+  return parsed.success
+    ? { ok: true, value: parsed.data }
+    : { ok: false, error: "FROM_BLOCK is not set to the block the pool was deployed in" };
+};
+
+export type PostmanConfig = z.infer<typeof PostmanSchema>;
+
+/**
+ * The postman is optional: a relayer can run without ever publishing a root,
+ * and in most deployments something else should. Absent config means the cron
+ * does nothing rather than failing loudly every minute.
+ */
+export const loadPostman = (env: Env): Loaded<PostmanConfig> => {
+  const parsed = PostmanSchema.safeParse({ key: env.POSTMAN_KEY, fromBlock: env.FROM_BLOCK });
+  if (!parsed.success) {
+    return { ok: false, error: parsed.error.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join("; ") };
+  }
+  return { ok: true, value: parsed.data };
+};
 
 export type Loaded<T> = { ok: true; value: T } | { ok: false; error: string };
 

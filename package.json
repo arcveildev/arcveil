@@ -7,7 +7,7 @@
     "build": "pnpm packages:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/gate test",
+    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/relay test && pnpm --filter @arcveil/gate test",
     "test:watch": "vitest",
     "gen:receipts": "tsx scripts/gen-receipts.mts",
     "deploy": "pnpm build && wrangler deploy",
@@ -15,13 +15,15 @@
     "gate:deploy": "pnpm --filter @arcveil/gate deploy",
     "gate:dev": "pnpm --filter @arcveil/gate dev",
     "sdk:build": "pnpm --filter @arcveildev/sdk build",
-    "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveildev/sdk typecheck && pnpm --filter @arcveil/bridge typecheck && pnpm --filter @arcveil/gate typecheck",
+    "typecheck": "tsc --noEmit --incremental false && pnpm --filter @arcveildev/sdk typecheck && pnpm --filter @arcveil/bridge typecheck && pnpm --filter @arcveil/relay typecheck && pnpm --filter @arcveil/gate typecheck",
     "check": "pnpm typecheck && pnpm lint && pnpm test",
     "intent": "tsx scripts/intent.mts",
     "film:studio": "pnpm --filter @arcveil/film studio",
     "film:render": "pnpm --filter @arcveil/film render ../../docs/social/video/docs/arcveil-docs.mp4",
     "bridge:build": "pnpm --filter @arcveil/bridge build",
-    "packages:build": "pnpm sdk:build && pnpm bridge:build"
+    "packages:build": "pnpm sdk:build && pnpm bridge:build",
+    "relay:deploy": "pnpm --filter @arcveil/relay deploy",
+    "relay:dev": "pnpm --filter @arcveil/relay dev"
   },
   "dependencies": {
     "@arcveildev/sdk": "workspace:*",

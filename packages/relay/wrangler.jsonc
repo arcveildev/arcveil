@@ -1,0 +1,30 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "arcveil-relay",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-16",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // The postman publishes the association-set root. Until it runs, a fresh
+  // deposit cannot be withdrawn privately — only ragequit publicly.
+  "triggers": { "crons": ["*/10 * * * *"] },
+
+  // No bearer token on purpose: a token is an identity, and an identity
+  // attached to a withdrawal is the link the pool exists to break. This bounds
+  // the load instead.
+  "ratelimits": [{ "name": "RATE_LIMIT", "namespace_id": "2001", "simple": { "limit": 30, "period": 60 } }],
+
+  "observability": { "enabled": true }
+
+  // Secrets — set with `wrangler secret put`, never committed:
+  //   RELAYER_KEY   hot key that pays gas and receives the relay fee
+  //   POSTMAN_KEY   publishes ASP roots; separate key, separate blast radius
+  //
+  // Vars — set with `wrangler secret put` or in the dashboard:
+  //   ARC_RPC       https://rpc.mainnet.arc.io
+  //   ENTRYPOINT    the Privacy Pool Entrypoint on Arc
+  //   SCOPE         the pool's scope, decimal
+  //   FROM_BLOCK    the block the pool was deployed in
+  //   MIN_FEE_BPS   optional, defaults to 25
+  //   RELAY_ORIGIN  optional, the one browser origin allowed to call this
+}

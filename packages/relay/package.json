@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@arcveil/bridge": "workspace:*",
+    "@arcveildev/sdk": "workspace:*",
     "viem": "^2",
     "zod": "^4"
   },
