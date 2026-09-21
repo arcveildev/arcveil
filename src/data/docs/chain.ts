@@ -52,7 +52,7 @@ export const ACCOUNT_ROWS = [
 ] as const;
 
 export const DECIMALS_NOTE =
-  "USDC has two faces on Arc. The native balance — gas, msg.value, native sends — has 18 decimals; the ERC-20 interface has the familiar 6. Mixing them is a factor of a million and it fails silently. The chain definitions in the SDK spell both out for that reason.";
+  "USDC has two faces on Arc. The native balance — gas, msg.value, native sends — has 18 decimals; the ERC-20 interface has the familiar 6. Mixing them is a factor of a trillion — 10^12 — and it fails silently. The chain definitions in the SDK spell both out for that reason.";
 
 export const READER_SNIPPET = `
 import { createRpcChainReader, arc, arcTestnet, ARC_REGISTRIES } from "@arcveildev/sdk";
