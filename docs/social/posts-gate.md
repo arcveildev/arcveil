@@ -57,6 +57,8 @@ Stronger hook, same build. Use this one if only one post goes out.
 > score fit and whether the price is worth paying.
 >
 > A field with nothing affordable is refused without buying an opinion.
+>
+> gate.arcveil.dev
 
 ---
 
@@ -74,6 +76,8 @@ the rest is believable.
 >
 > Calibration is a vendor's claim, not a proof. We would rather write that
 > down than let a green tick imply otherwise.
+>
+> arcveil.dev/verify
 
 ---
 
@@ -169,6 +173,8 @@ action" or anything shaped like that. Live is true. Guarding is not, yet.
 > So the benchmark is fully inspectable and the thing it measures against
 > stays sealed. If that sounds like having it both ways, the clause set is
 > hashed and the hash is in the repo.
+>
+> arcveil.dev/gate
 
 ---
 
@@ -184,6 +190,8 @@ action" or anything shaped like that. Live is true. Guarding is not, yet.
 >
 > An answer key you have not checked is not ground truth, it is a second
 > opinion you already agree with.
+>
+> arcveil.dev/gate
 
 ---
 
