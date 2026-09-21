@@ -86,39 +86,59 @@ twice; splitting them gives each a week.
 
 ---
 
-# The calibration round (2026-09-21)
+# Jev is live (2026-09-21)
 
-Drafted before the numbers landed, with the numbers left in brackets on
-purpose — so the copy could be judged on whether it is worth reading rather
-than on whether the result flattered us. Fill from the holdout column of
-`docs/gate-benchmark/results.json`. Do not post any bracket unfilled.
+The gate answers at `gate.arcveil.dev`, and the first full measurement is in.
+Banners: `banners/dark-calibration-3d.png` (the render) and
+`banners/dark-calibration.png` (the same numbers, CSS only, for when they move).
 
 **What must never appear in these posts:** a threshold, a probability, a clean
 floor or an attack ceiling. The corpus is public and the verdicts are public;
-the numbers the verdicts were measured against are the mandate, and a pair of
-brackets around a threshold is the same leak as printing it. If a draft below
-seems to want one, the draft is wrong.
+the numbers the verdicts were measured against are the mandate, and a bracket
+around a threshold is the same leak as printing it.
+
+**And one claim that is not available.** The gate is live and answering. No
+production agent routes through it yet, so nothing here says it "guards every
+action" or anything shaped like that. Live is true. Guarding is not, yet.
 
 ---
 
-## 05 · Main — the number that does not flatter
+## 05 · Main — the announcement, with its own audit attached
 
-> I set six thresholds by hand. All six were wrong, and wrong in the same
-> direction.
+> Cloudflare's Jev is live at Arcveil.
 >
-> Against 500 labelled proposals, the gate refused [N] of [M] attacks — and
-> also refused [N] of [M] honest ones. A gate that blocks everything is not a
-> safe gate. It is a gate you switch off by Friday.
+> It judges the clauses in a spending mandate that no threshold can express:
+> is this venue's own listing addressing my agent, is this trade still what I
+> asked for, is this destination one I named. The model answers with a
+> calibrated probability. Our code holds the number it has to clear, and the
+> model is never told what that number is.
 >
-> Measured, not guessed, the honest refusals fell to [N]. Attacks let through:
-> [N].
+> Measured on 500 labelled proposals, 161 held out: 0 of 102 attacks got
+> through. 5 of 59 honest proposals were refused.
 >
-> Reported on 163 items the tuning never saw. Corpus and verdicts:
+> gate.arcveil.dev
+
+---
+
+## 06 · The number that does not flatter
+
+> Before it was measured, our gate refused 54 of 59 honest proposals.
+>
+> It also caught every single attack — and that is exactly what made it
+> useless. A gate that blocks everything is not a safe gate. It is one you
+> switch off by Friday.
+>
+> Six thresholds, set by hand. All six sat above the honest floor. Measuring
+> them took one run over a labelled corpus and no new model calls, because the
+> answers were already on disk.
+>
+> 54 refusals became 5. Attacks through, before and after: zero.
+>
 > arcveil.dev/gate
 
 ---
 
-## 06 · The method one
+## 07 · The method one
 
 > Most agent-safety numbers you read have no answer key.
 >
@@ -137,7 +157,7 @@ seems to want one, the draft is wrong.
 
 ---
 
-## 07 · What is published and what is not
+## 08 · What is published and what is not
 
 > We published the corpus. We published every verdict. We did not publish the
 > thresholds, and we will not.
@@ -147,12 +167,12 @@ seems to want one, the draft is wrong.
 > way under it.
 >
 > So the benchmark is fully inspectable and the thing it measures against
-> stays sealed. If that sounds like having it both ways, check the commitment
-> in the repo: the clause set is hashed, and the hash is public.
+> stays sealed. If that sounds like having it both ways, the clause set is
+> hashed and the hash is in the repo.
 
 ---
 
-## 08 · The bug that was not in the gate
+## 09 · The bug that was not in the gate
 
 > The first run said one of our clean proposals was only 0.69 fine. My
 > instinct was that the question was badly worded.
@@ -167,10 +187,27 @@ seems to want one, the draft is wrong.
 
 ---
 
+## 10 · Reply to @kleffew94's x402 thread
+
+> Yes, with one change to the order.
+>
+> The mandate's price cap is applied before the request is built, so the judge
+> never sees a tool it could talk the agent into buying. Only then does Jev
+> score fit and whether the price is worth paying.
+>
+> A field with nothing affordable is refused without buying an opinion.
+
+---
+
 ## Which to post
 
-05 leads, because the number that does not flatter is the one nobody else
-posts. 06 a few days later for the people who ask how it was measured. 07 only
-if someone asks why the thresholds are not in the repo — it is an answer, not
-an announcement. 08 is the best of them and the least strategic; post it if
-the account can afford to be interesting rather than impressive.
+05 is the announcement and goes first, with the render banner. 06 a day or two
+later, with the same numbers and no announcement in it — it is the one that
+earns the account something, because nobody else posts the number that makes
+them look bad. 07 for whoever asks how it was measured. 08 only if someone
+asks why the thresholds are not in the repo; it is an answer, not a news item.
+09 is the most interesting and the least strategic. 10 is a reply, not a post.
+
+Note that 05 and 06 carry the same two figures on purpose. 05 uses them as
+evidence for a claim, 06 uses them as the claim. Posting 06 first would burn
+the announcement.

@@ -269,6 +269,35 @@ Card contents are quoted from `docs/RECEIPT.md`, `src/data/threatModel.ts` and
 `src/data/escapeHatch.ts`. If those change, the banners are wrong — re-render
 rather than leaving them.
 
+## The announcement banners (`soon-bridge-*`, 2026-09-21)
+
+Same `dark-banner.css`, three plates of their own. For post 03 in
+`posts-bridge.md` — the one that says the bridge is coming.
+
+| File | Headline | Plate | Higgsfield job |
+|---|---|---|---|
+| `soon-bridge-v1.png` | A private bridge into Arc is **coming** | A black arch alone in the void, a band of green light through the opening | `e2d232fe-cc8c-41b9-ab3b-e7637ee86883` |
+| `soon-bridge-v2.png` | One burn in. One **unlinkable** withdrawal out | Two points of light joined by a thread across blackness | `6fd061ca-7188-4bab-b9e7-d8360e128d90` |
+| `soon-bridge-v3.png` | The link is what we **break** | A parted chain, the missing link the subject | `c7344a49-1db4-4573-a1d9-4bee81c8faa0` |
+
+**v1 is the pick.** The arch is `<LogoMark>` made physical — the brand's own
+geometry, lit by the brand's own band — and it is the only one that says the
+thing the post is for.
+
+**v2's plate did not do what it was asked.** The prompt wanted the thread to
+fade out mid-span so the two ends were plainly related and the connection
+between them could not be traced. It came back fully drawn, which argues the
+opposite. Rather than re-roll it, the headline was changed to one where a
+visible connection is correct: the CCTP crossing itself. Re-prompt if that
+banner is ever the main one.
+
+A banner for something that does not exist has one job beyond looking good: it
+must be impossible to read as live. So every one of these carries the
+boundary — *the deposit is public, the withdrawal is public, the link between
+them is not* — directly under the headline rather than in the small print, and
+closes on "Not deployed. No date." The green in the type is spent on the status
+word, nowhere else.
+
 ## Dark banners (`dark-*.html`, 2026-09-21)
 
 A second banner series, 1920×1080 at 2x, sharing `dark-banner.css`. It drops
