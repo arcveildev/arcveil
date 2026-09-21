@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcveil — Arc's USDC is a view, not a ledger</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tech-banner.css">
+<style>
+  /* Same plate as tech-vision: a hand on a frosted pane with unreadable shapes
+     behind it. The post is about two precompiles nobody outside Arc can read,
+     so the image is the argument rather than decoration. */
+  body{background-image:url("plate-tech-vision.png");background-position:center 52%}
+  .r,.head{grid-template-columns:150px 1fr 118px}
+  .head{display:grid;align-items:baseline;gap:14px}
+  .head span:last-child{text-align:right}
+  .r b{font-size:13px;color:var(--ink2)}
+  .r .t{font-size:15px}
+  .r .w{display:block;font-size:12.5px;line-height:1.45;color:var(--ink2)}
+  /* Amber here means "cannot be read", not "does not exist". The series uses
+     italic for a row that is absent; these two are present and opaque. */
+  .r.gap .t{font-style:normal;font-weight:600}
+</style>
+</head>
+<body>
+  <div class="eyebrow">
+    <svg viewBox="0 0 28 24" fill="none"><path d="M3.1 10.5A11 11 0 0 1 24.9 10.5L18.77 10.5A5 5 0 0 0 9.23 10.5Z" fill="currentColor"/><rect x="3" y="14" width="6" height="9" fill="currentColor"/><rect x="19" y="14" width="6" height="9" fill="currentColor"/><rect y="11.25" width="28" height="2" fill="#85ed75"/></svg>
+    <span>Chain note</span>
+  </div>
+
+  <h1>A view. <span>Arc's USDC is a 6-decimal window onto an 18-decimal native balance.</span></h1>
+
+  <div class="note">Traced on a fork of Arc mainnet at block 21,800,000.<br>Neither precompile is EVM code, so neither can be forked or read.</div>
+  <div class="pill"><i></i>arcveil.dev</div>
+
+  <div class="card">
+    <div class="top"><i></i>what a USDC transfer on Arc actually touches<span class="badge">chain 5042</span></div>
+    <div class="head"><span>address</span><span>what it is</span><span>readable</span></div>
+    <div class="rows">
+      <div class="r live">
+        <b>0x3600…0000</b>
+        <span class="t">USDC, the ERC-20 face
+          <span class="w">6 decimals. A window onto the balance, not a mapping that holds it.</span>
+        </span>
+        <span class="a">yes</span>
+      </div>
+      <div class="r gap">
+        <b>0x1800…0000</b>
+        <span class="t">The native balance
+          <span class="w">transfer, mint and burn all hand off here, scaled by 1e12.</span>
+        </span>
+        <span class="a">precompile</span>
+      </div>
+      <div class="r gap">
+        <b>0x1800…0001</b>
+        <span class="t">isBlocklisted
+          <span class="w">Called on the mint path. Not from the ERC-20 layer on a transfer.</span>
+        </span>
+        <span class="a">precompile</span>
+      </div>
+    </div>
+    <div class="foot">Mix the two decimals and you are out by a factor of a million, silently. Fork the chain and both precompiles answer <span class="amber">OpcodeNotFound</span>, because there is no bytecode to fetch — which also means <span class="amber">what they do inside is not something anyone outside Arc can check</span>.</div>
+  </div>
+</body>
+</html>
