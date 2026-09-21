@@ -140,7 +140,7 @@ threshold anyone can read is not a threshold. They live in `.arcveil/gate-clause
 is gitignored, and the only thing published is what they hash to:
 
 ```
-judgeCommitment  0xbbf55c6c27f6b2a15efcb3ed96ede2c21dc58c116d9135547e4250f5dd216a7e
+judgeCommitment  0x57c80285a399ad4227da059aa010c2fdc41c63f7a4720147b51b36e7671235a7
 checks           no_injection · destination_known · intent_match ·
                  counterparty_kind · scope · no_pressure
 set              2026-09-21
@@ -199,11 +199,28 @@ The two modes write to different places on purpose. Verdicts go to
 not: raw probabilities sitting next to our own verdicts are the thresholds, and anyone holding
 both can solve for them.
 
-**No numbers yet.** The account has no Workers AI credits, so the first run returned
-`2021: Insufficient AI Gateway credits` — a partner model is not covered by the free daily
-Neuron allocation. The gate turned that into a 502 and a deny, which is the behaviour this
-document promises and the first time it was tested against a real upstream failure rather than
-a fake binding.
+### What the first full run found
+
+495 of 500 scored; 5 were lost to a dev-server restart and a dropped connection. 334 items
+tuned the thresholds, 161 were held out. Of the holdout, 59 should be allowed and 102 refused.
+
+| on the 161 holdout | thresholds set by hand | thresholds measured |
+|---|---|---|
+| attacks that got through | 0 of 102 | 0 of 102 |
+| honest proposals refused | **54 of 59** | **5 of 59** |
+
+The hand-set gate caught everything, including the work. That is the failure this document
+warns about, produced by its own author, in the same week he wrote the warning.
+
+All five remaining refusals come from one clause, and it is the one clause whose distributions
+**do not separate**: on `destination_known`, honest proposals run as low as the attacks run
+high. No threshold fixes that — the line currently sits a hundredth above the highest attack
+seen in training, which is fitted to the least stable statistic there is. Treat it as on notice:
+the question needs reworking, or the state it reads needs to carry the destination more plainly.
+
+`scope` reported no usable confidence signal at all. On a graded scale, an item sitting between
+two points is *supposed* to come back unsure, so gating it on confidence the way a boolean is
+gated was a category error; it now passes on the band alone. Four of the six separate cleanly.
 
 ## The page
 

@@ -469,3 +469,32 @@ the account is `arcveildev`. Everything in the repository uses the new name.
 The four `sdk-*.html` banners are the exception and are left untouched, because
 their PNGs were posted under the old name and those posts are a record of what
 was true when they went out. Re-render them only if they are ever posted again.
+
+## Calibration banners (2026-09-21)
+
+Two versions of the same figures, for `posts-gate.md` 05 and 06.
+
+`dark-calibration.png` is the series as written: 1920×1080, `dark-banner.css`,
+no raster anywhere, so a figure that moves is a one-line edit and a re-render.
+
+`dark-calibration-3d.png` breaks that rule once, deliberately. The right side is
+a Higgsfield plate (`plate-dark-calibration.png`, GPT Image 2.5 16:9 upscaled to
+2k, job `edd5643d-9830-443f-8831-ee58b4c29166`) of six knurled posts with a
+light line sitting far below their collars. Everything carrying a number is
+still type — only the scenery is a raster — but the plate cannot be corrected
+without Higgsfield, so **the CSS version is the one to re-render when the
+thresholds move again**, and they will.
+
+Two things the plate needed. It bleeds full frame, because a raster sized to
+part of the canvas shows its own edge: the render is pure black and the canvas
+is `#0e0e0e`. And it is `hue-rotate`d onto the brand accent, because it came
+back emerald and this series allows one green.
+
+`tech-calibration.png` is an earlier attempt in the pastel `tech-*` series with
+the same card. Kept for reference; the dark versions replaced it before anything
+went out.
+
+Figures in all three come from `docs/gate-benchmark/` and the holdout column.
+**No threshold, probability, clean floor or attack ceiling may appear on a
+banner** — those bracket the mandate, and printing them is the leak the whole
+split exists to prevent.
