@@ -82,6 +82,18 @@ export {
   type WithdrawProof,
 } from "./withdrawal";
 
+export {
+  buildWithdrawInputs,
+  proveWithdrawal,
+  SpendError,
+  toSolidityProof,
+  type Artifacts,
+  type Groth16,
+  type SnarkjsProof,
+  type SpendRequest,
+  type WithdrawInputs,
+} from "./prove";
+
 export { ENTRYPOINT_ABI, POOL_ABI } from "./pool";
 
 export { VEIL_GATEWAY_ABI } from "./gateway";

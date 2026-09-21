@@ -23,23 +23,29 @@
     "bridge:build": "pnpm --filter @arcveil/bridge build",
     "packages:build": "pnpm sdk:build && pnpm bridge:build",
     "relay:deploy": "pnpm --filter @arcveil/relay deploy",
-    "relay:dev": "pnpm --filter @arcveil/relay dev"
+    "relay:dev": "pnpm --filter @arcveil/relay dev",
+    "veil:artifacts": "tsx scripts/veil-artifacts.mts"
   },
   "dependencies": {
+    "@arcveil/bridge": "workspace:*",
     "@arcveildev/sdk": "workspace:*",
+    "@tanstack/react-query": "^5.103.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.45.0",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "snarkjs": "0.7.5",
     "tailwind-merge": "^3.6.0",
-    "viem": "^2.56.5"
+    "viem": "^2.56.5",
+    "wagmi": "^3.7.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/snarkjs": "0.7.9",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",

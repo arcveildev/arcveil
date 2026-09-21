@@ -41,6 +41,12 @@ export const DOCS_PAGES: readonly DocsPage[] = [
     label: "Arc and contracts",
     blurb: "Chain ids, the deployed registries, the account, and the decimals that bite.",
   },
+  {
+    index: "05",
+    href: "/docs/bridge",
+    label: "The private bridge",
+    blurb: "One CCTP burn in, one unlinkable withdrawal out — and everything that stays public.",
+  },
 ];
 
 /** Previous and next page for the footer pager. */
