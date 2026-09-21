@@ -6,10 +6,10 @@ nothing in the present tense that is not shipped.
 **Not live yet.** `VeilGateway`, `@arcveil/bridge`, the relayer and `/bridge`
 are committed and tested; none of them is deployed. No post here says a person
 can bridge privately into Arc today, and none links to `arcveil.dev/bridge`
-until the deploy lands. Posts 01 and 02 stand on their own and can go out now —
+until the deploy lands. Posts 01 to 03 stand on their own and can go out now —
 they are findings about Arc, not claims about us.
 
-**Before posting 03 or 04, decide this on purpose.** The association set admits
+**Before posting 04, 05 or 06, decide this on purpose.** The association set admits
 every label, unfiltered, which makes the pool a mixer in function. A post is
 what brings that to the attention of people who care about it — Circle among
 them, on Circle's own chain, through Circle's own CCTP. That is not a reason
@@ -27,8 +27,9 @@ Occasion: @arc's post of 2026-09-19 launching USDC Bridge.
 
 The strongest one, and it costs nothing to claim: anyone can check it.
 
-Banners: `banners/dark-precompile-v1.png` (the three addresses),
-`v2.png` (the decimals), `v3.png` (the opacity). One post, pick one.
+Banner: `banners/dark-precompile-v1.png` — the three addresses, only the
+readable one lit. `banners/tech-precompile.png` is the same card in the older
+pastel series, kept for reference.
 
 > Arc's USDC is not an ERC-20 with a balance mapping.
 >
@@ -45,7 +46,25 @@ Banners: `banners/dark-precompile-v1.png` (the three addresses),
 
 ---
 
-## 02 · Alt main — the thing that breaks your tests
+## 02 · The decimals → `banners/dark-precompile-v2.png`
+
+Stands alone, needs no product, and can go out any day. The one most likely to
+be useful to somebody at the moment they read it.
+
+> On Arc, USDC's ERC-20 face has 6 decimals. The balance underneath it has 18.
+>
+> They are the same money. Read one as the other and every amount is out by
+> 10^12 — a trillion — and nothing reverts, because nothing is broken. Both
+> numbers are valid. They are in different units.
+>
+> `transfer` hands the value to a precompile that does the scaling. Your code
+> never sees it happen, and neither does your test.
+>
+> Traced on a fork of Arc mainnet at block 21,800,000.
+
+---
+
+## 03 · The fork test → `banners/dark-precompile-v3.png`
 
 Same finding, aimed at people who are about to lose an afternoon.
 
@@ -59,7 +78,7 @@ Same finding, aimed at people who are about to lose an afternoon.
 
 ---
 
-## 03 · The announcement — chosen
+## 04 · The announcement — chosen
 
 Banner: `banners/soon-bridge-v1.png` — the arch, `<LogoMark>` made physical.
 
@@ -128,7 +147,49 @@ answering them in a day reads as a comms cycle.
 
 ---
 
-## 04 · The honest ledger
+## 05 · The crossing → `banners/soon-bridge-v2.png`
+
+For the people who will ask how it works rather than what it claims.
+
+> Getting into a shielded pool usually takes two transactions: bridge in, then
+> deposit.
+>
+> This is one. The CCTP burn names our gateway on Arc as both the payee and
+> the only address permitted to deliver the message, and carries the deposit's
+> commitment in the hook. The gateway mints and deposits in the same
+> transaction.
+>
+> It holds nothing between transactions. It has no owner, no pause and no
+> sweep, and if the deposit cannot be made the USDC goes back to the address
+> the burn named rather than nowhere.
+>
+> Built and tested against Circle's live CCTP contracts. Not deployed.
+
+---
+
+## 06 · What "private" is doing → `banners/soon-bridge-v3.png`
+
+The one to post if the announcement draws a sceptic, and the one worth posting
+even if it does not.
+
+> "Private" is doing a lot of work in most announcements. Here is all of it
+> this one is doing.
+>
+> Not the ledger: every deposit and every withdrawal sits on Arc, in public,
+> permanently.
+> Not the amounts: both are visible.
+> Not the audit trail: anyone can total the pool to the cent.
+>
+> One thing. Which deposit paid which withdrawal.
+>
+> And that is worth exactly as much as the number of deposits sitting in the
+> pool alongside yours — nothing at all, when that number is one.
+>
+> Coming. Not deployed.
+
+---
+
+## 07 · The honest ledger
 
 The most on-brand of the four, and the least likely to be misread.
 
@@ -144,7 +205,7 @@ The most on-brand of the four, and the least likely to be misread.
 
 ---
 
-## 05 · Reply-only — the proof
+## 08 · Reply-only — the proof
 
 Not a standalone post. Use if someone asks whether it actually works.
 
@@ -156,6 +217,20 @@ Not a standalone post. Use if someone asks whether it actually works.
 > signal tampered with each way.
 
 ---
+
+## Which to post
+
+01 to 03 are findings about Arc and can go out now, in any order, with or
+without the rest. 02 is the one a stranger is most likely to thank you for.
+
+04 is the announcement, and 05 and 06 are the same announcement from further
+in — post them days apart or not at all, because three posts about one
+unshipped thing reads as a countdown to a date that does not exist.
+
+07 is the one to keep for when somebody accuses the thing of being a privacy
+theatre. It answers that before it is asked.
+
+08 is a reply.
 
 ## What none of these say
 
