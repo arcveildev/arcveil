@@ -105,6 +105,74 @@ describe("GET /", () => {
   });
 });
 
+describe("GET / from a browser", () => {
+  const browse = (headers: Record<string, string> = {}) =>
+    new Request("https://gate.arcveil.dev/", { headers: { accept: "text/html,application/xhtml+xml", ...headers } });
+
+  it("greets a browser instead of refusing it", async () => {
+    const response = await worker.fetch(browse(), env());
+    expect(response.status).toBe(200);
+    expect(response.headers.get("content-type")).toContain("text/html");
+  });
+
+  it("buys no inference to render a page", async () => {
+    const calls: Call[] = [];
+    await worker.fetch(browse(), env({ AI: judge(clean, calls) }));
+    expect(calls).toHaveLength(0);
+  });
+
+  it("publishes nothing the mandate keeps", async () => {
+    const text = await (await worker.fetch(browse(), env())).text();
+    expect(text).not.toContain(TOKEN);
+    expect(text).not.toContain("no_injection");
+    expect(text).not.toContain("intent_match");
+  });
+
+  it("runs no script, so there is nothing on this page to trust", async () => {
+    const response = await worker.fetch(browse(), env());
+    expect(await response.text()).not.toContain("<script");
+    expect(response.headers.get("content-security-policy")).toContain("default-src 'none'");
+  });
+
+  it("is a page even when the gate has no token and serves nobody", async () => {
+    const response = await worker.fetch(browse(), env({ GATE_TOKEN: undefined }));
+    expect(response.status).toBe(200);
+  });
+
+  it("leaves every other route behind the bearer check", async () => {
+    const request = new Request("https://gate.arcveil.dev/evaluate", {
+      method: "POST",
+      headers: { accept: "text/html", "content-type": "application/json" },
+      body: JSON.stringify({ state: "x" }),
+    });
+    expect((await worker.fetch(request, env())).status).toBe(401);
+  });
+
+  it("still answers JSON to the callers that ask for it", async () => {
+    const response = await worker.fetch(get("/"), env());
+    expect(response.headers.get("content-type")).toContain("application/json");
+  });
+
+  it("tells caches the root answered on what was asked for", async () => {
+    const response = await worker.fetch(browse(), env());
+    expect(response.headers.get("vary")).toContain("accept");
+  });
+
+  it("keeps the origin it already varied on for CORS", async () => {
+    const configured = env({ GATE_ORIGIN: "https://arcveil.dev" });
+    const response = await worker.fetch(browse({ origin: "https://arcveil.dev" }), configured);
+    const varies = response.headers.get("vary") ?? "";
+    expect(varies).toContain("origin");
+    expect(varies).toContain("accept");
+  });
+
+  it("answers an uptime check that HEADs the root", async () => {
+    const request = new Request("https://gate.arcveil.dev/", { method: "HEAD", headers: { accept: "text/html" } });
+    const response = await worker.fetch(request, env());
+    expect(response.status).toBe(200);
+  });
+});
+
 describe("POST /evaluate", () => {
   it("allows when every clause holds", async () => {
     const response = await worker.fetch(post("/evaluate", { state: "Swap 30% of the A position" }), env());

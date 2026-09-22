@@ -12,6 +12,7 @@ import {
 import { loadClauses, loadSelectionPolicy } from "./config";
 import { ask, JEV_MODEL } from "./judge";
 import { authorise, corsHeaders, fail, json, rateLimit, readJson } from "./http";
+import { page, wantsPage } from "./landing";
 import type { Env } from "./env";
 
 /**
@@ -171,6 +172,14 @@ const gate = {
     const { pathname } = new URL(request.url);
 
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers });
+
+    // A person who typed the hostname in gets a door rather than a JSON 401.
+    // It is static, so it costs nothing and cannot say more than the site does.
+    // HEAD as well as GET: an uptime check or a link preview that HEADs the
+    // root and reads 401 reports this gate as down, which is the same wrong
+    // impression the page exists to correct.
+    const browsing = request.method === "GET" || request.method === "HEAD";
+    if (browsing && pathname === "/" && wantsPage(request)) return page(headers);
 
     const refused = authorise(env, request, headers);
     if (refused !== null) return refused.response;

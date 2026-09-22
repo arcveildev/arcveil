@@ -168,8 +168,21 @@ someone gives it a token, which means it cannot spend anything before it is mean
 | Route | Answers |
 |---|---|
 | `GET /` | The check names and the clause commitment. Never the terms. |
+| `GET /` from a browser | A static page. See below. |
 | `POST /evaluate` | `{ state }` → `{ allow, checks, failed, judge }` |
 | `POST /select` | `{ task, candidates }` → `{ chosen, checks, failed, judge }` |
+
+The root is the one place that answers two different things. A caller whose `Accept` carries
+`text/html` — which in practice means a person who typed the hostname into a browser — gets
+`packages/gate/src/landing.ts` instead of a 401, because a JSON refusal at the root reads as a
+broken deployment rather than as a closed door. Everything else is unchanged: the page is
+served before the bearer check but it is static, so it loads no clauses, names no checks and
+buys no inference, and it cannot say anything that is not already in this repository. Every
+other route, and the root for anything asking for JSON, stays behind the token.
+
+`HEAD` is answered the same way, so an uptime check does not read this gate as down, and the
+page carries `Vary: accept` because one URL now has two representations and the cacheable one
+must say what it varied on.
 
 ## Measuring it
 
