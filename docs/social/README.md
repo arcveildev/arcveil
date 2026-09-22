@@ -304,7 +304,7 @@ post about `@arcveildev/sdk`.
 
 | File | Angle |
 |---|---|
-| `sdk-287-v1.png` | The figure alone, at 340px |
+| `sdk-287-v1.png` | The figure at 340px, against a plate of the same artifact receding into black |
 | `sdk-287-v2.png` | The package is the hero, the figure is one stat of four |
 | `sdk-287-v3.png` | The figure, and what npm does not mean |
 
@@ -313,6 +313,15 @@ last-day, last-week *and* last-month, because the package was published on
 21 September and every download is inside 24 hours. "287 downloads" with no
 window attached reads as a running total and is not one; all three banners say
 *first day*, which is both the honest framing and the better number.
+
+v1's plate is `plate-sdk-287.png` (GPT Image 2.5, 16:9, job
+`5f9e26ca-49e7-4248-9d89-d462e8ed4efc`): one machined cube in focus and a trail
+of identical copies of itself fading one behind another into black. That is
+what a download count is — not a crowd of things, one thing many times — so the
+image makes the same point the caption does. `plate-sdk-287-alt.png` (job
+`4a8b7df3-3c74-485d-a97b-a719d28d6452`) is a loose cluster of the same modules
+with only the nearest lit; kept as the alternate, and the weaker of the two
+because a cluster reads as variety rather than repetition.
 
 **v3 is the one worth posting.** npm counts every fetch — CI, mirrors, security
 scanners, the same machine twice — so a download figure is real and is not
