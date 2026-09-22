@@ -102,3 +102,18 @@ h1.small{font-size:92px}
          font-family:"DM Mono",monospace;font-size:21px;letter-spacing:.06em;text-transform:uppercase}
 .builton i{font-style:normal;color:var(--subtle)}
 .builton b{font-weight:400;color:var(--fg)}
+
+/* ---- stat variant ------------------------------------------------------- */
+/* One figure, large enough that nothing else competes with it, and a line
+   underneath saying exactly what it counts. A number on a banner with no
+   window attached is a number that cannot be checked. */
+.figure{position:absolute;font-weight:800;line-height:.86;letter-spacing:-.05em;color:var(--accent)}
+.figure small{display:block;font-family:"DM Mono",monospace;font-weight:400;font-size:24px;
+              letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:26px}
+.pkg{position:absolute;font-family:"DM Mono",monospace;letter-spacing:-.01em}
+.stats{position:absolute;display:flex;gap:56px}
+.stats div{display:flex;flex-direction:column;gap:10px}
+.stats b{font-weight:700;font-size:52px;letter-spacing:-.02em;line-height:1}
+.stats b.lit{color:var(--accent)}
+.stats span{font-family:"DM Mono",monospace;font-size:17px;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--subtle)}

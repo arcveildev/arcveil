@@ -297,6 +297,31 @@ Card contents are quoted from `docs/RECEIPT.md`, `src/data/threatModel.ts` and
 `src/data/escapeHatch.ts`. If those change, the banners are wrong — re-render
 rather than leaving them.
 
+## The SDK download banners (`sdk-287-*`, 2026-09-22)
+
+Three versions of one figure, `dark-banner.css`, no raster. For a milestone
+post about `@arcveildev/sdk`.
+
+| File | Angle |
+|---|---|
+| `sdk-287-v1.png` | The figure alone, at 340px |
+| `sdk-287-v2.png` | The package is the hero, the figure is one stat of four |
+| `sdk-287-v3.png` | The figure, and what npm does not mean |
+
+**Check the window before printing a figure.** npm's API returns 287 for
+last-day, last-week *and* last-month, because the package was published on
+21 September and every download is inside 24 hours. "287 downloads" with no
+window attached reads as a running total and is not one; all three banners say
+*first day*, which is both the honest framing and the better number.
+
+**v3 is the one worth posting.** npm counts every fetch — CI, mirrors, security
+scanners, the same machine twice — so a download figure is real and is not
+adoption. Saying that on the banner turns a vanity metric into a credible one,
+and it is the only version a developer will not roll their eyes at.
+
+No banner may call a download a user. The number is what the registry counted,
+and the registry counted fetches.
+
 ## The announcement banners (`soon-bridge-*`, 2026-09-21)
 
 Same `dark-banner.css`, three plates of their own. For post 03 in
