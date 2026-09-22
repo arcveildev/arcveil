@@ -1,12 +1,12 @@
 "use client";
 
-import { routesInto, type CctpRoute } from "@arcveil/bridge";
+import type { CctpRoute } from "@arcveil/bridge";
 import { useMemo, useState } from "react";
 import { useAccount, useConnect, useDisconnect, useSwitchChain } from "wagmi";
 
 import { FigureLabel } from "@/components/ui/FigureLabel";
-import { ARC } from "@/data/site";
 import { formatUsdc, parseUsdc, shortAddress } from "@/lib/veil";
+import { veilSources } from "@/lib/veilNetwork";
 import type { VeilConfig } from "@/lib/veilConfig";
 import { useDeposit, type DepositStage } from "./useDeposit";
 import type { VeilKey } from "./useVeilKey";
@@ -19,7 +19,9 @@ import type { VeilKey } from "./useVeilKey";
  * after taking 25 USDC is not one anybody uses twice.
  */
 
-const ROUTES = routesInto(ARC.chainId);
+// Testnet feeds testnet and mainnet feeds mainnet — `veilSources` reads the
+// network the pool is on, so these are never the other one's chains.
+const ROUTES = veilSources().map(({ route }) => route);
 
 const STAGE_COPY: Readonly<Record<DepositStage, string>> = {
   idle: "",

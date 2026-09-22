@@ -62,6 +62,17 @@ Entrypoint, and that the gateway points back at the same Entrypoint. A
 mismatch stops it. Only then does it write `src/data/site.ts` and the pool's
 deployment block into `src/lib/veilConfig.ts`.
 
+It writes the **network** alongside the addresses, and that is the only place
+the bridge's network is set. `src/lib/veilNetwork.ts` turns it into the chain
+id, the RPC, the explorer and the list of source chains — so the page reads the
+chain it was deployed to, offers Sepolia sources on testnet, and says so in its
+own copy. Nothing needs editing by hand, and there is no flip to remember to
+undo.
+
+`ARC` in the same file is deliberately untouched: that is where `/verify` reads
+`MandateRegistry` and `AnchorRegistry`, which exist on mainnet only. A bridge on
+testnet and a verifier on mainnet is the normal state, not a mistake.
+
 Until this runs, `/bridge` reports every piece as *not deployed* and refuses to
 draw a form that cannot work.
 

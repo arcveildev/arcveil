@@ -122,7 +122,11 @@ const block = site.match(/export const VEIL: \{[\s\S]*?\n\} = \{[\s\S]*?\n\};/);
 if (!block) die("Could not find the VEIL block in src/data/site.ts.");
 
 const [declaration] = block![0].split(" = {");
+// The network is written here too. It decides which chain the page reads and
+// which source chains it offers, and a deployment on one with the page set to
+// the other reads an empty chain and says nothing about why.
 const replacement = `${declaration} = {
+  network: "${network}",
   entrypoint: "${entrypoint}",
   pool: "${pool}",
   gateway: "${gateway}",
@@ -136,4 +140,4 @@ const configPath = join(process.cwd(), "src", "lib", "veilConfig.ts");
 const config = readFileSync(configPath, "utf8");
 writeFileSync(configPath, config.replace(/const FROM_BLOCK = \d+n;/, `const FROM_BLOCK = ${fromBlock}n;`));
 
-console.log(`\n  Written to src/data/site.ts and src/lib/veilConfig.ts.\n`);
+console.log(`\n  Written to src/data/site.ts (network ${network}) and src/lib/veilConfig.ts.\n`);

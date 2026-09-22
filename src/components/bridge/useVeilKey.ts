@@ -4,7 +4,7 @@ import { veilKeyTypedData } from "@arcveil/bridge";
 import { useCallback, useState } from "react";
 import { useSignTypedData } from "wagmi";
 
-import { ARC } from "@/data/site";
+import { veilArcChain } from "@/lib/veilNetwork";
 
 /**
  * The one signature every note is derived from.
@@ -39,7 +39,7 @@ export function useVeilKey(gateway: `0x${string}` | null): VeilKey {
     setSigning(true);
     setError(null);
     try {
-      const produced = await signTypedDataAsync(veilKeyTypedData(ARC.chainId, gateway));
+      const produced = await signTypedDataAsync(veilKeyTypedData(veilArcChain().id, gateway));
       setSignature(produced);
       return produced;
     } catch (cause) {

@@ -1,7 +1,7 @@
-import { arc, arcTestnet } from "@arcveildev/sdk";
 import { createPublicClient, http, type PublicClient } from "viem";
 
-import { ARC, VEIL } from "@/data/site";
+import { VEIL } from "@/data/site";
+import { veilArcChain } from "./veilNetwork";
 
 /**
  * What the bridge needs before it can do anything, and a plain answer when it
@@ -64,9 +64,12 @@ export const veilConfig = (): ConfigState => {
  * Deposits are signed on the source chain and withdrawals are submitted by the
  * relayer, because a wallet paying its own gas here would rebuild the link the
  * pool exists to break.
+ *
+ * The chain comes from `VEIL.network`, not from `ARC`: the verifier reads
+ * mainnet registries and the bridge may be on testnet, and reading one with
+ * the other's RPC finds nothing and says nothing about why.
  */
-export const arcClient = (): PublicClient =>
-  createPublicClient({
-    chain: ARC.chainId === arcTestnet.id ? arcTestnet : arc,
-    transport: http(ARC.rpc),
-  });
+export const arcClient = (): PublicClient => {
+  const chain = veilArcChain();
+  return createPublicClient({ chain, transport: http(chain.rpcUrls.default.http[0]) });
+};
