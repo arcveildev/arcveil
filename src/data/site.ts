@@ -45,6 +45,9 @@ export const ARC: {
   account: "0xb1c0983a7b84f38fbaf5f3af92f0fecaa62ce25d",
 };
 
+/** The two Arc networks the bridge can be deployed to. */
+export type VeilNetwork = "mainnet" | "testnet";
+
 /**
  * The private bridge. Every address stays null until `DeployVeil.s.sol` has
  * run, and `/bridge` reports each piece as *not deployed* rather than drawing
@@ -52,6 +55,13 @@ export const ARC: {
  * unknown checks.
  */
 export const VEIL: {
+  /**
+   * Which Arc the bridge is deployed to. Separate from `ARC` above, which is
+   * where the verifier reads the registries: those are on mainnet, and the
+   * bridge has to prove itself on testnet first. `src/lib/veilNetwork.ts`
+   * turns this into the chain id, the RPC and the explorer.
+   */
+  network: VeilNetwork;
   entrypoint: `0x${string}` | null;
   pool: `0x${string}` | null;
   gateway: `0x${string}` | null;
@@ -60,6 +70,7 @@ export const VEIL: {
   /** Where a withdrawal is submitted from, so a fresh address needs no gas. */
   relayer: string | null;
 } = {
+  network: "testnet",
   entrypoint: null,
   pool: null,
   gateway: null,

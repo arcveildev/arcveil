@@ -30,7 +30,7 @@ export const BRIDGE_STEPS: readonly BridgeStep[] = [
   {
     n: "01",
     title: "Burn",
-    body: "One transaction on Ethereum, Base, Arbitrum, OP or Polygon. It names the gateway on Arc as both the payee and the only address allowed to deliver the message, and carries your deposit's commitment in the hook.",
+    body: "One transaction on the source chain. It names the gateway on Arc as both the payee and the only address allowed to deliver the message, and carries your deposit's commitment in the hook.",
     visible: "Your address, the amount, the time, and that it is going to this pool.",
   },
   {
@@ -52,6 +52,26 @@ export const BRIDGE_STEPS: readonly BridgeStep[] = [
     visible: "A withdrawal to a fresh address. Not which deposit funded it.",
   },
 ] as const;
+
+/** "Base", "Base or Polygon", "Ethereum, Base or Arbitrum" — never a trailing "or". */
+const listed = (names: readonly string[]): string =>
+  names.length < 2 ? (names[0] ?? "") : `${names.slice(0, -1).join(", ")} or ${names[names.length - 1]}`;
+
+/**
+ * The steps, with the first one naming the chains this deployment can actually
+ * be reached from.
+ *
+ * It is derived rather than written down because the answer changes with the
+ * network: a page on testnet that offers Base Sepolia while its own first
+ * paragraph says Ethereum, Base, Arbitrum, OP or Polygon is describing a
+ * different bridge than the one underneath it.
+ */
+export const bridgeSteps = (sourceNames: readonly string[]): readonly BridgeStep[] =>
+  BRIDGE_STEPS.map((step) =>
+    step.n === "01" && sourceNames.length > 0
+      ? { ...step, body: step.body.replace("the source chain.", `${listed(sourceNames)}.`) }
+      : step,
+  );
 
 export type LedgerRow = { readonly fact: string; readonly who: string; readonly kind: "public" | "private" | "seen" };
 
