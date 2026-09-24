@@ -117,3 +117,29 @@ in code. Still 07's arch is the model's approximation, not the Band mark.
 Job ids 01, 03 and 06 can seed the Seedance plates P1, P2 and P3 as
 references, so the café, the sweater cuff and the mint saucer stay the same
 across shots.
+
+## P2 test (2026-09-24) — passed
+
+1. **Keyframe**: still 03 edited in GPT Image 2.5 to a flat chroma screen,
+   hand removed (`plates/p2-keyframe.jpg`, job `77ae358e-3d6f-4f9a-9f09-11744f462a52`).
+2. **Plate**: Seedance 2.5 omni-reference, keyframe as `start_image`, 3:4,
+   1080p, 5 s, no audio — **60 credits**, not 45 (`plates/p2-plate.mp4`, job
+   `79be842e-302e-40c3-852d-b73aef447266`). The first submit with
+   `aspect_ratio: auto` failed without a reason and was not charged; an
+   explicit ratio went through.
+3. **Composite**: `p2/compose.py` → `plates/p2-test.mp4`, cropped to 4:5.
+
+What the plate gave: the screen rectangle moves at most 2 px over 5 s, so a
+fixed pin works with no tracking. The finger is down from 2.2 s to 3.55 s at
+about 60 % across and 64 % down the screen, so the thread is anchored from
+the bottom (as a real one is) with the receipt card centred there, and the
+card shows its pressed state while the finger is down:
+
+    python3 p2/compose.py plates/p2-plate.mp4 plates/p2-test.mp4 --tap 2.2 --tap-len 1.35 --card-y 0.645
+
+Two traps found on the way: the key must be confined to the screen, or the
+mint saucer is keyed grey with it; and the screen box must have even edges,
+or 4:2:0 chroma leaves a one-pixel seam that runs across the finger.
+
+The test's phone type is SF from macOS, because Manrope is not in the repo;
+the film's screens move to Remotion as planned.
