@@ -96,3 +96,24 @@ tick per message (our own, not Apple's), a low pad under the end card.
    the end card.
 4. **P2 test** — approve spending one keyframe + one plate on the green-screen
    test before the other two.
+
+## Stills (round 1, 2026-09-24)
+
+GPT Image 2.5, high, 2k, 4:5, on Higgsfield; 2.75 credits each. Files in
+`stills/`. The phone text is the image model's rendering and every line came
+out exact, but it is for the storyboard only — the film rebuilds each screen
+in code. Still 07's arch is the model's approximation, not the Band mark.
+
+| Beat | File | Higgsfield job |
+|---|---|---|
+| 1 | `stills/01.jpg` | `34653948-b50e-4625-ae87-ccacc089c345` |
+| 2 | `stills/02.jpg` | `32147cdc-e2c7-4895-b8dd-492149cd6449` |
+| 3 | `stills/03.jpg` | `64981b0c-4da0-46b7-89c2-31c6e2e30560` |
+| 4 | `stills/04.jpg` | `13167110-ee8e-4834-95e8-c54280cc4ca4` |
+| 5 | `stills/05.jpg` | `698d036b-58e1-4965-9263-527fdb9efdee` |
+| 6 | `stills/06.jpg` | `fbd177c9-29e1-419f-8922-77290e64d67b` |
+| 7 | `stills/07.jpg` | `9195b858-2f8a-4a83-ba8f-8bdf2abb36ee` |
+
+Job ids 01, 03 and 06 can seed the Seedance plates P1, P2 and P3 as
+references, so the café, the sweater cuff and the mint saucer stay the same
+across shots.
