@@ -1,0 +1,98 @@
+# Arcveil — "In the chat" concept film (storyboard v1, 2026-09-24)
+
+A tweet praised how smooth it feels to send money over @arc with iMessage.
+This film shows what Arcveil adds to that picture: **the agent sits in the
+chat, pays inside a mandate, hands back a receipt, and refuses when asked for
+more — without saying what the limit is.**
+
+It is a **concept film**. The iMessage relay (`packages/imessage`) is at
+phase 0: it echoes and moves no money. So the film looks real, and says it
+is a concept, in every frame and in the post. The `proof` film's rule —
+every screen is real — does not apply here, which is exactly why the label
+has to.
+
+Length 25 s, 4:5 (1080×1350, 30 fps) — a phone film, watched on a phone.
+Bright morning light, like the reference mood of the earlier films; no dusk.
+
+## How "real" is built
+
+AI video renders UI text as noise: "20 USDC", a link, `per_action_cap` would
+come out garbled. So the work is split:
+
+| Layer | Made with | Why |
+|---|---|---|
+| Live-action plates: hands, phone, café table, coffee, window light | **Higgsfield** — GPT Image 2.5 keyframes → Seedance 2.5 | What generative video is good at. Screens stay dark, angled away or green. |
+| Phone screen: the chat, the refusal, the verifier | **Remotion** (`packages/film`) — an iMessage-style thread built in code | Every character exact and sharp. |
+| `/verify` | Screen capture of the **real** page checking a real mainnet sample receipt | The one screen that already exists. |
+| End card, CONCEPT tag | Remotion, Manrope + DM Mono | Same type as the other films. |
+
+## Beats
+
+| # | t | Picture | On screen |
+|---|---|---|---|
+| 1 | 0.0–2.5 | **P1** plate. Sunlit café window seat, wooden table, a flat white. A hand lifts an iPhone off the table; screen angled away. Slow push-in. | tag `CONCEPT` (top-left, all frames until the end card) |
+| 2 | 2.5–8.0 | **UI** full frame: chat with contact **Arcveil** (Band-mark avatar). | You type *send 20 to budi for lunch* → send. Typing dots 0.8 s. Arcveil: *Sent 20 USDC to Budi. Inside your mandate.* + link card *Receipt · 5 checks · arcveil.dev/verify* |
+| 3 | 8.0–10.0 | **P2** plate, top-down, locked off: phone flat on the table, thumb taps the link card. Screen is the UI composited in (corner-pin; see test below). | — |
+| 4 | 10.0–14.5 | **UI**: `arcveil.dev/verify` in a mobile browser frame; five checks turn green one by one. | *Verified in your browser. Nothing sent to us.* |
+| 5 | 14.5–19.5 | **UI**: back in the chat. | You: *send 500 to budi*. Arcveil: *Declined — this breaks per_action_cap.* then *The limit itself stays private.* |
+| 6 | 19.5–22.0 | **P3** plate. Phone laid face down; the hand picks up the coffee. Window light, shallow focus, no face. | — |
+| 7 | 22.0–25.0 | End card, white. | Band mark · *Agents that can spend, never see, never exceed.* · pill `CONCEPT · COMING TO iMESSAGE` · `arcveil.dev` |
+
+Beat 5 is the film. Everyone can show a payment going through; the agent
+saying no — and not leaking the number when it does — is the part only
+Arcveil has.
+
+## Plates (Higgsfield)
+
+Common prompt spine: *photoreal, shot on a 35 mm lens, bright natural morning
+window light, soft shadows, warm neutral café, shallow depth of field, cream
+and light-wood palette with one mint accent object, iPhone with no visible
+logo, hands only — no face, no text anywhere in frame.*
+
+| Plate | Keyframe (GPT Image 2.5) | Motion (Seedance 2.5, 1080p, 5 s + handle) |
+|---|---|---|
+| P1 | Table by the window, flat white, iPhone face down, a hand entering frame | Hand lifts the phone toward camera-left, screen away; slow push-in |
+| P2 | Top-down: iPhone flat on light wood, screen solid `#00FF00`, thumb hovering | Locked camera. Thumb taps the lower third of the screen once, withdraws |
+| P3 | Phone face down beside the cup, hand around the cup | Hand lifts the cup out of frame; steam; light shifts slightly |
+
+Cost at the launch-film rate (45 credits per 5 s, 1080p): three plates ≈ 135
+credits, plus keyframe stills. Before spending on all three: **test P2 first**
+— one keyframe and one 5 s plate — to see whether Seedance keeps the green
+screen flat and the corners still enough to pin the UI onto. If it does not,
+P2 becomes an over-the-shoulder shot with the screen out of focus, and the
+tap is shown on the full-frame UI instead.
+
+## What the film may not do
+
+- Say *live*, *now*, or *available*. It says *concept* and *coming*.
+- Drop the `CONCEPT` tag from any frame before the end card.
+- Use Apple's logo, the iMessage icon, or Messages' own sounds. The thread is
+  styled to read as a chat on an iPhone, nothing more.
+- Show a transaction hash or an explorer page as if this flow produced it.
+  The `/verify` capture checks a real sample receipt, and is fine only because
+  the whole film is labelled a concept.
+
+## Sound
+
+No narration — the chat is the script. Room tone of a quiet café, one soft
+tick per message (our own, not Apple's), a low pad under the end card.
+
+## Post copy (X, draft)
+
+> Concept: your agent, in iMessage.
+>
+> Text it like a friend. It pays inside your mandate, hands back a receipt anyone can verify, and when you ask for more than you allowed, it says no without telling anyone what the limit is.
+>
+> Building it now on @arc.
+> arcveil.dev
+
+## Open decisions
+
+1. **Format** — 4:5 vertical (recommended, it is a phone film) or 16:9 like
+   the earlier films.
+2. **Names** — *Budi* as the friend (a local touch; the chat is in English
+   for the X audience) or a neutral name.
+3. **Sound** — room tone + ticks only (recommended), or a Grady VO line on
+   the end card.
+4. **P2 test** — approve spending one keyframe + one plate on the green-screen
+   test before the other two.
