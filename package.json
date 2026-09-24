@@ -7,7 +7,7 @@
     "build": "pnpm packages:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/relay test && pnpm --filter @arcveil/gate test",
+    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/relay test && pnpm --filter @arcveil/gate test && pnpm --filter @arcveil/imessage test",
     "test:watch": "vitest",
     "gen:receipts": "tsx scripts/gen-receipts.mts",
     "deploy": "pnpm build && wrangler deploy",

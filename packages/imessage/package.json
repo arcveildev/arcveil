@@ -1,0 +1,27 @@
+{
+  "name": "@arcveil/imessage",
+  "version": "0.1.0",
+  "description": "Talk to your Arcveil agent over iMessage, from a Mac that relays the chat.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "tsx": "^4.23.13",
+    "typescript": "^5",
+    "vitest": "^3"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "os": [
+    "darwin"
+  ]
+}
