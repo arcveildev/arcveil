@@ -31,10 +31,10 @@ come out garbled. So the work is split:
 | # | t | Picture | On screen |
 |---|---|---|---|
 | 1 | 0.0–2.5 | **P1** plate. Sunlit café window seat, wooden table, a flat white. A hand lifts an iPhone off the table; screen angled away. Slow push-in. | tag `CONCEPT` (top-left, all frames until the end card) |
-| 2 | 2.5–8.0 | **UI** full frame: chat with contact **Arcveil** (Band-mark avatar). | You type *send 20 to budi for lunch* → send. Typing dots 0.8 s. Arcveil: *Sent 20 USDC to Budi. Inside your mandate.* + link card *Receipt · 5 checks · arcveil.dev/verify* |
+| 2 | 2.5–8.0 | **UI** full frame: chat with contact **Arcveil** (Band-mark avatar). | You type *send 20 to sam for lunch* → send. Typing dots 0.8 s. Arcveil: *Sent 20 USDC to Sam. Inside your mandate.* + link card *Receipt · 5 checks · arcveil.dev/verify* |
 | 3 | 8.0–10.0 | **P2** plate, top-down, locked off: phone flat on the table, thumb taps the link card. Screen is the UI composited in (corner-pin; see test below). | — |
 | 4 | 10.0–14.5 | **UI**: `arcveil.dev/verify` in a mobile browser frame; five checks turn green one by one. | *Verified in your browser. Nothing sent to us.* |
-| 5 | 14.5–19.5 | **UI**: back in the chat. | You: *send 500 to budi*. Arcveil: *Declined — this breaks per_action_cap.* then *The limit itself stays private.* |
+| 5 | 14.5–19.5 | **UI**: back in the chat. | You: *send 500 to sam*. Arcveil: *Declined — this breaks per_action_cap.* then *The limit itself stays private.* |
 | 6 | 19.5–22.0 | **P3** plate. Phone laid face down; the hand picks up the coffee. Window light, shallow focus, no face. | — |
 | 7 | 22.0–25.0 | End card, white. | Band mark · *Agents that can spend, never see, never exceed.* · pill `CONCEPT · COMING TO iMESSAGE` · `arcveil.dev` |
 
@@ -90,8 +90,8 @@ tick per message (our own, not Apple's), a low pad under the end card.
 
 1. **Format** — 4:5 vertical (recommended, it is a phone film) or 16:9 like
    the earlier films.
-2. **Names** — *Budi* as the friend (a local touch; the chat is in English
-   for the X audience) or a neutral name.
+2. ~~**Names**~~ — decided 2026-09-25: the friend is **Sam**, an international,
+   gender-neutral name, not Budi.
 3. **Sound** — room tone + ticks only (recommended), or a Grady VO line on
    the end card.
 4. **P2 test** — approve spending one keyframe + one plate on the green-screen
@@ -107,10 +107,10 @@ in code. Still 07's arch is the model's approximation, not the Band mark.
 | Beat | File | Higgsfield job |
 |---|---|---|
 | 1 | `stills/01.jpg` | `34653948-b50e-4625-ae87-ccacc089c345` |
-| 2 | `stills/02.jpg` | `32147cdc-e2c7-4895-b8dd-492149cd6449` |
-| 3 | `stills/03.jpg` | `64981b0c-4da0-46b7-89c2-31c6e2e30560` |
+| 2 | `stills/02.jpg` | `637b9b77-00a2-4bd8-9209-f1762d6fc011` (Sam edit of `32147cdc…`) |
+| 3 | `stills/03.jpg` | `fd45c051-4f97-45c5-9ed2-e24a2f7730b5` (Sam edit of `64981b0c…`) |
 | 4 | `stills/04.jpg` | `13167110-ee8e-4834-95e8-c54280cc4ca4` |
-| 5 | `stills/05.jpg` | `698d036b-58e1-4965-9263-527fdb9efdee` |
+| 5 | `stills/05.jpg` | `f5e05bec-1cf1-495f-ac21-d8d718d6ca38` (Sam edit of `698d036b…`) |
 | 6 | `stills/06.jpg` | `fbd177c9-29e1-419f-8922-77290e64d67b` |
 | 7 | `stills/07.jpg` | `9195b858-2f8a-4a83-ba8f-8bdf2abb36ee` |
 

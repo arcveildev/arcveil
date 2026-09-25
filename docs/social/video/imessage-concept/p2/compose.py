@@ -106,7 +106,7 @@ def draw_ui(w: int, h: int, pressed: bool, card_y: float) -> Image.Image:
     card_top = card_y * H - card_h / 2
     card = (left, card_top, W * 0.78, card_top + card_h)
 
-    lines = ["Sent 20 USDC to Budi.", "Inside your mandate."]
+    lines = ["Sent 20 USDC to Sam.", "Inside your mandate."]
     reply_h = len(lines) * line_h + 2 * pad_y
     reply_top = card_top - 2.2 * u - reply_h
     you_h = line_h + 2 * pad_y
@@ -114,7 +114,7 @@ def draw_ui(w: int, h: int, pressed: bool, card_y: float) -> Image.Image:
 
     d.text((W / 2, you_top - 7 * u), "Today 9:41", font=font(3.2 * u), fill=MUTED, anchor="mt")
 
-    text = "send 20 to budi for lunch"
+    text = "send 20 to sam for lunch"
     tw = d.textlength(text, font=body)
     bubble(d, (right - tw - 2 * pad_x, you_top, right, you_top + you_h), BLUE, rad)
     d.text((right - tw - pad_x, you_top + pad_y), text, font=body, fill=PAGE)
