@@ -560,3 +560,27 @@ Figures in all three come from `docs/gate-benchmark/` and the holdout column.
 **No threshold, probability, clean floor or attack ceiling may appear on a
 banner** — those bracket the mandate, and printing them is the leak the whole
 split exists to prevent.
+
+## The Onramp Kit banners (`soon-onramp-*`, 2026-09-25)
+
+For a quote of @arc's Onramp Kit launch (x.com/arc/status/2103514871312629993).
+Same `dark-banner.css` and the same rules as `soon-bridge-*`: it must be
+impossible to read as live, the boundary sits directly under the headline, and
+the green in the type is spent on the status word. The plates continue
+soon-bridge v1's arch — its job was passed as the reference — so the two
+announcements read as one series.
+
+| File | Plate | Higgsfield job |
+|---|---|---|
+| `soon-onramp-v1.png` | Warm particles drift in from the left, pass through the arch, and leave as one green band | `b2ff73ce-0cec-4d0c-b740-76b32b2a15a2` |
+| `soon-onramp-v2.png` | A blank slab of light, card-proportioned with no markings, about to pass a green gate in the opening | `3142005d-42d2-4013-b55f-c8a883f00949` |
+
+Headline: *Fiat straight into your agent is **next***. Boundary: a card or
+Apple Pay becomes USDC on Arc in the account the agent spends from, and it
+still cannot spend past its mandate. Note: wired against Circle's sandbox
+first; not on mainnet, no date. "Apple Pay" is named as a payment method, as
+@arc's own post names it; no Apple mark is used and the card in v2 carries
+none. Rendered like the dark series, 1920×1080 at 2×.
+
+Both plates keep the left two thirds empty; v1's particles reach under the
+note, so its note sits higher (`top:720px`) than v2's.
