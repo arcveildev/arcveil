@@ -26,5 +26,11 @@ export type Env = {
    * threshold is measured against; serving them to callers does not.
    */
   GATE_CALIBRATION?: string;
+  /**
+   * Opens pay-per-verdict over x402 for callers without a token, as JSON:
+   * `{ "network": "eip155:5042", "payTo": "0x…", "prices": { "/evaluate": "0.002" } }`.
+   * Unset means the token is the only way in, as before.
+   */
+  GATE_X402?: string;
   RATE_LIMIT?: RateLimiter;
 };

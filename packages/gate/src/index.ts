@@ -13,6 +13,7 @@ import { loadClauses, loadSelectionPolicy } from "./config";
 import { ask, JEV_MODEL } from "./judge";
 import { authorise, corsHeaders, fail, json, rateLimit, readJson } from "./http";
 import { page, wantsPage } from "./landing";
+import { charge, pricingFor } from "./x402";
 import type { Env } from "./env";
 
 /**
@@ -181,11 +182,22 @@ const gate = {
     const browsing = request.method === "GET" || request.method === "HEAD";
     if (browsing && pathname === "/" && wantsPage(request)) return page(headers);
 
-    const refused = authorise(env, request, headers);
-    if (refused !== null) return refused.response;
+    // A caller with no token may pay per verdict instead, on the routes that
+    // have a price. Anyone who presents a token is held to it, right or wrong.
+    const paid = pricingFor(env, request, pathname);
+    if (paid === null) {
+      const refused = authorise(env, request, headers);
+      if (refused !== null) return refused.response;
+    }
 
     const limited = await rateLimit(env, request, headers);
     if (limited !== null) return limited.response;
+
+    if (paid !== null) {
+      if (!paid.ok) return fail(503, paid.error, headers);
+      const serve = paid.value.route === "/evaluate" ? evaluate : select;
+      return charge(request, paid.value, headers, () => serve(request, env, headers));
+    }
 
     if (request.method === "GET" && pathname === "/") return describe(env, headers);
     if (request.method === "POST" && pathname === "/evaluate") return evaluate(request, env, headers);

@@ -23,4 +23,7 @@
   //   GATE_SELECTION  price cap and confidence bars for tool selection, as JSON.
   //   GATE_TOKEN      the bearer token callers must present. No token, no service.
   //   GATE_ORIGIN     optional: the one browser origin allowed to call this gate.
+  //   GATE_X402       optional: pay per verdict over x402, settled by Arcus. Unset, the
+  //                   token is the only way in. Example (mainnet, 0.002 USDC a verdict):
+  //                   {"network":"eip155:5042","payTo":"0x…","prices":{"/evaluate":"0.002","/select":"0.003"}}
 }

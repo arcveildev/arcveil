@@ -54,7 +54,7 @@ const selectionSchema = z
 
 export type Loaded<T> = { ok: true; value: T } | { ok: false; error: string };
 
-const parseSecret = <T>(name: string, raw: string | undefined, schema: z.ZodType<T>): Loaded<T> => {
+export const parseSecret = <T>(name: string, raw: string | undefined, schema: z.ZodType<T>): Loaded<T> => {
   if (raw === undefined || raw.trim() === "") return { ok: false, error: `${name} is not configured.` };
   let json: unknown;
   try {
