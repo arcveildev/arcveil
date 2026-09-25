@@ -53,6 +53,9 @@ export async function authorizeFunding(input: unknown, deps: AuthorizeDeps): Pro
     return { ok: false, status: 503, error: "Arc could not be asked whether this signer belongs to the account. Try again." };
   }
   if (!member) {
+    // Addresses only: which key signed, and for which account. Enough to tell a
+    // wrong keystore from a message that drifted, and nothing that is secret.
+    console.warn("refused: signer is not a member", { account, signer });
     return { ok: false, status: 403, error: "That signature is not from one of this account's keys." };
   }
   return { ok: true, account, signer };
