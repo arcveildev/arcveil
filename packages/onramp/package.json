@@ -1,0 +1,27 @@
+{
+  "name": "@arcveil/onramp",
+  "version": "0.1.0",
+  "description": "Mints Circle Onramp sessions that can only fund an Arcveil account, for the member who proves they hold one of its keys.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry": "wrangler deploy --dry-run",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@circle-fin/onramp-kit": "1.0.1",
+    "viem": "^2",
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vitest": "^3",
+    "wrangler": "^4"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

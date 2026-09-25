@@ -7,7 +7,7 @@
     "build": "pnpm packages:build && next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/relay test && pnpm --filter @arcveil/gate test && pnpm --filter @arcveil/imessage test",
+    "test": "pnpm packages:build && vitest run --passWithNoTests && pnpm --filter @arcveildev/sdk test && pnpm --filter @arcveil/bridge test && pnpm --filter @arcveil/relay test && pnpm --filter @arcveil/gate test && pnpm --filter @arcveil/imessage test && pnpm --filter @arcveil/onramp test",
     "test:watch": "vitest",
     "gen:receipts": "tsx scripts/gen-receipts.mts",
     "deploy": "pnpm build && wrangler deploy",
@@ -33,6 +33,7 @@
   "dependencies": {
     "@arcveil/bridge": "workspace:*",
     "@arcveildev/sdk": "workspace:*",
+    "@circle-fin/onramp-kit": "1.0.1",
     "@tanstack/react-query": "^5.103.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.45.0",

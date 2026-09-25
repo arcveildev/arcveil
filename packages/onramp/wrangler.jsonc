@@ -1,0 +1,25 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "arcveil-onramp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-16",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Sandbox until KYB and a production key exist. Moving to production is
+  // these two URLs, a production key, and ONRAMP_REFERRER_DOMAIN=arcveil.dev.
+  "vars": {
+    "ONRAMP_API_BASE_URL": "https://api-test.circle.com",
+    "ONRAMP_WIDGET_BASE_URL": "https://onramp-sandbox.arc.io",
+    "ONRAMP_ORIGIN": "http://localhost:3000",
+    // Membership is read where the accounts live: Arc mainnet.
+    "ARC_RPC": "https://rpc.mainnet.arc.io",
+    "ARC_CHAIN_ID": "5042"
+  },
+
+  "ratelimits": [{ "name": "RATE_LIMIT", "namespace_id": "2002", "simple": { "limit": 20, "period": 60 } }],
+
+  "observability": { "enabled": true }
+
+  // Secret — `wrangler secret put CIRCLE_API_KEY`, or `.dev.vars` locally:
+  //   CIRCLE_API_KEY   the full <ENV>_API_KEY:<keyId>:<keySecret> value
+}

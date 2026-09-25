@@ -4,15 +4,36 @@
     {
       "name": "arcveil",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeArgs": [
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "arcveil-gate",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "@arcveil/gate", "dev", "--port", "8787"],
+      "runtimeArgs": [
+        "--filter",
+        "@arcveil/gate",
+        "dev",
+        "--port",
+        "8787"
+      ],
       "port": 8787,
+      "autoPort": false
+    },
+    {
+      "name": "arcveil-onramp",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@arcveil/onramp",
+        "dev",
+        "--port",
+        "8788"
+      ],
+      "port": 8788,
       "autoPort": false
     }
   ]
