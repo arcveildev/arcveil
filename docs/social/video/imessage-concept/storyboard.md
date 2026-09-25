@@ -143,3 +143,17 @@ or 4:2:0 chroma leaves a one-pixel seam that runs across the finger.
 
 The test's phone type is SF from macOS, because Manrope is not in the repo;
 the film's screens move to Remotion as planned.
+
+## P1 and P3 (2026-09-25)
+
+Format decided: **4:5**. Seedance 2.5 omni-reference, the round-1 stills as
+`start_image`, 3:4, 1080p, **4 s** (48 credits each; the film uses 2.5 s of
+each). Both submissions were first bounced by a preset recommendation ("IN
+THE DARK") and went through with `declined_preset_id`.
+
+| Plate | Job | Used | Notes |
+|---|---|---|---|
+| P1 `plates/p1-plate.mp4` → `p1-cut.mp4` | `e7850f84-9d90-498a-9ebb-b68c72771cf6` | 0.3–2.8 s | Hand and grip hold; screen never faces camera; slow push-in as asked. |
+| P3 `plates/p3-plate.mp4` → `p3-cut.mp4` | `72149e62-23b5-4b1f-bc2e-0d01c584cc27` | 0.2–2.7 s | **From ~3.0 s the hand vanishes and the cup floats.** The cut ends before it; do not extend this shot past 2.8 s of the plate. |
+
+Cuts are centre-cropped to 1248×1560 (4:5), H.264 CRF 16, no audio.
