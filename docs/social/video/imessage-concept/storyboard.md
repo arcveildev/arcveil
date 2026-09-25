@@ -157,3 +157,31 @@ THE DARK") and went through with `declined_preset_id`.
 | P3 `plates/p3-plate.mp4` → `p3-cut.mp4` | `72149e62-23b5-4b1f-bc2e-0d01c584cc27` | 0.2–2.7 s | **From ~3.0 s the hand vanishes and the cup floats.** The cut ends before it; do not extend this shot past 2.8 s of the plate. |
 
 Cuts are centre-cropped to 1248×1560 (4:5), H.264 CRF 16, no audio.
+
+## Cut v1 (2026-09-25)
+
+Master: `arcveil-in-the-chat.mp4` — 25 s, 1080×1350 (4:5), 30 fps, H.264 +
+AAC. Built in Remotion: `packages/film/src/chat/` (composition `ChatFilm`),
+assets in `packages/film/public/chat/`.
+
+    cd packages/film && npx remotion render src/index.ts ChatFilm ../../docs/social/video/imessage-concept/arcveil-in-the-chat.mp4 --codec=h264 --crf=17
+
+What changed from the plan, and why:
+
+- **Beat 4 is the real page, captured.** `verify/capture.mjs` drives the Mac's
+  own Chrome over DevTools, loads the "Clean run" sample on `/verify`, and
+  refuses to save unless receipt 1 passed all five checks against Arc mainnet.
+  The site's default theme is dark, so the page is dark — that is what the
+  link opens. The dev-only Next badge and the design-preset switcher are
+  hidden; nothing on the page is redrawn. The film only scrolls it.
+- **The checks do not turn green one by one.** The page shows its verdicts
+  together, and the film does not animate what the page does not do.
+- **The CONCEPT tag sits bottom-centre**, in the phone's home-indicator strip,
+  not top-left: top-left covered the clock.
+- **Sound is room tone, synthesised** (filtered brown and pink noise), plus
+  two cues of our own — a send swoop and a soft tick. Higgsfield has no
+  sound-effect model for standalone use; its audio tools are speech only. A
+  recorded café bed can replace `room.wav` without touching anything else.
+- Phone type in the chat beats is the system font (SF on this Mac), because
+  the chat is meant to read as a phone; brand type is Manrope + DM Mono on
+  the end card, with the real arch mark from `ui/Lockup`.
