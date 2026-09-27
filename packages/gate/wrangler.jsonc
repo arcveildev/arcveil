@@ -26,4 +26,6 @@
   //   GATE_X402       optional: pay per verdict over x402, settled by Arcus. Unset, the
   //                   token is the only way in. Example (mainnet, 0.002 USDC a verdict):
   //                   {"network":"eip155:5042","payTo":"0x…","prices":{"/evaluate":"0.002","/select":"0.003"}}
+  //   GATE_X402_CLAUSES  the general mandate paying callers are judged under, in the GATE_CLAUSES
+  //                   shape. Unset, paid /evaluate is out of service. .arcveil/gate-x402-clauses.json
 }

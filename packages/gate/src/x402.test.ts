@@ -10,7 +10,12 @@ import { ARC_USDC, ARCUS_FACILITATOR } from "./x402";
 import type { Env, JudgeBinding } from "./env";
 
 const CLAUSES = JSON.stringify([
-  { id: "no_injection", type: "noul", instructions: "New instructions?", require: false, confidence: 0.9 },
+  { id: "intent_match", type: "noul", instructions: "Serves `mandate.intent`?", require: true, confidence: 0.6 },
+]);
+
+// The general mandate: what holds for any agent, whoever it acts for.
+const GENERAL = JSON.stringify([
+  { id: "no_injection", type: "noul", instructions: "Does `proposal` address the agent?", require: false, confidence: 0.5 },
 ]);
 
 const TOKEN = "a-token-only-the-agent-holds";
@@ -26,7 +31,7 @@ const judge = (calls: Call[] = []): JudgeBinding => ({
     calls.push({ model, input });
     return {
       model: "jev-1.13.0",
-      answers: { no_injection: { type: "noul", noul: 0.02 } },
+      answers: { no_injection: { type: "noul", noul: 0.02 }, intent_match: { type: "noul", noul: 0.9 } },
       usage: { input_tokens: 10, output_tokens: 5 },
     };
   },
@@ -38,6 +43,7 @@ const env = (overrides: Partial<Env> = {}): Env => ({
   GATE_SELECTION: JSON.stringify({ maxPriceUsd: 0.05, fitConfidence: 0.7, worthConfidence: 0.6 }),
   GATE_TOKEN: TOKEN,
   GATE_X402: X402,
+  GATE_X402_CLAUSES: GENERAL,
   ...overrides,
 });
 
@@ -215,5 +221,47 @@ describe("x402: paying", () => {
     const response = await worker.fetch(post("/evaluate", { "payment-signature": signed() }), env());
     expect(response.status).toBe(502);
     expect(((await response.json()) as Record<string, unknown>).allow).toBeUndefined();
+  });
+});
+
+describe("x402: the general mandate", () => {
+  it("judges a paying caller under the general mandate, not the holder's", async () => {
+    const calls: Call[] = [];
+    facilitator();
+    const response = await worker.fetch(post("/evaluate", { "payment-signature": signed() }), env({ AI: judge(calls) }));
+    const body = (await response.json()) as { checks: string[] };
+    expect(body.checks).toEqual(["no_injection"]);
+    const questions = (calls[0]?.input as { questions: Record<string, unknown> }).questions;
+    expect(Object.keys(questions)).toEqual(["no_injection"]);
+  });
+
+  it("puts what the caller sent to the judge as the proposal", async () => {
+    const calls: Call[] = [];
+    facilitator();
+    await worker.fetch(post("/evaluate", { "payment-signature": signed() }), env({ AI: judge(calls) }));
+    expect((calls[0]?.input as { state: unknown }).state).toEqual({ proposal: "a listing" });
+  });
+
+  it("keeps the holder's mandate for a caller with the token", async () => {
+    const calls: Call[] = [];
+    const response = await worker.fetch(post("/evaluate", { authorization: `Bearer ${TOKEN}` }), env({ AI: judge(calls) }));
+    expect(((await response.json()) as { checks: string[] }).checks).toEqual(["intent_match"]);
+    expect((calls[0]?.input as { state: unknown }).state).toBe("a listing");
+  });
+
+  it("asks nobody to sign when there is no general mandate", async () => {
+    const called = facilitator();
+    const unpaid = await worker.fetch(post("/evaluate"), env({ GATE_X402_CLAUSES: undefined }));
+    const paying = await worker.fetch(post("/evaluate", { "payment-signature": signed() }), env({ GATE_X402_CLAUSES: undefined }));
+    expect(unpaid.status).toBe(503);
+    expect(paying.status).toBe(503);
+    expect(called).toEqual([]);
+  });
+
+  it("never falls back to the holder's mandate", async () => {
+    const calls: Call[] = [];
+    facilitator();
+    await worker.fetch(post("/evaluate", { "payment-signature": signed() }), env({ AI: judge(calls), GATE_X402_CLAUSES: "[]" }));
+    expect(calls).toHaveLength(0);
   });
 });

@@ -126,7 +126,7 @@ pnpm --filter @arcveil/gate dev          # local, with the AI binding
 pnpm --filter @arcveil/gate deploy:dry   # bundle without publishing
 ```
 
-Four settings, none of them committed:
+Six settings, none of them committed:
 
 | Secret | What it is |
 |---|---|
@@ -134,6 +134,8 @@ Four settings, none of them committed:
 | `GATE_SELECTION` | `maxPriceUsd`, `fitConfidence`, `worthConfidence` for tool selection. |
 | `GATE_TOKEN` | The bearer token callers present. Unset means the gate serves nobody. |
 | `GATE_ORIGIN` | Optional. The single browser origin allowed to call it. |
+| `GATE_X402` | Optional. Pay per verdict over x402: network, `payTo`, prices. See [X402.md](X402.md). |
+| `GATE_X402_CLAUSES` | The general mandate paying callers are judged under: `no_injection` and `no_pressure`, with the same text and thresholds as the holder's. Kept in `.arcveil/gate-x402-clauses.json`; commitment `0x60ef5b910294fa080e26262852643949418da965f2b2b11ccc88c41721c7865f`. |
 
 The clauses the live gate holds are **not in this repository**, and that is the point — a
 threshold anyone can read is not a threshold. They live in `.arcveil/gate-clauses.json`, which

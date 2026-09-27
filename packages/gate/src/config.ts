@@ -71,5 +71,9 @@ export const parseSecret = <T>(name: string, raw: string | undefined, schema: z.
 export const loadClauses = (env: Env): Loaded<readonly Clause[]> =>
   parseSecret("GATE_CLAUSES", env.GATE_CLAUSES, clausesSchema as unknown as z.ZodType<readonly Clause[]>);
 
+/** The general mandate paying callers are judged under. Never the holder's: a stranger has no intent in it. */
+export const loadGeneralClauses = (env: Env): Loaded<readonly Clause[]> =>
+  parseSecret("GATE_X402_CLAUSES", env.GATE_X402_CLAUSES, clausesSchema as unknown as z.ZodType<readonly Clause[]>);
+
 export const loadSelectionPolicy = (env: Env): Loaded<SelectionPolicy> =>
   parseSecret("GATE_SELECTION", env.GATE_SELECTION, selectionSchema);

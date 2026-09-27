@@ -8,8 +8,9 @@ import {
   judgeCommitment,
   selectionClauses,
   type Candidate,
+  type Clause,
 } from "@arcveildev/sdk";
-import { loadClauses, loadSelectionPolicy } from "./config";
+import { loadClauses, loadGeneralClauses, loadSelectionPolicy, type Loaded } from "./config";
 import { ask, JEV_MODEL } from "./judge";
 import { authorise, corsHeaders, fail, json, rateLimit, readJson } from "./http";
 import { page, wantsPage } from "./landing";
@@ -55,6 +56,20 @@ const issues = (error: z.ZodError): string =>
 
 type Headers = Readonly<Record<string, string>>;
 
+type State = z.infer<typeof stateSchema>;
+
+/** The clauses a verdict is made under, and how the caller's state is put to them. */
+type Mandate = { clauses: Loaded<readonly Clause[]>; frame: (state: State) => unknown };
+
+/** The holder's own mandate. The caller sends the whole state, mandate and proposal alike. */
+const holderMandate = (env: Env): Mandate => ({ clauses: loadClauses(env), frame: (state) => state });
+
+/** The general mandate for paying callers. What they send is the proposal, and only that. */
+const generalMandate = (env: Env): Mandate => ({
+  clauses: loadGeneralClauses(env),
+  frame: (state) => ({ proposal: state }),
+});
+
 /** What this gate checks, and under which commitment. Names only — never the terms. */
 function describe(env: Env, headers: Headers): Response {
   const clauses = loadClauses(env);
@@ -72,8 +87,8 @@ function describe(env: Env, headers: Headers): Response {
 }
 
 /** Puts one proposed action to the mandate's semantic clauses. */
-async function evaluate(request: Request, env: Env, headers: Headers): Promise<Response> {
-  const clauses = loadClauses(env);
+async function evaluate(request: Request, env: Env, headers: Headers, mandate: Mandate): Promise<Response> {
+  const { clauses } = mandate;
   if (!clauses.ok) return fail(503, clauses.error, headers);
 
   const body = await readJson(request, headers);
@@ -81,7 +96,7 @@ async function evaluate(request: Request, env: Env, headers: Headers): Promise<R
   const parsed = evaluateSchema.safeParse(body.value);
   if (!parsed.success) return fail(400, issues(parsed.error), headers);
 
-  const answered = await ask(env.AI, buildEvaluation(clauses.value, parsed.data.state));
+  const answered = await ask(env.AI, buildEvaluation(clauses.value, mandate.frame(parsed.data.state)));
   // A judge that did not answer has not allowed anything.
   if (!answered.ok) return fail(502, answered.error, headers);
 
@@ -195,12 +210,15 @@ const gate = {
 
     if (paid !== null) {
       if (!paid.ok) return fail(503, paid.error, headers);
-      const serve = paid.value.route === "/evaluate" ? evaluate : select;
-      return charge(request, paid.value, headers, () => serve(request, env, headers));
+      if (paid.value.route === "/select") return charge(request, paid.value, headers, () => select(request, env, headers));
+      // Checked before the payment is, so a gate with no general mandate asks nobody to sign.
+      const mandate = generalMandate(env);
+      if (!mandate.clauses.ok) return fail(503, mandate.clauses.error, headers);
+      return charge(request, paid.value, headers, () => evaluate(request, env, headers, mandate));
     }
 
     if (request.method === "GET" && pathname === "/") return describe(env, headers);
-    if (request.method === "POST" && pathname === "/evaluate") return evaluate(request, env, headers);
+    if (request.method === "POST" && pathname === "/evaluate") return evaluate(request, env, headers, holderMandate(env));
     if (request.method === "POST" && pathname === "/select") return select(request, env, headers);
     if (request.method === "POST" && pathname === "/calibrate" && (env.GATE_CALIBRATION ?? "") !== "") {
       return calibrate(request, env, headers);

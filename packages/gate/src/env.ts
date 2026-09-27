@@ -32,5 +32,13 @@ export type Env = {
    * Unset means the token is the only way in, as before.
    */
   GATE_X402?: string;
+  /**
+   * The clauses paying callers are judged under, as JSON in the GATE_CLAUSES
+   * shape. They ask only what holds for any agent (is the proposal talking to
+   * the agent, is it pressing it) and see the caller's state as `proposal`.
+   * Unset, paid /evaluate is out of service rather than judged against the
+   * holder's mandate, which a stranger's action would fail for being a stranger.
+   */
+  GATE_X402_CLAUSES?: string;
   RATE_LIMIT?: RateLimiter;
 };
